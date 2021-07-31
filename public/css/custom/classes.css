@@ -1,0 +1,66 @@
+/******* backgrounds *******/
+
+.color-black{
+    color: black !important;
+}
+
+.bg-dropdown-btn-user{
+    background-color: rgb(183, 255, 0) !important;
+}
+.bg-dropdown-btn-user:hover{
+    background-color: rgb(18, 255, 18) !important;
+}
+
+
+.bg-grass{
+    background-color: rgb(18, 255, 18) !important;
+}
+.bg-bright{
+    background-color: rgb(183, 255, 0) !important;
+}
+
+.bg-orangeyellow{
+    background-image: linear-gradient(to top, rgb(228, 126, 98), rgb(232, 244, 0)) !important;
+}
+.bg-orangeyellow:hover{
+    background-image: linear-gradient(to top, rgb(254, 76, 27), rgb(232, 244, 0)) !important;
+}
+
+.bg-lightblue{
+    background-image: linear-gradient(to top, rgb(162, 247, 217), rgb(104, 223, 0)) !important;
+}
+.bg-lightblue:hover{
+    background-image: linear-gradient(to top, rgb(243, 247, 246), rgb(104, 223, 0)) !important;
+}
+
+.bg-gradient-to-left{
+    background-image: linear-gradient(to left, rgb(183, 255, 0), rgb(18, 255, 18)) !important;
+}
+.bg-gradient-to-right{
+    background-image: linear-gradient(to right, rgb(183, 255, 0), rgb(18, 255, 18)) !important;
+}
+
+/******* link *******/
+
+.link{
+    color: blue !important;
+    text-decoration: none !important;
+    background-color: none !important;
+}
+.link:hover{
+    text-decoration: underline !important;
+}
+
+
+/******* border-radius *******/
+
+.border-radius-10{
+    border-radius: 10px !important;
+}
+.border-radius-15{
+    border-radius: 15px !important;
+}
+.border-radius-25{
+    border-radius: 25px !important;
+}
+

@@ -17,16 +17,16 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="{{ asset('images/image1.jpg') }}" class="d-block w-100 slide" alt="">
+            <img src="{{ asset('images/slider-images/image1.jpg') }}" class="d-block w-100 slide" alt="">
           </div>
           <div class="carousel-item">
-            <img src="{{ asset('images/image2.jpg') }}" class="d-block w-100 slide" alt="">
+            <img src="{{ asset('images/slider-images/image2.jpg') }}" class="d-block w-100 slide" alt="">
           </div>
           <div class="carousel-item">
-            <img src="{{ asset('images/image3.jpg') }}" class="d-block w-100 slide" alt="">
+            <img src="{{ asset('images/slider-images/image3.jpg') }}" class="d-block w-100 slide" alt="">
           </div>
           <div class="carousel-item">
-            <img src="{{ asset('images/image4.jpg') }}" class="d-block w-100 slide" alt="">
+            <img src="{{ asset('images/slider-images/image4.jpg') }}" class="d-block w-100 slide" alt="">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

@@ -1,9 +1,9 @@
     <nav class="p-2 ps-3 mb-3
                 navbar navbar-expand-md navbar-light
-                border border-2 border-top-0 border-success"
-            style="border-bottom-left-radius: 15px;
-                border-bottom-right-radius: 15px;
-                background-image: linear-gradient(to right, rgb(183, 255, 0), rgb(18, 255, 18));">
+                border border-2 border-top-0 border-success
+                bg-gradient-to-right"
+         style="border-bottom-left-radius: 15px;
+                border-bottom-right-radius: 15px;">
 
         <a class="navbar-brand ms-2 fs-2" href="{{ route('home') }}">Snake</a>
 
@@ -14,8 +14,7 @@
             data-bs-target="#toggleMobileMenu"
             aria-controls="toggleMobileMenu"
             aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
+            aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -26,12 +25,13 @@
                 </li>
 
                 <li>
-                    <a class="nav-link me-3" href="{{ route('log') }}">Logowanie</a>
+                    <a class="nav-link me-3" href="{{ route('login') }}">Logowanie</a>
                 </li>
 
                 <li>
                     <a class="nav-link me-3" href="{{ route('register') }}">Rejestracja</a>
                 </li>
+
             </ul>
         </div>
 

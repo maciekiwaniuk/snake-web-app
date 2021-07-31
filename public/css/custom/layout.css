@@ -2,6 +2,8 @@ body{
     background-color: rgb(198, 234, 108) !important;
 }
 
+
+
 @media (min-width: 576px){
 
 }
@@ -18,12 +20,12 @@ body{
 
 @media (min-width: 1200px){
     .slide{
-        height: 500px;
+        height: 600px;
     }
 }
 
 @media (min-width: 1400px){
     .slide{
-        height: 500px;
+        height: 700px;
     }
 }

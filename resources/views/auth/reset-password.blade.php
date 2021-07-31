@@ -1,48 +1,70 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.layout')
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+@section('title')
+    Logowanie
+@endsection
 
-        <form method="POST" action="{{ route('password.update') }}">
-            @csrf
 
-            <!-- Password Reset Token -->
-            <input type="hidden" name="token" value="{{ $request->route('token') }}">
+@section('content')
 
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
+    <div class="row mt-sm-1 mt-md-5">
+
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6 col-xl-5 col-xxl-5
+                    mx-auto">
+            <div class="login-form p-3
+                        border border-2 border-success
+                        bg-gradient-to-left border-radius-25">
+
+                    @if ($errors->any())
+                        <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
+                                    border border-2 border-danger
+                                    border-radius-15"
+                             style="background-color: rgb(240, 183, 183);">
+                            @foreach ($errors->all() as $error)
+                                <div class="invalid-feedback d-block">
+                                    <strong>{{ $error }}</strong>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                <form method="POST" action="{{ route('password.update') }}" class="row g-3">
+                    @csrf
+
+                    <h4 class="text-center">Resetowanie hasła</h4>
+
+                    <div class="col-12">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" class="form-control" value="{{ old('email') }}">
+                    </div>
+
+
+                    <div class="col-12">
+                        <label for="password">Hasło</label>
+                        <input type="password" name="password" class="form-control" placeholder="">
+                    </div>
+
+
+                    <div class="col-12">
+                        <label for="password_confirmation">Powtórz hasło</label>
+                        <input type="password" name="password_confirmation" class="form-control"placeholder="">
+                    </div>
+
+
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-sm fs-4
+                                                     border border-2 border-success
+                                                     border-radius-15 bg-orangeyellow"
+                        >Zresetuj</button>
+                    </div>
+                </form>
+
             </div>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+        </div>
 
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required />
-            </div>
+    </div>
 
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
 
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                    type="password"
-                                    name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Reset Password') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+@endsection

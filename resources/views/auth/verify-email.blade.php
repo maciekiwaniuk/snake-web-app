@@ -1,39 +1,74 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.layout')
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-        </div>
+@section('title')
+    Logowanie
+@endsection
 
-        @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+
+@section('content')
+
+
+    <div class="row mt-sm-1 mt-md-5">
+
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6 col-xl-5 col-xxl-5
+                    mx-auto">
+            <div class="login-form p-3
+                        border border-2 border-success
+                        bg-gradient-to-left border-radius-25">
+
+                    @if ($errors->any())
+                        <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
+                                    border border-2 border-danger
+                                    border-radius-15"
+                             style="background-color: rgb(240, 183, 183);">
+                            @foreach ($errors->all() as $error)
+                                <div class="invalid-feedback d-block">
+                                    <strong>{{ $error }}</strong>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    <div class="col-12">
+                        Dziękujemy za rejestracje! Przed rozpoczęciem korzystania ze strony,
+                        bylibyśmy wdzięczni za weryfikację adresu email. Możesz to zrobić poprzez
+                        link, który został na twój email. Jeżeli email nie doszedł, możemy
+                        wysłać Ci kolejny email klikając w przycisk poniżej.
+                    </div>
+
+                <form method="POST" action="{{ route('register') }}" class="row g-3">
+                    @csrf
+
+                    <div class="row mt-4">
+                        <div class="col-7 mt-2">
+                            <button type="submit" class="btn btn-md
+                                                         border border-2 border-success
+                                                         border-radius-15 bg-orangeyellow"
+                            >Wyślij link ponownie</button>
+                        </div>
+
+                        <div class="col-5 mt-2 text-end">
+                            <form method="POST" action="{{ route('logout') }}">
+
+                                    <button type="submit" class="btn btn-md
+                                                                 border border-2 border-success
+                                                                 border-radius-15 bg-orangeyellow"
+                                    >Wyloguj</button>
+
+                            </form>
+                        </div>
+
+
+                    </div>
+
+
+                </form>
+
             </div>
-        @endif
 
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
-
-                <div>
-                    <x-button>
-                        {{ __('Resend Verification Email') }}
-                    </x-button>
-                </div>
-            </form>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Log Out') }}
-                </button>
-            </form>
         </div>
-    </x-auth-card>
-</x-guest-layout>
+
+    </div>
+
+
+@endsection
