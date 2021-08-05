@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="toggleMobileMenu">
             <ul class="navbar-nav text-center ms-auto fs-4">
                 <li>
-                    <a class="nav-link me-3" href="{{ route('login') }}">Pobierz grę</a>
+                    <a class="nav-link me-3" href="{{ route('download') }}">Pobierz grę</a>
                 </li>
 
                 <li>

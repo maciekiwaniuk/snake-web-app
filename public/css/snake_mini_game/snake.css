@@ -1,0 +1,23 @@
+.snake-game-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.game-board{
+    background: #CCC;
+    width: 90vmin;
+    height: 90vmin;
+    display: grid;
+    grid-template-rows: repeat(21, 1fr);
+    grid-template-columns: repeat(21, 1fr);
+}
+
+.snake{
+    background-color: green;
+    border: .25vmin solid black;
+}
+.food{
+    background-color: orange;
+    border: .25vmin solid black;
+}

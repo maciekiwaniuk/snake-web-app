@@ -58,7 +58,7 @@
 
                 <div class="col-12">
                     <p class="text-center mb-0">Nie masz jeszcze konta?
-                        <a href="#" class="btn border border-2 border-success
+                        <a href="{{ route('register') }}" class="btn border border-2 border-success
                                            bg-orangeyellow border-radius-10"
                         >Zarejestruj się!</a>
                     </p>

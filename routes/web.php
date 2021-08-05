@@ -11,6 +11,8 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\GameDownloadsController;
+use App\Http\Controllers\ProfilesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +27,12 @@ use App\Http\Controllers\PagesController;
 
 Route::get('/', [PagesController::class, 'index'])->name('home');
 
+Route::get('/pobierz-gre', [GameDownloadsController::class, 'index'])->name('download');
 
-/********************************************** ACCOUNT MANAGMENT **********************************************/
+Route::get('/profil/{name}', [ProfilesController::class, 'show'])->name('profile');
+
+
+/********************************************** AUTH **********************************************/
 
 Route::middleware('guest')->group(function () {
     Route::get('/rejestracja', [RegisteredUserController::class, 'create'])->name('register');
@@ -43,20 +49,19 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/verify-email', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');
+    Route::get('/weryfikacja-email', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');
 
-    Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
+    Route::get('/potwierdzenie-hasla', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
+    Route::post('/potwierdzenie-hasla', [ConfirmablePasswordController::class, 'store'])->name('password.confirm');
 
-    Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store'])->name('password.confirm');
-
-    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    Route::post('/wylogowanie', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
-Route::get('/verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
+Route::get('/weryfikacja-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
     ->middleware(['auth', 'signed', 'throttle:6,1'])
     ->name('verification.verify');
 
-Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+Route::post('/email/weryfikacja-powiadomienia', [EmailVerificationNotificationController::class, 'store'])
     ->middleware(['auth', 'throttle:6,1'])
     ->name('verification.send');
 

@@ -51,6 +51,15 @@
     text-decoration: underline !important;
 }
 
+.link-grey{
+    color: grey;
+    text-decoration: none !important;
+    background-color: none !important;
+}
+.link-grey:hover{
+    text-decoration: underline !important;
+}
+
 
 /******* border-radius *******/
 
@@ -64,3 +73,14 @@
     border-radius: 25px !important;
 }
 
+
+/******* width - height *******/
+.wh-65{
+    height: 65%;
+    width: 65%;
+}
+
+.wh-80{
+    height: 80%;
+    width: 80%;
+}

@@ -22,21 +22,21 @@
             <ul class="navbar-nav text-center ms-auto fs-4">
 
                 <li>
-                    <a class="nav-link me-3" href="{{ route('login') }}">Pobierz grę</a>
+                    <a class="nav-link me-3" href="{{ route('download') }}">Pobierz grę</a>
                 </li>
 
                 <li>
                     <a class="nav-link me-3 mb-1" href="{{ route('login') }}">Ranking</a>
                 </li>
 
+                <!-- Profil d-md-none -->
+                <li class="d-md-none">
+                    <a class="nav-link me-3 mb-1" href="{{ route('profile', Auth::user()->name) }}">Profil</a>
+                </li>
+
                 <!-- Ustawienia d-md-none -->
                 <li class="d-md-none">
                     <a class="nav-link me-3 mb-1" href="{{ route('login') }}">Ustawienia</a>
-                </li>
-
-                <!-- Profil d-md-none -->
-                <li class="d-md-none">
-                    <a class="nav-link me-3 mb-1" href="{{ route('login') }}">Profil</a>
                 </li>
 
                 <!-- Wyloguj d-md-none -->
@@ -57,16 +57,17 @@
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle color-user mt-1 p-0" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name }} <img style="height:50px; width: 50px; border-radius: 50%;" class="" src="{{ asset('images/default-avatar-image.png') }}">
+                            <a class="nav-link dropdown-toggle color-user mt-1 p-0" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <strong>{{ Auth::user()->name }}</strong> <img style="height:50px; width: 50px; border-radius: 50%;"
+                                class="border border-2 border-dark" src="{{ asset(Auth::user()->avatar) }}">
                             </a>
                             <ul class="dropdown-menu bg-bright" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item bg-dropdown-btn-user color-black" href="#">Profil</a></li>
-                                <li><a class="dropdown-item bg-dropdown-btn-user color-black" href="#">Ustawienia</a></li>
+                                <li><a class="dropdown-item bg-dropdown-btn-user color-black" href="{{ route('profile', Auth::user()->name) }}"><i class="bi bi-person-circle me-1"></i>Profil</a></li>
+                                <li><a class="dropdown-item bg-dropdown-btn-user color-black" href="#"><i class="bi bi-gear-fill me-1"></i>Ustawienia</a></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}" }}>
                                         @csrf
-                                        <button type="submit" class="dropdown-item bg-dropdown-btn-user color-black" >Wyloguj</button>
+                                        <button type="submit" class="dropdown-item bg-dropdown-btn-user color-black" ><i class="bi bi-box-arrow-right me-1"></i>Wyloguj</button>
                                     </form>
                                 </li>
                             </ul>
