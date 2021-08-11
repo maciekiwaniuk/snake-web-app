@@ -8,7 +8,7 @@
 @section('content')
 
 
-    <div class="row mt-sm-1 mt-md-5">
+    <div class="row mt-2 mt-sm-3 mt-md-5">
 
         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6 col-xl-5 col-xxl-5
                     mx-auto">
@@ -23,7 +23,7 @@
                              style="background-color: rgb(240, 183, 183);">
                             @foreach ($errors->all() as $error)
                                 <div class="invalid-feedback d-block">
-                                    <strong>{{ $error }}</strong>
+                                    <strong>• {{ $error }}</strong>
                                 </div>
                             @endforeach
                         </div>

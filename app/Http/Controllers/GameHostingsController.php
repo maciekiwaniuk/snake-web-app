@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Hosting;
 
-class GameDownloadsController extends Controller
+class GameHostingsController extends Controller
 {
     /**
      * Wyświetlenie strony z linkami

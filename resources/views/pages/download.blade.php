@@ -7,15 +7,20 @@
 
 @section('content')
 
-    <div class="col-12
+    <div class="col-12 col-sm-10
                 mx-auto
-                mx-5 mt-2 mb-3 fs-3 pt-2 pb-3
+                mx-5
+                mt-2 mt-sm-4
+                mb-3 fs-3 pt-2 pb-3
                 border border-2 border-success
                 bg-gradient-to-left border-radius-15">
 
-        <div class="col-12 text-center">
-            Pobierz grę
-        </div>
+        @if (count($hostings))
+            <div class="col-12 text-center">
+                Pobierz grę
+            </div>
+        @endif
+
 
         <div class="row text-center">
 
@@ -47,13 +52,14 @@
 
             @empty
 
-                Chwilowo nie ma żadnego dostępnego źródła, które umożliwiałoby
-                pobranie gry.
+                <div class="col-8 mx-auto">
+                    Chwilowo nie ma żadnego dostępnego źródła, które umożliwiałoby
+                    pobranie gry.
+                </div>
 
             @endforelse
 
         </div>
-
 
     </div>
 

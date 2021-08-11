@@ -1,4 +1,5 @@
-    <nav class="p-2 ps-3 mb-3
+    <nav class="p-2 ps-3
+                mb-0 mb-sm-1 mb-md-3
                 navbar navbar-expand-md navbar-light
                 border border-2 border-top-0 border-success
                 bg-gradient-to-right"

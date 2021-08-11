@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,6 +32,12 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        // Zapisanie ip oraz czasu ostatniego logowania
+        $user = Auth::user();
+        $user->last_login_ip = $request->getClientIp();
+        $user->last_login_time = Carbon::now()->toDateTimeString();
+        $user->save();
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

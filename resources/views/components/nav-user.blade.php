@@ -1,4 +1,4 @@
-    <nav class="p-2 ps-3 mb-3
+    <nav class="p-2 ps-3 mb-1
                 navbar navbar-expand-md navbar-light
                 border border-2 border-top-0 border-success
                 bg-gradient-to-right"
@@ -36,7 +36,7 @@
 
                 <!-- Ustawienia d-md-none -->
                 <li class="d-md-none">
-                    <a class="nav-link me-3 mb-1" href="{{ route('login') }}">Ustawienia</a>
+                    <a class="nav-link me-3 mb-1" href="{{ route('options.index') }}">Ustawienia</a>
                 </li>
 
                 <!-- Wyloguj d-md-none -->
@@ -59,11 +59,11 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle color-user mt-1 p-0" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <strong>{{ Auth::user()->name }}</strong> <img style="height:50px; width: 50px; border-radius: 50%;"
-                                class="border border-2 border-dark" src="{{ asset(Auth::user()->avatar) }}">
+                                class="border border-2 border-dark" id="user_avatar" src="{{ asset(Auth::user()->avatar) }}">
                             </a>
                             <ul class="dropdown-menu bg-bright" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item bg-dropdown-btn-user color-black" href="{{ route('profile', Auth::user()->name) }}"><i class="bi bi-person-circle me-1"></i>Profil</a></li>
-                                <li><a class="dropdown-item bg-dropdown-btn-user color-black" href="#"><i class="bi bi-gear-fill me-1"></i>Ustawienia</a></li>
+                                <li><a class="dropdown-item bg-dropdown-btn-user color-black" href="{{ route('options.index') }}"><i class="bi bi-gear me-1"></i>Ustawienia</a></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}" }}>
                                         @csrf

@@ -20,10 +20,13 @@
     <link href="{{ asset('css/custom/layout.css') }}" type="text/css" rel="stylesheet">
 
     <!-- Bootstrap 5 CSS -->
-    <link href="{{ asset('bootstrap/bootstrap.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/Bootstrap/bootstrap.css') }}" type="text/css" rel="stylesheet">
 
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ asset('assets\plugins\BootstrapIcons\bootstrap-icons.css') }}">
+
+    <!-- jQuery -->
+    <script src="{{ asset('assets/plugins/jQuery/jquery-3.6.0.min.js') }}"></script>
 
     @stack('assets')
 
@@ -59,7 +62,8 @@
     @stack('js.body')
 
     <!-- Bootstrap 5 JS -->
-    <script src="{{ asset('bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/Bootstrap/bootstrap.min.js') }}"></script>
+
 </body>
 
 </html>

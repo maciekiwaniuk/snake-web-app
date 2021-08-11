@@ -11,8 +11,10 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\PagesController;
-use App\Http\Controllers\GameDownloadsController;
-use App\Http\Controllers\ProfilesController;
+use App\Http\Controllers\GameHostingsController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OptionsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +29,26 @@ use App\Http\Controllers\ProfilesController;
 
 Route::get('/', [PagesController::class, 'index'])->name('home');
 
-Route::get('/pobierz-gre', [GameDownloadsController::class, 'index'])->name('download');
+Route::get('/pobierz-gre', [GameHostingsController::class, 'index'])->name('download');
 
-Route::get('/profil/{name}', [ProfilesController::class, 'show'])->name('profile');
+Route::get('/profil/{name}', [ProfileController::class, 'show'])->name('profile');
 
 
-/********************************************** AUTH **********************************************/
+Route::prefix('ustawienia')->middleware('auth')->group(function () {
+    Route::name('options.')->group(function() {
+        Route::get('/', [OptionsController::class, 'index'])->name('index');
+        Route::get('/{selected}', [OptionsController::class, 'show'])->name('selected');
+
+        Route::put('/zmiana-hasla', [OptionsController::class, 'passwordChange'])->name('password-change');
+        Route::put('/zmiana-emaila', [OptionsController::class, 'emailChange'])->name('email-change');
+        Route::post('/zmiana-awatara', [OptionsController::class, 'avatarChange'])->name('avatar-change');
+        Route::delete('/usuniecie-awatara', [OptionsController::class, 'avatarDelete'])->name('avatar-delete');
+        Route::delete('/usuniecie-konta', [OptionsController::class, 'accountDelete'])->name('account-delete');
+    });
+});
+
+
+/********************************************** Routing związany z kontem użytkownika **********************************************/
 
 Route::middleware('guest')->group(function () {
     Route::get('/rejestracja', [RegisteredUserController::class, 'create'])->name('register');
@@ -55,15 +71,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/potwierdzenie-hasla', [ConfirmablePasswordController::class, 'store'])->name('password.confirm');
 
     Route::post('/wylogowanie', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    Route::get('/weryfikacja-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])->name('verification.verify')
+    ->middleware(['signed', 'throttle:6,1']);
+
+    Route::post('/email/weryfikacja-powiadomienia', [EmailVerificationNotificationController::class, 'store'])->name('verification.send')
+        ->middleware('throttle:6,1');
 });
 
-Route::get('/weryfikacja-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
-    ->middleware(['auth', 'signed', 'throttle:6,1'])
-    ->name('verification.verify');
 
-Route::post('/email/weryfikacja-powiadomienia', [EmailVerificationNotificationController::class, 'store'])
-    ->middleware(['auth', 'throttle:6,1'])
-    ->name('verification.send');
 
 
 

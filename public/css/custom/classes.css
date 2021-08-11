@@ -11,7 +11,6 @@
     background-color: rgb(18, 255, 18) !important;
 }
 
-
 .bg-grass{
     background-color: rgb(18, 255, 18) !important;
 }
@@ -83,4 +82,18 @@
 .wh-80{
     height: 80%;
     width: 80%;
+}
+
+
+/******* Toasts (notifications) *******/
+.toast-success{
+    font-weight: 700;
+    background-color: #55CE63 !important;
+    border: 2px solid rgb(4, 104, 4) !important;
+}
+
+.toast-error{
+    font-weight: 700;
+    background-color: #F62D51 !important;
+    border: 2px solid #bd0d2e !important;
 }

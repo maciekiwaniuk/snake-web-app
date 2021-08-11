@@ -2,6 +2,7 @@
 
 @push('css')
     <link href="{{ asset('assets/plugins/filepond/filepond.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/pages/profile.css') }}" rel="stylesheet" type="text/css">
 @endpush
 
 @push('js.header')
@@ -19,64 +20,46 @@
 
     <div class="col-12
                 mx-auto
-                mx-5 mt-2 mb-3 fs-3 pt-2 pb-3 ps-3
+                mx-5 mt-2 mb-3 fs-3 pt-2 pb-3
                 border border-2 border-success
                 bg-gradient-to-left border-radius-15">
 
 
-                <div class="row">
+                <div class="col-12 col-sm-6
+                            ms-sm-4
+                            mt-sm-2
+                            bg-success text-center">
 
-                    <div class='col-4
-                                p-4
-                                text-center'>
 
-                                    <img class="my-0
-                                                mx-0 mx-lg-3 mx-xl-5
-                                                img-thumbnail"
-                                                src="{{ asset($user->avatar) }}">
+                    <div class="p-sm-4">
+                        <div class="col-6 col-sm-12
+                                mt-2
+                                mx-auto
+                                text-center">
 
-                                <span class="ms-2 fs-4">
+                                @if (Auth::user()->id == $user->id)
+                                    <a href="{{ route('options.selected', 'awatar') }}">
+                                        <img class="img-thumbnail" src="{{ asset($user->avatar) }}">
+                                    </a>
+                                @else
+                                    <img class="img-thumbnail" src="{{ asset($user->avatar) }}">
+                                @endif
+
+                        </div>
+
+                        <div class="col-12
+                                mx-auto text-center">
+
+                                <span class="nick-size bg-light text-center">
                                     <strong>{{ $user->name }}</strong>
                                 </span>
-
+                        </div>
                     </div>
 
-                    <div class="col-8
-                                pt-4 pb-4 pe-4">
 
-                                Zmień awatar <input type="file" labelIdle="siema" class="filepond">
-                                <input type="file" name='file' class='filepond' multiple id='file_upload' />
-                    </div>
 
                 </div>
 
     </div>
-
-    <script>
-
-FilePond.parse(document.body);
-const inputElement = document.querySelector('#file_upload');
-
-FilePond.registerPlugin(FilePondPluginImagePreview);
-
-const pond = FilePond.create(inputElement, {
-  allowMultiple: true,
-  imagePreviewHeight: 135,
-  labelIdle: `
-    <div style="width:100%;height:100%;">
-    	<p>
-        Drag &amp; Drop ydsadsadsales or <span class="filepond--label-action" tabindex="0">Browse</span><br>
-      </p>
-    </div>
-
-  `,
-  beforeAddFile (e) {
-  	$('#allImages').html('');
-  }
-});
-
-
-    </script>
-
 
 @endsection

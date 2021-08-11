@@ -8,7 +8,7 @@
 @section('content')
 
 
-    <div class="row mt-sm-1 mt-md-5">
+    <div class="row mt-2 mt-sm-3 mt-md-5">
 
         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6 col-xl-5 col-xxl-4
                     mx-auto">
@@ -18,14 +18,14 @@
 
                 <form method="POST" action="{{ route('login') }}" class="row g-3">
                     @csrf
-                    <h4 class="text-center">Panel logowania</h4>
+                    <h4 class="text-center mb-0">Panel logowania</h4>
                     <div class="col-12">
                         <label for="email">E-mail</label>
                         <input type="text" name="email" class="form-control" placeholder="" value="{{ old('email') }}">
                     </div>
                     @if ($errors)
                         <div class="invalid-feedback d-block">
-                            {{ $errors->first() }}
+                            <strong>{{ $errors->first() }}</strong>
                         </div>
                     @endif
 
