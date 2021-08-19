@@ -34,6 +34,11 @@
                     <a class="nav-link me-3 mb-1" href="{{ route('profile', Auth::user()->name) }}">Profil</a>
                 </li>
 
+                <!-- Akcje d-md-none -->
+                <li class="d-md-none">
+                    <a class="nav-link me-3 mb-1" href="{{ route('actions.index') }}">Akcje</a>
+                </li>
+
                 <!-- Ustawienia d-md-none -->
                 <li class="d-md-none">
                     <a class="nav-link me-3 mb-1" href="{{ route('options.index') }}">Ustawienia</a>
@@ -63,6 +68,7 @@
                             </a>
                             <ul class="dropdown-menu bg-bright" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item bg-dropdown-btn-user color-black" href="{{ route('profile', Auth::user()->name) }}"><i class="bi bi-person-circle me-1"></i>Profil</a></li>
+                                <li><a class="dropdown-item bg-dropdown-btn-user color-black" href="{{ route('actions.index') }}"><i class="bi bi-play-circle me-1"></i>Akcje</a></li>
                                 <li><a class="dropdown-item bg-dropdown-btn-user color-black" href="{{ route('options.index') }}"><i class="bi bi-gear me-1"></i>Ustawienia</a></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}" }}>

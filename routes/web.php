@@ -14,6 +14,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\GameHostingsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OptionsController;
+use App\Http\Controllers\ActionsController;
 
 
 /*
@@ -41,9 +42,18 @@ Route::prefix('ustawienia')->middleware('auth')->group(function () {
 
         Route::put('/zmiana-hasla', [OptionsController::class, 'passwordChange'])->name('password-change');
         Route::put('/zmiana-emaila', [OptionsController::class, 'emailChange'])->name('email-change');
+
         Route::post('/zmiana-awatara', [OptionsController::class, 'avatarChange'])->name('avatar-change');
         Route::delete('/usuniecie-awatara', [OptionsController::class, 'avatarDelete'])->name('avatar-delete');
         Route::delete('/usuniecie-konta', [OptionsController::class, 'accountDelete'])->name('account-delete');
+    });
+});
+
+Route::prefix('akcje')->middleware('auth')->group(function() {
+    Route::name('actions.')->group(function() {
+        Route::get('/', [ActionsController::class, 'index'])->name('index');
+
+        Route::post('/wczytaj-progres', [ActionsController::class, 'loadProgress'])->name('load-progress');
     });
 });
 

@@ -23,10 +23,16 @@
     <link href="{{ asset('assets/plugins/Bootstrap/bootstrap.css') }}" type="text/css" rel="stylesheet">
 
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="{{ asset('assets\plugins\BootstrapIcons\bootstrap-icons.css') }}">
+    <link href="{{ asset('assets/plugins/BootstrapIcons/bootstrap-icons.css') }}" rel="stylesheet">
+
+    <!-- toastr CSS -->
+    <link href="{{ asset('assets/plugins/toastr/toastr.css') }}" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jQuery/jquery-3.6.0.min.js') }}"></script>
+
+    <!-- toastr JS -->
+    <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
 
     @stack('assets')
 

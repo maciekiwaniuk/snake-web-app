@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangeEmailRequest;
@@ -47,13 +48,13 @@ class OptionsController extends Controller
 
         $result = [
             'success' => true,
-            'message' => '<i class="bi bi-check-lg me-1"></i> Awatar został pomyślnie zmieniony.'
+            'message' => 'Awatar został pomyślnie zmieniony.'
         ];
 
         if ($validator->fails()) {
             $result = [
                 'success' => false,
-                'message' => '<i class="bi bi-exclamation-circle me-1"></i> Wystąpił błąd podczas dodawania obrazka.'
+                'message' => 'Wystąpił błąd podczas dodawania obrazka.'
             ];
         } else {
             $this->changeUserAvatar($request->file('image'));
@@ -66,16 +67,17 @@ class OptionsController extends Controller
     }
 
     /**
-     * Obsługa usunięcia awataru
+     * Obsługa usunięcia awataru - AJAX
      */
     public function avatarDelete(Request $request)
     {
         $result = [
             'success' => true,
-            'message' => '<i class="bi bi-check-lg me-1"></i> Awatar został pomyślnie usunięty.'
+            'message' => 'Awatar został pomyślnie usunięty.',
+            'avatarPath' => 'assets/images/avatar.png',
         ];
 
-        Controller::deleteUserAvatar();
+        $this->deleteUserAvatar();
 
         return response()->json([
             'result' => $result
@@ -109,7 +111,7 @@ class OptionsController extends Controller
         $user->save();
 
         return redirect()->route('options.selected', 'email')
-            ->with('email_success', 'Email zostało pomyślnie zmienione.');
+            ->with('email_success', 'Email został pomyślnie zmieniony.');
     }
 
     /**
@@ -120,20 +122,27 @@ class OptionsController extends Controller
         $validator = Validator::make($request->all(), [
             'password' => ['bail', 'required', new LoggedUserPassword]
         ]);
-        logger(print_r($validator, true));
 
         if ($validator->fails()) {
             $result = [
-                'success' => false,
-                'message' => '<i class="bi bi-exclamation-circle me-1"></i> Wystąpił błąd podczas dodawania obrazka.'
+                'error' => true,
+                'message' => $validator->errors()->first(),
             ];
-        } else {
-            $this->changeUserAvatar($request->file('image'));
+
+            return response()->json([
+                'result' => $result,
+            ]);
         }
 
+        $this->deleteUserAccountByID(Auth::user()->id);
+
+        $result = [
+            'error' => false,
+            'url' => route('home'),
+        ];
         return response()->json([
             'result' => $result,
-            'avatarPath' => Auth::user()->avatar
         ]);
     }
+
 }

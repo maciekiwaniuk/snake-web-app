@@ -2,6 +2,10 @@ body{
     background-color: rgb(198, 234, 108) !important;
 }
 
+label{
+    font-weight: 700;
+}
+
 
 @media (min-width: 576px){
 

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Carbon\Carbon;
 
 class RegisteredUserController extends Controller
 {
@@ -33,16 +34,22 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        $this->validate(
+            $request,
+            [
+                'name' => 'required|string|max:255|unique:users',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ],
+            ['password.confirmed' => 'Hasła nie były takie same.']
+        );
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'last_login_ip' => $request->getClientIp(),
+            'last_login_time' => Carbon::now()->toDateTimeString(),
         ]);
 
         event(new Registered($user));

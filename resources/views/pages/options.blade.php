@@ -13,6 +13,8 @@
     <!-- Dropify CSS -->
     <link href="{{ asset('assets/plugins/dropify/css/dropify.css') }}" type="text/css" rel="stylesheet">
     <!-- END Dropify CSS -->
+
+    <link href="{{ asset('css/pages/options.css') }}" type="text/css" rel="stylesheet">
 @endpush
 
 @push('js.header')
@@ -20,11 +22,6 @@
     <script src="{{ asset('assets/plugins/dropify/js/dropify.js') }}"></script>
     <!-- END Dropify JS -->
 @endpush
-
-@push('js.body')
-    <script src="{{ asset('js/options/index.js') }}" type="module"></script>
-@endpush
-
 
 @section('title')
     Ustawienia
@@ -34,8 +31,8 @@
 @section('content')
 
     <div class="col-12
-                mx-auto
-                mx-5 mt-2 mb-3 fs-3 pt-2 pb-3 ps-3
+                p-3
+                mt-0 mt-sm-2 mt-md-3 mt-lg-4
                 border border-2 border-success
                 bg-gradient-to-left border-radius-15">
 
@@ -45,11 +42,11 @@
                     <!-- Awatar -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingAvatar">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAvatar" aria-expanded="false" aria-controls="collapseAvatar">
-                                Awatar
+                            <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAvatar" aria-expanded="false" aria-controls="collapseAvatar">
+                                <strong>Awatar</strong>
                             </button>
                         </h2>
-                        <div id="collapseAvatar" class="accordion-collapse @if(isset($selected) && $selected=="awatar") collapse show @else collapse @endif" aria-labelledby="headingAvatar" data-bs-parent="#optionsAccordion">
+                        <div id="collapseAvatar" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="awatar") collapse show @else collapse @endif" aria-labelledby="headingAvatar" data-bs-parent="#optionsAccordion">
                             <div class="accordion-body text-center">
 
                                 <form id="avatarForm" method="POST" action="{{ route('options.avatar-change') }}">
@@ -57,8 +54,8 @@
                                     <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="../{{ Auth::user()->avatar }}"/>
                                 </form>
 
-                                <button class="d-block d-sm-none mx-auto col-4 mt-2
-                                               btn btn-primary" id="delete_avatar_xs">Usuń awatar</button>
+                                <button class="d-block d-md-none btn-md fs-4 mx-auto mt-2
+                                               bg-orangeyellow border-radius-15 border border-2 border-dark" id="delete_avatar_xs">Usuń awatar</button>
 
                             </div>
                         </div>
@@ -69,41 +66,61 @@
                     <!-- Hasło -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingPassword">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePassword" aria-expanded="false" aria-controls="collapsePassword">
-                                Hasło
+                            <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePassword" aria-expanded="false" aria-controls="collapsePassword">
+                                <strong>Hasło</strong>
                             </button>
                         </h2>
                         <div id="collapsePassword" class="accordion-collapse @if(isset($selected) && $selected=="haslo") collapse show @else collapse @endif" aria-labelledby="headingPassword" data-bs-parent="#optionsAccordion">
-                            <div class="accordion-body">
+                            <div class="bg-accordion-body accordion-body">
 
 
-                                @forelse ($errors->password->all() as $error)
-                                    <div class="invalid-feedback d-block">
-                                        <strong>{{ $error }}</strong>
-                                    </div>
-                                @empty
-                                @endforelse
-
-
-                                @if (session('password_success'))
-                                    <div class="valid-feedback d-block">
-                                        <strong>{{ session('password_success') }}</strong>
+                                @if ($errors->password->any())
+                                    <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
+                                                border border-2 border-danger
+                                                border-radius-15 bg-error">
+                                        @foreach ($errors->password->all() as $error)
+                                            <div class="invalid-feedback d-block">
+                                                <strong>• {{ $error }}</strong>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 @endif
 
-                                <form method="POST" action="{{ route('options.password-change') }}">
+                                @if (session('password_success'))
+                                    <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
+                                                border border-2 border-success
+                                                border-radius-15 bg-complete">
+                                                <div class="valid-feedback d-block">
+                                                    <strong>• {{ session('password_success') }}</strong>
+                                                </div>
+                                    </div>
+                                @endif
+
+                                <form method="POST" action="{{ route('options.password-change') }}" class="row">
                                     @csrf
                                     @method('PUT')
-                                    <label for="password">Aktualne hasło</label>
-                                    <input type="password" name="old_password"> <br>
+                                    <div class="col-12 col-md-9 col-lg-7 mx-auto">
+                                        <label for="password">Aktualne hasło</label>
+                                        <input type="password" name="old_password" class="form-control" required>
+                                    </div>
 
-                                    <label for="new_password">Nowe hasło</label>
-                                    <input type="password" name="new_password"> <br>
+                                    <div class="col-12 col-md-9 col-lg-7 mx-auto">
+                                        <label for="new_password" class="mt-2">Nowe hasło</label>
+                                        <input type="password" name="new_password" class="form-control" required>
+                                    </div>
 
-                                    <label for="confirm_password">Powtórz nowe hasło</label>
-                                    <input type="password" name="new_password_confirmation"> <br>
+                                    <div class="col-12 col-md-9 col-lg-7 mx-auto">
+                                        <label for="confirm_password" class="mt-2">Powtórz nowe hasło</label>
+                                        <input type="password" name="new_password_confirmation" class="form-control" required>
+                                    </div>
 
-                                    <button type="submit">Zmień hasło</button>
+
+                                    <div class="col-12 text-center">
+                                        <button type="submit" class="btn btn-sm fs-4 mt-3
+                                                                     border border-2 border-dark
+                                                                     border-radius-15 bg-orangeyellow"
+                                        >Zmień hasło</button>
+                                    </div>
                                 </form>
 
 
@@ -116,41 +133,62 @@
                     <!-- Email -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingEmail">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEmail" aria-expanded="false" aria-controls="collapseEmail">
-                                Email
+                            <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEmail" aria-expanded="false" aria-controls="collapseEmail">
+                                <strong>Email</strong>
                             </button>
                         </h2>
                         <div id="collapseEmail" class="accordion-collapse @if(isset($selected) && $selected=="email") collapse show @else collapse @endif" aria-labelledby="headingEmail" data-bs-parent="#optionsAccordion">
-                            <div class="accordion-body">
+                            <div class="bg-accordion-body accordion-body">
 
 
-                                @forelse ($errors->email->all() as $error)
-                                    <div class="invalid-feedback d-block">
-                                        <strong>{{ $error }}</strong>
-                                    </div>
-                                @empty
-                                @endforelse
-
-
-                                @if (session('email_success'))
-                                    <div class="valid-feedback d-block">
-                                        <strong>{{ session('email_success') }}</strong>
+                                @if ($errors->email->any())
+                                    <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
+                                                border border-2 border-danger
+                                                border-radius-15 bg-error">
+                                        @foreach ($errors->email->all() as $error)
+                                            <div class="invalid-feedback d-block">
+                                                <strong>• {{ $error }}</strong>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 @endif
 
-                                <form method="POST" action="{{ route('options.email-change') }}">
+
+                                @if (session('email_success'))
+                                    <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
+                                                border border-2 border-success
+                                                border-radius-15 bg-complete">
+                                                <div class="valid-feedback d-block">
+                                                    <strong>• {{ session('email_success') }}</strong>
+                                                </div>
+                                    </div>
+                                @endif
+
+                                <form method="POST" action="{{ route('options.email-change') }}" class="row">
                                     @csrf
                                     @method('PUT')
-                                    <label for="old_password">Aktualne hasło</label>
-                                    <input type="password" name="old_password"> <br>
 
-                                    <label for="new_email">Nowy email</label>
-                                    <input type="text" name="new_email"> <br>
+                                    <div class="col-12 col-md-9 col-lg-7 mx-auto">
+                                        <label for="old_password">Aktualne hasło</label>
+                                        <input type="password" name="old_password" class="form-control" required>
+                                    </div>
 
-                                    <label for="new_email_confirmation">Powtórz nowy email</label>
-                                    <input type="text" name="new_email_confirmation"> <br>
+                                    <div class="col-12 col-md-9 col-lg-7 mx-auto">
+                                        <label for="new_email" class="mt-2">Nowy email</label>
+                                        <input type="text" name="new_email" class="form-control" required>
+                                    </div>
 
-                                    <button type="submit">Zmień email</button>
+                                    <div class="col-12 col-md-9 col-lg-7 mx-auto">
+                                        <label for="new_email_confirmation" class="mt-2">Powtórz nowy email</label>
+                                        <input type="text" name="new_email_confirmation" class="form-control" required>
+                                    </div>
+
+                                    <div class="col-12 text-center">
+                                        <button type="submit" class="btn btn-sm fs-4 mt-3
+                                                                     border border-2 border-dark
+                                                                     border-radius-15 bg-orangeyellow"
+                                        >Zmień email</button>
+                                    </div>
                                 </form>
 
 
@@ -163,45 +201,46 @@
                     <!-- Inne -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingActions">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActions" aria-expanded="false" aria-controls="collapseActions">
-                                Inne
+                            <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActions" aria-expanded="false" aria-controls="collapseActions">
+                                <strong>Inne</strong>
                             </button>
                         </h2>
                         <div id="collapseActions" class="accordion-collapse @if(isset($selected) && $selected=="inne") collapse show @else collapse @endif" aria-labelledby="headingActions" data-bs-parent="#optionsAccordion">
-                            <div class="accordion-body">
+                            <div class="bg-accordion-body accordion-body">
 
                                 <!-- Usuń konto przycisk -->
-                                <button type="button" id="deleteAccountButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                                <button type="button" id="deleteAccountButton" class="btn btn-danger border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
                                     Usuń konto
                                 </button>
 
                                 <!-- Usuń konto modal -->
                                 <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
-                                        <div class="modal-content">
+                                        <div class="modal-content border border-3 border-danger">
 
-                                            <div class="modal-body">
+                                            <div class="modal-body bg-accordion-body">
 
-                                                <div>
-                                                    Usunięcie konta jest czynnością permanentną oraz nieodwracalną.
+                                                <div class="text-start">
+                                                    Usunięcie konta jest czynnością
+                                                    <strong class="text-danger">permanentną</strong> oraz <strong class="text-danger">nieodwracalną.</strong>
                                                     Zastanów się czy na pewno chcesz to zrobić!
                                                 </div>
 
                                                 <hr>
 
-                                                <div id="deleteAccountMessage" class="invalid-feedback d-block"></div>
-
-                                                <form method="POST" action="{{ route('options.account-delete') }}">
+                                                <form method="POST" action="{{ route('options.account-delete') }}" class="row">
                                                     @csrf
-                                                    @method('delete')
-                                                    <label for="old_password">Aktualne hasło</label>
-                                                    <input type="password" name="old_password"> <br>
+                                                    <div class="col-12 mb-3">
+                                                        <label for="old_password">Aktualne hasło</label>
+                                                        <input type="password" id="delete_account_password" name="old_password" class="form-control">
+                                                    </div>
 
-                                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Anuluj</button>
-                                                    <button type="submit" class="btn btn-danger">Usuń konto</button>
+                                                    <div class="col-12 d-flex justify-content-around">
+                                                        <button type="button" class="btn btn-success border border-2 border-dark" data-bs-dismiss="modal">Anuluj</button>
+                                                        <button id="confirmDeleteAccountBtn" type="submit" class="btn btn-danger border border-2 border-dark">Usuń konto</button>
+                                                    </div>
+
                                                 </form>
-
-
 
                                             </div>
 
@@ -216,20 +255,28 @@
 
                 </div>
 
-                <!-- TOAST SUCCESS -->
-                <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
-                    <div id="toastNotification" class="toast d-none" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-delay="3000">
-                        <div class="toast-body" id="toastNotificationMessage"></div>
-                    </div>
-                </div>
-                <!-- END TOAST-->
-
-
-
     </div>
 
     <script>
         $(document).ready(function() {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
             var dropifyOptions = {
                 'messages': {
                     'default' : '',
@@ -262,16 +309,13 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        $('#toastNotificationMessage').html(response.result.message);
                         if ( response.result.success ) {
-                            $('#toastNotification').removeClass('toast-error d-none').addClass('toast-success');
-                            $('#toastNotification').toast('show');
+                            toastr.success(response.result.message);
                             // odświeżenie ikonki awatara
                             d = new Date();
                             $('#user_avatar').attr('src', response.avatarPath+'?'+d.getTime());
                         } else {
-                            $('#toastNotification').removeClass('toast-success d-none').addClass('toast-error');
-                            $('#toastNotification').toast('show');
+                            toastr.error(response.result.message);
                         }
                     },
                 });
@@ -290,19 +334,38 @@
                     },
                     success: function(response){
                         if ( response.result.success ) {
-                            $('#toastNotificationMessage').html(response.result.message);
-                            $('#toastNotification').removeClass('toast-error d-none').addClass('toast-success');
-                            $('#toastNotification').toast('show');
+                            toastr.success(response.result.message);
                         }
                         d = new Date();
-                        $('#user_avatar').attr('src', 'assets/images/avatar.png?'+d.getTime());
+                        $('#user_avatar').attr('src', response.result.avatarPath+'?'+d.getTime());
                     },
                 });
             })
 
-            $('#toastNotification').click(function() {
-                $('#toastNotification').addClass('d-none');
+
+            $('#confirmDeleteAccountBtn').on('click', function() {
+                event.preventDefault();
+
+                var password = $('#delete_account_password').val();
+
+                $.ajax({
+                    type: 'DELETE',
+                    url: '{{ route("options.account-delete") }}',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        password: password,
+                    },
+                    success: function(response){
+                        if ( response.result.error ) {
+                            toastr.error(response.result.message);
+                        } else {
+                            window.location.replace(response.result.url);
+                        }
+                    },
+                });
+
             });
+
 
         });
     </script>

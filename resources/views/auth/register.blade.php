@@ -19,8 +19,7 @@
                     @if ($errors->any())
                         <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
                                     border border-2 border-danger
-                                    border-radius-15"
-                             style="background-color: rgb(240, 183, 183);">
+                                    border-radius-15 bg-error">
                             @foreach ($errors->all() as $error)
                                 <div class="invalid-feedback d-block">
                                     <strong>• {{ $error }}</strong>

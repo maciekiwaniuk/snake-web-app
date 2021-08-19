@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 use App\Models\User;
+use App\Models\UserDeleted;
 
 class Controller extends BaseController
 {
@@ -62,7 +63,7 @@ class Controller extends BaseController
      * Funkcja usuwająca awatar użytkownika
      * oraz zastępująca go default.png
      */
-    public static function deleteUserAvatar()
+    public function deleteUserAvatar()
     {
         if (Auth::user()->avatar != 'assets/images/avatar.png') {
             $previous_avatar = Auth::user()->avatar;
@@ -73,4 +74,28 @@ class Controller extends BaseController
             $user->save();
         }
     }
+
+    /**
+     * Funkcja usuwająca konto aktualnie
+     * zalogowanego użytkownika, a następnie
+     * dodająca dane do tabeli z usuniętymi użytkownikami
+     */
+    public static function deleteUserAccountByID($user_id)
+    {
+        $user = User::query()
+            ->where('id', '=', $user_id)
+            ->first();
+        $user_deleted = new UserDeleted;
+
+        $user_deleted->name =        $user->name;
+        $user_deleted->email =       $user->email;
+        $user_deleted->previous_id = $user->id;
+        $user_deleted->last_ip =     $user->last_login_ip;
+        $user_deleted->last_date =   $user->last_login_time;
+        $user_deleted->created_at =  $user->created_at;
+
+        $user_deleted->save();
+        $user->delete();
+    }
+
 }
