@@ -1,12 +1,22 @@
 @extends('layouts.layout')
 
 @section('title')
-    Logowanie
+    Rejestracja
 @endsection
 
+@push('js.header')
+    <!-- reCAPTCHA v2 JS -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- END reCAPTCHA v2 JS-->
+@endpush
 
 @section('content')
 
+<style>
+    .g-recaptcha {
+        display: inline-block;
+    }
+</style>
 
     <div class="row mt-2 mt-sm-3 mt-md-5">
 
@@ -33,27 +43,30 @@
                     <h4 class="text-center">Panel rejestracji</h4>
                     <div class="col-12">
                         <label for="name">Nazwa</label>
-                        <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                        <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
                     </div>
 
 
                     <div class="col-12">
                         <label for="email">Email</label>
-                        <input type="text" name="email" class="form-control" value="{{ old('email') }}">
+                        <input type="text" name="email" class="form-control" value="{{ old('email') }}" required>
                     </div>
 
 
                     <div class="col-12">
                         <label for="password">Hasło</label>
-                        <input type="password" name="password" class="form-control" placeholder="">
+                        <input type="password" name="password" class="form-control" placeholder="" required>
                     </div>
 
 
                     <div class="col-12">
                         <label for="password_confirmation">Powtórz hasło</label>
-                        <input type="password" name="password_confirmation" class="form-control"placeholder="">
+                        <input type="password" name="password_confirmation" class="form-control"placeholder="" required>
                     </div>
 
+                    <div class="col-12 text-center">
+                        <div class="g-recaptcha" data-sitekey="6LcPyTQcAAAAAI_US8hwlUw9iaaTYx7fKKEXo6_7"></div>
+                    </div>
 
                     <div class="col-12 text-center">
                         <button type="submit" class="btn btn-sm fs-4

@@ -37,6 +37,7 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
         $user->last_login_ip = $request->getClientIp();
         $user->last_login_time = Carbon::now()->toDateTimeString();
+        $user->last_user_agent = $request->server('HTTP_USER_AGENT');
         $user->save();
 
         return redirect()->intended(RouteServiceProvider::HOME);

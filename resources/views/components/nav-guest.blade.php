@@ -1,6 +1,6 @@
     <nav class="p-2 ps-3
                 mb-0 mb-sm-1 mb-md-3
-                navbar navbar-expand-md navbar-light
+                navbar navbar-expand-lg navbar-light
                 border border-2 border-top-0 border-success
                 bg-gradient-to-right"
          style="border-bottom-left-radius: 15px;
@@ -22,7 +22,15 @@
         <div class="collapse navbar-collapse" id="toggleMobileMenu">
             <ul class="navbar-nav text-center ms-auto fs-4">
                 <li>
+                    <a class="nav-link me-3" href="{{ route('support.index') }}">Pomoc</a>
+                </li>
+
+                <li>
                     <a class="nav-link me-3" href="{{ route('download') }}">Pobierz grę</a>
+                </li>
+
+                <li>
+                    <a class="nav-link me-3" href="{{ route('ranking.index') }}">Ranking</a>
                 </li>
 
                 <li>

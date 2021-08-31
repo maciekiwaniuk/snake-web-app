@@ -21,6 +21,10 @@
     <!-- Dropify JS -->
     <script src="{{ asset('assets/plugins/dropify/js/dropify.js') }}"></script>
     <!-- END Dropify JS -->
+
+    <!-- BlockUI JS -->
+    <script src="{{ asset('assets/plugins/jQuery BlockUI/jquery.blockUI.js') }}"></script>
+    <!-- END BlockUI JS -->
 @endpush
 
 @section('title')
@@ -259,6 +263,25 @@
 
     <script>
         $(document).ready(function() {
+            function blockUI() {
+                // Default blockUI code
+                $.blockUI({
+                    css: {
+                        padding: '8px',
+                        backgroundColor: 'rgb(198, 234, 108)',
+                        border: 'solid black 2px',
+                        '-webkit-border-radius': '10px',
+                        '-moz-border-radius': '10px',
+                    },
+                    message: `<div class="spinner-border text-success" role="status"></div>
+                              <div>Trwa wczytywanie...</div>`,
+                });
+                setTimeout(function () {
+                    // Timer to unblock
+                    $.unblockUI();
+                }, 400);
+            }
+
             toastr.options = {
                 "closeButton": true,
                 "debug": false,
@@ -310,12 +333,18 @@
                     processData: false,
                     success: function(response) {
                         if ( response.result.success ) {
-                            toastr.success(response.result.message);
-                            // odświeżenie ikonki awatara
-                            d = new Date();
-                            $('#user_avatar').attr('src', response.avatarPath+'?'+d.getTime());
+                            blockUI();
+                            setTimeout(function () {
+                                toastr.success(response.result.message);
+                                // odświeżenie ikonki awatara
+                                d = new Date();
+                                $('#user_avatar').attr('src', response.avatarPath+'?'+d.getTime());
+                            }, 400);
                         } else {
-                            toastr.error(response.result.message);
+                            blockUI();
+                            setTimeout(function () {
+                                toastr.error(response.result.message);
+                            }, 400);
                         }
                     },
                 });
@@ -334,7 +363,10 @@
                     },
                     success: function(response){
                         if ( response.result.success ) {
-                            toastr.success(response.result.message);
+                            blockUI();
+                            setTimeout(function () {
+                                toastr.success(response.result.message);
+                            }, 400);
                         }
                         d = new Date();
                         $('#user_avatar').attr('src', response.result.avatarPath+'?'+d.getTime());
@@ -357,7 +389,10 @@
                     },
                     success: function(response){
                         if ( response.result.error ) {
-                            toastr.error(response.result.message);
+                            blockUI();
+                            setTimeout(function () {
+                                toastr.error(response.result.message);
+                            }, 400);
                         } else {
                             window.location.replace(response.result.url);
                         }

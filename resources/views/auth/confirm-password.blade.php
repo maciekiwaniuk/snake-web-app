@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-    Logowanie
+    Potwierdź hasło
 @endsection
 
 

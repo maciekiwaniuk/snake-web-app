@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     /**
-     * Wyświetlenie strony głównej
+     * Showing welcome index page
      */
     public function index()
     {

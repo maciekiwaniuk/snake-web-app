@@ -14,12 +14,10 @@ use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangeEmailRequest;
 use App\Rules\LoggedUserPassword;
 
-use App\Models\User;
-
 class OptionsController extends Controller
 {
     /**
-     * Wyświetla główną stronę z opcjami
+     * Showing options index page
      */
     public function index()
     {
@@ -27,8 +25,8 @@ class OptionsController extends Controller
     }
 
     /**
-     * Wyświetla główną stronę z opcjami
-     * wraz z rozwiniętą wybraną opcją
+     * Showing options index page with
+     * selected one tab
      */
     public function show($selected)
     {
@@ -38,7 +36,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Obsługa zmiany awataru - AJAX
+     * Mechanism of changing user's avatar - AJAX
      */
     public function avatarChange(Request $request)
     {
@@ -67,7 +65,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Obsługa usunięcia awataru - AJAX
+     * Mechanism of user's deleting avatar - AJAX
      */
     public function avatarDelete(Request $request)
     {
@@ -85,7 +83,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Obsługa zmiany hasła
+     * Mechanism of changing user's password
      */
     public function passwordChange(ChangePasswordRequest $request)
     {
@@ -100,7 +98,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Obsługa zmiany emaila
+     * Mechanism of changing user's email
      */
     public function emailChange(ChangeEmailRequest $request)
     {
@@ -115,7 +113,8 @@ class OptionsController extends Controller
     }
 
     /**
-     * Obsługa kasowania konta - AJAX
+     * Mechanism and validation confirmation
+     * of deleting user's account
      */
     public function accountDelete(Request $request)
     {

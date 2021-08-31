@@ -16,7 +16,9 @@ class ValidGameFile implements Rule
      */
     public function passes($attribute, $value)
     {
-        if ($value->getClientOriginalExtension() != 'json') {
+        $extension = $value->getClientOriginalExtension();
+
+        if ($extension != 'json') {
             return false;
         }
 
@@ -40,13 +42,14 @@ class ValidGameFile implements Rule
     }
 
     /**
-     * VALID FILE CONTENT
+     * VALIDATION FILE CONTENT
      */
     protected function validFileContent($content)
     {
         if ($this->validCoins($content) && $this->validSelectedLevel($content) &&
             $this->validSelectedSkins($content) && $this->validDifficulties($content) &&
-            $this->validRecords($content))
+            $this->validRecords($content) && $this->validInventory($content) &&
+            $this->validOptions($content))
         {
             return true;
         }
@@ -57,7 +60,7 @@ class ValidGameFile implements Rule
     }
 
     /**
-     * Valid coins property
+     * Validation coins property
      */
     protected function validCoins($content)
     {
@@ -73,7 +76,7 @@ class ValidGameFile implements Rule
     }
 
     /**
-     * Valid selected_level property
+     * Validation selected_level property
      */
     protected function validSelectedLevel($content)
     {
@@ -90,7 +93,7 @@ class ValidGameFile implements Rule
     }
 
     /**
-     * Valid selected_skins property
+     * Validation selected_skins property
      */
     protected function validSelectedSkins($content)
     {
@@ -108,13 +111,12 @@ class ValidGameFile implements Rule
     }
 
     /**
-     * Valid difficulties property
+     * Validation difficulties property
      */
     protected function validDifficulties($content)
     {
         if (isset($content['difficulties']) && isset($content['difficulties']['medium']) &&
-            isset($content['difficulties']['hard']) && is_bool($content['difficulties']['medium']) &&
-            is_bool($content['difficulties']['hard']))
+            isset($content['difficulties']['hard']))
         {
             return true;
         }
@@ -125,7 +127,7 @@ class ValidGameFile implements Rule
     }
 
     /**
-     * Valid records property
+     * Validation records property
      */
     protected function validRecords($content)
     {
@@ -146,10 +148,35 @@ class ValidGameFile implements Rule
     }
 
     /**
-     * Valid inventory property
+     * Validation inventory property
      */
     protected function validInventory($content)
     {
+        if (isset($content['inventory']) && isset($content['inventory']['snake_skins']) &&
+            isset($content['inventory']['fruit_skins']) && isset($content['inventory']['board_skins']))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
+    /**
+     * Validation options property
+     */
+    protected function validOptions($content)
+    {
+        if (isset($content['options']) && isset($content['options']['fps']) &&
+            isset($content['options']['music']) && isset($content['options']['effects']) &&
+            isset($content['options']['volume']))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

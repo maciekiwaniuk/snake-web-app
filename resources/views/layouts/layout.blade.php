@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Strona internetowa, gdzie można pobrać grę na komputer Snake">
     <meta name="keywords" content="Snake">
-    <meta name="author" content="">
+    <meta name="author" content="Maciej Iwaniuk">
 
     <!-- favicon -->
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>

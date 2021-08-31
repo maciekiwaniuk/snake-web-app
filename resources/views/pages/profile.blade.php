@@ -1,15 +1,5 @@
 @extends('layouts.layout')
 
-@push('css')
-    <link href="{{ asset('assets/plugins/filepond/filepond.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('css/pages/profile.css') }}" rel="stylesheet" type="text/css">
-@endpush
-
-@push('js.header')
-    <script src="{{ asset('assets/plugins/jQuery/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/filepond/filepond.min.js') }}"></script>
-@endpush
-
 
 @section('title')
     Profil {{ $user->name }}
@@ -25,40 +15,61 @@
                 bg-gradient-to-left border-radius-15">
 
 
-                <div class="col-12 col-sm-6
-                            ms-sm-4
-                            mt-sm-2
-                            bg-success text-center">
+                <div class="row">
+
+                    <div class="col-6
+                             text-center">
 
 
-                    <div class="p-sm-4">
-                        <div class="col-6 col-sm-12
-                                mt-2
-                                mx-auto
-                                text-center">
+                        <div class="p-sm-4">
+                            <div class="col-6 col-sm-12
+                                    mt-2
+                                    mx-auto
+                                    text-center">
 
-                                @if (Auth::user()->id == $user->id)
-                                    <a href="{{ route('options.selected', 'awatar') }}">
+                                    @auth
+                                        @if (Auth::user()->id == $user->id)
+                                        <a href="{{ route('options.show', 'awatar') }}">
+                                            <img class="img-thumbnail" src="{{ asset($user->avatar) }}">
+                                        </a>
+                                        @else
+                                            <img class="img-thumbnail" src="{{ asset($user->avatar) }}">
+                                        @endif
+                                    @endauth
+
+                                    @guest
                                         <img class="img-thumbnail" src="{{ asset($user->avatar) }}">
-                                    </a>
-                                @else
-                                    <img class="img-thumbnail" src="{{ asset($user->avatar) }}">
-                                @endif
+                                    @endguest
 
+                            </div>
+
+                            <div class="col-12
+                                    mx-auto text-center">
+
+                                    <span class="nick-size  text-center">
+                                        <strong>{{ $user->name }}</strong>
+                                    </span>
+                            </div>
                         </div>
 
-                        <div class="col-12
-                                mx-auto text-center">
-
-                                <span class="nick-size bg-light text-center">
-                                    <strong>{{ $user->name }}</strong>
-                                </span>
-                        </div>
                     </div>
 
+                    <div class="col-6 mt-3
+                                    text-center">
+                                    @if (isset($user->user_game_data_id) && isset($user_game_data))
+                                        Coins: {{ $user_game_data->coins }} <br>
+                                        Rekord na easy: {{ $user_game_data->records_easy }} <br>
+                                        Rekord na medium: {{ $user_game_data->records_medium }} <br>
+                                        Rekord na hard: {{ $user_game_data->records_hard }}
+                                    @else
 
+                                        Użytkownik nie dodał jeszcze postepu z gry
+                                    @endif
+
+                    </div>
 
                 </div>
+
 
     </div>
 

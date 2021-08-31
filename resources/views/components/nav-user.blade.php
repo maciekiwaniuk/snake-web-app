@@ -22,11 +22,15 @@
             <ul class="navbar-nav text-center ms-auto fs-4">
 
                 <li>
+                    <a class="nav-link me-3" href="{{ route('support.index') }}">Pomoc</a>
+                </li>
+
+                <li>
                     <a class="nav-link me-3" href="{{ route('download') }}">Pobierz grę</a>
                 </li>
 
                 <li>
-                    <a class="nav-link me-3 mb-1" href="{{ route('login') }}">Ranking</a>
+                    <a class="nav-link me-3 mb-1" href="{{ route('ranking.index') }}">Ranking</a>
                 </li>
 
                 <!-- Profil d-md-none -->

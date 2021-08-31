@@ -24,6 +24,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\HeaderReferrerPolicy::class,
         \App\Http\Middleware\NoCacheMiddleware::class,
         \App\Http\Middleware\NoMimeSniffingMiddleware::class,
+        \App\Http\Middleware\BannedIpsMiddleware::class,
     ];
 
     /**
@@ -65,5 +66,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+        'admin' => \App\Http\Middleware\IsAdminMiddleware::class,
+        'unique.visitor' => \App\Http\Middleware\UniqueVisitorsMiddleware::class,
     ];
 }

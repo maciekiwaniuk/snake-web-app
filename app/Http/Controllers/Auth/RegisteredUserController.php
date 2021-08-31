@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Rules\OnlyLettersDigits;
+use App\Rules\ValidNickname;
+use App\Rules\reCAPTCHAv2;
 use Carbon\Carbon;
 
 class RegisteredUserController extends Controller
@@ -37,9 +40,10 @@ class RegisteredUserController extends Controller
         $this->validate(
             $request,
             [
-                'name' => 'required|string|max:255|unique:users',
+                'name' => ['required', 'string', 'max:30', 'unique:users', new OnlyLettersDigits, new ValidNickname],
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                'g-recaptcha-response' => [new reCAPTCHAv2],
             ],
             ['password.confirmed' => 'Hasła nie były takie same.']
         );
@@ -50,6 +54,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'last_login_ip' => $request->getClientIp(),
             'last_login_time' => Carbon::now()->toDateTimeString(),
+            'last_user_agent' => $request->server('HTTP_USER_AGENT'),
         ]);
 
         event(new Registered($user));

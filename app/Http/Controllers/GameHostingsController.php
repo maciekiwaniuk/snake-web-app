@@ -9,8 +9,7 @@ use App\Models\Hosting;
 class GameHostingsController extends Controller
 {
     /**
-     * Wyświetlenie strony z linkami
-     * do hostingów do pobrania gry
+     * Showing hostings index page
      */
     public function index()
     {

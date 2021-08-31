@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Models\UserGameData;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -22,6 +24,7 @@ class User extends Authenticatable
         'password',
         'last_login_ip',
         'last_login_time',
+        'last_user_agent',
     ];
 
     /**
@@ -42,4 +45,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /**
+     * Relation for users_game_data
+     */
+    public function usersGameData()
+    {
+        return $this->hasOne(UserGameData::class);
+    }
 }

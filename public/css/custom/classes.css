@@ -3,6 +3,18 @@
 .color-black{
     color: black !important;
 }
+.color-white{
+    color: white !important;
+}
+.color-golden{
+    color: #ffc107 !important;
+}
+.color-silver{
+    color: #c0c0c0 !important;
+}
+.color-bronze{
+    color: #cd7f32 !important;
+}
 
 .bg-dropdown-btn-user{
     background-color: rgb(183, 255, 0) !important;
@@ -49,6 +61,15 @@
 
 /******* link *******/
 
+.link-none{
+    color: rgb(0, 0, 0) !important;
+    text-decoration: none !important;
+    background-color: none !important;
+}
+.link-none:hover{
+    cursor:pointer !important;
+}
+
 .link{
     color: blue !important;
     text-decoration: none !important;
@@ -65,6 +86,52 @@
 }
 .link-grey:hover{
     text-decoration: underline !important;
+}
+
+.link-blue{
+    color: rgb(21, 115, 255) !important;
+    text-decoration: none !important;
+    background-color: none !important;
+}
+.link-blue:hover{
+    color: rgb(54, 116, 250)!important;
+}
+
+
+.link-golden{
+    color: #ffc107 !important;
+    text-decoration: none !important;
+    background-color: none !important;
+}
+.link-golden:hover{
+    color: #d5ad35 !important;
+}
+
+.link-silver{
+    color: #c0c0c0 !important;
+    text-decoration: none !important;
+    background-color: none !important;
+}
+.link-silver:hover{
+    color: rgb(188, 179, 179) !important;
+}
+
+.link-bronze{
+    color: #cd7f32 !important;
+    text-decoration: none !important;
+    background-color: none !important;
+}
+.link-bronze:hover{
+    color: #bf6e1e !important;
+}
+
+.link-white{
+    color: white !important;
+    text-decoration: none !important;
+    background-color: none !important;
+}
+.link-white:hover{
+    color: rgb(211, 210, 210) !important
 }
 
 

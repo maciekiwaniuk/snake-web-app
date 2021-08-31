@@ -4468,7 +4468,7 @@ textarea.form-control-lg {
 
 .accordion-item {
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
 .accordion-item:first-of-type {
   border-top-left-radius: 0.25rem;

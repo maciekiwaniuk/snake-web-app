@@ -17,7 +17,7 @@ class UserDeleted extends Model
     protected $table = 'users_deleted';
 
     /**
-     * Wyłączenie timestampów
+     * Disabling timestamps
      */
     public $timestamps = false;
 }
