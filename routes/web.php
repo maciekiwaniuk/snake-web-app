@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\Admin\UsersActionsController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\GameHostingsController;
 use App\Http\Controllers\ProfileController;
@@ -18,9 +18,7 @@ use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\ActionsController;
 use App\Http\Controllers\RankingsController;
 use App\Http\Controllers\SupportController;
-
-
-
+use App\Models\User;
 
 Route::get('/', [PagesController::class, 'index'])->middleware('unique.visitor')->name('home');
 
@@ -46,14 +44,28 @@ Route::prefix('ranking')->group(function() {
 
 /********************************************************* Admin routing *********************************************************/
 
-Route::prefix('admin')->middleware('admin')->group(function()  {
-    Route::name('admin.')->group(function()  {
-        Route::put('/banowanie-uzytkownika/{id}', [UsersActionsController::class, 'banIP'])->name('ban-ip');
-        Route::delete('/usuwanie-uzytkownika/{id}', [UsersActionsController::class, 'deleteUserAccount'])->name('delete-user');
+Route::prefix('admin')->middleware('admin')->group(function() {
+    Route::name('admin.')->group(function() {
+        Route::put('/banowanie-ip/{id}', [UsersController::class, 'banLastUserIp'])->name('ban-last-ip');
+        Route::put('/banowanie-konta/{id}', [UsersController::class, 'banAccount'])->name('ban-account');
+        Route::put('/banowanie-konta-oraz-ip/{id}', [UsersController::class, 'banAccountAndIP'])->name('ban-ip-account');
+        Route::delete('/usuwanie-konta/{id}', [UsersController::class, 'deleteUserAccount'])->name('delete-account');
+        Route::put('/odbanowanie-ip/{id}', [UsersController::class, 'unbanLastUserIp'])->name('unban-last-ip');
+        Route::put('/odbanowanie-konta/{id}', [UsersController::class, 'unbanAccount'])->name('unban-account');
+        Route::put('/odbanowanie-konta-oraz-ip', [UsersController::class, 'unbanAccountAndIP'])->name('unban-ip-account');
+
+        Route::prefix('uzytkownicy')->group(function() {
+            Route::name('users.')->group(function() {
+                Route::get('/', [UsersController::class, 'index'])->name('index');
+                Route::get('/uzytkownicy-wszyscy', [UsersController::class, 'getAllUsers'])->name('get-all-users');
+                Route::get('/uzytkownicy-zbanowani', [UsersController::class, 'getBannedUsers'])->name('get-banned-users');
+                Route::get('/uzytkownicy-niezbanowani', [UsersController::class, 'getNotBannedUsers'])->name('get-notbanned-users');
+            });
+        });
     });
 });
 
-/********************************************** Routing available when user is logged **********************************************/
+/********************************************************* User routing *********************************************************/
 
 Route::middleware('auth')->group(function() {
     Route::prefix('ustawienia')->group(function() {

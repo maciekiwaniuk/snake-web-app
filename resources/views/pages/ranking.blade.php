@@ -61,7 +61,7 @@
                 <div class="col-12
                             mx-auto text-center fs-6">
 
-                            <div class="mt-3">
+                            <div class="mt-3 table-responsive-sm">
                                 <table id="RankingsTable" class="table table-dark table-hover">
                                     <thead>
                                     </thead>
@@ -202,16 +202,34 @@
                             data: function (row, type, val, meta) {
                                 console.log(row);
                                 if (row.permision != 2) {
-                                    urlDeleteUserToReplace = "{{ route('admin.delete-user', '__ID__') }}";
+                                    urlDeleteUserToReplace = "{{ route('admin.delete-account', '__ID__') }}";
                                     urlDeleteUser = urlDeleteUserToReplace.replace('__ID__', row.user_id);
 
-                                    urlBanIpToReplace = "{{ route('admin.ban-ip', '__ID__') }}";
+                                    urlBanIpToReplace = "{{ route('admin.ban-last-ip', '__ID__') }}";
                                     urlBanIp = urlBanIpToReplace.replace('__ID__', row.user_id);
+
+                                    urlBanAccountToReplace = "{{ route('admin.ban-account', '__ID__') }}";
+                                    urlBanAccount = urlBanAccountToReplace.replace('__ID__', row.user_id);
+
+                                    urlBanIpAndAccountToReplace = "{{ route('admin.ban-ip-account', '__ID__') }}";
+                                    urlBanIpAndAccount = urlBanIpAndAccountToReplace.replace('__ID__', row.user_id);
                                     return `
                                         <form method="POST" action="`+urlBanIp+`">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-md btn-danger">Zbanuj IP</button>
+                                            <button type="submit" class="btn btn-md btn-warning">Zbanuj IP</button>
+                                        </form>
+
+                                        <form method="POST" action="`+urlBanAccount+`" class="mt-1">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-md btn-info">Zbanuj konto</button>
+                                        </form>
+
+                                        <form method="POST" action="`+urlBanIpAndAccount+`" class="mt-1">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-md btn-danger">Zbanuj konto oraz IP</button>
                                         </form>
 
                                         <form method="POST" action="`+urlDeleteUser+`" class="mt-1">

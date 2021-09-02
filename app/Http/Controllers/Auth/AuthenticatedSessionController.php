@@ -33,12 +33,22 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Zapisanie ip oraz czasu ostatniego logowania
+        // saving user's ip and login's time
         $user = Auth::user();
         $user->last_login_ip = $request->getClientIp();
         $user->last_login_time = Carbon::now()->toDateTimeString();
         $user->last_user_agent = $request->server('HTTP_USER_AGENT');
         $user->save();
+
+        if (Auth::user()->user_banned && Auth::user()->permision == 0) {
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('login')->withErrors([
+                'banned' => 'Konto na które próbujesz się zalogować zostało zbanowane.'
+            ]);
+        }
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

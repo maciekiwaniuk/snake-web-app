@@ -21,10 +21,12 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+
         \App\Http\Middleware\HeaderReferrerPolicy::class,
         \App\Http\Middleware\NoCacheMiddleware::class,
         \App\Http\Middleware\NoMimeSniffingMiddleware::class,
-        \App\Http\Middleware\BannedIpsMiddleware::class,
+        \App\Http\Middleware\BannedIpMiddleware::class,
+        \App\Http\Middleware\BannedAccountMiddleware::class,
     ];
 
     /**

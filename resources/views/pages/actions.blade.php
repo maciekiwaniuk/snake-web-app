@@ -54,12 +54,11 @@
 
                 <hr>
 
-                <div class="col-12
-                            mx-auto text-center">
+                <div class="col-12 mx-auto text-center">
 
                             <span class="fs-4"><strong>Zapisane postępy</strong></span>
 
-                            <div class="mt-2">
+                            <div class="mt-2 table-responsive-sm">
                                 <table id="UserProgressTable" class="table table-primary table-hover">
                                     <thead>
                                     </thead>
@@ -259,7 +258,7 @@
 
                 },
 
-
+                responsive: true,
                 order: [[ 2, 'desc' ]],
                 lengthChange: false,
                 info: false,

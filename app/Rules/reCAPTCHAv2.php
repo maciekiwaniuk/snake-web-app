@@ -2,7 +2,6 @@
 
 namespace App\Rules;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Validation\Rule;
 
 class reCAPTCHAv2 implements Rule

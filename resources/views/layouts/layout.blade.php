@@ -50,8 +50,12 @@
             @include('components.nav-guest')
         @endif
 
-        @if (Auth::user())
+        @if (Auth::check() && Auth::user()->permision == 0)
             @include('components.nav-user')
+        @endif
+
+        @if (Auth::check() && Auth::user()->permision == 2)
+            @include('components.nav-admin')
         @endif
         <!-- END NAV -->
 

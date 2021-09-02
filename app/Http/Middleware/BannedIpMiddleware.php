@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\VisitorUnique;
 
-class BannedIpsMiddleware
+class BannedIpMiddleware
 {
     /**
      * Handle an incoming request.
@@ -19,10 +19,12 @@ class BannedIpsMiddleware
     {
         $ip_is_banned = VisitorUnique::query()
             ->where('ip', '=', $request->getClientIp())
-            ->where('banned', '=', 1)
+            ->where('ip_banned', '=', 1)
             ->first();
 
+        // if current request ip found as banned ip
         if ($ip_is_banned !== null) {
+
             return response()
                 ->view('pages.banned', [
                     'ip' => $request->getClientIp()

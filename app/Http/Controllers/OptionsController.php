@@ -41,7 +41,7 @@ class OptionsController extends Controller
     public function avatarChange(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'image' => ['image', 'mimes:jpeg,jpg,png', 'max:10000']
+            'image' => ['image', 'mimes:jpeg,jpg,png', 'max:10000', 'dimensions:max_width=800,max_height=800']
         ]);
 
         $result = [
