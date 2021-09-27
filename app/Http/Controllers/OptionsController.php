@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangeEmailRequest;
@@ -52,7 +50,7 @@ class OptionsController extends Controller
         if ($validator->fails()) {
             $result = [
                 'success' => false,
-                'message' => 'Wystąpił błąd podczas dodawania obrazka.'
+                'message' => $validator->errors()->first(),
             ];
         } else {
             $this->changeUserAvatar($request->file('image'));
@@ -67,7 +65,7 @@ class OptionsController extends Controller
     /**
      * Mechanism of user's deleting avatar - AJAX
      */
-    public function avatarDelete(Request $request)
+    public function avatarDelete()
     {
         $result = [
             'success' => true,
@@ -87,8 +85,6 @@ class OptionsController extends Controller
      */
     public function passwordChange(ChangePasswordRequest $request)
     {
-        $validated = $request->validated();
-
         $user = Auth::user();
         $user->password = Hash::make($request->new_password);
         $user->save();
@@ -102,8 +98,6 @@ class OptionsController extends Controller
      */
     public function emailChange(ChangeEmailRequest $request)
     {
-        $validated = $request->validated();
-
         $user = Auth::user();
         $user->email = $request->new_email;
         $user->save();
@@ -139,6 +133,25 @@ class OptionsController extends Controller
             'error' => false,
             'url' => route('home'),
         ];
+        return response()->json([
+            'result' => $result,
+        ]);
+    }
+
+    /**
+     * Changing user's token - logout from game
+     */
+    public function logoutFromGame()
+    {
+        $user = Auth::user();
+        $user->api_token = Str::random(60);
+        $user->save();
+
+        $result = [
+            'success' => true,
+            'message' => 'Zostałeś pomyślnie wylogowany z gry na wszystkich urządzeniach.',
+        ];
+
         return response()->json([
             'result' => $result,
         ]);

@@ -17,7 +17,7 @@ class CreateVisitorsUniqueTable extends Migration
             $table->id();
             $table->string('ip');
             $table->string('user_agent');
-            $table->boolean('banned')->default(false);
+            $table->boolean('ip_banned')->default(false);
             $table->timestamps();
         });
     }

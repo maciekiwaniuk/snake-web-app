@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-    Użytkownicy
+    Odwiedzający
 @endsection
 
 @push('js.header')
@@ -39,8 +39,148 @@
                     <strong>IP odwiedzających</strong>
                 </div>
 
+                <div class="btn-group w-100" style="background-color: rgb(232, 226, 226);" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="visitorsRadio" id="allVisitors" autocomplete="off" checked>
+                    <label class="btn btn-outline-dark" for="allVisitors">
+                        <strong class="text-danger">Wszystkie IP</strong>
+                    </label>
 
+                    <input type="radio" class="btn-check" name="visitorsRadio" id="bannedVisitors" autocomplete="off">
+                    <label class="btn btn-outline-dark" for="bannedVisitors">
+                        <strong class="text-danger">Tylko zbanowane</strong>
+                    </label>
+
+                    <input type="radio" class="btn-check" name="visitorsRadio" id="notbannedVisitors" autocomplete="off">
+                    <label class="btn btn-outline-dark" for="notbannedVisitors">
+                        <strong class="text-danger">Tylko niezbanowane</strong>
+                    </label>
+                </div>
+
+                <div class="col-12
+                            mx-auto text-center fs-6">
+
+                            <div class="mt-3
+                                        table-responsive-sm
+                                        table-responsive-md">
+                                <table id="VisitorsTable" class="table table-dark table-hover">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                </div>
 
     </div>
+
+
+    <script>
+
+
+        $(document).ready(function() {
+            // Datatables
+            var visitorsTable = $('#VisitorsTable').DataTable({
+                oLanguage: {
+                    sUrl: "{{ asset('assets/plugins/DataTables/pl.json') }}"
+                },
+                order: [[ 0, 'asc' ]],
+                serverSide: false,
+                ajax: {
+                    url: "{{ route('admin.visitors.get-all-visitors') }}",
+                    type: "GET",
+                    datatype: "json",
+                    contentType: "application/json",
+                },
+                columns: [
+                    {
+                        title: 'Numer',
+                        data: '',
+                        render: function (data, type, row, meta) {
+                            let number = meta.row + meta.settings._iDisplayStart + 1;
+                            return `<span class="color-white">`+number+`</span>`;
+                        },
+                        class: 'align-middle',
+                    },
+                    {
+                        title: 'IP',
+                        data: 'ip',
+                        class: 'align-middle',
+                        orderable: false,
+                    },
+                    {
+                        title: 'User-Agent',
+                        data: 'user_agent',
+                        class: 'align-middle',
+                        orderable: false,
+                    },
+                    {
+                        title: 'Pierwsza wizyta',
+                        data: 'created_at',
+                        class: 'align-middle',
+                    },
+                    {
+                        title: 'Ban',
+                        data: '',
+                        render: function (data, type, row, meta) {
+                            if (row.ip_banned == 0) {
+                                return '<i class="bi bi-check-lg text-success"></i>'
+                            } else {
+                                return '<i class="bi bi-exclamation-circle text-danger"></i>'
+                            }
+                        },
+                        class: 'align-middle',
+                        orderable: false,
+                    },
+                    {
+                        title: 'Akcje',
+                        data: '',
+                        render: function (data, type, row, meta) {
+                            // ip IS BANNED
+                            if (row.ip_banned) {
+                                urlUnbanIpToReplace = "{{ route('admin.unban-ip', '__ID__') }}";
+                                urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', row.ip_id)
+                                return `
+                                            <form action="`+urlUnbanIp+`" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button class="btn btn-success">Odbanuj</button>
+                                            </form>
+                                        `;
+                            } else {
+                                // ip ISN'T BANNED
+                                urlBanIpToReplace = "{{ route('admin.ban-ip', '__ID__') }}";
+                                urlBanIp = urlBanIpToReplace.replace('__ID__', row.ip_id)
+                                return `
+                                            <form action="`+urlBanIp+`" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button class="btn btn-danger">Zbanuj</button>
+                                            </form>
+                                        `;
+                            }
+                        },
+                        class: 'align-middle',
+                        orderable: false,
+                    },
+                ]
+            });
+
+            $('#allVisitors').on('click', function() {
+                visitorsTable.ajax.url("{{ route('admin.visitors.get-all-visitors') }}").load();
+            });
+            $('#bannedVisitors').on('click', function() {
+                visitorsTable.ajax.url("{{ route('admin.visitors.get-banned-visitors') }}").load();
+            });
+            $('#notbannedVisitors').on('click', function() {
+                visitorsTable.ajax.url("{{ route('admin.visitors.get-notbanned-visitors') }}").load();
+            });
+        });
+
+
+
+
+
+    </script>
 
 @endsection

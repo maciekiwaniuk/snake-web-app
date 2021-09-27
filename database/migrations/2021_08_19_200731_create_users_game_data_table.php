@@ -14,32 +14,39 @@ class CreateUsersGameDataTable extends Migration
     public function up()
     {
         Schema::create('users_game_data', function (Blueprint $table) {
-            $table->id();
             $table->integer('user_id');
-            $table->string('filename');
 
-            $table->integer('coins');
+            $table->integer('points')->default(0);
+            $table->integer('coins')->default(0);
+            $table->integer('play_time_seconds')->default(0);
 
-            $table->string('selected_level');
-            $table->string('selected_skins_snake');
-            $table->string('selected_skins_fruit');
-            $table->string('selected_skins_board');
+            $table->string('selected_level')->default("easy");
+            $table->string('selected_head_skin')->default('default');
+            $table->string('selected_body_skin')->default("default");
+            $table->string('selected_fruit_skin')->default("default");
+            $table->string('selected_board_skin')->default("default");
 
-            $table->boolean('difficulties_medium');
-            $table->boolean('difficulties_hard');
+            $table->string('head_skins')->default("default");
+            $table->string('body_skins')->default("default");
+            $table->string('fruit_skins')->default("default");
+            $table->string('board_skins')->default("default");
 
-            $table->integer('records_easy');
-            $table->integer('records_medium');
-            $table->integer('records_hard');
+            $table->boolean('unlocked_medium')->default(false);
+            $table->boolean('unlocked_hard')->default(false);
 
-            $table->string('inventory_snake_skins');
-            $table->string('inventory_fruit_skins');
-            $table->string('inventory_board_skins');
+            $table->integer('easy_record')->default(0);
+            $table->integer('medium_record')->default(0);
+            $table->integer('hard_record')->default(0);
 
-            $table->integer('options_fps');
-            $table->boolean('options_music');
-            $table->boolean('options_effects');
-            $table->float('options_volume');
+            $table->integer('games_amount')->default(0);
+            $table->integer('ate_fruits_amount')->default(0);
+            $table->integer('hit_wall')->default(0);
+            $table->integer('hit_snake')->default(0);
+
+            $table->integer('fps')->default(60);
+            $table->boolean('music')->default(true);
+            $table->boolean('effects')->default(true);
+            $table->float('volume')->default(0.1);
 
             $table->timestamps();
         });

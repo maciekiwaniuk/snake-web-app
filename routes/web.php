@@ -11,14 +11,14 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\VisitorsUniqueController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\GameHostingsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OptionsController;
-use App\Http\Controllers\ActionsController;
 use App\Http\Controllers\RankingsController;
 use App\Http\Controllers\SupportController;
-use App\Models\User;
+
 
 Route::get('/', [PagesController::class, 'index'])->middleware('unique.visitor')->name('home');
 
@@ -35,6 +35,7 @@ Route::prefix('pomoc')->group(function() {
 Route::prefix('ranking')->group(function() {
     Route::name('ranking.')->group(function() {
         Route::get('/', [RankingsController::class, 'index'])->name('index');
+        Route::get('/points', [RankingsController::class, 'getPoints'])->name('get-points');
         Route::get('/coins', [RankingsController::class, 'getCoins'])->name('get-coins');
         Route::get('/easy', [RankingsController::class, 'getEasy'])->name('get-easy');
         Route::get('/medium', [RankingsController::class, 'getMedium'])->name('get-medium');
@@ -52,7 +53,11 @@ Route::prefix('admin')->middleware('admin')->group(function() {
         Route::delete('/usuwanie-konta/{id}', [UsersController::class, 'deleteUserAccount'])->name('delete-account');
         Route::put('/odbanowanie-ip/{id}', [UsersController::class, 'unbanLastUserIp'])->name('unban-last-ip');
         Route::put('/odbanowanie-konta/{id}', [UsersController::class, 'unbanAccount'])->name('unban-account');
-        Route::put('/odbanowanie-konta-oraz-ip', [UsersController::class, 'unbanAccountAndIP'])->name('unban-ip-account');
+        Route::put('/odbanowanie-konta-oraz-ip/{id}', [UsersController::class, 'unbanAccountAndIP'])->name('unban-ip-account');
+        Route::put('/resetowanie-api-tokenu/{id}', [UsersController::class, 'resetApiToken'])->name('reset-api-token');
+
+        Route::put('/zbanuj-ip/{id}', [VisitorsUniqueController::class, 'banIp'])->name('ban-ip');
+        Route::put('/odbanuj-ip/{id}', [VisitorsUniqueController::class, 'unbanIp'])->name('unban-ip');
 
         Route::prefix('uzytkownicy')->group(function() {
             Route::name('users.')->group(function() {
@@ -60,6 +65,15 @@ Route::prefix('admin')->middleware('admin')->group(function() {
                 Route::get('/uzytkownicy-wszyscy', [UsersController::class, 'getAllUsers'])->name('get-all-users');
                 Route::get('/uzytkownicy-zbanowani', [UsersController::class, 'getBannedUsers'])->name('get-banned-users');
                 Route::get('/uzytkownicy-niezbanowani', [UsersController::class, 'getNotBannedUsers'])->name('get-notbanned-users');
+            });
+        });
+
+        Route::prefix('odwiedzajacy')->group(function() {
+            Route::name('visitors.')->group(function() {
+                Route::get('/', [VisitorsUniqueController::class, 'index'])->name('index');
+                Route::get('/odwiedzajacy-wszyscy', [VisitorsUniqueController::class, 'getAllVisitors'])->name('get-all-visitors');
+                Route::get('/odwiedzajacy-zbanowani', [VisitorsUniqueController::class, 'getBannedVisitors'])->name('get-banned-visitors');
+                Route::get('/odwiedzajacy-niezbanowani', [VisitorsUniqueController::class, 'getNotBannedVisitors'])->name('get-notbanned-visitors');
             });
         });
     });
@@ -79,18 +93,7 @@ Route::middleware('auth')->group(function() {
             Route::post('/zmiana-awatara', [OptionsController::class, 'avatarChange'])->name('avatar-change');
             Route::delete('/usuniecie-awatara', [OptionsController::class, 'avatarDelete'])->name('avatar-delete');
             Route::delete('/usuniecie-konta', [OptionsController::class, 'accountDelete'])->name('account-delete');
-        });
-    });
-
-    Route::prefix('akcje')->group(function() {
-        Route::name('actions.')->group(function() {
-            Route::get('/', [ActionsController::class, 'index'])->name('index');
-
-            Route::post('/wczytaj-progres', [ActionsController::class, 'loadProgress'])->name('progress-load');
-            Route::get('/pokaz-progres', [ActionsController::class,'showProgress'])->name('progress-show');
-            Route::delete('/usun-progres/{id}', [ActionsController::class, 'deleteProgress'])->name('progress-delete');
-            Route::post('/pobierz-progres/{id}', [ActionsController::class, 'downloadProgress'])->name('progress-download');
-            Route::post('/wybierz-progres/{id}', [ActionsController::class, 'selectProgress'])->name('progress-select');
+            Route::post('/wylogowanie-z-gry', [OptionsController::class, 'logoutFromGame'])->name('logout-from-game');
         });
     });
 });

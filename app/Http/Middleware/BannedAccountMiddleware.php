@@ -17,8 +17,18 @@ class BannedAccountMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // $user = $request->user();
-        // logger($user->id);
+        if (Auth::check() && Auth::user()->user_banned == 1) {
+
+            // logout after ban
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            // redirect to login page with error message
+            return redirect()->route('login')->withErrors([
+                'banned' => 'Konto zostało zbanowane.'
+            ]);
+        }
 
         return $next($request);
     }

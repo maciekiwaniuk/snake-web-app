@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserGameData;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -12,17 +13,17 @@ class ProfileController extends Controller
      */
     public function show($username)
     {
-        $user = $this->findUserByUsername($username);
+        $user = User::query()
+            ->select('id', 'name', 'avatar')
+            ->where('name', '=', $username)
+            ->first();
 
-        if ($user->user_game_data_id != null) {
-            $user_game_data = UserGameData::query()
-                ->where('id', '=', $user->user_game_data_id)
-                ->first();
-        } else {
-            $user_game_data = '-';
-        }
+        $user_game_data = UserGameData::query()
+            ->select('points', 'coins', 'play_time_seconds',
+                     'easy_record', 'medium_record', 'hard_record')
+            ->where('user_id', '=', $user->id)
+            ->first();
 
-        logger($user_game_data);
 
         return view('pages.profile', [
             'user' => $user,

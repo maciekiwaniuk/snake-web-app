@@ -18,6 +18,16 @@ class UserGameData extends Model
      */
     protected $table = 'users_game_data';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id'
+    ];
+
+    protected $primaryKey = 'user_id';
 
     /**
      * Relation for users table

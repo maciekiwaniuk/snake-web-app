@@ -37,7 +37,12 @@
                 </div>
 
                 <div class="btn-group w-100" style="background-color: rgb(232, 226, 226);" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="rankingRadio" id="coinsRank" autocomplete="off" checked>
+                    <input type="radio" class="btn-check" name="rankingRadio" id="pointsRank" autocomplete="off" checked>
+                    <label class="btn btn-outline-dark" for="pointsRank">
+                        Ilość <strong class="text-primary">Punktów</strong>
+                    </label>
+
+                    <input type="radio" class="btn-check" name="rankingRadio" id="coinsRank" autocomplete="off">
                     <label class="btn btn-outline-dark" for="coinsRank">
                         Ilość <strong class="text-warning">Coins</strong>
                     </label>
@@ -109,7 +114,7 @@
                 info: false,
                 serverSide: false,
                 ajax: {
-                    url: "{{ route('ranking.get-coins') }}",
+                    url: "{{ route('ranking.get-points') }}",
                     type: "GET",
                     datatype: "json",
                     contentType: "application/json",
@@ -161,17 +166,19 @@
                     {
                         class: 'align-middle',
                         orderable: false,
-                        title: 'Ilość coins',
+                        title: 'Ilość punktów',
                         data: function (row, type, val, meta) {
                             var data;
-                            if ($('#coinsRank').prop('checked')) {
+                            if ($('#pointsRank').prop('checked')) {
+                                data = row.points;
+                            } else if ($('#coinsRank').prop('checked')) {
                                 data = row.coins;
                             } else if ($('#easyRank').prop('checked')) {
-                                data = row.records_easy;
+                                data = row.easy_record;
                             } else if ($('#mediumRank').prop('checked')) {
-                                data = row.records_medium;
+                                data = row.medium_record;
                             } else if ($('#hardRank').prop('checked')) {
-                                data = row.records_hard;
+                                data = row.hard_record;
                             }
 
                             if (meta.row == 0) {
@@ -200,7 +207,7 @@
                             class: 'align-middle',
                             orderable: false,
                             data: function (row, type, val, meta) {
-                                console.log(row);
+                                text = ``;
                                 if (row.permision != 2) {
                                     urlDeleteUserToReplace = "{{ route('admin.delete-account', '__ID__') }}";
                                     urlDeleteUser = urlDeleteUserToReplace.replace('__ID__', row.user_id);
@@ -213,34 +220,47 @@
 
                                     urlBanIpAndAccountToReplace = "{{ route('admin.ban-ip-account', '__ID__') }}";
                                     urlBanIpAndAccount = urlBanIpAndAccountToReplace.replace('__ID__', row.user_id);
-                                    return `
-                                        <form method="POST" action="`+urlBanIp+`">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-md btn-warning">Zbanuj IP</button>
-                                        </form>
 
-                                        <form method="POST" action="`+urlBanAccount+`" class="mt-1">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-md btn-info">Zbanuj konto</button>
-                                        </form>
+                                    text += `
 
-                                        <form method="POST" action="`+urlBanIpAndAccount+`" class="mt-1">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-md btn-danger">Zbanuj konto oraz IP</button>
-                                        </form>
+                                            <form method="POST" action="`+urlBanIp+`">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-md btn-warning">Zbanuj IP</button>
+                                            </form>
 
-                                        <form method="POST" action="`+urlDeleteUser+`" class="mt-1">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-md btn-primary">Usuń konto</button>
-                                        </form>
+                                            <form method="POST" action="`+urlBanAccount+`" class="mt-1">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-md btn-danger">Zbanuj konto</button>
+                                            </form>
+
+                                            <form method="POST" action="`+urlBanIpAndAccount+`" class="mt-1">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-md btn-warning">Zbanuj konto oraz IP</button>
+                                            </form>
+
+                                            <form method="POST" action="`+urlDeleteUser+`" class="mt-1">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-md btn-danger">Usuń konto</button>
+                                            </form>
                                         `;
-                                } else {
-                                    return '-';
                                 }
+
+
+                                urlResetTokenToReplace = "{{ route('admin.reset-api-token', '__ID__') }}";
+                                urlResetToken = urlResetTokenToReplace.replace('__ID__', row.user_id);
+                                text += `
+                                            <form action="`+urlResetToken+`" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-primary mb-1 mt-1">Zresetuj token</button>
+                                            </form>
+                                        `;
+                                return text;
+
 
                             },
                         },
@@ -249,6 +269,13 @@
             });
 
 
+            $('#pointsRank').on('click', function() {
+                blockUI();
+                setTimeout(function()  {
+                    $(rankingTable.column(2).header()).text('Ilość Punktów');
+                    rankingTable.ajax.url("{{ route('ranking.get-points') }}").load();
+                }, 400);
+            });
             $('#coinsRank').on('click', function() {
                 blockUI();
                 setTimeout(function()  {

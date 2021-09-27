@@ -24,7 +24,6 @@ class reCAPTCHAv2 implements Rule
         } else {
             return false;
         }
-
     }
 
     /**

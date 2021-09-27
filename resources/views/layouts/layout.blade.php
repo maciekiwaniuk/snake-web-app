@@ -4,11 +4,12 @@
     <title>@yield('title')</title>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Strona internetowa, gdzie można pobrać grę na komputer Snake">
-    <meta name="keywords" content="Snake">
+    <meta name="keywords" content="Snake, snake-gra.pl, snake, snake-gra, Gra na komputer, Snake na komputer">
     <meta name="author" content="Maciej Iwaniuk">
+    <meta name=”robots” content="index,follow">
 
     <!-- favicon -->
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>

@@ -65,7 +65,7 @@ class ValidGameFile implements Rule
     protected function validCoins($content)
     {
         if (isset($content['coins']) && is_int($content['coins']) &&
-            $content['coins'] >= 0 && $content['coins'] <= 100_000)
+            $content['coins'] >= 0 && $content['coins'] <= 98_951)
         {
             return true;
         }
@@ -135,9 +135,9 @@ class ValidGameFile implements Rule
             isset($content['records']['medium']) && isset($content['records']['hard']) &&
             is_int($content['records']['easy']) && is_int($content['records']['medium']) &&
             is_int($content['records']['hard']) && $content['records']['easy'] >= 0 &&
-            $content['records']['easy'] <= 200 && $content['records']['medium'] >= 0 &&
-            $content['records']['medium'] <= 200 && $content['records']['hard'] >= 0 &&
-            $content['records']['hard'] <= 200)
+            $content['records']['easy'] <= 193 && $content['records']['medium'] >= 0 &&
+            $content['records']['medium'] <= 191 && $content['records']['hard'] >= 0 &&
+            $content['records']['hard'] <= 189)
         {
             return true;
         }

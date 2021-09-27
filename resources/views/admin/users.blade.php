@@ -113,11 +113,13 @@
                             }
                         },
                         class: 'align-middle',
+                        orderable: false,
                     },
                     {
                         title: 'IP',
                         data: 'last_login_ip',
                         class: 'align-middle',
+                        orderable: false,
                     },
                     {
                         title: 'Ostatnie logowanie',
@@ -135,6 +137,7 @@
                             }
                         },
                         class: 'align-middle',
+                        orderable: false,
                     },
                     {
                         title: 'Ban IP',
@@ -147,13 +150,14 @@
                             }
                         },
                         class: 'align-middle',
+                        orderable: false,
                     },
                     {
                         title: 'Akcje',
                         data: '',
+                        orderable: false,
                         render: function (data, type, row, meta) {
-                            text = "";
-                            console.log(row);
+                            text = ``;
 
                             // USER
                             if (row.permision == 0) {
@@ -247,8 +251,18 @@
                                         `;
                             } else if (row.permision == 2) {
                                 // ADMIN
-                                text += '-'
+                                text += ''
                             }
+
+                            urlResetTokenToReplace = "{{ route('admin.reset-api-token', '__ID__') }}";
+                            urlResetToken = urlResetTokenToReplace.replace('__ID__', row.user_id);
+                            text += `
+                                        <form action="`+urlResetToken+`" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-primary mb-1">Zresetuj token</button>
+                                        </form>
+                                    `;
 
                             return text;
                         },

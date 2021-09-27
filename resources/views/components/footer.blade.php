@@ -13,7 +13,7 @@
                 <i class="bi bi-linkedin"></i>
             </a>
 
-            <a class="link-none me-1" style="color: #333 !important;" href="https://github.com/Kazo67">
+            <a class="link-none me-1" style="color: #333 !important;" href="https://github.com/macieeek">
                 <i class="bi bi-github"></i>
             </a>
 

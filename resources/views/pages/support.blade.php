@@ -18,7 +18,7 @@
 
 <div class="col-12
             p-3
-            mt-0 mt-sm-2 mt-md-3 mt-lg-4
+            mt-1 mt-sm-2 mt-md-3 mt-lg-4
             border border-2 border-success
             bg-gradient-to-left border-radius-15">
 
@@ -35,9 +35,108 @@
                     <div id="collapseGenerally" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="co-sie-dzieje") collapse show @else collapse @endif" aria-labelledby="headingGenerally" data-bs-parent="#supportAccordion">
                         <div class="accordion-body text-start">
 
-                            Jest to strona na której możemy utworzyć konto, które umożliwia m.in. rywalizację z innymi użytkownikami, modyfikację profilu, czy wczytanie postępu z gry,
-                            która jest dostępna do pobrania na komputer w zakładce <a class="link-blue" href="{{ route('support.show', 'pobierz-gre') }}">Pobierz grę</a>. Więcej o wczytywaniu
-                            postępu w grze na stronę w zakładce <a class="link-blue" href="{{ route('support.show', 'akcje') }}">Akcje</a>.
+                            Jest to strona, umożliwiająca <a class="link-blue" href="{{ route('support.show', 'pobierz-gre') }}">pobranie gry</a> na komputer Snake.
+                            Zakładka <a class="link-blue" href="{{ route('ranking.index') }}" target="_blank">Ranking</a>
+                            umożliwia rywalizację użytkowników poprzez uczestniczenie w rozgrywce w pobranej grze. Po instalacji Snake'a należy zalogować się w panelu logowania
+                            kontem zarejestrowanym na tej stronie.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zakładka pobierz grę -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingActionsDownload">
+                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActionsDownload" aria-expanded="false" aria-controls="collapseActionsDownload">
+                            <strong>Zakładka Pobierz grę</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseActionsDownload" class="bg-accordion-body accordion-collapse @if(isset($selected) && ($selected=="pobierz-gre" || $selected=="pobieranie-plikow" || $selected=="pobieranie-instalatora")) collapse show @else collapse @endif" aria-labelledby="headingActionsDownload" data-bs-parent="#supportAccordion">
+                        <div class="accordion-body text-start">
+
+                            Pobranie gry umożliwia zakładka <a class="link-blue" href="{{ route('download') }}" target="_blank"><strong><em>Pobierz grę</em></strong></a>. Znajdziemy w niej przyciski,
+                            które przenoszą na dany hosting w celu pobrania plików gry. Możliwe jest pobranie tzw. instalki, czyli pliku exe, który po podwójnym kliknięciu umożliwi nam zainstalowanie
+                            gry we wskazanym miejscu na komputerze. W większości przypadków wiąże się to z wykryciem przez Windows Defender jako niedozwolone oprogramowanie, w celu obejścia tego
+                            więcej w zakładce <strong><a class="link-blue" href="{{ route('support.show', 'pobieranie-instalatora') }}">Pobieranie instalatora gry</a></strong>. Jeżeli wystąpią poważniejsze
+                            problemy zawsze jest możliwość <strong><a class="link-blue" href="{{ route('support.show', 'pobieranie-plikow') }}">pobrania plików</a></strong>, lecz może to potrwać
+                            dłużej niż pobieranie instalatora.
+
+                                <!-- Zagnieżdżony accordion ze wskazówkami dotyczącymi instalacji -->
+                                <div class="accordion mt-2" id="installationAccordion">
+
+                                    <!-- EXE -->
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingExe">
+                                            <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExe" aria-expanded="false" aria-controls="collapseExe">
+                                                <strong>Pobieranie instalatora</strong>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseExe" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="pobieranie-instalatora") collapse show @else collapse @endif" aria-labelledby="headingExe" data-bs-parent="#installationAccordion">
+                                            <div class="accordion-body text-start">
+
+                                                <strong>Aby zainstalować grę pobierając instalkę należy:</strong>
+                                                <ol>
+                                                    <li>Wejdź w zakładkę <a class="link-blue" href="{{ route('download') }}" target="_blank"><strong><em>Pobierz grę</em></strong></a></li>
+                                                    <li>Kliknij w przycisk <strong><em class="text-success">Pobierz</em></strong> gdzie w nazwie jest napisane <strong><em>(instalka)</em></strong></li>
+                                                    <li>Jeżeli na nowo otwartej karcie wyskoczyło potwierdzenie o ciasteczka, kliknij <strong class="text-success"><em>Accept all cookies</em></strong></li>
+                                                    <li>Następnie kliknij w <strong class="text-success"><em>Download</em></strong></li>
+                                                    <li>Po kliknięciu pobieranie powinno się rozpocząć.</li>
+                                                    <li>Po pobraniu przejdź do folderu <em class="text-success">Pobrane</em> <kbd>Ctrl + J</kbd></li>
+                                                    <li>Dwukrotnie kliknij na pobrany instalator</li>
+                                                    <li>Po pojawieniu się okienka kliknij w <em>Więcej informacji</em></li>
+                                                    <div class="col-12 col-sm-8 col-md-6 col-lg-5
+                                                                text-center">
+                                                        <img class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_2.jpg') }}">
+                                                    </div>
+                                                    <li>Po wyskoczeniu przycisku <em>Uruchom mimo to</em>, naciśnij go</li>
+                                                    <div class="col-12 col-sm-8 col-md-6 col-lg-5
+                                                                text-center">
+                                                        <img class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_3.jpg') }}">
+                                                    </div>
+                                                    <li>Wejdź do zainstalowanego folderu z grą, kliknij na plik Snake raz lewym, a raz prawym przyciskiem i następnie kliknij <strong><em>Utwórz skrót</em></strong></li>
+                                                    <li>Utworzony skrót przenieś na pulpit (może to być dowolne inne miejsce na urządzeniu) przeciągając go, następnie zmień nazwę skrótu na np. Snake</li>
+                                                    <li>Uruchom grę poprzez dwukrotnie kliknięcie lewym przyciskiem</li>
+                                                </ol>
+                                                <strong class="text-success"><em>voilà! Udało się! :)</em></strong>
+                                            </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Pliki -->
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingFiles">
+                                            <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFiles" aria-expanded="false" aria-controls="collapseFiles">
+                                                <strong>Pobieranie plików</strong>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseFiles" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="pobieranie-plikow") collapse show @else collapse @endif" aria-labelledby="headingFiles" data-bs-parent="#installationAccordion">
+                                            <div class="accordion-body text-start">
+
+                                                <strong>Aby zainstalować grę pobierając pliki należy:</strong>
+                                                <ol>
+                                                    <li>Wejdź w zakładkę <a class="link-blue" href="{{ route('download') }}" target="_blank"><strong><em>Pobierz grę</em></strong></a></li>
+                                                    <li>Kliknij w przycisk <strong><em class="text-success">Pobierz</em></strong> gdzie w nazwie jest napisane <strong><em>(pliki)</em></strong></li>
+                                                    <li>Jeżeli na nowo otwartej karcie wyskoczyło potwierdzenie o ciasteczka, kliknij <strong class="text-success"><em>Accept all cookies</em></strong></li>
+                                                    <li>Następnie kliknij w <strong class="text-success"><em>Download as zip</em></strong></li>
+                                                    <div class="col text-center">
+                                                        <img class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_1.jpg') }}">
+                                                    </div>
+                                                    <li>Po kliknięciu pobieranie powinno się rozpocząć. Pobieranie może pod koniec zwolnić do bardzo niskiej prędkości (wówczas nie wyłączaj pobierania, tylko przeczekaj)</li>
+                                                    <li>Po pobraniu przejdź do folderu <em class="text-success">Pobrane</em> <kbd>Ctrl + J</kbd></li>
+                                                    <li>Następnie wypakuj pobrany plik</li>
+                                                    <li>Wypakowany folder możesz przechowywać gdziekolwiek na urządzeniu (może to być pulpit)</li>
+                                                    <li>Wejdź do wypakowanego folderu, kliknij na plik <em>Snake</em> raz lewym, a raz prawym przyciskiem i następnie kliknij <strong><em>Utwórz skrót</em></strong></li>
+                                                    <li>Utworzony skrót przenieś na pulpit (może to być dowolne inne miejsce na urządzeniu) przeciągając go, następnie zmień nazwę skrótu na np. Snake</li>
+                                                    <li>Uruchom grę poprzez dwukrotnie kliknięcie lewym przyciskiem</li>
+                                                </ol>
+                                                <strong class="text-success"><em>Sukces! :)</em></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
 
                         </div>
                     </div>
@@ -60,128 +159,56 @@
                     </div>
                 </div>
 
-                <!-- Zakładka akcje -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingActionsTab">
-                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActionsTab" aria-expanded="false" aria-controls="collapseActionsTab">
-                            <strong>Zakładka Akcje</strong>
+
+
+
+
+                <!-- Programistyczny bełkot -->
+                <div class="accordion-item" style="font-weight: 500;">
+                    <h2 class="accordion-header" id="headingInfo">
+                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo">
+                            <strong>Programistyczny bełkot</strong>
                         </button>
                     </h2>
-                    <div id="collapseActionsTab" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="akcje") collapse show @else collapse @endif" aria-labelledby="headingActionsTab" data-bs-parent="#supportAccordion">
+                    <div id="collapseInfo" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="programistyczny-belkot") collapse show @else collapse @endif" aria-labelledby="headingInfo" data-bs-parent="#supportAccordion">
                         <div class="accordion-body text-start">
 
-                            Wczytanie postępu z gry jest możliwe z pliku, który jesteśmy w stanie uzyskać z zainstalowanej gry. Po udanej instalacji gry a następnie wejściu w ustawienia
-                            (w grze) oraz kliknięciu <em>Zapisz progres</em>, utworzy się plik wraz całym osiągniętym postępem w grze we wskazanym miejscu na urządzeniu.
+                            <strong>Do stworzenia strony zostały użyte następujące technologie:</strong>
+                            <ol>
+                                <li><a class="link-blue" href="https://laravel.com/" target="_blank">PHP Framework Laravel</a></li>
+                                <li><a class="link-blue" href="https://getbootstrap.com/docs/5.0/getting-started/introduction/" target="_blank">Bootstrap 5</a></li>
+                                <li><a class="link-blue" href="https://icons.getbootstrap.com/" target="_blank">Bootstrap Icons</a></li>
+                                <li><a class="link-blue" href="https://datatables.net/" target="_blank">DataTables</a></li>
+                                <li><a class="link-blue" href="https://github.com/JeremyFagis/dropify" target="_blank">dropify</a></li>
+                                <li><a class="link-blue" href="https://jquery.com/" target="_blank">jQuery</a></li>
+                                <li><a class="link-blue" href="https://github.com/malsup/blockui" target="_blank">jQuery BlockUI</a></li>
+                                <li><a class="link-blue" href="https://github.com/CodeSeven/toastr" target="_blank">toastr</a></li>
+                                <li><a class="link-blue" href="https://developers.google.com/recaptcha/docs/display" target="_blank">reCAPTCHA v2</a></li>
+                            </ol>
 
-                            <!-- Zagnieżdżony accordion ze szczegółowymi wskazówkami dotyczącymi wczytywania postępu -->
-                            <div class="accordion mt-2" id="actionDetailsAccordion">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingactionDetails">
-                                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseactionDetails" aria-expanded="false" aria-controls="collapseactionDetails">
-                                            <strong>Szczegółowo</strong>
-                                        </button>
-                                    </h2>
-                                    <div id="collapseactionDetails" class="bg-accordion-body accordion-collapse collapse" aria-labelledby="headingactionDetails" data-bs-parent="#actionDetailsAccordion">
-                                        <div class="accordion-body text-start">
-                                            <strong>Aby dodać postęp w grze a następnie pojawić się w rankingu:</strong>
-                                            <ol class="mt-2">
-                                                <li><a class="link-blue" href="{{ route('support.show', 'pobierz-gre') }}">Pobierz grę</a> a następnie ją uruchom</li>
-                                                <li>Wejdź do gry, następnie wejdź do zakładki z ustawieniami</li>
-                                                <li>Kliknij w <strong><em>Zapisz progres</em></strong></li>
-                                                <li>Wybierz miejsce na urządzeniu poprzez kliknięcie w dowolne miejsce <em>(np. pulpit)</em> w okienku, które się pojawiło </li>
-                                                <li>Po wybraniu miejsca utworzenia, kliknij w <strong><em>Wybierz folder</em></strong> w prawym dolnym rogu okna</li>
-                                                <li>Zaloguj się na stronę</li>
-                                                <li>Kliknij na swoją nazwę/awatar</li>
-                                                <li>Kliknij w zakładkę <strong><em>Akcje</em></strong></li>
-                                                <li>Pod napisem <strong>Wczytaj postęp osiągnięty w grze z pliku</strong> kliknij w <em class="text-success">Wybierz plik | Nie wybrano pliku</em></li>
-                                                <li>Wybierz wcześniej zapisany plik z postępem gry poprzez kliknięcie w utworzony plik we wcześniejszych podpunktach</li>
-                                                <li>Kliknij w prawym dolnym rogu okienka <strong><em>Otwórz</em></strong></li>
-                                                <li>Po pomyślnym wczytaniu postępu, wybierz go w celu wyświetlenia w rankingu</li>
-                                                <li>W celu ustawienia postępu kliknij w kółeczko w kolumnie <em>Ustaw</em></li>
-                                            </ol>
-                                            <strong class="text-success"><em>GOTOWE! :)</em></strong>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <strong>Do stworzenia gry zostały użyte poniższe technologie:</strong>
+                            <ol>
+                                <li><a class="link-blue" href="https://www.pygame.org/docs/" target="_blank">Python Framework pygame</a></li>
+                                <li><a class="link-blue" href="https://pypi.org/project/PyQt5/">PyQt5</a></li>
+                            </ol>
+
+                            <strong>Oraz następujące moduły:</strong>
+                            <ul>
+                                <li><a class="link-blue" href="https://docs.python.org/3/library/tkinter.html" target="_blank">tkinter</a></li>
+                                <li><a class="link-blue" href="https://docs.python.org/3/library/os.html" target="_blank">os</a></li>
+                                <li><a class="link-blue" href="https://docs.python.org/3/library/json.html" target="_blank">json</a></li>
+                                <li><a class="link-blue" href="https://docs.python.org/3/library/sys.html" target="_blank">sys</a></li>
+                                <li><a class="link-blue" href="https://docs.python.org/3/library/shutil.html" target="_blank">shutil</a></li>
+                                <li><a class="link-blue" href="https://docs.python.org/3/library/datetime.html" target="_blank">datetime</a></li>
+                                <li><a class="link-blue" href="https://docs.python.org/3/library/random.html" target="_blank">random</a></li>
+                                <li><a class="link-blue" href="https://docs.python.org/3/library/webbrowser.html" target="_blank">webbrowser</a></li>
+                                <li><a class="link-blue" href="https://docs.python-requests.org/en/master/" target="_blank">requests</a></li>
+                            </ul>
 
                         </div>
                     </div>
                 </div>
 
-                <!-- Zakładka pobierz grę -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingActionsDownload">
-                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActionsDownload" aria-expanded="false" aria-controls="collapseActionsDownload">
-                            <strong>Zakładka Pobierz grę</strong>
-                        </button>
-                    </h2>
-                    <div id="collapseActionsDownload" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="pobierz-gre") collapse show @else collapse @endif" aria-labelledby="headingActionsDownload" data-bs-parent="#supportAccordion">
-                        <div class="accordion-body text-start">
-
-                            Pobranie gry umożliwia zakładka <a class="link-blue" href="{{ route('download') }}" target="_blank"><strong><em>Pobierz grę</em></strong></a>. Znajdziemy w niej przyciski,
-                            które przenoszą na dany hosting w celu pobrania plików gry. Możliwe jest pobranie tzw. instalki czyli, pliku exe który po podwójnym kliknięciu umożliwi nam zainstalowanie
-                            gry we wskazanym miejscu na komputerze. Pobranie instalatora (plik exe) w większości przypadków wiąże się z problemami związanymi z wykrywaniem pliku przez Windows Defener
-                            jako niebezpiecznie oprogramowanie, więc jeżeli chcemy uniknąć tego typu problemów zalecane jest zwykłe pobranie plików gry (pobieranie plików może zająć odrobinę dłużej
-                            niż pobieranie instalatora).
-
-                                <!-- Zagnieżdżony accordion ze wskazówkami dotyczącymi instalacji -->
-                                <div class="accordion mt-2" id="installationAccordion">
-                                    <!-- Pliki -->
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="headingFiles">
-                                            <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFiles" aria-expanded="false" aria-controls="collapseFiles">
-                                                <strong>Zwykłe pobieranie plików</strong>
-                                            </button>
-                                        </h2>
-                                        <div id="collapseFiles" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="pobieranie-plikow") collapse show @else collapse @endif" aria-labelledby="headingFiles" data-bs-parent="#installationAccordion">
-                                            <div class="accordion-body text-start">
-
-                                                <strong>Aby zainstalować grę w najprostszy sposób należy:</strong>
-                                                <ol>
-                                                    <li>Wejdź w zakładkę <a class="link-blue" href="{{ route('download') }}" target="_blank"><strong><em>Pobierz grę</em></strong></a></li>
-                                                    <li>Kliknij w przycisk <strong><em class="text-success">Pobierz</em></strong> gdzie w nazwie jest napisane <strong><em>(pliki)</em></strong></li>
-                                                    <li>Jeżeli na nowo otwartej karcie wyskoczyło potwierdzenie o ciasteczka, kliknij <strong class="text-success"><em>Accept all cookies</em></strong>
-                                                        w przeciwnym wypadku, przejdź do kolejnego punktu</li>
-                                                    <li>Następnie kliknij w <strong class="text-success"><em>Download as zip</em></strong></li>
-                                                    <div class="col text-center">
-                                                        <img class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_1.jpg') }}">
-                                                    </div>
-                                                    <li>Po kliknięciu pobieranie powinno się rozpocząć, pobieranie może pod koniec zwolnić do bardzo niskiej prędkości, wówczas nie wyłączać pobierania, tylko przeczekać</li>
-                                                    <li>Po pobraniu przejdź do folderu <em class="text-success">Pobrane</em> <kbd>Ctrl + J</kbd></li>
-                                                    <li>Następnie wypakuj pobrany plik</li>
-                                                    <li>Wypakowany folder możesz przechowywać gdziekolwiek na urządzeniu (może to być pulpit)</li>
-                                                    <li>Wejdź do wypakowanego folderu, kliknij na niego raz lewym nastepnie prawym przyciskiem a następnie kliknij <strong><em>Utwórz skrót</em></strong></li>
-                                                    <li>Utworzony skrót przenieś na pulpit (może to być dowolne inne miejsce na urządzeniu) przeciągając go, następnie zmień nazwę skrótu na np. Snake</li>
-                                                    <li>A następnie uruchom grę poprzez dwukrotnie kliknięcie lewym przyciskiem</li>
-                                                </ol>
-                                                <strong class="text-success"><em>voilà! Udało się! :)</em></strong>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- EXE -->
-                                    {{-- <div class="accordion-item">
-                                        <h2 class="accordion-header" id="headingExe">
-                                            <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExe" aria-expanded="false" aria-controls="collapseExe">
-                                                <strong>Pobieranie instalatora</strong>
-                                            </button>
-                                        </h2>
-                                        <div id="collapseExe" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="pobieranie-instalki") collapse show @else collapse @endif" aria-labelledby="headingExe" data-bs-parent="#installationAccordion">
-                                            <div class="accordion-body text-start">
-
-
-
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                </div>
-
-                        </div>
-                    </div>
-
-
-                </div>
 
             </div>
 

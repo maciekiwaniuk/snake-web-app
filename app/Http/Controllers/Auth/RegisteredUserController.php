@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserGameData;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Str;
 use App\Rules\OnlyLettersDigits;
 use App\Rules\ValidNickname;
 use App\Rules\reCAPTCHAv2;
@@ -52,6 +54,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'api_token' => Str::random(60),
             'last_login_ip' => $request->getClientIp(),
             'last_login_time' => Carbon::now()->toDateTimeString(),
             'last_user_agent' => $request->server('HTTP_USER_AGENT'),
@@ -60,6 +63,10 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        $user_game_data = new UserGameData;
+        $user_game_data->user_id = $user->id;
+        $user_game_data->save();
 
         return redirect(RouteServiceProvider::HOME);
     }

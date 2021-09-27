@@ -18,7 +18,7 @@ class DifferentNewPassword implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (Hash::check($value,Auth::user()->password)) {
+        if (Hash::check($value, Auth::user()->password)) {
             return false;
         } else {
             return true;

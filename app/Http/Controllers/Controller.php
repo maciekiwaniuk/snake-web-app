@@ -9,7 +9,6 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-
 use App\Models\User;
 use App\Models\UserDeleted;
 use App\Models\UserGameData;

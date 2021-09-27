@@ -40,8 +40,9 @@
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
             </div>
-            <div class="carousel-inner">
+            <div class="carousel-inner  border border-2">
             <div class="carousel-item active">
                 <img src="{{ asset('assets/images/slider-images/image1.jpg') }}" class="d-block w-100 slide" alt="">
             </div>
@@ -53,6 +54,9 @@
             </div>
             <div class="carousel-item">
                 <img src="{{ asset('assets/images/slider-images/image4.jpg') }}" class="d-block w-100 slide" alt="">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('assets/images/slider-images/image5.jpg') }}" class="d-block w-100 slide" alt="">
             </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -79,7 +83,7 @@
                     border border-2 border-success border-radius"
              style="background-color: rgb(183, 255, 0);
                     background-image: linear-gradient(to right, rgb(18, 255, 18), rgb(183, 255, 0));
-                    border-radius: 15px;">Snake mini-gra</div>
+                    border-radius: 15px;">Snake mini-gra - WKRÓTCE...</div>
     </div>
 
 

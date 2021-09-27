@@ -8,6 +8,8 @@ return [
     'max' => [
         'numeric' => ':attribute nie może mieć więcej znaków niż :max.',
         'string' => ':attribute nie może mieć więcej niż :max znaków.',
+        'file' => 'Obrazek może ważyć maksymalnie 10 MB.',
+
     ],
     'min' => [
         'numeric' => ':attribute powinno zawierać przynajmniej :min cyfr.',
@@ -21,6 +23,8 @@ return [
     'in' => ':attribute było niepoprawne.',
     'different' => ':attribute oraz :other muszą się od siebie różnić.',
     'image' => 'Wybrany plik nie był obrazkiem.',
+    'dimensions' => 'Maksymalne wymiary obrazka to 800px na 800px.',
+    'mimes' => 'Dozwolone rozszerzenia plików to: :values.',
 
     'attributes' => [
         'password' => 'Hasło',
@@ -30,5 +34,5 @@ return [
         'old_password_correctness' => 'Aktualne hasło',
         'name' => 'Podana nazwa',
         'email' => 'Podany email',
-        ],
+    ],
 ];

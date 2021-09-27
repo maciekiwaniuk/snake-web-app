@@ -36,7 +36,7 @@
 
     <div class="col-12
                 p-3
-                mt-0 mt-sm-2 mt-md-3 mt-lg-4
+                mt-1 mt-sm-2 mt-md-3 mt-lg-4
                 border border-2 border-success
                 bg-gradient-to-left border-radius-15">
 
@@ -215,6 +215,10 @@
                                 <!-- Usuń konto przycisk -->
                                 <button type="button" id="deleteAccountButton" class="btn btn-danger border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
                                     Usuń konto
+                                </button>
+
+                                <button type="button" id="logoutFromGame" class="btn btn-primary border border-2 border-dark ms-2">
+                                    Wyloguj z gry
                                 </button>
 
                                 <!-- Usuń konto modal -->
@@ -398,7 +402,24 @@
                         }
                     },
                 });
+            });
 
+            $('#logoutFromGame').on('click', function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("options.logout-from-game") }}',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function(response){
+                        if ( response.result.success ) {
+                            blockUI();
+                            setTimeout(function () {
+                                toastr.success(response.result.message);
+                            }, 400);
+                        }
+                    },
+                });
             });
 
 

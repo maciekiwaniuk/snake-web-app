@@ -26,7 +26,6 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\NoCacheMiddleware::class,
         \App\Http\Middleware\NoMimeSniffingMiddleware::class,
         \App\Http\Middleware\BannedIpMiddleware::class,
-        \App\Http\Middleware\BannedAccountMiddleware::class,
     ];
 
     /**
@@ -43,6 +42,8 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
+            \App\Http\Middleware\BannedAccountMiddleware::class,
         ],
 
         'api' => [

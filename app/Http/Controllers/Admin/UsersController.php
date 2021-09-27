@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\VisitorUnique;
 
@@ -26,8 +27,9 @@ class UsersController extends Controller
     public function getAllUsers()
     {
         // $users = User::all();
-        $users = DB::select('SELECT *, users.id as user_id FROM users, visitors_unique WHERE
-                             users.last_login_ip = visitors_unique.ip');
+        $users = DB::select('SELECT *, users.id as user_id FROM users, visitors_unique
+                             WHERE users.last_login_ip = visitors_unique.ip
+                             ORDER BY users.created_at');
 
         return response()->json([
             'data' => $users
@@ -39,9 +41,10 @@ class UsersController extends Controller
      */
     public function getBannedUsers()
     {
-        $users = DB::select('SELECT *, users.id as user_id FROM users, visitors_unique WHERE
-                             user_banned = 1
-                             AND users.last_login_ip = visitors_unique.ip');
+        $users = DB::select('SELECT *, users.id as user_id FROM users, visitors_unique
+                             WHERE user_banned = 1
+                             AND users.last_login_ip = visitors_unique.ip
+                             ORDER BY users.created_at');
 
         return response()->json([
             'data' => $users
@@ -53,9 +56,10 @@ class UsersController extends Controller
      */
     public function getNotBannedUsers()
     {
-        $users = DB::select('SELECT *, users.id as user_id FROM users, visitors_unique WHERE
-                             user_banned = 0
-                             AND users.last_login_ip = visitors_unique.ip');
+        $users = DB::select('SELECT *, users.id as user_id FROM users, visitors_unique
+                             WHERE user_banned = 0
+                             AND users.last_login_ip = visitors_unique.ip
+                             ORDER BY users.created_at');
 
         return response()->json([
             'data' => $users
@@ -76,8 +80,11 @@ class UsersController extends Controller
         $banned_ip = VisitorUnique::query()
             ->where('ip', '=', $ip)
             ->first();
-        $banned_ip->ip_banned = 1;
-        $banned_ip->save();
+
+        if (Auth::user()->last_login_ip != $banned_ip->ip) {
+            $banned_ip->ip_banned = 1;
+            $banned_ip->save();
+        }
 
         return back();
     }
@@ -146,8 +153,11 @@ class UsersController extends Controller
         $banned_ip = VisitorUnique::query()
             ->where('ip', '=', $ip)
             ->first();
-        $banned_ip->ip_banned = 1;
-        $banned_ip->save();
+
+        if (Auth::user()->last_login_ip != $banned_ip->ip) {
+            $banned_ip->ip_banned = 1;
+            $banned_ip->save();
+        }
 
         return back();
     }
@@ -180,6 +190,20 @@ class UsersController extends Controller
     public function deleteUserAccount($id)
     {
         $this->deleteUserAccountByID($id);
+
+        return back();
+    }
+
+    /**
+     * Reseting user's API Token
+     */
+    public function resetApiToken($id)
+    {
+        $user = User::query()
+            ->where('id', '=', $id)
+            ->first();
+        $user->api_token = Str::random(60);
+        $user->save();
 
         return back();
     }
