@@ -58,6 +58,16 @@ class ChangePasswordRequest extends FormRequest
      */
     protected function getRedirectUrl()
     {
-        return route('options.selected', 'haslo');
+        return route('options.show', 'haslo');
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return ['new_password.confirmed' => 'Pola z nowym hasłem różniły się do siebie.'];
     }
 }

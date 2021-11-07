@@ -20,7 +20,10 @@ use App\Http\Controllers\RankingsController;
 use App\Http\Controllers\SupportController;
 
 
+/********************************************************* General routing *********************************************************/
+
 Route::get('/', [PagesController::class, 'index'])->middleware('unique.visitor')->name('home');
+Route::get('/strona-offline', [PagesController::class, 'offlineFallback'])->name('offline-fallback');
 
 Route::get('/pobierz-gre', [GameHostingsController::class, 'index'])->name('download');
 Route::get('/profil/{name}', [ProfileController::class, 'show'])->name('profile');
@@ -35,11 +38,12 @@ Route::prefix('pomoc')->group(function() {
 Route::prefix('ranking')->group(function() {
     Route::name('ranking.')->group(function() {
         Route::get('/', [RankingsController::class, 'index'])->name('index');
-        Route::get('/points', [RankingsController::class, 'getPoints'])->name('get-points');
-        Route::get('/coins', [RankingsController::class, 'getCoins'])->name('get-coins');
+        Route::get('/punkty', [RankingsController::class, 'getPoints'])->name('get-points');
+        Route::get('/monety', [RankingsController::class, 'getCoins'])->name('get-coins');
         Route::get('/easy', [RankingsController::class, 'getEasy'])->name('get-easy');
         Route::get('/medium', [RankingsController::class, 'getMedium'])->name('get-medium');
         Route::get('/hard', [RankingsController::class, 'getHard'])->name('get-hard');
+        Route::get('/speed', [RankingsController::class, 'getSpeed'])->name('get-speed');
     });
 });
 
@@ -47,17 +51,17 @@ Route::prefix('ranking')->group(function() {
 
 Route::prefix('admin')->middleware('admin')->group(function() {
     Route::name('admin.')->group(function() {
-        Route::put('/banowanie-ip/{id}', [UsersController::class, 'banLastUserIp'])->name('ban-last-ip');
+        Route::put('/banowanie-ostatniego-ip/{id}', [UsersController::class, 'banLastUserIp'])->name('ban-last-ip');
         Route::put('/banowanie-konta/{id}', [UsersController::class, 'banAccount'])->name('ban-account');
         Route::put('/banowanie-konta-oraz-ip/{id}', [UsersController::class, 'banAccountAndIP'])->name('ban-ip-account');
         Route::delete('/usuwanie-konta/{id}', [UsersController::class, 'deleteUserAccount'])->name('delete-account');
-        Route::put('/odbanowanie-ip/{id}', [UsersController::class, 'unbanLastUserIp'])->name('unban-last-ip');
+        Route::put('/odbanowanie-ostatniego-ip/{id}', [UsersController::class, 'unbanLastUserIp'])->name('unban-last-ip');
         Route::put('/odbanowanie-konta/{id}', [UsersController::class, 'unbanAccount'])->name('unban-account');
         Route::put('/odbanowanie-konta-oraz-ip/{id}', [UsersController::class, 'unbanAccountAndIP'])->name('unban-ip-account');
         Route::put('/resetowanie-api-tokenu/{id}', [UsersController::class, 'resetApiToken'])->name('reset-api-token');
 
-        Route::put('/zbanuj-ip/{id}', [VisitorsUniqueController::class, 'banIp'])->name('ban-ip');
-        Route::put('/odbanuj-ip/{id}', [VisitorsUniqueController::class, 'unbanIp'])->name('unban-ip');
+        Route::put('/zbanuj-konkretne-ip/{id}', [VisitorsUniqueController::class, 'banIp'])->name('ban-ip');
+        Route::put('/odbanuj-konkretne-ip/{id}', [VisitorsUniqueController::class, 'unbanIp'])->name('unban-ip');
 
         Route::prefix('uzytkownicy')->group(function() {
             Route::name('users.')->group(function() {
@@ -124,7 +128,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/wylogowanie', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     Route::get('/weryfikacja-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])->name('verification.verify')
-    ->middleware(['signed', 'throttle:6,1']);
+        ->middleware(['signed', 'throttle:6,1']);
 
     Route::post('/email/weryfikacja-powiadomienia', [EmailVerificationNotificationController::class, 'store'])->name('verification.send')
         ->middleware('throttle:6,1');

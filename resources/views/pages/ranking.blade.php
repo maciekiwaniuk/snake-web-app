@@ -10,7 +10,7 @@
     <!-- END DataTables JS -->
 
     <!-- BlockUI JS -->
-    <script src="{{ asset('assets/plugins/jQuery BlockUI/jquery.blockUI.js') }}"></script>
+    <script src="{{ asset('assets/plugins/jQueryBlockUI/jquery.blockUI.js') }}"></script>
     <!-- END BlockUI JS -->
 @endpush
 
@@ -28,7 +28,7 @@
                 mx-5
                 mt-2 mt-sm-4
                 mb-3 fs-3
-                px-4 py-3
+                px-2 px-sm-4 py-3
                 border border-2 border-success
                 bg-gradient-to-left border-radius-15">
 
@@ -36,7 +36,8 @@
                     <strong>Ranking</strong>
                 </div>
 
-                <div class="btn-group w-100" style="background-color: rgb(232, 226, 226);" role="group" aria-label="Basic radio toggle button group">
+                <div class="btn-group w-100 d-none d-sm-flex" style="background-color: rgb(232, 226, 226);" role="group" aria-label="Ranking button group">
+
                     <input type="radio" class="btn-check" name="rankingRadio" id="pointsRank" autocomplete="off" checked>
                     <label class="btn btn-outline-dark" for="pointsRank">
                         Ilość <strong class="text-primary">Punktów</strong>
@@ -44,7 +45,7 @@
 
                     <input type="radio" class="btn-check" name="rankingRadio" id="coinsRank" autocomplete="off">
                     <label class="btn btn-outline-dark" for="coinsRank">
-                        Ilość <strong class="text-warning">Coins</strong>
+                        Ilość <strong class="text-warning">Monet</strong>
                     </label>
 
                     <input type="radio" class="btn-check" name="rankingRadio" id="easyRank" autocomplete="off">
@@ -61,7 +62,49 @@
                     <label class="btn btn-outline-dark" for="hardRank">
                         Rekord na <strong class="text-danger">Hard</strong>
                     </label>
+
+                    <input type="radio" class="btn-check" name="rankingRadio" id="speedRank" autocomplete="off">
+                    <label class="btn btn-outline-dark" for="speedRank">
+                        Rekord na <strong class="text-purple">Speed</strong>
+                    </label>
+
                 </div>
+
+                <div class="btn-group w-100 d-flex d-sm-none" style="background-color: rgb(232, 226, 226);" role="group" aria-label="Ranking button group">
+
+                    <button type="button" class="btn btn-dark" id="pointsSelected">
+                        Ilość <strong class="text-primary">Punktów</strong>
+                    </button>
+
+                    <button type="button" class="btn btn-dark" id="coinsSelected">
+                        Ilość <strong class="text-warning">Monet</strong>
+                    </button>
+
+                    <button type="button" class="btn btn-dark" id="easySelected">
+                        Rekord na <strong class="text-success">Easy</strong>
+                    </button>
+
+                </div>
+
+                <div class="btn-group w-100 d-flex d-sm-none" style="background-color: rgb(232, 226, 226);" role="group" aria-label="Ranking button group">
+
+                    <button type="button" class="btn btn-dark" id="mediumSelected">
+                        Rekord na <strong class="text-info">Medium</strong>
+                    </button>
+
+                    <button type="button" class="btn btn-dark" id="hardSelected">
+                        Rekord na <strong class="text-danger">Hard</strong>
+                    </button>
+
+                    <button type="button" class="btn btn-dark" id="speedSelected">
+                        Rekord na <strong class="text-purple">Speed</strong>
+                    </button>
+
+                </div>
+
+
+
+
 
                 <div class="col-12
                             mx-auto text-center fs-6">
@@ -117,6 +160,7 @@
                     url: "{{ route('ranking.get-points') }}",
                     type: "GET",
                     datatype: "json",
+                    cache: true,
                     contentType: "application/json",
                 },
                 columns: [
@@ -144,20 +188,24 @@
                             URL = urlToReplace.replace('__NICKNAME__', row.name);
                             if (meta.row == 0) {
                                 return `<a class="link-golden" href="`+URL+`"><strong>`+row.name+`</strong>
-                                        <img style="width: 25px; height: 25px; border-radius: 50%;"
+                                        <img alt="Awatar użytkownika"
+                                             style="width: 25px; height: 25px; border-radius: 50%;"
                                              class="border border-1 border-secondary" src="`+row.avatar+`"></a>`;
                             } else if (meta.row == 1) {
                                 return `<a class="link-silver" href="`+URL+`"><strong>`+row.name+`</strong>
-                                        <img style="width: 25px; height: 25px; border-radius: 50%;"
+                                        <img alt="Awatar użytkownika"
+                                             style="width: 25px; height: 25px; border-radius: 50%;"
                                              class="border border-1 border-secondary" src="`+row.avatar+`"></a>`;
                             } else if (meta.row == 2) {
                                 return `<a class="link-bronze" href="`+URL+`"><strong>`+row.name+`</strong>
-                                        <img style="width: 25px; height: 25px; border-radius: 50%;"
+                                        <img alt="Awatar użytkownika"
+                                             style="width: 25px; height: 25px; border-radius: 50%;"
                                              class="border border-1 border-secondary" src="`+row.avatar+`"></a>`;
                             } else {
                                 return `<a class="link-white" href="`+URL+`">`+row.name+`
-                                <img style="width: 25px; height: 25px; border-radius: 50%;"
-                                class="border border-1 border-secondary" src="`+row.avatar+`"></a>`;
+                                <img alt="Awatar użytkownika"
+                                     style="width: 25px; height: 25px; border-radius: 50%;"
+                                     class="border border-1 border-secondary" src="`+row.avatar+`"></a>`;
                             }
                         },
                         class: 'align-middle',
@@ -179,6 +227,8 @@
                                 data = row.medium_record;
                             } else if ($('#hardRank').prop('checked')) {
                                 data = row.hard_record;
+                            } else if ($('#speedRank').prop('checked')) {
+                                data = row.speed_record;
                             }
 
                             if (meta.row == 0) {
@@ -190,15 +240,6 @@
                             } else {
                                 return `<span class="color-white">`+data+`</span>`;
                             }
-                            // if ($('#coinsRank').prop('checked')) {
-                            //     return row.users_game_data.coins;
-                            // } else if ($('#easyRank').prop('checked')) {
-                            //     return row.users_game_data.records_easy;
-                            // } else if ($('#mediumRank').prop('checked')) {
-                            //     return row.users_game_data.records_medium;
-                            // } else if ($('#hardRank').prop('checked')) {
-                            //     return row.users_game_data.records_hard;
-                            // }
                         },
                     },
                     @if (isset(Auth::user()->permision) && Auth::user()->permision == 2)
@@ -279,7 +320,7 @@
             $('#coinsRank').on('click', function() {
                 blockUI();
                 setTimeout(function()  {
-                    $(rankingTable.column(2).header()).text('Ilość Coins');
+                    $(rankingTable.column(2).header()).text('Ilość Monet');
                     rankingTable.ajax.url("{{ route('ranking.get-coins') }}").load();
                 }, 400);
             });
@@ -303,6 +344,45 @@
                     $(rankingTable.column(2).header()).text('Rekord na Hard');
                     rankingTable.ajax.url("{{ route('ranking.get-hard') }}").load();
                 }, 400);
+            });
+            $('#speedRank').on('click', function() {
+                blockUI();
+                setTimeout(function()  {
+                    $(rankingTable.column(2).header()).text('Rekord na Speed');
+                    rankingTable.ajax.url("{{ route('ranking.get-speed') }}").load();
+                }, 400);
+            });
+
+
+            // clicks on small devices
+            $('#pointsSelected').on('click', function() {
+                $('#pointsRank').prop('checked');
+                $('#pointsRank').click();
+            });
+
+            $('#coinsSelected').on('click', function() {
+                $('#coinsRank').prop('checked');
+                $('#coinsRank').click();
+            });
+
+            $('#easySelected').on('click', function() {
+                $('#easyRank').prop('checked');
+                $('#easyRank').click();
+            });
+
+            $('#mediumSelected').on('click', function() {
+                $('#mediumRank').prop('checked');
+                $('#mediumRank').click();
+            });
+
+            $('#hardSelected').on('click', function() {
+                $('#hardRank').prop('checked');
+                $('#hardRank').click();
+            });
+
+            $('#speedSelected').on('click', function() {
+                $('#speedRank').prop('checked');
+                $('#speedRank').click();
             });
 
         });

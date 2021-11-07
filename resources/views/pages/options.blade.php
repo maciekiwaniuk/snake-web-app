@@ -23,7 +23,7 @@
     <!-- END Dropify JS -->
 
     <!-- BlockUI JS -->
-    <script src="{{ asset('assets/plugins/jQuery BlockUI/jquery.blockUI.js') }}"></script>
+    <script src="{{ asset('assets/plugins/jQueryBlockUI/jquery.blockUI.js') }}"></script>
     <!-- END BlockUI JS -->
 @endpush
 
@@ -55,7 +55,7 @@
 
                                 <form id="avatarForm" method="POST" action="{{ route('options.avatar-change') }}">
                                     @csrf
-                                    <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="../{{ Auth::user()->avatar }}"/>
+                                    <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="{{ Auth::user()->avatar }}"/>
                                 </form>
 
                                 <button class="d-block d-md-none btn-md fs-4 mx-auto mt-2
@@ -79,7 +79,8 @@
 
 
                                 @if ($errors->password->any())
-                                    <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
+                                    <div class="col-12 col-sm-8 col-md-6
+                                                mx-auto text-center mb-3 p-2 pb-3
                                                 border border-2 border-danger
                                                 border-radius-15 bg-error">
                                         @foreach ($errors->password->all() as $error)
@@ -134,11 +135,11 @@
 
 
 
-                    <!-- Email -->
+                    <!-- E-mail -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingEmail">
                             <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEmail" aria-expanded="false" aria-controls="collapseEmail">
-                                <strong>Email</strong>
+                                <strong>E-mail</strong>
                             </button>
                         </h2>
                         <div id="collapseEmail" class="accordion-collapse @if(isset($selected) && $selected=="email") collapse show @else collapse @endif" aria-labelledby="headingEmail" data-bs-parent="#optionsAccordion">
@@ -146,7 +147,8 @@
 
 
                                 @if ($errors->email->any())
-                                    <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
+                                    <div class="col-12 col-sm-8 col-md-6
+                                                mx-auto text-center mb-3 p-2 pb-3
                                                 border border-2 border-danger
                                                 border-radius-15 bg-error">
                                         @foreach ($errors->email->all() as $error)

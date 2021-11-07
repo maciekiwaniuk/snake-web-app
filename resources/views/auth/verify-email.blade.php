@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-    Potwierdź email
+    Potwierdź e-mail
 @endsection
 
 
@@ -31,9 +31,9 @@
 
                     <div class="col-12">
                         Dziękujemy za rejestracje! Przed rozpoczęciem korzystania ze strony,
-                        bylibyśmy wdzięczni za weryfikację adresu email. Możesz to zrobić poprzez
-                        link, który został na twój email. Jeżeli email nie doszedł, możemy
-                        wysłać Ci kolejny email klikając w przycisk poniżej.
+                        bylibyśmy wdzięczni za weryfikację adresu e-mail. Możesz to zrobić poprzez
+                        link, który został na twój e-mail. Jeżeli e-mail nie doszedł, możemy
+                        wysłać Ci kolejny e-mail klikając w przycisk poniżej.
                     </div>
 
                 <form method="POST" action="{{ route('register') }}" class="row g-3">

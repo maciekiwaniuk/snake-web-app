@@ -13,4 +13,12 @@ class PagesController extends Controller
     {
         return view('pages.welcome');
     }
+
+    /**
+     * Showing offline fallback page
+     */
+    public function offlineFallback()
+    {
+        return view('pages.offline-fallback');
+    }
 }

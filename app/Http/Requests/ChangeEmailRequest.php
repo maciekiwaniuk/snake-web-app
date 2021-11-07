@@ -74,6 +74,6 @@ class ChangeEmailRequest extends FormRequest
      */
     protected function getRedirectUrl()
     {
-        return route('options.selected', 'email');
+        return route('options.show', 'email');
     }
 }

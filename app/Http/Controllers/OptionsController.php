@@ -70,7 +70,7 @@ class OptionsController extends Controller
         $result = [
             'success' => true,
             'message' => 'Awatar został pomyślnie usunięty.',
-            'avatarPath' => 'assets/images/avatar.png',
+            'avatarPath' => '/assets/images/avatar.png',
         ];
 
         $this->deleteUserAvatar();
@@ -89,7 +89,7 @@ class OptionsController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return redirect()->route('options.selected', 'haslo')
+        return redirect()->route('options.show', 'haslo')
             ->with('password_success', 'Hasło zostało pomyślnie zmienione.');
     }
 
@@ -102,7 +102,7 @@ class OptionsController extends Controller
         $user->email = $request->new_email;
         $user->save();
 
-        return redirect()->route('options.selected', 'email')
+        return redirect()->route('options.show', 'email')
             ->with('email_success', 'Email został pomyślnie zmieniony.');
     }
 

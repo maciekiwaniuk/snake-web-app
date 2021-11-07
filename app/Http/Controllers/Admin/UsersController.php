@@ -29,7 +29,7 @@ class UsersController extends Controller
         // $users = User::all();
         $users = DB::select('SELECT *, users.id as user_id FROM users, visitors_unique
                              WHERE users.last_login_ip = visitors_unique.ip
-                             ORDER BY users.created_at');
+                             ORDER BY users.updated_at DESC');
 
         return response()->json([
             'data' => $users
@@ -44,7 +44,7 @@ class UsersController extends Controller
         $users = DB::select('SELECT *, users.id as user_id FROM users, visitors_unique
                              WHERE user_banned = 1
                              AND users.last_login_ip = visitors_unique.ip
-                             ORDER BY users.created_at');
+                             ORDER BY users.updated_at DESC');
 
         return response()->json([
             'data' => $users
@@ -59,7 +59,7 @@ class UsersController extends Controller
         $users = DB::select('SELECT *, users.id as user_id FROM users, visitors_unique
                              WHERE user_banned = 0
                              AND users.last_login_ip = visitors_unique.ip
-                             ORDER BY users.created_at');
+                             ORDER BY users.updated_at DESC');
 
         return response()->json([
             'data' => $users

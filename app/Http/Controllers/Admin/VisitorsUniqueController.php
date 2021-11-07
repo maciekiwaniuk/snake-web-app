@@ -26,7 +26,7 @@ class VisitorsUniqueController extends Controller
     public function getAllVisitors()
     {
         $data = DB::select('SELECT *, visitors_unique.id as ip_id FROM visitors_unique
-                            ORDER BY created_at');
+                            ORDER BY created_at DESC');
 
         return response()->json([
             'data' => $data
@@ -40,7 +40,7 @@ class VisitorsUniqueController extends Controller
     {
         $data = DB::select('SELECT *, visitors_unique.id as ip_id FROM visitors_unique
                             WHERE ip_banned = 1
-                            ORDER BY created_at');
+                            ORDER BY created_at DESC');
         return response()->json([
             'data' => $data
         ]);
@@ -53,7 +53,7 @@ class VisitorsUniqueController extends Controller
     {
         $data = DB::select('SELECT *, visitors_unique.id as ip_id FROM visitors_unique
                             WHERE ip_banned = 0
-                            ORDER BY created_at');
+                            ORDER BY created_at DESC');
         return response()->json([
             'data' => $data
         ]);

@@ -4,7 +4,7 @@
     align-items: center;
     margin: 0;
 }
-.game-board{
+#game-board{
     background: #CCC;
     width: 90vmin;
     height: 90vmin;
@@ -14,10 +14,10 @@
 }
 
 .snake{
-    background-color: green;
+    background-color: hsl(200, 100%, 50%);
     border: .25vmin solid black;
 }
-.food{
-    background-color: orange;
+.food {
+    background-color: hsl(50, 100%, 50%);
     border: .25vmin solid black;
-}
+  }

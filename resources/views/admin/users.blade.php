@@ -106,10 +106,12 @@
                         title: 'Nazwa',
                         data: 'name',
                         render: function (data, type, row, meta) {
+                            urlProfileToReplace = "{{ route('profile', '__NAME__') }}";
+                            urlProfile = urlProfileToReplace.replace('__NAME__', row.name);
                             if (row.permision == 0) {
-                                return row.name;
+                                return `<a class="link-white" href="`+urlProfile+`">`+row.name+`</a>`;
                             } else if (row.permision == 2) {
-                                return '<strong class="text-danger">'+row.name+'</strong>'
+                                return `<strong class="text-danger"><a class="link-red" href="`+urlProfile+`">`+row.name+`</a></strong>`;
                             }
                         },
                         class: 'align-middle',

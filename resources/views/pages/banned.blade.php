@@ -32,7 +32,7 @@
 <body>
 
     <div class="container-md mb-5" style="min-height: 100vh">
-        <div class="col-12 text-center fs-1 text-danger">Twoje IP {{ $ip }} zostało zbanowane.</div>
+        <div class="col-12 text-center fs-1 text-danger">Twoje IP: <strong>{{ $ip }}</strong> zostało zbanowane.</div>
     </div>
 
     <!-- Bootstrap 5 JS -->

@@ -134,6 +134,15 @@
     color: rgb(211, 210, 210) !important
 }
 
+.link-red{
+    color: rgb(255, 0, 0) !important;
+    text-decoration: none !important;
+    background-color: none !important;
+}
+.link-red:hover{
+    cursor:pointer !important;
+}
+
 
 /******* border-radius *******/
 
@@ -158,3 +167,4 @@
     height: 80%;
     width: 80%;
 }
+

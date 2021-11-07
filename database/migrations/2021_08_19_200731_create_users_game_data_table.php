@@ -33,20 +33,32 @@ class CreateUsersGameDataTable extends Migration
 
             $table->boolean('unlocked_medium')->default(false);
             $table->boolean('unlocked_hard')->default(false);
+            $table->boolean('unlocked_speed')->default(false);
+
+            $table->integer('coins_upgrade_lvl')->default(0);
+            $table->integer('points_upgrade_lvl')->default(0);
+            $table->integer('fruits_upgrade_lvl')->default(0);
+
+            $table->integer('selected_fruits_upgrade_lvl')->default(0);
 
             $table->integer('easy_record')->default(0);
             $table->integer('medium_record')->default(0);
             $table->integer('hard_record')->default(0);
+            $table->integer('speed_record')->default(0);
 
             $table->integer('games_amount')->default(0);
             $table->integer('ate_fruits_amount')->default(0);
             $table->integer('hit_wall')->default(0);
             $table->integer('hit_snake')->default(0);
+            $table->integer('clicks')->default(0);
 
             $table->integer('fps')->default(60);
             $table->boolean('music')->default(true);
             $table->boolean('effects')->default(true);
             $table->float('volume')->default(0.1);
+
+            $table->integer('selected_game_music')->default(1);
+            $table->integer('selected_menu_music')->default(1);
 
             $table->timestamps();
         });

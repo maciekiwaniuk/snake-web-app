@@ -14,7 +14,7 @@ class ProfileController extends Controller
     public function show($username)
     {
         $user = User::query()
-            ->select('id', 'name', 'avatar')
+            ->select('id', 'name', 'avatar', 'user_banned')
             ->where('name', '=', $username)
             ->first();
 

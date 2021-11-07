@@ -23,7 +23,7 @@ class RankingsController extends Controller
      */
     public function getPoints()
     {
-        $data = DB::select('SELECT users.name, users.avatar, users.permision, users_game_data.points
+        $data = DB::select('SELECT users.id as user_id, users.name, users.avatar, users.permision, users_game_data.points
                             FROM users, users_game_data
                             WHERE users.id = users_game_data.user_id
                             AND users.user_banned = 0
@@ -41,7 +41,7 @@ class RankingsController extends Controller
      */
     public function getCoins()
     {
-        $data = DB::select('SELECT users.name, users.avatar, users.permision, users_game_data.coins
+        $data = DB::select('SELECT users.id as user_id, users.name, users.avatar, users.permision, users_game_data.coins
                             FROM users, users_game_data
                             WHERE users.id = users_game_data.user_id
                             AND users.user_banned = 0
@@ -59,7 +59,7 @@ class RankingsController extends Controller
      */
     public function getEasy()
     {
-        $data = DB::select('SELECT users.name, users.avatar, users.permision, users_game_data.easy_record
+        $data = DB::select('SELECT users.id as user_id, users.name, users.avatar, users.permision, users_game_data.easy_record
                             FROM users, users_game_data
                             WHERE users.id = users_game_data.user_id
                             AND users.user_banned = 0
@@ -77,7 +77,7 @@ class RankingsController extends Controller
      */
     public function getMedium()
     {
-        $data = DB::select('SELECT users.name, users.avatar, users.permision, users_game_data.medium_record
+        $data = DB::select('SELECT users.id as user_id, users.name, users.avatar, users.permision, users_game_data.medium_record
                             FROM users, users_game_data
                             WHERE users.id = users_game_data.user_id
                             AND users.user_banned = 0
@@ -95,12 +95,30 @@ class RankingsController extends Controller
      */
     public function getHard()
     {
-        $data = DB::select('SELECT users.name, users.avatar, users.permision, users_game_data.hard_record
+        $data = DB::select('SELECT users.id as user_id, users.name, users.avatar, users.permision, users_game_data.hard_record
                             FROM users, users_game_data
                             WHERE users.id = users_game_data.user_id
                             AND users.user_banned = 0
                             AND users_game_data.hard_record > 0
                             ORDER BY users_game_data.hard_record DESC, users_game_data.updated_at DESC');
+
+        return response()->json([
+            'data' => $data,
+        ]);
+    }
+
+    /**
+     * Returning data with user's
+     * records on hard ranking
+     */
+    public function getSpeed()
+    {
+        $data = DB::select('SELECT users.id as user_id, users.name, users.avatar, users.permision, users_game_data.speed_record
+                            FROM users, users_game_data
+                            WHERE users.id = users_game_data.user_id
+                            AND users.user_banned = 0
+                            AND users_game_data.speed_record > 0
+                            ORDER BY users_game_data.speed_record DESC, users_game_data.updated_at DESC');
 
         return response()->json([
             'data' => $data,

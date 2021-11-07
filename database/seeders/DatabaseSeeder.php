@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,40 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
+        \App\Models\User::factory()->create([
+            'name' => "user1234",
+            'email' => "user1234@wp.pl",
+            'password' => Hash::make("user1234"),
+            'permision' => 0,
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => "test1234",
+            'email' => "test1234@wp.pl",
+            'password' => Hash::make("test1234"),
+            'permision' => 0,
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => "admin1234",
+            'email' => "admin1234@wp.pl",
+            'password' => Hash::make("admin1234"),
+            'permision' => 2,
+        ]);
+
+        // Creating users inside VisitorUniqueFactory
+        \App\Models\VisitorUnique::factory(50)->create();
+
+        \App\Models\UserGameData::factory(53)->create();
+
+        \App\Models\Hosting::factory()->create([
+            'hosting_name' => "Snake (instalka)",
+            'hosting_link' => "https://snake-gra.pl/pobierz-gre",
+        ]);
+
+        \App\Models\Hosting::factory()->create([
+            'hosting_name' => "Snake (pliki)",
+            'hosting_link' => "https://snake-gra.pl/pobierz-gre",
+        ]);
     }
 }

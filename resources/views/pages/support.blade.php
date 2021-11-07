@@ -18,7 +18,7 @@
 
 <div class="col-12
             p-3
-            mt-1 mt-sm-2 mt-md-3 mt-lg-4
+            mt-2 mt-sm-2 mt-md-3 mt-lg-4
             border border-2 border-success
             bg-gradient-to-left border-radius-15">
 
@@ -39,6 +39,23 @@
                             Zakładka <a class="link-blue" href="{{ route('ranking.index') }}" target="_blank">Ranking</a>
                             umożliwia rywalizację użytkowników poprzez uczestniczenie w rozgrywce w pobranej grze. Po instalacji Snake'a należy zalogować się w panelu logowania
                             kontem zarejestrowanym na tej stronie.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zakładka ustawienia -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOptionsTab">
+                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOptionsTab" aria-expanded="false" aria-controls="collapseOptionsTab">
+                            <strong>Zakładka Ustawienia</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseOptionsTab" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="zakladka-ustawienia") collapse show @else collapse @endif" aria-labelledby="headingOptionsTab" data-bs-parent="#supportAccordion">
+                        <div class="accordion-body text-start">
+
+                            W zakładce <strong><em>Ustawienia</em></strong> możliwa jest zmiana awatara użytkownika, hasła oraz e-mail'a. Istnieje również możliwość permanentnego usunięcia
+                            konta po podaniu hasła użytkownika. <br>
+
                         </div>
                     </div>
                 </div>
@@ -85,12 +102,12 @@
                                                     <li>Po pojawieniu się okienka kliknij w <em>Więcej informacji</em></li>
                                                     <div class="col-12 col-sm-8 col-md-6 col-lg-5
                                                                 text-center">
-                                                        <img class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_2.jpg') }}">
+                                                        <img alt="Zdjęcie porady #2" class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_2.jpg') }}">
                                                     </div>
                                                     <li>Po wyskoczeniu przycisku <em>Uruchom mimo to</em>, naciśnij go</li>
                                                     <div class="col-12 col-sm-8 col-md-6 col-lg-5
                                                                 text-center">
-                                                        <img class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_3.jpg') }}">
+                                                        <img alt="Zdjęcie porady #3" class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_3.jpg') }}">
                                                     </div>
                                                     <li>Wejdź do zainstalowanego folderu z grą, kliknij na plik Snake raz lewym, a raz prawym przyciskiem i następnie kliknij <strong><em>Utwórz skrót</em></strong></li>
                                                     <li>Utworzony skrót przenieś na pulpit (może to być dowolne inne miejsce na urządzeniu) przeciągając go, następnie zmień nazwę skrótu na np. Snake</li>
@@ -120,7 +137,7 @@
                                                     <li>Jeżeli na nowo otwartej karcie wyskoczyło potwierdzenie o ciasteczka, kliknij <strong class="text-success"><em>Accept all cookies</em></strong></li>
                                                     <li>Następnie kliknij w <strong class="text-success"><em>Download as zip</em></strong></li>
                                                     <div class="col text-center">
-                                                        <img class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_1.jpg') }}">
+                                                        <img alt="Zdjęcie porady #1" class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_1.jpg') }}">
                                                     </div>
                                                     <li>Po kliknięciu pobieranie powinno się rozpocząć. Pobieranie może pod koniec zwolnić do bardzo niskiej prędkości (wówczas nie wyłączaj pobierania, tylko przeczekaj)</li>
                                                     <li>Po pobraniu przejdź do folderu <em class="text-success">Pobrane</em> <kbd>Ctrl + J</kbd></li>
@@ -142,29 +159,14 @@
                     </div>
                 </div>
 
-                <!-- Zakładka ustawienia -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOptionsTab">
-                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOptionsTab" aria-expanded="false" aria-controls="collapseOptionsTab">
-                            <strong>Zakładka Ustawienia</strong>
-                        </button>
-                    </h2>
-                    <div id="collapseOptionsTab" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="zakladka-ustawienia") collapse show @else collapse @endif" aria-labelledby="headingOptionsTab" data-bs-parent="#supportAccordion">
-                        <div class="accordion-body text-start">
 
-                            W zakładce <strong><em>Ustawienia</em></strong> możliwa jest zmiana awatara użytkownika, hasła oraz e-maila. Istnieje również możliwość permanentnego usunięcia
-                            konta po podaniu hasła użytkownika. <br>
-
-                        </div>
-                    </div>
-                </div>
 
 
 
 
 
                 <!-- Programistyczny bełkot -->
-                <div class="accordion-item" style="font-weight: 500;">
+                <div class="accordion-item d-none" style="font-weight: 500;">
                     <h2 class="accordion-header" id="headingInfo">
                         <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo">
                             <strong>Programistyczny bełkot</strong>

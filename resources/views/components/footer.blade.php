@@ -9,11 +9,11 @@
                 <i class="bi bi-envelope me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="iwaniukmaciej.kontakt@gmail.com"></i>
             </a>
 
-            <a class="link-none me-1" style="color: #0e76a8 !important;" href="https://www.linkedin.com/in/maciej-iwaniuk-478505213/">
+            <a class="link-none me-1" style="color: #0e76a8 !important;" href="https://www.linkedin.com/in/maciej-iwaniuk-478505213/" target="_blank">
                 <i class="bi bi-linkedin"></i>
             </a>
 
-            <a class="link-none me-1" style="color: #333 !important;" href="https://github.com/macieeek">
+            <a class="link-none me-1" style="color: #333 !important;" href="https://github.com/macieeek" target="_blank">
                 <i class="bi bi-github"></i>
             </a>
 
