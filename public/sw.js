@@ -8,7 +8,7 @@ var __webpack_exports__ = {};
 // cache then we should change version of cache name
 // in case to delete old cache - only for static caches
 // version of application from .env
-var app_version = "1.1"; // static caches
+var app_version = "1.7"; // static caches
 
 var imagesCache = 'images-cache-v' + app_version;
 var cssCache = 'css-cache-v' + app_version;
@@ -23,7 +23,7 @@ var usersAvatarsCache = 'users-avatars-cache'; // all names of cache variables
 var keysOfStaticCaches = [imagesCache, cssCache, jsCache, assetsCache, pluginsCache];
 var keysOfDynamicCaches = [pagesCache, usersProfilesCache, usersAvatarsCache]; // urls to cache
 
-var imagesToCache = ['/favicon.ico', '/assets/icons/16x16.png', '/assets/icons/32x32.png', '/assets/icons/72x72.png', '/assets/icons/96x96.png', '/assets/icons/144x144.png', '/assets/icons/152x152.png', '/assets/icons/192x192.png', '/assets/icons/384x384.png', '/assets/icons/512x512.png', '/assets/icons/apple-touch-icon.png', '/assets/images/slider-images/image1.jpg', '/assets/images/slider-images/image2.jpg', '/assets/images/slider-images/image3.jpg', '/assets/images/slider-images/image4.jpg', '/assets/images/slider-images/image5.jpg', '/assets/images/support_images/download_files/tip_1.jpg', '/assets/images/support_images/download_files/tip_2.jpg', '/assets/images/support_images/download_files/tip_3.jpg'];
+var imagesToCache = ['/favicon.ico', '/assets/images/background.jpg', '/assets/icons/16x16.png', '/assets/icons/32x32.png', '/assets/icons/72x72.png', '/assets/icons/96x96.png', '/assets/icons/144x144.png', '/assets/icons/152x152.png', '/assets/icons/192x192.png', '/assets/icons/384x384.png', '/assets/icons/512x512.png', '/assets/icons/apple-touch-icon.png', '/assets/images/slider-images/image1.jpg', '/assets/images/slider-images/image2.jpg', '/assets/images/slider-images/image3.jpg', '/assets/images/slider-images/image4.jpg', '/assets/images/slider-images/image5.jpg', '/assets/images/support_images/download_files/tip_1.jpg', '/assets/images/support_images/download_files/tip_2.jpg', '/assets/images/support_images/download_files/tip_3.jpg'];
 var cssToCache = ['/css/custom/classes.css', '/css/custom/layout.css', '/css/pages/options.css', '/css/pages/profile.css', '/css/pages/support.css', '/css/snake_mini_game/snake.css', '/css/app.css'];
 var jsToCache = ['/js/snake_mini_game/game.js', '/js/snake_mini_game/snake.js', '/js/app.js'];
 var assetsToCache = ['/strona-offline', '/assets/uncensored_words.json'];

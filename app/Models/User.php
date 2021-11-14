@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use App\Models\AppLog;
+use App\Models\VisitorUnique;
 use App\Models\UserGameData;
 
 class User extends Authenticatable
@@ -46,12 +47,61 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Function that checks if user has admin permissions
+     */
+    public function isAdmin()
+    {
+        if ($this->permission == 2) {
+            return true;
+        }
+        return false;
+    }
 
     /**
-     * Relation for users_game_data
+     * Function that checks if user has normal permissions
      */
-    public function usersGameData()
+    public function isUser()
     {
-        return $this->hasOne(UserGameData::class);
+        if ($this->permission == 0) {
+            return true;
+        }
+        return false;
     }
+
+    /**
+     * Function that checks if user is banned
+     */
+    public function isBanned()
+    {
+        if ($this->user_banned == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Relation for users_game_data to get only points
+     */
+    public function userGameData()
+    {
+        return $this->hasOne(UserGameData::class, 'user_id', 'id');
+    }
+
+    /**
+     * Relation for app_logs table
+     */
+    public function appLogs()
+    {
+        return $this->hasMany(AppLog::class, 'user_id', 'id');
+    }
+
+    /**
+     * Relation for unique_visitors table
+     */
+    public function visitorUnique()
+    {
+        return $this->hasOne(VisitorUnique::class, 'ip', 'last_login_ip');
+    }
+
 }

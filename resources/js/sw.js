@@ -39,6 +39,7 @@ let keysOfDynamicCaches = [
 // urls to cache
 const imagesToCache = [
     '/favicon.ico',
+    '/assets/images/background.jpg',
     '/assets/icons/16x16.png',
     '/assets/icons/32x32.png',
     '/assets/icons/72x72.png',

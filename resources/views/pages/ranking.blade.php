@@ -70,7 +70,7 @@
 
                 </div>
 
-                <div class="btn-group w-100 d-flex d-sm-none" style="background-color: rgb(232, 226, 226);" role="group" aria-label="Ranking button group">
+                <div class="btn-group w-100 d-flex d-sm-none border-bottom border-2 border-light" style="background-color: rgb(232, 226, 226);" role="group" aria-label="Ranking button group">
 
                     <button type="button" class="btn btn-dark" id="pointsSelected">
                         Ilość <strong class="text-primary">Punktów</strong>
@@ -217,6 +217,7 @@
                         title: 'Ilość punktów',
                         data: function (row, type, val, meta) {
                             var data;
+                            console.log(row);
                             if ($('#pointsRank').prop('checked')) {
                                 data = row.points;
                             } else if ($('#coinsRank').prop('checked')) {
@@ -242,25 +243,25 @@
                             }
                         },
                     },
-                    @if (isset(Auth::user()->permision) && Auth::user()->permision == 2)
+                    @if (Auth::check() && Auth::user()->isAdmin())
                         {
                             title: '<span class="text-danger">ADMIN</span>',
                             class: 'align-middle',
                             orderable: false,
                             data: function (row, type, val, meta) {
                                 text = ``;
-                                if (row.permision != 2) {
+                                if (row.permission != 2) {
                                     urlDeleteUserToReplace = "{{ route('admin.delete-account', '__ID__') }}";
-                                    urlDeleteUser = urlDeleteUserToReplace.replace('__ID__', row.user_id);
+                                    urlDeleteUser = urlDeleteUserToReplace.replace('__ID__', row.id);
 
                                     urlBanIpToReplace = "{{ route('admin.ban-last-ip', '__ID__') }}";
-                                    urlBanIp = urlBanIpToReplace.replace('__ID__', row.user_id);
+                                    urlBanIp = urlBanIpToReplace.replace('__ID__', row.uid);
 
                                     urlBanAccountToReplace = "{{ route('admin.ban-account', '__ID__') }}";
-                                    urlBanAccount = urlBanAccountToReplace.replace('__ID__', row.user_id);
+                                    urlBanAccount = urlBanAccountToReplace.replace('__ID__', row.id);
 
                                     urlBanIpAndAccountToReplace = "{{ route('admin.ban-ip-account', '__ID__') }}";
-                                    urlBanIpAndAccount = urlBanIpAndAccountToReplace.replace('__ID__', row.user_id);
+                                    urlBanIpAndAccount = urlBanIpAndAccountToReplace.replace('__ID__', row.id);
 
                                     text += `
 
@@ -292,7 +293,7 @@
 
 
                                 urlResetTokenToReplace = "{{ route('admin.reset-api-token', '__ID__') }}";
-                                urlResetToken = urlResetTokenToReplace.replace('__ID__', row.user_id);
+                                urlResetToken = urlResetTokenToReplace.replace('__ID__', row.id);
                                 text += `
                                             <form action="`+urlResetToken+`" method="POST">
                                                 @csrf

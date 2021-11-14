@@ -36,19 +36,19 @@
 
                     <div class="col-12">
                         <label for="email">E-mail</label>
-                        <input type="text" name="email" class="form-control" value="{{ old('email') }}">
+                        <input type="text" name="email" class="form-control" value="{{ old('email') }}" required>
                     </div>
 
 
                     <div class="col-12">
                         <label for="password">Hasło</label>
-                        <input type="password" name="password" class="form-control" placeholder="">
+                        <input type="password" name="password" class="form-control" placeholder="" required>
                     </div>
 
 
                     <div class="col-12">
                         <label for="password_confirmation">Powtórz hasło</label>
-                        <input type="password" name="password_confirmation" class="form-control"placeholder="">
+                        <input type="password" name="password_confirmation" class="form-control"placeholder="" required>
                     </div>
 
 

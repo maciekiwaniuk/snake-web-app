@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\AppLog;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -40,7 +41,7 @@ class AuthenticatedSessionController extends Controller
         $user->last_user_agent = $request->server('HTTP_USER_AGENT');
         $user->save();
 
-        if (Auth::user()->user_banned && Auth::user()->permision == 0) {
+        if (Auth::user()->user_banned && Auth::user()->isUser()) {
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
@@ -49,6 +50,11 @@ class AuthenticatedSessionController extends Controller
                 'banned' => 'Konto na które próbujesz się zalogować zostało zbanowane.'
             ]);
         }
+
+        $this->createAppLog(
+            "site_login",
+            "Użytkownik ".$user->name." zalogował się na stronę."
+        );
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
@@ -61,6 +67,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
+        $this->createAppLog(
+            "site_logout",
+            "Użytkownik ".Auth::user()->name." wylogował się z konta na stronie."
+        );
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

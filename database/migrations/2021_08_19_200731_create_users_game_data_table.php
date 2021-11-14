@@ -18,6 +18,7 @@ class CreateUsersGameDataTable extends Migration
 
             $table->integer('points')->default(0);
             $table->integer('coins')->default(0);
+            $table->integer('total_coins_earned')->default(0);
             $table->integer('play_time_seconds')->default(0);
 
             $table->string('selected_level')->default("easy");
@@ -46,8 +47,13 @@ class CreateUsersGameDataTable extends Migration
             $table->integer('hard_record')->default(0);
             $table->integer('speed_record')->default(0);
 
-            $table->integer('games_amount')->default(0);
             $table->integer('ate_fruits_amount')->default(0);
+            $table->integer('ate_fruits_on_easy')->default(0);
+            $table->integer('ate_fruits_on_medium')->default(0);
+            $table->integer('ate_fruits_on_hard')->default(0);
+            $table->integer('ate_fruits_on_speed')->default(0);
+
+            $table->integer('games_amount')->default(0);
             $table->integer('hit_wall')->default(0);
             $table->integer('hit_snake')->default(0);
             $table->integer('clicks')->default(0);
@@ -57,7 +63,6 @@ class CreateUsersGameDataTable extends Migration
             $table->boolean('effects')->default(true);
             $table->float('volume')->default(0.1);
 
-            $table->integer('selected_game_music')->default(1);
             $table->integer('selected_menu_music')->default(1);
 
             $table->timestamps();

@@ -108,9 +108,9 @@
                         render: function (data, type, row, meta) {
                             urlProfileToReplace = "{{ route('profile', '__NAME__') }}";
                             urlProfile = urlProfileToReplace.replace('__NAME__', row.name);
-                            if (row.permision == 0) {
+                            if (row.permission == 0) {
                                 return `<a class="link-white" href="`+urlProfile+`">`+row.name+`</a>`;
-                            } else if (row.permision == 2) {
+                            } else if (row.permission == 2) {
                                 return `<strong class="text-danger"><a class="link-red" href="`+urlProfile+`">`+row.name+`</a></strong>`;
                             }
                         },
@@ -133,9 +133,11 @@
                         data: 'user_banned',
                         render: function (data, type, row, meta) {
                             if (data == 0) {
-                                return '<i class="bi bi-check-lg text-success"></i>'
+                                return '<i class="bi bi-check-lg text-success"></i>';
+                            } else if (data == 1) {
+                                return '<i class="bi bi-exclamation-circle text-danger"></i>';
                             } else {
-                                return '<i class="bi bi-exclamation-circle text-danger"></i>'
+                                return '<i class="bi bi-question-circle"></i>';
                             }
                         },
                         class: 'align-middle',
@@ -143,13 +145,18 @@
                     },
                     {
                         title: 'Ban IP',
-                        data: 'ip_banned',
+                        data: '',
                         render: function (data, type, row, meta) {
-                            if (data == 0) {
-                                return '<i class="bi bi-check-lg text-success"></i>'
+                            if (row.visitor_unique != null) {
+                                if (row.visitor_unique.ip_banned == 0) {
+                                    return '<i class="bi bi-check-lg text-success"></i>';
+                                } else {
+                                    return '<i class="bi bi-exclamation-circle text-danger"></i>';
+                                }
                             } else {
-                                return '<i class="bi bi-exclamation-circle text-danger"></i>'
+                                return '<i class="bi bi-question-circle"></i>';
                             }
+
                         },
                         class: 'align-middle',
                         orderable: false,
@@ -162,11 +169,11 @@
                             text = ``;
 
                             // USER
-                            if (row.permision == 0) {
+                            if (row.permission == 0) {
                                 // if user's account IS BANNED
                                 if (row.user_banned) {
                                 urlUnbanAccountToReplace = "{{ route('admin.unban-account', '__ID__') }}";
-                                urlUnbanAccount = urlUnbanAccountToReplace.replace('__ID__', row.user_id);
+                                urlUnbanAccount = urlUnbanAccountToReplace.replace('__ID__', row.id);
 
                                 text += `
                                             <form action="`+urlUnbanAccount+`" method="POST">
@@ -178,7 +185,7 @@
                                 } else {
                                     // if user's account ISN'T BANNED
                                     urlBanAccountToReplace = "{{ route('admin.ban-account', '__ID__') }}";
-                                    urlBanAccount = urlBanAccountToReplace.replace('__ID__', row.user_id);
+                                    urlBanAccount = urlBanAccountToReplace.replace('__ID__', row.id);
 
                                     text += `
                                                 <form action="`+urlBanAccount+`" method="POST">
@@ -188,11 +195,10 @@
                                                 </form>
                                             `;
                                 }
-
                                 // if user's last ip IS BANNED
-                                if (row.ip_banned) {
+                                if (row.visitor_unique != null && row.visitor_unique.ip_banned) {
                                     urlUnbanIpToReplace = "{{ route('admin.unban-last-ip', '__ID__') }}";
-                                    urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', row.user_id);
+                                    urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', row.id);
 
                                     text += `
                                                 <form action="`+urlUnbanIp+`" method="POST">
@@ -204,7 +210,7 @@
                                 } else {
                                     // if user's last ip ISN'T BANNED
                                     urlBanIpToReplace = "{{ route('admin.ban-last-ip', '__ID__') }}";
-                                    urlBanIp = urlBanIpToReplace.replace('__ID__', row.user_id);
+                                    urlBanIp = urlBanIpToReplace.replace('__ID__', row.id);
 
                                     text += `
                                                 <form action="`+urlBanIp+`" method="POST">
@@ -216,9 +222,9 @@
                                 }
 
                                 // if user's last ip and account IS BANNED
-                                if (row.ip_banned && row.user_banned) {
+                                if (row.visitor_unique != null && row.visitor_unique.ip_banned && row.user_banned) {
                                     urlUnbanIpAndAccountToReplace = "{{ route('admin.unban-ip-account', '__ID__') }}";
-                                    urlUnbanIpAndAccount = urlUnbanIpAndAccountToReplace.replace('__ID__', row.user_id);
+                                    urlUnbanIpAndAccount = urlUnbanIpAndAccountToReplace.replace('__ID__', row.id);
 
                                     text += `
                                                 <form action="`+urlUnbanIpAndAccount+`" method="POST">
@@ -230,7 +236,7 @@
                                 } else {
                                     // if user's last ip OR account ISN'T BANNED
                                     urlBanIpAndAccountToReplace = "{{ route('admin.ban-ip-account', '__ID__') }}";
-                                    urlBanIpAndAccount = urlBanIpAndAccountToReplace.replace('__ID__', row.user_id);
+                                    urlBanIpAndAccount = urlBanIpAndAccountToReplace.replace('__ID__', row.id);
 
                                     text += `
                                                 <form action="`+urlBanIpAndAccount+`" method="POST">
@@ -242,7 +248,7 @@
                                 }
 
                                 urlDeleteAccountToReplace = "{{ route('admin.delete-account', '__ID__') }}";
-                                urlDeleteAccount = urlDeleteAccountToReplace.replace('__ID__', row.user_id);
+                                urlDeleteAccount = urlDeleteAccountToReplace.replace('__ID__', row.id);
 
                                 text += `
                                             <form action="`+urlDeleteAccount+`" method="POST">
@@ -251,13 +257,13 @@
                                                 <button type="submit" class="btn btn-warning mb-1">Usuń konto</button>
                                             </form>
                                         `;
-                            } else if (row.permision == 2) {
+                            } else if (row.permission == 2) {
                                 // ADMIN
                                 text += ''
                             }
 
                             urlResetTokenToReplace = "{{ route('admin.reset-api-token', '__ID__') }}";
-                            urlResetToken = urlResetTokenToReplace.replace('__ID__', row.user_id);
+                            urlResetToken = urlResetTokenToReplace.replace('__ID__', row.id);
                             text += `
                                         <form action="`+urlResetToken+`" method="POST">
                                             @csrf

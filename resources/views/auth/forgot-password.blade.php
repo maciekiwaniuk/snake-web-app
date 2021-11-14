@@ -40,7 +40,7 @@
 
                     <div class="col-12">
                         <label for="email">E-mail</label>
-                        <input type="text" name="email" class="form-control" value="{{ old('email') }}">
+                        <input type="text" name="email" class="form-control" value="{{ old('email') }}" required>
                     </div>
 
                     <div class="offset-1 col-10 text-center">

@@ -8,28 +8,28 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Request;
 use App\Models\User;
 use App\Models\UserDeleted;
-use App\Models\UserGameData;
+use App\Models\AppLog;
+
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
-     * Returning bool on user's permision
+     * Returning bool on user's permission
      * to do something, true when:
      *  - if user_id == Auth::user()->id
-     *  - Auth::user()->permision = 2 (ADMIN)
+     *  - Auth::user()->permission = 2 (ADMIN)
      */
-    protected function hasPermision($user_id)
+    protected function hasPermission($user_id)
     {
-        if (Auth::user()->id == $user_id || Auth::user()->permision == 2) {
+        if (Auth::user()->id == $user_id || Auth::user()->isAdmin()) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -57,7 +57,7 @@ class Controller extends BaseController
         $extension = $image->getClientOriginalExtension();
 
         $filename = 'avatar.'.$extension;
-        $folder = 'users_avatars/'.Auth::user()->name;
+        $folder = '/users_avatars/'.Auth::user()->name;
 
         $image->storeAs($folder, $filename, 'public');
 
@@ -79,12 +79,12 @@ class Controller extends BaseController
      */
     protected function deleteUserAvatar()
     {
-        if (Auth::user()->avatar != 'assets/images/avatar.png') {
+        if (Auth::user()->avatar != '/assets/images/avatar.png') {
             $previous_avatar = Auth::user()->avatar;
             Storage::delete($previous_avatar);
 
             $user = Auth::user();
-            $user->avatar = 'assets/images/avatar.png';
+            $user->avatar = '/assets/images/avatar.png';
             $user->save();
         }
     }
@@ -101,25 +101,67 @@ class Controller extends BaseController
         $user_deleted = new UserDeleted;
 
         $user_deleted->name =        $user->name;
+        $user_deleted->password =    $user->password;
         $user_deleted->email =       $user->email;
         $user_deleted->previous_id = $user->id;
         $user_deleted->last_ip =     $user->last_login_ip;
         $user_deleted->last_date =   $user->last_login_time;
         $user_deleted->created_at =  $user->created_at;
 
+        if (Auth::user()->isAdmin()) {
+            $this->createAppLog(
+                'account_delete',
+                'Administrator '.Auth::user()->name.' usunął konto użytkownika '.$user->name.'.'
+            );
+        } else {
+            $this->createAppLog(
+                'account_delete',
+                'Konto użytkownika '.$user->name.' zostało usunięte manualnie.'
+            );
+        }
+
         $user_deleted->save();
         $user->delete();
     }
 
     /**
-     * Checking if authorised user has admin's permision
+     * Checking if authorised user has admin's permission
      */
     protected function isAdmin()
     {
-        if (Auth::check() && Auth::user()->permision == 2) {
+        if (Auth::check() && Auth::user()->isAdmin()) {
             return true;
-        } else {
-            return false;
         }
+        return false;
+    }
+
+    /**
+     * Creating app log
+     */
+    protected function createAppLog($type, $content)
+    {
+        $log = new AppLog;
+
+        $log->type = $type;
+        $log->content = $content;
+        $log->user_id = Auth::user()->id;
+        $log->ip = Request::ip();
+
+        $log->save();
+    }
+
+    /**
+     * Creating app log for game actions
+     */
+    protected function createGameAppLog($type, $content, $user_id, $ip)
+    {
+        $log = new AppLog;
+
+        $log->type = $type;
+        $log->content = $content;
+        $log->user_id = $user_id;
+        $log->ip = $ip;
+
+        $log->save();
     }
 }

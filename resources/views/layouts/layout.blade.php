@@ -94,18 +94,34 @@
         });
     </script>
 
+    <style>
+        .linkedin {
+            color: #0e76a8 !important;
+        }
+        .linkedin:hover {
+            color: rgb(29, 164, 227) !important;
+        }
+
+        .github {
+            color: #333 !important;
+        }
+        .github:hover {
+            color: rgb(81, 73, 73) !important;
+        }
+    </style>
+
     <div class="container-md mb-5" style="min-height: 100vh">
 
         <!-- NAV -->
-        @if (!Auth::user())
+        @if (!Auth::check())
             @include('components.nav-guest')
         @endif
 
-        @if (Auth::check() && Auth::user()->permision == 0)
+        @if (Auth::check() && Auth::user()->isUser())
             @include('components.nav-user')
         @endif
 
-        @if (Auth::check() && Auth::user()->permision == 2)
+        @if (Auth::check() && Auth::user()->isAdmin())
             @include('components.nav-admin')
         @endif
         <!-- END NAV -->

@@ -26,6 +26,7 @@
 
 body{
     background-color: rgb(198, 234, 108) !important;
+    background-image: url('/assets/images/background.jpg') !important;
 }
 
 label{

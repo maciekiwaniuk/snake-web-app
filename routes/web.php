@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\VisitorsUniqueController;
+use App\Http\Controllers\Admin\AppLogsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\GameHostingsController;
 use App\Http\Controllers\ProfileController;
@@ -80,6 +81,13 @@ Route::prefix('admin')->middleware('admin')->group(function() {
                 Route::get('/odwiedzajacy-niezbanowani', [VisitorsUniqueController::class, 'getNotBannedVisitors'])->name('get-notbanned-visitors');
             });
         });
+
+        Route::prefix('logi')->group(function() {
+            Route::name('app-logs.')->group(function() {
+                Route::get('/', [AppLogsController::class, 'index'])->name('index');
+                Route::get('/logi-aplikacji', [AppLogsController::class, 'getAllAppLogs'])->name('get-app-logs');
+            });
+        });
     });
 });
 
@@ -101,7 +109,6 @@ Route::middleware('auth')->group(function() {
         });
     });
 });
-
 
 /********************************************** Routing related with user's account **********************************************/
 

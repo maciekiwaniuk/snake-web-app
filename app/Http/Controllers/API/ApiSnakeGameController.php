@@ -23,7 +23,7 @@ class ApiSnakeGameController extends Controller
 
         if (isset($user) && Hash::check($request->password, $user->password)) {
             // logged user is banned
-            if ($user->user_banned == 1) {
+            if ($user->isBanned()) {
                 $result["success"] = false;
                 $result["error_message"] = "Konto zostało zbanowane.";
             } else {
@@ -61,11 +61,14 @@ class ApiSnakeGameController extends Controller
 
         $user = User::query()
             ->where('api_token', '=', $request->api_token)
-            ->with('usersGameData')
+            ->with('userGameData')
             ->first();
 
+        $ip = $request->getClientIp();
+
         return response()->json([
-            "result" => $user
+            "result" => $user,
+            "ip" => $ip
         ]);
     }
 
@@ -95,15 +98,21 @@ class ApiSnakeGameController extends Controller
             ->first();
 
         $user_game_data->coins = $request->coins;
+        $user_game_data->total_coins_earned = $request->total_coins_earned;
         $user_game_data->points = $request->points;
         $user_game_data->play_time_seconds = $request->play_time_seconds;
 
         $user_game_data->games_amount = $request->games_amount;
-        $user_game_data->ate_fruits_amount = $request->ate_fruits_amount;
         $user_game_data->hit_wall = $request->hit_wall;
         $user_game_data->hit_snake = $request->hit_snake;
         $user_game_data->clicks = $request->clicks;
         $user_game_data->selected_level = $request->selected_level;
+
+        $user_game_data->ate_fruits_amount = $request->ate_fruits_amount;
+        $user_game_data->ate_fruits_on_easy = $request->ate_fruits_on_easy;
+        $user_game_data->ate_fruits_on_medium = $request->ate_fruits_on_medium;
+        $user_game_data->ate_fruits_on_hard = $request->ate_fruits_on_hard;
+        $user_game_data->ate_fruits_on_speed = $request->ate_fruits_on_speed;
 
         $user_game_data->coins_upgrade_lvl = $request->coins_upgrade_lvl;
         $user_game_data->points_upgrade_lvl = $request->points_upgrade_lvl;
@@ -135,9 +144,77 @@ class ApiSnakeGameController extends Controller
         $user_game_data->effects = $request->effects;
         $user_game_data->volume = $request->volume;
 
-        $user_game_data->selected_game_music = $request->selected_game_music;
         $user_game_data->selected_menu_music = $request->selected_menu_music;
 
         $user_game_data->save();
+    }
+
+    /**
+     * saving log when user opened game
+     */
+    public function createOpenGameLog(Request $request)
+    {
+        if (!isset($request->secret_game_key) || $request->secret_game_key != env('SECRET_GAME_KEY')) {
+            exit();
+        }
+
+        $user = User::query()
+            ->where('api_token', '=', $request->api_token)
+            ->first();
+
+        if (isset($user)) {
+            $this->createGameAppLog(
+                'game_open',
+                'Użytkownik '.$user->name.' wszedł do gry.',
+                $request->user_id,
+                $request->ip
+            );
+        }
+    }
+
+    /**
+     * saving log when user quit game
+     */
+    public function createExitGameLog(Request $request)
+    {
+        if (!isset($request->secret_game_key) || $request->secret_game_key != env('SECRET_GAME_KEY')) {
+            exit();
+        }
+
+        $user = User::query()
+            ->where('api_token', '=', $request->api_token)
+            ->first();
+
+        if (isset($user)) {
+            $this->createGameAppLog(
+                'game_leave',
+                'Użytkownik '.$user->name.' wyszedł z gry.',
+                $request->user_id,
+                $request->ip
+            );
+        }
+    }
+
+    /**
+     * saving log when user logout from game
+     */
+    public function createLogoutGameLog(Request $request)
+    {
+        if (!isset($request->secret_game_key) || $request->secret_game_key != env('SECRET_GAME_KEY')) {
+            exit();
+        }
+
+        $user = User::query()
+            ->where('api_token', '=', $request->api_token)
+            ->first();
+
+        if (isset($user)) {
+            $this->createGameAppLog(
+                'game_logout',
+                'Użytkownik '.$user->name.' wylogował się z gry.',
+                $request->user_id,
+                $request->ip
+            );
+        }
     }
 }

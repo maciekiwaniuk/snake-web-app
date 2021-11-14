@@ -35,7 +35,7 @@
 
                     <div class="col-12">
                         <label for="password">Hasło</label>
-                        <input type="password" name="password" class="form-control" placeholder="">
+                        <input type="password" name="password" class="form-control" placeholder="" required>
                     </div>
 
                     <div class="col-12 text-center">

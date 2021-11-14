@@ -17,7 +17,7 @@ class IsAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check() || Auth::user()->permision != 2) {
+        if (!Auth::check() || !Auth::user()->isAdmin()) {
             return abort('403');
         }
 

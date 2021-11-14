@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\VisitorUnique;
@@ -26,10 +24,10 @@ class UsersController extends Controller
      */
     public function getAllUsers()
     {
-        // $users = User::all();
-        $users = DB::select('SELECT *, users.id as user_id FROM users, visitors_unique
-                             WHERE users.last_login_ip = visitors_unique.ip
-                             ORDER BY users.updated_at DESC');
+        $users = User::query()
+            ->with('visitorUnique')
+            ->orderBy('users.last_login_time', 'DESC')
+            ->get();
 
         return response()->json([
             'data' => $users
@@ -41,10 +39,11 @@ class UsersController extends Controller
      */
     public function getBannedUsers()
     {
-        $users = DB::select('SELECT *, users.id as user_id FROM users, visitors_unique
-                             WHERE user_banned = 1
-                             AND users.last_login_ip = visitors_unique.ip
-                             ORDER BY users.updated_at DESC');
+        $users = User::query()
+            ->with('visitorUnique')
+            ->where('user_banned', '=', 1)
+            ->orderBy('users.last_login_time', 'DESC')
+            ->get();
 
         return response()->json([
             'data' => $users
@@ -56,10 +55,11 @@ class UsersController extends Controller
      */
     public function getNotBannedUsers()
     {
-        $users = DB::select('SELECT *, users.id as user_id FROM users, visitors_unique
-                             WHERE user_banned = 0
-                             AND users.last_login_ip = visitors_unique.ip
-                             ORDER BY users.updated_at DESC');
+        $users = User::query()
+            ->with('visitorUnique')
+            ->where('user_banned', '=', 0)
+            ->orderBy('users.last_login_time', 'DESC')
+            ->get();
 
         return response()->json([
             'data' => $users
@@ -82,6 +82,11 @@ class UsersController extends Controller
             ->first();
 
         if (Auth::user()->last_login_ip != $banned_ip->ip) {
+            $this->createAppLog(
+                'ip_user_ban',
+                'Administrator '.Auth::user()->name.' zbanował IP: '.$ip.' użytkownika '.$user->name.'.'
+            );
+
             $banned_ip->ip_banned = 1;
             $banned_ip->save();
         }
@@ -106,6 +111,11 @@ class UsersController extends Controller
         $banned_ip->ip_banned = 0;
         $banned_ip->save();
 
+        $this->createAppLog(
+            'ip_user_unban',
+            'Administrator '.Auth::user()->name.' odbanował IP: '.$ip.' użytkownika '.$user->name.'.'
+        );
+
         return back();
     }
 
@@ -119,6 +129,11 @@ class UsersController extends Controller
             ->first();
         $user->user_banned = 1;
         $user->save();
+
+        $this->createAppLog(
+            'account_ban',
+            'Administrator '.Auth::user()->name.' zbanował użytkownika '.$user->name.'.'
+        );
 
         return back();
     }
@@ -134,6 +149,11 @@ class UsersController extends Controller
         $user->user_banned = 0;
         $user->save();
 
+        $this->createAppLog(
+            'account_unban',
+            'Administrator '.Auth::user()->name.' odbanował użytkownika '.$user->name.'.'
+        );
+
         return back();
     }
 
@@ -148,6 +168,11 @@ class UsersController extends Controller
         $user->user_banned = 1;
         $user->save();
 
+        $this->createAppLog(
+            'account_ban',
+            'Administrator '.Auth::user()->name.' zbanował użytkownika '.$user->name.'.'
+        );
+
         $ip = $user->last_login_ip;
 
         $banned_ip = VisitorUnique::query()
@@ -155,6 +180,11 @@ class UsersController extends Controller
             ->first();
 
         if (Auth::user()->last_login_ip != $banned_ip->ip) {
+            $this->createAppLog(
+                'ip_user_ban',
+                'Administrator '.Auth::user()->name.' zbanował IP: '.$ip.' użytkownika '.$user->name.'.'
+            );
+
             $banned_ip->ip_banned = 1;
             $banned_ip->save();
         }
@@ -181,6 +211,15 @@ class UsersController extends Controller
         $banned_ip->ip_banned = 0;
         $banned_ip->save();
 
+        $this->createAppLog(
+            'account_unban',
+            'Administrator '.Auth::user()->name.' odbanował użytkownika '.$user->name.'.'
+        );
+        $this->createAppLog(
+            'ip_user_unban',
+            'Administrator '.Auth::user()->name.' odbanował IP: '.$ip.' użytkownika '.$user->name.'.'
+        );
+
         return back();
     }
 
@@ -204,6 +243,11 @@ class UsersController extends Controller
             ->first();
         $user->api_token = Str::random(60);
         $user->save();
+
+        $this->createAppLog(
+            'token_reset',
+            'Administrator '.Auth::user()->name.' zresetował api_token użytkownika '.$user->name.'.'
+        );
 
         return back();
     }

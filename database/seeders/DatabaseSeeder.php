@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,26 +15,51 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory()->create([
-            'name' => "user1234",
-            'email' => "user1234@wp.pl",
-            'password' => Hash::make("user1234"),
-            'permision' => 0,
-        ]);
+        $users = User::query()
+            ->get();
 
-        \App\Models\User::factory()->create([
-            'name' => "test1234",
-            'email' => "test1234@wp.pl",
-            'password' => Hash::make("test1234"),
-            'permision' => 0,
-        ]);
+        $user1234_exists = false;
+        $test1234_exists = false;
+        $admin1234_exists = false;
 
-        \App\Models\User::factory()->create([
-            'name' => "admin1234",
-            'email' => "admin1234@wp.pl",
-            'password' => Hash::make("admin1234"),
-            'permision' => 2,
-        ]);
+        foreach ($users as $user) {
+            if ($user['name'] == "user1234") {
+                $user1234_exists = true;
+            }
+            if ($user['name'] == "test1234") {
+                $test1234_exists = true;
+            }
+            if ($user['name'] == "admin1234") {
+                $admin1234_exists = true;
+            }
+        }
+
+        if ($user1234_exists == false) {
+            \App\Models\User::factory()->create([
+                'name' => "user1234",
+                'email' => "user1234@wp.pl",
+                'password' => Hash::make("user1234"),
+                'permission' => 0,
+            ]);
+        }
+
+        if ($test1234_exists == false) {
+            \App\Models\User::factory()->create([
+                'name' => "test1234",
+                'email' => "test1234@wp.pl",
+                'password' => Hash::make("test1234"),
+                'permission' => 0,
+            ]);
+        }
+
+        if ($admin1234_exists == false) {
+            \App\Models\User::factory()->create([
+                'name' => "admin1234",
+                'email' => "admin1234@wp.pl",
+                'password' => Hash::make("admin1234"),
+                'permission' => 2,
+            ]);
+        }
 
         // Creating users inside VisitorUniqueFactory
         \App\Models\VisitorUnique::factory(50)->create();

@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
-class VisitorUnique extends Model
+class AppLog extends Model
 {
     use HasFactory;
 
@@ -14,13 +15,14 @@ class VisitorUnique extends Model
      *
      * @var string
      */
-    protected $table = 'visitors_unique';
+    protected $table = 'app_logs';
 
     /**
      * Relation for users table
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'ip', 'last_login_ip');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
 }

@@ -8,6 +8,15 @@
 
 @section('content')
 
+    <style>
+        @media (min-width: 576px){
+            .avatar {
+                height: 300px !important;
+                width: 300px !important;
+            }
+        }
+    </style>
+
     <div class="col-12
                 mx-auto
                 mt-1 mt-sm-2 mt-md-3 mt-lg-4
@@ -31,15 +40,15 @@
                                     @auth
                                         @if (Auth::user()->id == $user->id)
                                         <a href="{{ route('options.show', 'awatar') }}">
-                                            <img alt="Awatar użytkownika" class="img-thumbnail" style="height: 300px !important; width: 300px !important;" src="{{ asset($user->avatar) }}">
+                                            <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
                                         </a>
                                         @else
-                                            <img alt="Awatar użytkownika" class="img-thumbnail" style="height: 300px !important; width: 300px !important;" src="{{ asset($user->avatar) }}">
+                                            <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
                                         @endif
                                     @endauth
 
                                     @guest
-                                        <img alt="Awatar użytkownika" class="img-thumbnail" style="height: 300px !important; width: 300px !important;" src="{{ asset($user->avatar) }}">
+                                        <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
                                     @endguest
 
                             </div>
@@ -58,7 +67,7 @@
                     <div class="col-12 col-md-6
                                 mt-3
                                 text-center">
-                                    @if ($user->user_banned == 1)
+                                    @if ($user->isBanned())
 
                                         <div class="text-danger">
                                             <strong>UŻYTKOWNIK ZBANOWANY</strong>
@@ -66,11 +75,11 @@
 
                                     @else
 
-                                        @if (isset($user_game_data) && $user_game_data->points > 0)
-                                            Punkty: {{ $user_game_data->points }} <br>
-                                            Monety: {{ $user_game_data->coins }} <br>
+                                        @if ($user->userGameData->points > 0)
+                                            Punkty: {{ $user->userGameData->points }} <br>
+                                            Monety: {{ $user->userGameData->coins }} <br>
                                             @php
-                                                $playtime_minutes = round($user_game_data->play_time_seconds / 60);
+                                                $playtime_minutes = round($user->userGameData->play_time_seconds / 60);
                                             @endphp
                                             Czas gry:
                                             @php
@@ -86,9 +95,11 @@
                                                 }
                                             @endphp
                                             <br>
-                                            Rekord na easy: {{ $user_game_data->easy_record }} <br>
-                                            Rekord na medium: {{ $user_game_data->medium_record }} <br>
-                                            Rekord na hard: {{ $user_game_data->hard_record }}
+                                            Zjedzone owoce: {{ $user->userGameData->ate_fruits_amount }} <br>
+                                            Rekord na Easy: {{ $user->userGameData->easy_record }} <br>
+                                            Rekord na Medium: {{ $user->userGameData->medium_record }} <br>
+                                            Rekord na Hard: {{$user->userGameData->hard_record }} <br>
+                                            Rekord na Speed: {{ $user->userGameData->speed_record }}
                                         @else
 
                                             Użytkownik jeszcze nie zdążył zagrać w Snake

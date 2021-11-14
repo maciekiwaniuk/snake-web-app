@@ -23,4 +23,7 @@ Route::prefix('/v1')->group(function() {
     Route::post('/logowanie-do-gry', [ApiSnakeGameController::class, 'login']);
     Route::post('/wczytanie-danych-tokenem', [ApiSnakeGameController::class, 'loadData']);
     Route::post('/zapisanie-danych-tokenem', [ApiSnakeGameController::class, 'saveData']);
+    Route::post('/zapisanie-logu-wejsciowego', [ApiSnakeGameController::class, 'createOpenGameLog']);
+    Route::post('/zapisanie-logu-wyjsciowego', [ApiSnakeGameController::class, 'createExitGameLog']);
+    Route::post('/zapisanie-logu-wylogowania', [ApiSnakeGameController::class, 'createLogoutGameLog']);
 });

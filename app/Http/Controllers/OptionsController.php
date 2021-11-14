@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangeEmailRequest;
 use App\Rules\LoggedUserPassword;
@@ -56,6 +55,11 @@ class OptionsController extends Controller
             $this->changeUserAvatar($request->file('image'));
         }
 
+        $this->createAppLog(
+            'avatar_change',
+            'Użytkownik '.Auth::user()->name.' zmienił swój awatar.'
+        );
+
         return response()->json([
             'result' => $result,
             'avatarPath' => Auth::user()->avatar
@@ -75,6 +79,11 @@ class OptionsController extends Controller
 
         $this->deleteUserAvatar();
 
+        $this->createAppLog(
+            "avatar_delete",
+            "Użytkownik ".Auth::user()->name." usunął swój awatar."
+        );
+
         return response()->json([
             'result' => $result
         ]);
@@ -86,6 +95,12 @@ class OptionsController extends Controller
     public function passwordChange(ChangePasswordRequest $request)
     {
         $user = Auth::user();
+
+        $this->createAppLog(
+            'change_password',
+            'Użytkownik '.$user->name.' zmienił swoje hasło.'
+        );
+
         $user->password = Hash::make($request->new_password);
         $user->save();
 
@@ -99,6 +114,13 @@ class OptionsController extends Controller
     public function emailChange(ChangeEmailRequest $request)
     {
         $user = Auth::user();
+
+        $this->createAppLog(
+            'change_email',
+            'Użytkownik '.$user->name.' zmienił e-mail z '.$user->email.'
+             na '.$request->new_email.'.'
+        );
+
         $user->email = $request->new_email;
         $user->save();
 
@@ -151,6 +173,11 @@ class OptionsController extends Controller
             'success' => true,
             'message' => 'Zostałeś pomyślnie wylogowany z gry na wszystkich urządzeniach.',
         ];
+
+        $this->createAppLog(
+            "game_total_logout",
+            "Użytkownik ".$user->name." wylogował się z gry przez stronę."
+        );
 
         return response()->json([
             'result' => $result,

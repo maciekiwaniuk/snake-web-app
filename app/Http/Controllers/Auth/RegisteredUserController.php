@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AppLog;
 use App\Models\User;
 use App\Models\UserGameData;
 use App\Providers\RouteServiceProvider;
@@ -47,7 +48,9 @@ class RegisteredUserController extends Controller
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
                 'g-recaptcha-response' => [new reCAPTCHAv2],
             ],
-            ['password.confirmed' => 'Hasła nie były takie same.']
+            [
+                'password.confirmed' => 'Hasła nie były takie same.'
+            ]
         );
 
         $user = User::create([
@@ -67,6 +70,11 @@ class RegisteredUserController extends Controller
         $user_game_data = new UserGameData;
         $user_game_data->user_id = $user->id;
         $user_game_data->save();
+
+        $this->createAppLog(
+            "site_register",
+            "Użytkownik ".$user->name." utworzył konto."
+        );
 
         return redirect(RouteServiceProvider::HOME);
     }

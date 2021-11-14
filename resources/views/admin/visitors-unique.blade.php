@@ -117,6 +117,11 @@
                     {
                         title: 'Pierwsza wizyta',
                         data: 'created_at',
+                        render: function (data, type, row, meta) {
+                            let hours = row.created_at.slice(0, 10);
+                            let minutes = row.created_at.slice(11, 19);
+                            return hours + " " + minutes;
+                        },
                         class: 'align-middle',
                     },
                     {
@@ -139,7 +144,7 @@
                             // ip IS BANNED
                             if (row.ip_banned) {
                                 urlUnbanIpToReplace = "{{ route('admin.unban-ip', '__ID__') }}";
-                                urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', row.ip_id)
+                                urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', row.id)
                                 return `
                                             <form action="`+urlUnbanIp+`" method="POST">
                                                 @csrf
@@ -150,7 +155,7 @@
                             } else {
                                 // ip ISN'T BANNED
                                 urlBanIpToReplace = "{{ route('admin.ban-ip', '__ID__') }}";
-                                urlBanIp = urlBanIpToReplace.replace('__ID__', row.ip_id)
+                                urlBanIp = urlBanIpToReplace.replace('__ID__', row.id)
                                 return `
                                             <form action="`+urlBanIp+`" method="POST">
                                                 @csrf

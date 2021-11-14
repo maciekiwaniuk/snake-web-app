@@ -29,7 +29,7 @@
                     border border-2 border-success border-radius
                     bg-gradient-to-left
                     border-radius-15">
-                    Galeria</div>
+                    Galeria - zdjęcia z gry</div>
     </div>
 
     <div class="row">
@@ -82,7 +82,7 @@
                     bg-gradient-to-right
                     border-radius-15"
                     style="width:92vmin !important;">
-                    Snake mini-gra - WKRÓTCE...</div>
+                    Snake mini-gra</div>
     </div>
 
 
