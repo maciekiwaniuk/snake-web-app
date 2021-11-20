@@ -26,7 +26,7 @@
 
             @forelse ($hostings as $hosting)
 
-                <div class="col-9 col-md-5
+                <div class="col-11 col-md-5
                             mt-3
                             pt-2
                             pb-3

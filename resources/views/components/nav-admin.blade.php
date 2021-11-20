@@ -39,6 +39,18 @@
                             <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.app-logs.index') }}">
                                 <i class="bi bi-text-left me-1"></i>Logi aplikacji
                             </a>
+
+                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.server-logs.index') }}">
+                                <i class="bi bi-hdd-rack me-1"></i>Logi serwera
+                            </a>
+
+                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.artisan-tools.index') }}">
+                                <i class="bi bi-wrench me-1"></i>Narzędzia
+                            </a>
+
+                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.php-info.index') }}">
+                                <i class="bi bi-gear-wide-connected me-1"></i>PHP Info
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -50,7 +62,7 @@
                     </button>
                     <ul class="dropdown-menu text-center bg-bright " aria-labelledby="dropdownMenuButtonUser">
                         <li>
-                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('support.index') }}">
+                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('help.index') }}">
                                 <i class="bi bi-info-circle me-1"></i>Pomoc
                             </a>
                         </li>

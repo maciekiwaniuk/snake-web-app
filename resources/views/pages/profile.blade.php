@@ -57,7 +57,9 @@
                                     mx-auto text-center">
 
                                     <span class="nick-size  text-center">
-                                        <strong>{{ $user->name }}</strong>
+                                        <strong>
+                                            {{ $user->name }}
+                                        </strong>
                                     </span>
                             </div>
                         </div>

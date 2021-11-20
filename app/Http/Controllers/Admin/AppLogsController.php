@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AppLogsController extends Controller
 {
     /**
-     * Showing index page with logs
+     * Showing index page with application logs
      */
     public function index()
     {
@@ -17,9 +17,9 @@ class AppLogsController extends Controller
     }
 
     /**
-     * Returning all app logs
+     * Returning all application logs
      */
-public function getAllAppLogs()
+    public function getAllAppLogs()
     {
         $logs = AppLog::query()
             ->with('user')

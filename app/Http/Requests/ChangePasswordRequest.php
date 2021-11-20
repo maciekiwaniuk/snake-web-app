@@ -17,7 +17,6 @@ class ChangePasswordRequest extends FormRequest
      */
     protected $errorBag = 'password';
 
-
     /**
      * Determine if the user is authorized to make this request.
      *

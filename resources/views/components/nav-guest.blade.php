@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse" id="toggleMobileMenu">
             <ul class="navbar-nav text-center ms-auto fs-4">
                 <li>
-                    <a class="nav-link me-3" href="{{ route('support.index') }}">Pomoc</a>
+                    <a class="nav-link me-3" href="{{ route('help.index') }}">Pomoc</a>
                 </li>
 
                 <li>

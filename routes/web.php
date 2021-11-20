@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -13,13 +12,16 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\VisitorsUniqueController;
 use App\Http\Controllers\Admin\AppLogsController;
+use App\Http\Controllers\Admin\ServerLogsController;
+use App\Http\Controllers\Admin\ArtisanToolsController;
+use App\Http\Controllers\Admin\PHPInfoController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\GameHostingsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\RankingsController;
-use App\Http\Controllers\SupportController;
-
+use App\Http\Controllers\HelpController;
+use App\Mail\WelcomeMail;
 
 /********************************************************* General routing *********************************************************/
 
@@ -30,9 +32,9 @@ Route::get('/pobierz-gre', [GameHostingsController::class, 'index'])->name('down
 Route::get('/profil/{name}', [ProfileController::class, 'show'])->name('profile');
 
 Route::prefix('pomoc')->group(function() {
-    Route::name('support.')->group(function() {
-        Route::get('/', [SupportController::class, 'index'])->name('index');
-        Route::get('/{selected}', [SupportController::class, 'show'])->name('show');
+    Route::name('help.')->group(function() {
+        Route::get('/', [HelpController::class, 'index'])->name('index');
+        Route::get('/{selected}', [HelpController::class, 'show'])->name('show');
     });
 });
 
@@ -84,8 +86,29 @@ Route::prefix('admin')->middleware('admin')->group(function() {
 
         Route::prefix('logi')->group(function() {
             Route::name('app-logs.')->group(function() {
-                Route::get('/', [AppLogsController::class, 'index'])->name('index');
-                Route::get('/logi-aplikacji', [AppLogsController::class, 'getAllAppLogs'])->name('get-app-logs');
+                Route::get('/aplikacja', [AppLogsController::class, 'index'])->name('index');
+                Route::get('/lista-logow-applikacji', [AppLogsController::class, 'getAllAppLogs'])->name('get-app-logs');
+            });
+
+            Route::name('server-logs.')->group(function() {
+                Route::get('/serwer', [ServerLogsController::class, 'index'])->name('index');
+                Route::get('/lista-logow-serwera', [ServerLogsController::class, 'getAllServerLogs'])->name('get-server-logs');
+            });
+        });
+
+        Route::prefix('narzedzia')->group(function() {
+            Route::name('artisan-tools.')->group(function() {
+                Route::get('/', [ArtisanToolsController::class, 'index'])->name('index');
+                Route::put('/wyczysc-cache-aplikacji', [ArtisanToolsController::class, 'clearApplicationCache'])->name('clear-app-cache');
+                Route::put('/wyczysc-cache-routingu', [ArtisanToolsController::class, 'clearRouteCache'])->name('clear-route-cache');
+                Route::put('/wyczysc-cache-konfiguracji', [ArtisanToolsController::class, 'clearConfigCache'])->name('clear-config-cache');
+            });
+        });
+
+        Route::prefix('php-info')->group(function() {
+            Route::name('php-info.')->group(function() {
+                Route::get('/', [PHPInfoController::class, 'index'])->name('index');
+                Route::get('/src', [PHPInfoController::class, 'src'])->name('src');
             });
         });
     });
@@ -141,7 +164,13 @@ Route::middleware('auth')->group(function () {
         ->middleware('throttle:6,1');
 });
 
+/********************************************** E-mails **********************************************/
 
-
-
+Route::prefix('email')->group(function() {
+    Route::name('email.')->group(function() {
+        Route::get('/welcome', function() {
+            return new WelcomeMail();
+        });
+    });
+});
 

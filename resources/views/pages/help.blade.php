@@ -5,7 +5,7 @@
 @endsection
 
 @push('css')
-    <link href="{{ asset('css/pages/support.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/pages/help.css') }}" rel="stylesheet" type="text/css">
 @endpush
 
 <style>
@@ -23,7 +23,7 @@
             bg-gradient-to-left border-radius-15">
 
 
-            <div class="accordion" id="supportAccordion" style="font-weight: 500;">
+            <div class="accordion" id="helpAccordion" style="font-weight: 500;">
 
                 <!-- Co tu się tak właściwie dzieje? -->
                 <div class="accordion-item">
@@ -32,10 +32,10 @@
                             <strong>Co tu się tak właściwie dzieje?</strong>
                         </button>
                     </h2>
-                    <div id="collapseGenerally" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="co-sie-dzieje") collapse show @else collapse @endif" aria-labelledby="headingGenerally" data-bs-parent="#supportAccordion">
+                    <div id="collapseGenerally" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="co-sie-dzieje") collapse show @else collapse @endif" aria-labelledby="headingGenerally" data-bs-parent="#helpAccordion">
                         <div class="accordion-body text-start">
 
-                            Jest to strona, umożliwiająca <a class="link-blue" href="{{ route('support.show', 'pobierz-gre') }}">pobranie gry</a> na komputer Snake.
+                            Jest to strona, umożliwiająca <a class="link-blue" href="{{ route('help.show', 'pobierz-gre') }}">pobranie gry</a> na komputer Snake.
                             Zakładka <a class="link-blue" href="{{ route('ranking.index') }}" target="_blank">Ranking</a>
                             umożliwia rywalizację użytkowników poprzez uczestniczenie w rozgrywce w pobranej grze. Po instalacji Snake'a należy zalogować się w panelu logowania
                             kontem zarejestrowanym na tej stronie.
@@ -50,7 +50,7 @@
                             <strong>Zakładka Ustawienia</strong>
                         </button>
                     </h2>
-                    <div id="collapseOptionsTab" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="zakladka-ustawienia") collapse show @else collapse @endif" aria-labelledby="headingOptionsTab" data-bs-parent="#supportAccordion">
+                    <div id="collapseOptionsTab" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="zakladka-ustawienia") collapse show @else collapse @endif" aria-labelledby="headingOptionsTab" data-bs-parent="#helpAccordion">
                         <div class="accordion-body text-start">
 
                             W zakładce <strong><em>Ustawienia</em></strong> możliwa jest zmiana awatara użytkownika, hasła oraz e-mail'a. Istnieje również możliwość permanentnego usunięcia
@@ -67,14 +67,14 @@
                             <strong>Zakładka Pobierz grę</strong>
                         </button>
                     </h2>
-                    <div id="collapseActionsDownload" class="bg-accordion-body accordion-collapse @if(isset($selected) && ($selected=="pobierz-gre" || $selected=="pobieranie-plikow" || $selected=="pobieranie-instalatora")) collapse show @else collapse @endif" aria-labelledby="headingActionsDownload" data-bs-parent="#supportAccordion">
+                    <div id="collapseActionsDownload" class="bg-accordion-body accordion-collapse @if(isset($selected) && ($selected=="pobierz-gre" || $selected=="pobieranie-plikow" || $selected=="pobieranie-instalatora")) collapse show @else collapse @endif" aria-labelledby="headingActionsDownload" data-bs-parent="#helpAccordion">
                         <div class="accordion-body text-start">
 
                             Pobranie gry umożliwia zakładka <a class="link-blue" href="{{ route('download') }}" target="_blank"><strong><em>Pobierz grę</em></strong></a>. Znajdziemy w niej przyciski,
                             które przenoszą na dany hosting w celu pobrania plików gry. Możliwe jest pobranie tzw. instalki, czyli pliku exe, który po podwójnym kliknięciu umożliwi nam zainstalowanie
                             gry we wskazanym miejscu na komputerze. W większości przypadków wiąże się to z wykryciem przez Windows Defender jako niedozwolone oprogramowanie, w celu obejścia tego
-                            więcej w zakładce <strong><a class="link-blue" href="{{ route('support.show', 'pobieranie-instalatora') }}">Pobieranie instalatora gry</a></strong>. Jeżeli wystąpią poważniejsze
-                            problemy zawsze jest możliwość <strong><a class="link-blue" href="{{ route('support.show', 'pobieranie-plikow') }}">pobrania plików</a></strong>, lecz może to potrwać
+                            więcej w zakładce <strong><a class="link-blue" href="{{ route('help.show', 'pobieranie-instalatora') }}">Pobieranie instalatora gry</a></strong>. Jeżeli wystąpią poważniejsze
+                            problemy zawsze jest możliwość <strong><a class="link-blue" href="{{ route('help.show', 'pobieranie-plikow') }}">pobrania plików</a></strong>, lecz może to potrwać
                             dłużej niż pobieranie instalatora.
 
                                 <!-- Zagnieżdżony accordion ze wskazówkami dotyczącymi instalacji -->
@@ -102,12 +102,12 @@
                                                     <li>Po pojawieniu się okienka kliknij w <em>Więcej informacji</em></li>
                                                     <div class="col-12 col-sm-8 col-md-6 col-lg-5
                                                                 text-center">
-                                                        <img alt="Zdjęcie porady #2" class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_2.jpg') }}">
+                                                        <img alt="Zdjęcie porady #2" class="w-100" src="{{ asset('assets/images/help_images/download_files/tip_2.jpg') }}">
                                                     </div>
                                                     <li>Po wyskoczeniu przycisku <em>Uruchom mimo to</em>, naciśnij go</li>
                                                     <div class="col-12 col-sm-8 col-md-6 col-lg-5
                                                                 text-center">
-                                                        <img alt="Zdjęcie porady #3" class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_3.jpg') }}">
+                                                        <img alt="Zdjęcie porady #3" class="w-100" src="{{ asset('assets/images/help_images/download_files/tip_3.jpg') }}">
                                                     </div>
                                                     <li>Wejdź do zainstalowanego folderu z grą, kliknij na plik Snake raz lewym, a raz prawym przyciskiem i następnie kliknij <strong><em>Utwórz skrót</em></strong></li>
                                                     <li>Utworzony skrót przenieś na pulpit (może to być dowolne inne miejsce na urządzeniu) przeciągając go, następnie zmień nazwę skrótu na np. Snake</li>
@@ -137,7 +137,7 @@
                                                     <li>Jeżeli na nowo otwartej karcie wyskoczyło potwierdzenie o ciasteczka, kliknij <strong class="text-success"><em>Accept all cookies</em></strong></li>
                                                     <li>Następnie kliknij w <strong class="text-success"><em>Download as zip</em></strong></li>
                                                     <div class="col text-center">
-                                                        <img alt="Zdjęcie porady #1" class="w-100" src="{{ asset('assets/images/support_images/download_files/tip_1.jpg') }}">
+                                                        <img alt="Zdjęcie porady #1" class="w-100" src="{{ asset('assets/images/help_images/download_files/tip_1.jpg') }}">
                                                     </div>
                                                     <li>Po kliknięciu pobieranie powinno się rozpocząć. Pobieranie może pod koniec zwolnić do bardzo niskiej prędkości (wówczas nie wyłączaj pobierania, tylko przeczekaj)</li>
                                                     <li>Po pobraniu przejdź do folderu <em class="text-success">Pobrane</em> <kbd>Ctrl + J</kbd></li>
@@ -172,7 +172,7 @@
                             <strong>Programistyczny bełkot</strong>
                         </button>
                     </h2>
-                    <div id="collapseInfo" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="programistyczny-belkot") collapse show @else collapse @endif" aria-labelledby="headingInfo" data-bs-parent="#supportAccordion">
+                    <div id="collapseInfo" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="programistyczny-belkot") collapse show @else collapse @endif" aria-labelledby="headingInfo" data-bs-parent="#helpAccordion">
                         <div class="accordion-body text-start">
 
                             <strong>Do stworzenia strony zostały użyte następujące technologie:</strong>

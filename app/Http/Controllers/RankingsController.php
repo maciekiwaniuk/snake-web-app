@@ -20,13 +20,6 @@ class RankingsController extends Controller
      */
     public function getPoints()
     {
-        // $data = DB::select('SELECT users.id as user_id, users.name, users.avatar, users.permission, users_game_data.points
-        //                     FROM users
-        //                     INNER JOIN users_game_data ON users.id = users_game_data.user_id
-        //                     AND users.user_banned = 0
-        //                     AND users_game_data.points > 0
-        //                     ORDER BY users_game_data.points DESC, users_game_data.updated_at DESC');
-
         $data = User::query()
             ->join('users_game_data', 'user_id', '=', 'users.id')
             ->select('id', 'name', 'avatar', 'users_game_data.points')

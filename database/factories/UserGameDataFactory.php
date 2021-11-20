@@ -28,6 +28,7 @@ class UserGameDataFactory extends Factory
 
             'points' => rand(1, 100000),
             'coins' => rand(1, 100000),
+            'total_coins_earned' => 100000,
             'play_time_seconds' => rand(1, 86400),
 
             'easy_record' => rand(1, 90),

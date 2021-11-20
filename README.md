@@ -1,62 +1,67 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Snake website ![alt text](https://github.com/macieeek/laravel-snake-website/blob/main/public/assets/icons/32x32.png?raw=true) 
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> ### Project of the website where you can interact via API with Snake game which is available to download on it.
+> ###
+> ### Online: https://snake-gra.pl/
 
-## About Laravel
+- Project uses a login system from the [Breeze starter kit](https://laravel.com/docs/8.x/starter-kits#laravel-breeze) which has been modified.
+- Application is responsive, made with the [Bootstrap 5](https://getbootstrap.com/docs/5.1/getting-started/introduction/).
+- To display tables is used the [DataTables](https://datatables.net/) plugin.
+- [jQuery](https://jquery.com/) is used to write JavaScript things.
+- Every user has his own profile which everyone can visit.
+- Logged user can set an avatar, change an email, change a password etc. in a user panel.
+- Users can compare each other in a ranking page what means players can compete which is very fun!
+- User with special permission is able to use admin panel which contains all users list, unique visitors and application logs.
+- Admin is able to ban user's account, ban IP etc.
+- In application has been implemented PWA system, what means website can run in a offline mode (without an internet connection - caches things while first visit).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Installation
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+To successfully install and test application you need to have installed [composer](https://getcomposer.org/download/), [npm](https://docs.npmjs.com/cli/v7/commands/npm-install), [Git](https://git-scm.com/), database environment (for example [XAMPP](https://www.apachefriends.org/pl/index.html) - localhost).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Open folder where you want to have project files, open console and then clone the repository
 
-## Learning Laravel
+    git clone https://github.com/macieeek/laravel-snake-website.git
+	
+Change folder in console to created folder with project files
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+	cd laravel-snake-website
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Install all the dependencies using composer
 
-## Laravel Sponsors
+    composer install
+	
+Run npm install command
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+	npm install
+	
+Run npm run dev command to compile js files
 
-### Premium Partners
+	npm run dev
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+Copy the example env file and make the required configuration changes in the .env file
 
-## Contributing
+    copy .env.example .env
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Generate a new application key
 
-## Code of Conduct
+    php artisan key:generate
+	
+Create the symbolic link between storage and public folders
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+	php artisan storage:link
 
-## Security Vulnerabilities
+Run the database migrations (**Set the database connection in .env before migrating**)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    php artisan migrate
 
-## License
+Start the local development server
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    php artisan serve
+
+You can now access the server at http://localhost:8000 or http://127.0.0.1:8000
+
+To fill database with data use db:seed command which will create users accounts with randomly generated game data etc.
+
+	php artisan db:seed
+    

@@ -48,6 +48,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = "users";
+
+    /**
      * Function that checks if user has admin permissions
      */
     public function isAdmin()

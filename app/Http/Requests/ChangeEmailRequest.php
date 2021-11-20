@@ -17,7 +17,6 @@ class ChangeEmailRequest extends FormRequest
      */
     protected $errorBag = 'email';
 
-
     /**
      * Determine if the user is authorized to make this request.
      *

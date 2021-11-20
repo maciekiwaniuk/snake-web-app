@@ -55,9 +55,9 @@ const imagesToCache = [
     '/assets/images/slider-images/image3.jpg',
     '/assets/images/slider-images/image4.jpg',
     '/assets/images/slider-images/image5.jpg',
-    '/assets/images/support_images/download_files/tip_1.jpg',
-    '/assets/images/support_images/download_files/tip_2.jpg',
-    '/assets/images/support_images/download_files/tip_3.jpg'
+    '/assets/images/help_images/download_files/tip_1.jpg',
+    '/assets/images/help_images/download_files/tip_2.jpg',
+    '/assets/images/help_images/download_files/tip_3.jpg'
 ];
 
 const cssToCache = [
@@ -65,7 +65,7 @@ const cssToCache = [
     '/css/custom/layout.css',
     '/css/pages/options.css',
     '/css/pages/profile.css',
-    '/css/pages/support.css',
+    '/css/pages/help.css',
     '/css/snake_mini_game/snake.css',
     '/css/app.css'
 ];

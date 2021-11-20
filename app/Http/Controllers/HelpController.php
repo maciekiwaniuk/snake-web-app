@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-class SupportController extends Controller
+class HelpController extends Controller
 {
     /**
-     * Showing support index page
+     * Showing help index page
      */
     public function index()
     {
-        return view('pages.support');
+        return view('pages.help');
     }
 
     /**
-     * Showing support index page with
+     * Showing help index page with
      * selected one tab
      */
     public function show($selected)
     {
-        return view('pages.support', [
+        return view('pages.help', [
             'selected' => $selected
         ]);
     }

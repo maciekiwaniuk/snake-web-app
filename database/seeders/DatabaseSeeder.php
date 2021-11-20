@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\VisitorUnique;
+use App\Models\UserGameData;
+use App\Models\Hosting;
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,7 +38,7 @@ class DatabaseSeeder extends Seeder
         }
 
         if ($user1234_exists == false) {
-            \App\Models\User::factory()->create([
+            User::factory()->create([
                 'name' => "user1234",
                 'email' => "user1234@wp.pl",
                 'password' => Hash::make("user1234"),
@@ -44,7 +47,7 @@ class DatabaseSeeder extends Seeder
         }
 
         if ($test1234_exists == false) {
-            \App\Models\User::factory()->create([
+            User::factory()->create([
                 'name' => "test1234",
                 'email' => "test1234@wp.pl",
                 'password' => Hash::make("test1234"),
@@ -53,7 +56,7 @@ class DatabaseSeeder extends Seeder
         }
 
         if ($admin1234_exists == false) {
-            \App\Models\User::factory()->create([
+            User::factory()->create([
                 'name' => "admin1234",
                 'email' => "admin1234@wp.pl",
                 'password' => Hash::make("admin1234"),
@@ -62,16 +65,16 @@ class DatabaseSeeder extends Seeder
         }
 
         // Creating users inside VisitorUniqueFactory
-        \App\Models\VisitorUnique::factory(50)->create();
+        VisitorUnique::factory(50)->create();
 
-        \App\Models\UserGameData::factory(53)->create();
+        UserGameData::factory(53)->create();
 
-        \App\Models\Hosting::factory()->create([
+        Hosting::factory()->create([
             'hosting_name' => "Snake (instalka)",
             'hosting_link' => "https://snake-gra.pl/pobierz-gre",
         ]);
 
-        \App\Models\Hosting::factory()->create([
+        Hosting::factory()->create([
             'hosting_name' => "Snake (pliki)",
             'hosting_link' => "https://snake-gra.pl/pobierz-gre",
         ]);
