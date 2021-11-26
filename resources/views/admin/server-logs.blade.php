@@ -39,6 +39,14 @@
                     <strong>Logi serwera</strong>
                 </div>
 
+                <div class="col-12 text-center">
+                    <form action="{{ route('admin.server-logs.clear-server-logs') }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-primary">Wyczyść logi</button>
+                    </form>
+                </div>
+
                 <div class="col-12
                             mx-auto text-center fs-6">
 

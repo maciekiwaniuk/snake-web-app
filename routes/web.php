@@ -87,12 +87,13 @@ Route::prefix('admin')->middleware('admin')->group(function() {
         Route::prefix('logi')->group(function() {
             Route::name('app-logs.')->group(function() {
                 Route::get('/aplikacja', [AppLogsController::class, 'index'])->name('index');
-                Route::get('/lista-logow-applikacji', [AppLogsController::class, 'getAllAppLogs'])->name('get-app-logs');
+                Route::get('/lista-logow-applikacji', [AppLogsController::class, 'getAppLogs'])->name('get-app-logs');
             });
 
             Route::name('server-logs.')->group(function() {
                 Route::get('/serwer', [ServerLogsController::class, 'index'])->name('index');
-                Route::get('/lista-logow-serwera', [ServerLogsController::class, 'getAllServerLogs'])->name('get-server-logs');
+                Route::get('/lista-logow-serwera', [ServerLogsController::class, 'getServerLogs'])->name('get-server-logs');
+                Route::delete('/czyszczenie-logow-serwera', [ServerLogsController::class, 'clearServerLogs'])->name('clear-server-logs');
             });
         });
 

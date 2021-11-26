@@ -15,7 +15,7 @@ class PHPInfoController extends Controller
     }
 
     /**
-     * Returning what phpinfo command showed
+     * Returning what phpinfo function showed
      */
     public function src()
     {

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Artisan;
 
 class ServerLogsController extends Controller
 {
@@ -18,7 +18,7 @@ class ServerLogsController extends Controller
     /**
      * Returning all server logs from laravel.log file
      */
-    public function getAllServerLogs()
+    public function getServerLogs()
     {
         $logFile = file(storage_path().'/logs/laravel.log');
         $logCollection = [];
@@ -28,24 +28,49 @@ class ServerLogsController extends Controller
             $logString .= $line;
         }
 
+        // checking if app is running in production or local
+        if (env('APP_ENV') == 'production') {
+            $errorName = 'production.ERROR:';
+        } else if (env('APP_ENV') == 'local') {
+            $errorName = 'local.ERROR:';
+        }
+
         // file with logs is empty
-        if (strlen($logString <= 1)) {
+        if (!str_contains($logString, $errorName)) {
             return response()->json([
                 'data' => ''
             ]);
         }
 
-        $logArray = explode('local.ERROR:', $logString);
+        $logArray = explode($errorName, $logString);
 
         for ($i = 0; $i < count($logArray); $i += 2) {
-            $logCollection[] = array(
-                'date' => $logArray[$i],
-                'content' => substr($logArray[$i+1], 0, 500)
-            );
+            if ($i == 0) {
+                $logCollection[] = array(
+                    'date' => substr($logArray[$i], 1, 19),
+                    'content' => substr($logArray[$i+1], 0, 500)
+                );
+            } else {
+                $lengthPreviousContent = strlen($logArray[$i-1]);
+                $logCollection[] = array(
+                    'date' => substr($logArray[$i-1], $lengthPreviousContent-21, 19),
+                    'content' => substr($logArray[$i], 0, 500)
+                );
+            }
         }
 
         return response()->json([
             'data' => $logCollection
         ]);
+    }
+
+    /**
+     * Clearing file with server logs
+     */
+    public function clearServerLogs()
+    {
+        file_put_contents(storage_path('logs/laravel.log'), '');
+
+        return back();
     }
 }

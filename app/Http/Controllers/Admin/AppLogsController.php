@@ -19,7 +19,7 @@ class AppLogsController extends Controller
     /**
      * Returning all application logs
      */
-    public function getAllAppLogs()
+    public function getAppLogs()
     {
         $logs = AppLog::query()
             ->with('user')
