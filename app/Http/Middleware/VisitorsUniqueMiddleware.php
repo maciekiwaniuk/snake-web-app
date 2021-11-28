@@ -18,7 +18,7 @@ class VisitorsUniqueMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Checking if current visitor is unique (first time on website)
+        // Check if current visitor is unique (first time on website)
         $visitor_unique = VisitorUnique::query()
             ->where('ip', '=', $request->getClientIp())
             ->first();

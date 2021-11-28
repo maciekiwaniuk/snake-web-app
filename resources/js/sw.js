@@ -198,7 +198,7 @@ self.addEventListener('fetch', (event) => {
                     });
             }
 
-            // if requested thing is user's avatar
+            // if requested thing is user's avatar image
             else if (URL.includes('/storage/users_avatars/') && URL.includes('?') == false) {
                 let fetchResponse = fetch(event.request);
                 fetchResponse.then(result => {
@@ -214,7 +214,7 @@ self.addEventListener('fetch', (event) => {
                     })
             }
 
-            // if requested thing is user's profile
+            // if requested thing is user's profile page
             else if (URL.includes('/profil/')) {
                 let fetchResponse = fetch(event.request);
                 fetchResponse.then(result => {
@@ -237,7 +237,7 @@ self.addEventListener('fetch', (event) => {
         }).catch(() => {
             // there is no internet connection and requested thing isn't cached
             // if requested thing is subpage and it isn't cached - show offline fallback
-            if (event.request.destination == "document") {
+            if (event.request.destination == 'document') {
                 return caches.match('/strona-offline')
             }
 

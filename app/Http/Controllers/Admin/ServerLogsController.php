@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 class ServerLogsController extends Controller
 {
     /**
-     * Showing index page with server logs
+     * Show index page with server logs
      */
     public function index()
     {
@@ -16,7 +16,7 @@ class ServerLogsController extends Controller
     }
 
     /**
-     * Returning all server logs from laravel.log file
+     * Return all server logs from laravel.log file
      */
     public function getServerLogs()
     {
@@ -28,7 +28,7 @@ class ServerLogsController extends Controller
             $logString .= $line;
         }
 
-        // checking if app is running in production or local
+        // check if app is running in production or local
         if (env('APP_ENV') == 'production') {
             $errorName = 'production.ERROR:';
         } else if (env('APP_ENV') == 'local') {
@@ -65,7 +65,7 @@ class ServerLogsController extends Controller
     }
 
     /**
-     * Clearing file with server logs
+     * Clear file with server logs
      */
     public function clearServerLogs()
     {

@@ -7,7 +7,7 @@ use App\Models\User;
 class RankingsController extends Controller
 {
     /**
-     * Showing ranking index page
+     * Show ranking index page
      */
     public function index()
     {
@@ -15,7 +15,7 @@ class RankingsController extends Controller
     }
 
     /**
-     * Returning data with user's
+     * Return data with user's
      * points ranking
      */
     public function getPoints()
@@ -35,7 +35,7 @@ class RankingsController extends Controller
     }
 
     /**
-     * Returning data with user's
+     * Return data with user's
      * coins ranking
      */
     public function getCoins()
@@ -55,7 +55,7 @@ class RankingsController extends Controller
     }
 
     /**
-     * Returning data with user's
+     * Return data with user's
      * records on easy ranking
      */
     public function getEasy()
@@ -75,7 +75,7 @@ class RankingsController extends Controller
     }
 
     /**
-     * Returning data with user's
+     * Return data with user's
      * records on medium ranking
      */
     public function getMedium()
@@ -95,7 +95,7 @@ class RankingsController extends Controller
     }
 
     /**
-     * Returning data with user's
+     * Return data with user's
      * records on hard ranking
      */
     public function getHard()
@@ -115,7 +115,7 @@ class RankingsController extends Controller
     }
 
     /**
-     * Returning data with user's
+     * Return data with user's
      * records on hard ranking
      */
     public function getSpeed()

@@ -7,7 +7,7 @@ use App\Models\Hosting;
 class GameHostingsController extends Controller
 {
     /**
-     * Showing hostings index page
+     * Show hostings index page
      */
     public function index()
     {

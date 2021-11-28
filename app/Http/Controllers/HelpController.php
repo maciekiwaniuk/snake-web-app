@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 class HelpController extends Controller
 {
     /**
-     * Showing help index page
+     * Show help index page
      */
     public function index()
     {
@@ -13,7 +13,7 @@ class HelpController extends Controller
     }
 
     /**
-     * Showing help index page with
+     * Show help index page with
      * selected one tab
      */
     public function show($selected)

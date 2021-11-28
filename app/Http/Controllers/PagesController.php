@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 class PagesController extends Controller
 {
     /**
-     * Showing welcome index page
+     * Show welcome index page
      */
     public function index()
     {
@@ -13,7 +13,7 @@ class PagesController extends Controller
     }
 
     /**
-     * Showing offline fallback page
+     * Show offline fallback page
      */
     public function offlineFallback()
     {

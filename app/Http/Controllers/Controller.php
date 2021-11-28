@@ -19,10 +19,8 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
-     * Returning bool on user's permission
-     * to do something, true when:
-     *  - if user_id == Auth::user()->id
-     *  - Auth::user()->permission = 2 (ADMIN)
+     * Return bool on user's permission
+     * to do something
      */
     protected function hasPermission($user_id)
     {
@@ -33,7 +31,7 @@ class Controller extends BaseController
     }
 
     /**
-     * Searching for user by his name
+     * Search for user by his name and return instance of user
      */
     protected function findUserByUsername($username)
     {
@@ -48,9 +46,9 @@ class Controller extends BaseController
 
     /**
      * Function that:
-     * - adding user's avatar
-     * - deleting previous user's avatar
-     * - saving link to user's avatar in database
+     * - adds user's avatar
+     * - deletes previous user's avatar
+     * - saves link to user's avatar in database
      */
     protected function changeUserAvatar($image)
     {
@@ -74,7 +72,7 @@ class Controller extends BaseController
     }
 
     /**
-     * Deleting user's avatar and replacing
+     * Delete user's avatar and replacing
      * it with default.png
      */
     protected function deleteUserAvatar()
@@ -90,8 +88,8 @@ class Controller extends BaseController
     }
 
     /**
-     * Deleting user's account by his id
-     * and adding data about user to users_deleted table
+     * Delete user's account by his id
+     * and add data about user to users_deleted table
      */
     protected function deleteUserAccountByID($user_id)
     {
@@ -125,7 +123,7 @@ class Controller extends BaseController
     }
 
     /**
-     * Checking if authorised user has admin's permission
+     * Check if authorised user has admin's permission
      */
     protected function isAdmin()
     {
@@ -136,7 +134,7 @@ class Controller extends BaseController
     }
 
     /**
-     * Creating app log
+     * Create app log
      */
     protected function createAppLog($type, $content)
     {
@@ -151,7 +149,7 @@ class Controller extends BaseController
     }
 
     /**
-     * Creating app log for game actions
+     * Create app log for game actions
      */
     protected function createGameAppLog($type, $content, $user_id, $ip)
     {

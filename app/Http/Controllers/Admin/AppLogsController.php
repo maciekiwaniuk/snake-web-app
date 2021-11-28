@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AppLogsController extends Controller
 {
     /**
-     * Showing index page with application logs
+     * Show index page with application logs
      */
     public function index()
     {

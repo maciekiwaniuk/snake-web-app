@@ -14,7 +14,7 @@ use App\Rules\LoggedUserPassword;
 class OptionsController extends Controller
 {
     /**
-     * Showing options index page
+     * Show options index page
      */
     public function index()
     {
@@ -22,7 +22,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Showing options index page with
+     * Show options index page with
      * selected one tab
      */
     public function show($selected)

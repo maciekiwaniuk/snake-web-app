@@ -12,7 +12,7 @@ use App\Models\VisitorUnique;
 class UsersController extends Controller
 {
     /**
-     * Showing users admin index page
+     * Show users admin index page
      */
     public function index()
     {
@@ -20,7 +20,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Returning all users
+     * Return all users
      */
     public function getAllUsers()
     {
@@ -35,7 +35,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Returning all banned users
+     * Return all banned users
      */
     public function getBannedUsers()
     {
@@ -51,7 +51,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Returning all not banned users
+     * Return all not banned users
      */
     public function getNotBannedUsers()
     {
@@ -67,7 +67,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Banning user's last ip
+     * Ban user's last ip
      */
     public function banLastUserIP($id)
     {
@@ -95,7 +95,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Ubanning user's last ip
+     * Unban user's last ip
      */
     public function unbanLastUserIP($id)
     {
@@ -120,7 +120,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Banning user's account
+     * Ban user's account
      */
     public function banAccount($id)
     {
@@ -139,7 +139,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Unbanning user's account
+     * Unban user's account
      */
     public function unbanAccount($id)
     {
@@ -158,7 +158,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Banning user's last ip and user's account
+     * Ban user's last ip and user's account
      */
     public function banAccountAndIP($id)
     {
@@ -193,7 +193,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Unbanning user's last ip and user's account
+     * Unban user's last ip and user's account
      */
     public function unbanAccountAndIP($id)
     {
@@ -224,7 +224,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Deleting account by user's ID
+     * Delete account by user's ID
      */
     public function deleteUserAccount($id)
     {
@@ -234,7 +234,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Reseting user's API Token
+     * Reset user's API Token
      */
     public function resetApiToken($id)
     {

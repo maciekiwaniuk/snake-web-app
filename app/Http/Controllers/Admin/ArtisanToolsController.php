@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cache;
 class ArtisanToolsController extends Controller
 {
     /**
-     * Showing artisan tools index page
+     * Show artisan tools index page
      */
     public function index()
     {
@@ -17,7 +17,7 @@ class ArtisanToolsController extends Controller
     }
 
     /**
-     * Clearing application cache
+     * Clear application cache
      */
     public function clearApplicationCache()
     {
@@ -28,7 +28,7 @@ class ArtisanToolsController extends Controller
     }
 
     /**
-     * Clearing routing cache
+     * Clear routing cache
      */
     public function clearRouteCache()
     {
@@ -39,7 +39,7 @@ class ArtisanToolsController extends Controller
     }
 
     /**
-     * Clearing config cache
+     * Clear config cache
      */
     public function clearConfigCache()
     {

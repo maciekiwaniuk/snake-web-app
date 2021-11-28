@@ -12,7 +12,7 @@ use App\Models\UserGameData;
 class ApiSnakeGameController extends Controller
 {
     /**
-     * trying to log into account from login panel in dekstop app
+     * Trying to log into account from login panel in dekstop app
      */
     public function login(Request $request)
     {
@@ -49,7 +49,7 @@ class ApiSnakeGameController extends Controller
     }
 
     /**
-     * returning user game data if token is valid
+     * Returning user game data if token is valid
      */
     public function loadData(Request $request)
     {
@@ -73,7 +73,7 @@ class ApiSnakeGameController extends Controller
     }
 
     /**
-     * saving user game data by user's api token
+     * Saving user game data by user's api token
      */
     public function saveData(Request $request)
     {
@@ -150,7 +150,7 @@ class ApiSnakeGameController extends Controller
     }
 
     /**
-     * saving log when user opened game
+     * Saving log when user opened game
      */
     public function createOpenGameLog(Request $request)
     {
@@ -173,7 +173,7 @@ class ApiSnakeGameController extends Controller
     }
 
     /**
-     * saving log when user quit game
+     * Saving log when user quit game
      */
     public function createExitGameLog(Request $request)
     {
@@ -196,7 +196,7 @@ class ApiSnakeGameController extends Controller
     }
 
     /**
-     * saving log when user logout from game
+     * Saving log when user logout from game
      */
     public function createLogoutGameLog(Request $request)
     {

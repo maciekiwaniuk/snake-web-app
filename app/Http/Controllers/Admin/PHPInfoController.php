@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 class PHPInfoController extends Controller
 {
     /**
-     * Showing page with php info
+     * Show page with php info
      */
     public function index()
     {
@@ -15,7 +15,7 @@ class PHPInfoController extends Controller
     }
 
     /**
-     * Returning what phpinfo function showed
+     * Return what phpinfo function showed
      */
     public function src()
     {

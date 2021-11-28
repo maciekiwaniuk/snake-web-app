@@ -9,7 +9,7 @@ use App\Models\VisitorUnique;
 class VisitorsUniqueController extends Controller
 {
     /**
-     * Showing visitors unique ip index page
+     * Show visitors unique ip index page
      */
     public function index()
     {
@@ -17,7 +17,7 @@ class VisitorsUniqueController extends Controller
     }
 
     /**
-     * Returning all visitors unique data
+     * Return all visitors unique data
      */
     public function getAllVisitors()
     {
@@ -31,7 +31,7 @@ class VisitorsUniqueController extends Controller
     }
 
     /**
-     * Returning banned visitors unique data
+     * Return banned visitors unique data
      */
     public function getBannedVisitors()
     {
@@ -46,7 +46,7 @@ class VisitorsUniqueController extends Controller
     }
 
     /**
-     * Returning not banned visitors unique data
+     * Return not banned visitors unique data
      */
     public function getNotBannedVisitors()
     {
@@ -61,7 +61,7 @@ class VisitorsUniqueController extends Controller
     }
 
     /**
-     * Banning ip where param is ip's id
+     * Ban ip where param is ip's id
      */
     public function banIp($id)
     {
@@ -85,7 +85,7 @@ class VisitorsUniqueController extends Controller
     }
 
     /**
-     * Unbanning ip where param is ip's id
+     * Unban ip where param is ip's id
      */
     public function unbanIp($id)
     {
