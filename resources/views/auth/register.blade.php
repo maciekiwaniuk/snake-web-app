@@ -7,7 +7,6 @@
 @push('js.header')
     <!-- reCAPTCHA v2 JS -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <!-- END reCAPTCHA v2 JS-->
 @endpush
 
 @section('content')

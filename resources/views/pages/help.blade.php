@@ -5,6 +5,7 @@
 @endsection
 
 @push('css')
+    <!-- Help page CSS -->
     <link href="{{ asset('css/pages/help.css') }}" rel="stylesheet" type="text/css">
 @endpush
 
@@ -25,7 +26,7 @@
 
             <div class="accordion" id="helpAccordion" style="font-weight: 500;">
 
-                <!-- Co tu się tak właściwie dzieje? -->
+                <!-- Zakładka - Co tu się tak właściwie dzieje? -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingGenerally">
                         <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGenerally" aria-expanded="false" aria-controls="collapseGenerally">
@@ -43,7 +44,7 @@
                     </div>
                 </div>
 
-                <!-- Zakładka ustawienia -->
+                <!-- Zakładka - ustawienia -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOptionsTab">
                         <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOptionsTab" aria-expanded="false" aria-controls="collapseOptionsTab">
@@ -60,7 +61,7 @@
                     </div>
                 </div>
 
-                <!-- Zakładka pobierz grę -->
+                <!-- Zakładka - pobierz grę -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingActionsDownload">
                         <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActionsDownload" aria-expanded="false" aria-controls="collapseActionsDownload">
@@ -165,7 +166,7 @@
 
 
 
-                <!-- Programistyczny bełkot -->
+                <!-- Ukryta zakładka - Programistyczny bełkot -->
                 <div class="accordion-item d-none" style="font-weight: 500;">
                     <h2 class="accordion-header" id="headingInfo">
                         <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo">

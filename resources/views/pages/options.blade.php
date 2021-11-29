@@ -1,5 +1,9 @@
 @extends('layouts.layout')
 
+@section('title')
+    Ustawienia
+@endsection
+
 @push('assets')
     <!-- Dropify fonts -->
     <link href="{{ asset('assets/plugins/dropify/fonts/dropify.eot') }}" rel="preconnect">
@@ -12,24 +16,18 @@
 @push('css')
     <!-- Dropify CSS -->
     <link href="{{ asset('assets/plugins/dropify/css/dropify.css') }}" type="text/css" rel="stylesheet">
-    <!-- END Dropify CSS -->
 
+    <!-- Options page CSS -->
     <link href="{{ asset('css/pages/options.css') }}" type="text/css" rel="stylesheet">
 @endpush
 
 @push('js.header')
     <!-- Dropify JS -->
     <script src="{{ asset('assets/plugins/dropify/js/dropify.js') }}"></script>
-    <!-- END Dropify JS -->
 
     <!-- BlockUI JS -->
     <script src="{{ asset('assets/plugins/jQueryBlockUI/jquery.blockUI.js') }}"></script>
-    <!-- END BlockUI JS -->
 @endpush
-
-@section('title')
-    Ustawienia
-@endsection
 
 
 @section('content')
@@ -283,7 +281,7 @@
                               <div>Trwa wczytywanie...</div>`,
                 });
                 setTimeout(function () {
-                    // Timer to unblock
+                    // Timer to unblock screen
                     $.unblockUI();
                 }, 400);
             }
@@ -342,7 +340,7 @@
                             blockUI();
                             setTimeout(function () {
                                 toastr.success(response.result.message);
-                                // odświeżenie ikonki awatara
+                                // avatar icon refresh
                                 d = new Date();
                                 $('#user_avatar').attr('src', response.avatarPath+'?'+d.getTime());
                             }, 400);

@@ -4,6 +4,11 @@
     Pobierz grę
 @endsection
 
+@push('css')
+    <!-- Download page CSS -->
+    <link href="{{ asset('css/pages/download.css') }}" type="text/css" rel="stylesheet">
+@endpush
+
 
 @section('content')
 

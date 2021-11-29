@@ -6,6 +6,9 @@
 
 
 @push('css')
+    <!-- Welcome page CSS -->
+    <link href="{{ asset('css/pages/welcome.css') }}" type="text/css" rel="stylesheet">
+
     <!-- Snake CSS -->
     <link href="{{ asset('css/snake_mini_game/snake.css') }}" type="text/css" rel="stylesheet">
 @endpush
@@ -34,7 +37,7 @@
 
     <div class="row">
         <div id="carouselIndicators" class="col-12 col-sm-10 col-md-10 col-lg-8
-                                                   carousel slide mx-auto" data-bs-ride="carousel">
+                                            carousel slide mx-auto" data-bs-ride="carousel">
             <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -42,7 +45,7 @@
             <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
             <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
             </div>
-            <div class="carousel-inner  border border-2">
+            <div class="carousel-inner border border-2">
             <div class="carousel-item active">
                 <img alt="Zdjęcie z gry #1" src="{{ asset('assets/images/slider-images/image1.jpg') }}" class="d-block w-100 slide" alt="">
             </div>

@@ -61,13 +61,18 @@ const imagesToCache = [
 ];
 
 const cssToCache = [
-    '/css/custom/classes.css',
+    '/css/app.css',
     '/css/custom/layout.css',
+    '/css/custom/classes.css',
+    '/css/pages/banned.css',
+    '/css/pages/download.css',
+    '/css/pages/help.css',
+    '/css/pages/offline-fallback.css',
     '/css/pages/options.css',
     '/css/pages/profile.css',
-    '/css/pages/help.css',
-    '/css/snake_mini_game/snake.css',
-    '/css/app.css'
+    '/css/pages/ranking.css',
+    '/css/pages/welcome.css',
+    '/css/snake_mini_game/snake.css'
 ];
 
 const jsToCache = [

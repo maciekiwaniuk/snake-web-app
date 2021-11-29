@@ -37,7 +37,7 @@
     <meta property="og:image" content="{{ asset('assets/icons/192x192.png') }}">
     <meta property="og:description" content="Strona internetowa, która umożliwia zagranie w grę jaką jest Snake, gdzie możesz rywalizować z innymi użytkownikami, zdobywać skiny, bić rekordy i wiele innych!">
     <meta property="og:locale" content="pl_PL">
-    <meta property="og:site_name" content="Snake" />
+    <meta property="og:site_name" content="Snake">
 
     <!-- manifest link -->
     <link rel="manifest" href="{{ asset('manifest.json') }}">
@@ -55,13 +55,13 @@
     <link href="{{ asset('assets/plugins/Bootstrap/bootstrap.css') }}" type="text/css" rel="stylesheet">
 
     <!-- Bootstrap Icons -->
-    <link href="{{ asset('assets/plugins/BootstrapIcons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/BootstrapIcons/bootstrap-icons.css') }}" type="text/css" rel="stylesheet">
 
     <!-- toastr CSS -->
-    <link href="{{ asset('assets/plugins/toastr/toastr.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/toastr/toastr.css') }}" type="text/css" rel="stylesheet">
 
     <!-- cookie bar CSS -->
-    <link href="{{ asset('assets/plugins/cookieBar/jquery.cookieBar.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/cookieBar/jquery.cookieBar.css') }}" type="text/css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jQuery/jquery-3.6.0.min.js') }}"></script>

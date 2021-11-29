@@ -4,20 +4,20 @@
     Ranking
 @endsection
 
+@push('css')
+    <!-- Ranking page CSS -->
+    <link href="{{ asset('css/pages/ranking.css') }}" rel="stylesheet" type="text/css">
+
+    <!-- DataTables CSS -->
+    <link href="{{ asset('assets/plugins/DataTables/datatables.min.css') }}" rel="stylesheet" text="text/css">
+@endpush
+
 @push('js.header')
     <!-- DataTables JS -->
     <script src="{{ asset('assets/plugins/DataTables/datatables.min.js') }}"></script>
-    <!-- END DataTables JS -->
 
     <!-- BlockUI JS -->
     <script src="{{ asset('assets/plugins/jQueryBlockUI/jquery.blockUI.js') }}"></script>
-    <!-- END BlockUI JS -->
-@endpush
-
-@push('css')
-    <!-- DataTables CSS -->
-    <link href="{{ asset('assets/plugins/DataTables/datatables.min.css') }}" rel="stylesheet" text="text/css">
-    <!-- END DataTables CSS -->
 @endpush
 
 

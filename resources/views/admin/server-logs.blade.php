@@ -7,13 +7,11 @@
 @push('js.header')
     <!-- DataTables JS -->
     <script src="{{ asset('assets/plugins/DataTables/datatables.min.js') }}"></script>
-    <!-- END DataTables JS -->
 @endpush
 
 @push('css')
     <!-- DataTables CSS -->
     <link href="{{ asset('assets/plugins/DataTables/datatables.min.css') }}" rel="stylesheet" text="text/css">
-    <!-- END DataTables CSS -->
 @endpush
 
 
@@ -68,7 +66,6 @@
     <script>
 
         $(document).ready(function() {
-            // Datatables
             var logsTable = $('#LogsTable').DataTable({
                 oLanguage: {
                     sUrl: "{{ asset('assets/plugins/DataTables/pl.json') }}"

@@ -34,28 +34,4 @@ label{
 }
 
 
-@media (min-width: 576px){
 
-}
-
-@media (min-width: 768px){
-
-}
-
-@media (min-width: 992px){
-    .slide{
-        height: 500px;
-    }
-}
-
-@media (min-width: 1200px){
-    .slide{
-        height: 600px;
-    }
-}
-
-@media (min-width: 1400px){
-    .slide{
-        height: 700px;
-    }
-}

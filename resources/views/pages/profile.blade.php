@@ -5,6 +5,11 @@
     Profil {{ $user->name }}
 @endsection
 
+@push('css')
+    <!-- Profile page CSS -->
+    <link href="{{ asset('css/pages/profile.css') }}" type="text/css" rel="stylesheet">
+@endpush
+
 
 @section('content')
 
