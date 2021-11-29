@@ -18,7 +18,7 @@ class UserFactory extends Factory
     protected $model = User::class;
 
     /**
-     * Generating random ip adress
+     * Generate random ip adress
      */
     public function generateRandomIP()
     {

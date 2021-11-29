@@ -86,7 +86,6 @@
                         title: 'Numer',
                         data: '',
                         render: function (data, type, row, meta) {
-                            console.log(row);
                             let number = meta.row + meta.settings._iDisplayStart + 1;
                             return `<span class="color-white">`+number+`</span>`;
                         },

@@ -20,9 +20,8 @@ class DifferentNewPassword implements Rule
     {
         if (Hash::check($value, Auth::user()->password)) {
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     /**

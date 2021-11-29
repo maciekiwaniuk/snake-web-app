@@ -77,7 +77,6 @@ const jsToCache = [
 ];
 
 const assetsToCache = [
-    '/strona-offline',
     '/assets/uncensored_words.json'
 ];
 
@@ -119,6 +118,7 @@ const pluginsToCache = [
 
 const pagesToCache = [
     '/',
+    '/strona-offline',
     '/pobierz-gre',
     '/pomoc',
     '/ranking',

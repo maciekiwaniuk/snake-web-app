@@ -52,7 +52,7 @@ class User extends Authenticatable
      *
      * @var string
      */
-    protected $table = "users";
+    protected $table = 'users';
 
     /**
      * Function that checks if user has admin permissions

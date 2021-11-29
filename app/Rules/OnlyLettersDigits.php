@@ -18,9 +18,8 @@ class OnlyLettersDigits implements Rule
     {
         if (preg_match('/^[a-zA-Z0-9żźćńółęąśŻŹĆĄŚĘŁÓŃ]*$/', $value)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**

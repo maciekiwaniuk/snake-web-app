@@ -217,7 +217,6 @@
                         title: 'Ilość punktów',
                         data: function (row, type, val, meta) {
                             var data;
-                            console.log(row);
                             if ($('#pointsRank').prop('checked')) {
                                 data = row.points;
                             } else if ($('#coinsRank').prop('checked')) {

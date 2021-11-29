@@ -18,9 +18,8 @@ class DifferentNewEmail implements Rule
     {
         if ($value == Auth::user()->email) {
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     /**
