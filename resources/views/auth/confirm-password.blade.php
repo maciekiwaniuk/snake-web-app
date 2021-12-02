@@ -10,7 +10,7 @@
 
     <div class="row mt-sm-1 mt-md-5">
 
-        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6 col-xl-5 col-xxl-5
+        <div class="col-xs-12 col-sm-9 col-md-8 col-lg-6 col-xl-5 col-xxl-5
                     mx-auto">
             <div class="p-3
                         border border-2 border-success
