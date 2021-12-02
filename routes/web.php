@@ -21,6 +21,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\RankingsController;
 use App\Http\Controllers\HelpController;
+use App\Http\Controllers\MessageController;
 use App\Mail\WelcomeMail;
 
 /********************************************************* General routing *********************************************************/
@@ -35,6 +36,14 @@ Route::prefix('pomoc')->group(function() {
     Route::name('help.')->group(function() {
         Route::get('/', [HelpController::class, 'index'])->name('index');
         Route::get('/{selected}', [HelpController::class, 'show'])->name('show');
+    });
+});
+
+Route::prefix('wiadomosc')->group(function() {
+    Route::name('message.')->group(function() {
+        Route::get('/', [MessageController::class, 'index'])->name('index');
+        Route::get('/{selected}', [MessageController::class, 'show'])->name('show');
+        Route::post('/', [MessageController::class, 'store'])->name('index');
     });
 });
 

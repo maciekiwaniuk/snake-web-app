@@ -15,15 +15,17 @@ class reCAPTCHAv2 implements Rule
      */
     public function passes($attribute, $value)
     {
-        $secret_key_recaptcha_v2 = env('SECRET_KEY_RECAPTCHA_V2');
+        $secret_key_recaptcha_v2 = env('CAPTCHA_SECRET_KEY');
         $recaptcha_check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret_key_recaptcha_v2.'&response='.$value);
         $recaptcha_response = json_decode($recaptcha_check);
 
-        // if ($recaptcha_response->success) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
+        if (env('CAPTCHA_VALIDATION')) {
+            if ($recaptcha_response->success) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         return true;
     }
 

@@ -12,7 +12,7 @@
 
         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6 col-xl-5 col-xxl-4
                     mx-auto">
-            <div class="login-form p-3
+            <div class="p-3
                         border border-2 border-success
                         bg-gradient-to-left border-radius-25">
 

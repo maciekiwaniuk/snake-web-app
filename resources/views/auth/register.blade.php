@@ -21,7 +21,7 @@
 
         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6 col-xl-5 col-xxl-5
                     mx-auto">
-            <div class="login-form p-3
+            <div class="p-3
                         border border-2 border-success
                         bg-gradient-to-left border-radius-25">
 
@@ -63,9 +63,11 @@
                         <input type="password" name="password_confirmation" class="form-control"placeholder="" required>
                     </div>
 
-                    <div class="col-12 text-center">
-                        <div class="g-recaptcha" data-sitekey="6LcPyTQcAAAAAI_US8hwlUw9iaaTYx7fKKEXo6_7"></div>
-                    </div>
+                    @if(env('CAPTCHA_VALIDATION'))
+                        <div class="col-12 text-center">
+                            <div class="g-recaptcha" data-sitekey="{{ env('CAPTCHA_PUBLIC_KEY') }}"></div>
+                        </div>
+                    @endif
 
                     <div class="col-12 text-center">
                         <button type="submit" class="btn btn-sm fs-4
