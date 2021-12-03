@@ -3,13 +3,13 @@
 <head>
     <title>@yield('title')</title>
 
-    <!-- Basic meta tags -->
+    <!-- Basic -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#b5e51d">
 
-    <!-- Google meta tags -->
+    <!-- Google -->
     <meta name="description" content="Strona internetowa, która umożliwia zagranie w grę jaką jest Snake, gdzie możesz rywalizować z innymi użytkownikami, zdobywać skiny, bić rekordy i wiele innych!">
     <meta name="keywords" content="Snake, snake-gra.pl, snake, snake-gra, Gra na komputer, Snake na komputer">
     <meta name="author" content="Maciej Iwaniuk">
@@ -17,27 +17,27 @@
 
     <!-- Android support -->
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Snake">
+    <meta name="application-name" content="{{ env('APP_NAME') }}">
     <link rel="icon" sizes="512x512" href="{{ asset('assets/icons/512x512.png') }}">
 
     <!-- iOS support -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="#b5e51d">
-    <meta name="apple-mobile-web-app-title" content="Snake">
+    <meta name="apple-mobile-web-app-title" content="{{ env('APP_NAME') }}">
     <link rel="apple-touch-icon" href="{{ asset('assets/icons/apple-touch-icon.png') }}">
 
     <!-- Windows -->
     <meta name="msapplication-TileColor" content="#b5e51d">
     <meta name="msapplication-TileImage" content="{{ asset('assets/icons/512x512.png') }}">
 
-    <!-- Social media meta tags -->
-    <meta property="og:title" content="Snake">
-    <meta property="og:url" content="https://snake-gra.pl/">
+    <!-- Social media -->
+    <meta property="og:title" content="{{ env('APP_NAME') }}">
+    <meta property="og:url" content="{{ env('APP_URL') }}">
     <meta property="og:type" content="website">
     <meta property="og:image" content="{{ asset('assets/icons/192x192.png') }}">
     <meta property="og:description" content="Strona internetowa, która umożliwia zagranie w grę jaką jest Snake, gdzie możesz rywalizować z innymi użytkownikami, zdobywać skiny, bić rekordy i wiele innych!">
     <meta property="og:locale" content="pl_PL">
-    <meta property="og:site_name" content="Snake">
+    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
 
     <!-- manifest link -->
     <link rel="manifest" href="{{ asset('manifest.json') }}">
@@ -84,7 +84,7 @@
     <script>
         // check if serviceWorker is avaliable in the browser
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
+            navigator.serviceWorker.register("{{ asset('sw.js') }}");
         }
 
         $(function() {
@@ -93,22 +93,6 @@
             });
         });
     </script>
-
-    <style>
-        .linkedin {
-            color: #0e76a8 !important;
-        }
-        .linkedin:hover {
-            color: rgb(29, 164, 227) !important;
-        }
-
-        .github {
-            color: #333 !important;
-        }
-        .github:hover {
-            color: rgb(81, 73, 73) !important;
-        }
-    </style>
 
     <div class="container-md mb-5" style="min-height: 100vh">
 

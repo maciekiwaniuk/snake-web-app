@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\MessageRequest;
+use App\Models\Message;
 
 class MessageController extends Controller
 {
@@ -31,6 +33,21 @@ class MessageController extends Controller
      */
     public function store(MessageRequest $request)
     {
-        return back();
+        $message = new Message();
+        $message->subject = $request->subject;
+        $message->sender = $request->sender;
+        $message->email = $request->email;
+        $message->content = $request->content;
+
+        if (Auth::check()) {
+            $message->sent_as_user = true;
+            $message->user_name = Auth::user()->name;
+        } else {
+            $message->sent_as_user = false;
+        }
+        $message->save();
+
+        return redirect()->route('message.index')
+            ->with('success', 'Wiadomość została pomyślnie wysłana.');
     }
 }

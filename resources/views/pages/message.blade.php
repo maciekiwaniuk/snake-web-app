@@ -59,25 +59,27 @@
 
                     <div class="col-12">
                         <label for="subject">Temat</label>
-                        <select class="form-control">
-                            <option class="form-control" @if(isset($selected) && $selected=="kontakt") selected @else @endif>Kontakt</option>
-                            <option class="form-control" @if(isset($selected) && $selected=="usterka") selected @else @endif>Zgłoszenie usterki</option>
+                        <select name="subject" class="form-control">
+                            <option value="contact" class="form-control" @if(isset($selected) && $selected=="kontakt") selected @endif>Kontakt</option>
+                            <option value="error-website" class="form-control" @if(isset($selected) && $selected=="blad-strona") selected @endif>Zgłoszenie błędu ze strony</option>
+                            <option value="error-game" class="form-control" @if(isset($selected) && $selected=="blad-gra") selected @endif>Zgłoszenie błędu z gry</option>
+                            <option value="other" class="form-control" @if(isset($selected) && $selected=="inne") selected @endif>Inne</option>
                         </select>
                     </div>
 
                     <div class="col-12">
-                        <label for="name">Od kogo</label>
-                        <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+                        <label for="sender">Od kogo</label>
+                        <input type="text" name="sender" class="form-control" value="@if(Auth::check()){{ Auth::user()->name }} @else{{ old('sender') }}@endif" required>
                     </div>
 
                     <div class="col-12">
                         <label for="email">E-mail</label>
-                        <input type="text" name="email" class="form-control" value="{{ old('email') }}" required>
+                        <input type="text" name="email" class="form-control" value="@if(Auth::check()){{ Auth::user()->email }} @else{{ old('email') }}@endif" required>
                     </div>
 
                     <div class="col-12">
-                        <label for="message">Treść wiadomości</label>
-                        <textarea name="message" class="form-control" rows="5" required>{{ old('message') }}</textarea>
+                        <label for="content">Treść wiadomości</label>
+                        <textarea name="content" class="form-control" rows="5" required>{{ old('content') }}</textarea>
                     </div>
 
                     @if(env('CAPTCHA_VALIDATION'))
@@ -88,8 +90,8 @@
 
                     <div class="col-12 text-center">
                         <button type="submit" class="btn btn-sm fs-4
-                                                    border border-2 border-success
-                                                    border-radius-15 bg-orangeyellow"
+                                                     border border-2 border-success
+                                                     border-radius-15 bg-orangeyellow"
                         >Wyślij</button>
                     </div>
                 </form>

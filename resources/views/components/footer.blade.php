@@ -1,3 +1,19 @@
+<style>
+    .linkedin {
+        color: #0e76a8 !important;
+    }
+    .linkedin:hover {
+        color: rgb(29, 164, 227) !important;
+    }
+
+    .github {
+        color: #333 !important;
+    }
+    .github:hover {
+        color: rgb(81, 73, 73) !important;
+    }
+</style>
+
 <footer class="footer mt-auto py-3
                border-top border-2 border-success
                navbar-fixed-bottom"
@@ -23,7 +39,7 @@
             <div class="d-inline d-md-none"><br></div>
 
             <a href="{{ route('message.show', ['selected' => 'kontakt']) }}" class="link-grey">Kontakt</a> |
-            <a href="{{ route('message.show', ['selected' => 'usterka']) }}" class="link-grey">Zgłoś usterkę</a>
+            <a href="{{ route('message.show', ['selected' => 'blad-strona']) }}" class="link-grey">Zgłoś błąd</a>
 
         </div>
 
