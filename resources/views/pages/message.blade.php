@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-    Wiadomość
+    Wyślij wiadomość
 @endsection
 
 @push('css')

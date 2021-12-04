@@ -21,6 +21,7 @@ class CreateMessagesTable extends Migration
             $table->text('content');
             $table->boolean('sent_as_user');
             $table->string('user_name')->nullable();
+            $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
     }

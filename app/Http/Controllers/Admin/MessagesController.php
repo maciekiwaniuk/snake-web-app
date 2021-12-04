@@ -20,10 +20,27 @@ class MessagesController extends Controller
      */
     public function getMessages()
     {
-        $messages = Message::all();
+        $messages = Message::query()
+            ->where('deleted', '=', 0)
+            ->get();
 
         return response()->json([
             'data' => $messages
         ]);
+    }
+
+    /**
+     * Delete message
+     */
+    public function destroy($id)
+    {
+        $message = Message::query()
+            ->where('id', '=', $id)
+            ->first();
+
+        $message->deleted = true;
+        $message->save();
+
+        return back();
     }
 }

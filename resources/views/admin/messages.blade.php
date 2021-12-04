@@ -61,15 +61,54 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="messageModalLabel">
-                        <div id="message-sender"></div>
-                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <div class="modal-body" id="message-content"></div>
+                <div class="modal-body">
 
-                <div class="modal-footer">
+                    <form class="row g-3">
+                        <div class="col-12">
+                            <label for="message-date">Data wysłania</label>
+                            <input type="text" id="message-date" name="message-date" class="form-control" disabled>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="subject">Temat</label>
+                            <select name="subject" class="form-control" disabled>
+                                <option id="message-subject"></option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="sender">Od kogo</label>
+                            <input type="text" id="message-sender" name="sender" class="form-control" disabled required>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="email">E-mail</label>
+                            <input type="text" id="message-email" name="email" class="form-control" disabled required>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="content">Treść wiadomości</label>
+                            <textarea name="content" id="message-content" class="form-control" rows="5" disabled required></textarea>
+                        </div>
+
+                        <div class="col-12" id="message-user_name-div">
+                            <label for="user_name">Nazwa konta użytkownika nadawcy</label>
+                            <input type="text" id="message-user_name" name="user_name" class="form-control" disabled required>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="modal-footer d-flex justify-content-around">
+                    <form method="POST" id="message-delete-form">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Usuń</button>
+                    </form>
+
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
                 </div>
             </div>
@@ -78,9 +117,37 @@
 
     <script>
 
-        function changeModalMessage(sender, content) {
-            $('#message-sender').text('Wiadomość od: '+sender);
+        function changeModalMessage(message_id, date, subject, sender, email, content, sent_as_user, user_name) {
+            $('#message-date').val(date.slice(0, 10));
+
+            if (subject == 'contact') {
+                $('#message-subject').text('Kontakt');
+            } else if (subject == 'error-website') {
+                $('#message-subject').text('Błąd na stronie');
+            } else if (subject == 'error-game') {
+                $('#message-subject').text('Błąd w grze');
+            } else if (subject == 'idea-website') {
+                $('#message-subject').text('Pomysł dotyczący strony');
+            } else if (subject == 'idea-game') {
+                $('#message-subject').text('Pomysł dotyczący gry');
+            } else {
+                $('#message-subject').text('Inny');
+            }
+
+            $('#message-sender').val(sender);
+            $('#message-email').val(email);
             $('#message-content').text(content);
+
+            if (sent_as_user == 1) {
+                $('#message-user_name-div').show();
+                $('#message-user_name').val(user_name);
+            } else {
+                $('#message-user_name-div').hide();
+            }
+
+            URL = "{{ route('admin.messages.destroy', '__ID__') }}";
+            URL = URL.replace('__ID__', message_id);
+            $('#message-delete-form').attr('action', URL);
         }
 
         $(document).ready(function() {
@@ -169,14 +236,44 @@
                         orderable: false
                     },
                     {
+                        title: 'Data',
+                        data: '',
+                        render: function (data, type, row, meta) {
+                            let hours = row.created_at.slice(0, 10);
+                            let minutes = row.created_at.slice(11, 19);
+                            return hours + " " + minutes;
+                        },
+                        class: 'align-middle'
+                    },
+                    {
                         title: 'Akcje',
                         data: '',
                         render: function (data, type, row, meta) {
-                            return `
-                                        <button onclick="changeModalMessage('`+row.sender+`','`+row.content+`')"
+                            URL = "{{ route('admin.messages.destroy', '__ID__') }}";
+                            URL = URL.replace('__ID__', row.id);
+
+                            return html = `
+                                        <button onclick="changeModalMessage(
+                                                '`+row.id+`',
+                                                '`+row.created_at+`',
+                                                '`+row.subject+`',
+                                                '`+row.sender+`',
+                                                '`+row.email+`',
+                                                '`+row.content+`',
+                                                '`+row.sent_as_user+`',
+                                                '`+row.user_name+`'
+                                            )"
                                                 type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#messageModal">
                                             <i class="bi bi-envelope-open"></i>
                                         </button>
+
+                                        <form method="POST" action="`+URL+`">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm mt-1">
+                                                <i class="bi bi-x-circle"></i>
+                                            </button>
+                                        </form>
                                     `;
                         },
                         class: 'align-middle',

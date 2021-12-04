@@ -98,6 +98,7 @@ Route::prefix('admin')->middleware('admin')->group(function() {
             Route::name('messages.')->group(function() {
                 Route::get('/', [MessagesController::class, 'index'])->name('index');
                 Route::get('/wyswietl-wiadomosci', [MessagesController::class, 'getMessages'])->name('get-messages');
+                Route::delete('/usun-wiadomosc/{id}', [MessagesController::class, 'destroy'])->name('destroy');
             });
         });
 
