@@ -9,6 +9,7 @@
         "service_worker": "sw.js"
     },
     "homepage_url": "https://snake-gra.pl/",
+    "id": "/",
     "start_url": "/",
     "scope": "/",
     "background_color": "#b5e51d",

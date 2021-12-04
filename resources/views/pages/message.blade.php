@@ -61,20 +61,22 @@
                         <label for="subject">Temat</label>
                         <select name="subject" class="form-control">
                             <option value="contact" class="form-control" @if(isset($selected) && $selected=="kontakt") selected @endif>Kontakt</option>
-                            <option value="error-website" class="form-control" @if(isset($selected) && $selected=="blad-strona") selected @endif>Zgłoszenie błędu ze strony</option>
-                            <option value="error-game" class="form-control" @if(isset($selected) && $selected=="blad-gra") selected @endif>Zgłoszenie błędu z gry</option>
+                            <option value="error-website" class="form-control" @if(isset($selected) && $selected=="blad-strona") selected @endif>Błąd na stronie</option>
+                            <option value="error-game" class="form-control" @if(isset($selected) && $selected=="blad-gra") selected @endif>Błąd w grze</option>
+                            <option value="idea-website" class="form-control" @if(isset($selected) && $selected=="pomysl-strona") selected @endif>Pomysł dotyczący strony</option>
+                            <option value="idea-game" class="form-control" @if(isset($selected) && $selected=="pomysl-gra") selected @endif>Pomysł dotyczący gry</option>
                             <option value="other" class="form-control" @if(isset($selected) && $selected=="inne") selected @endif>Inne</option>
                         </select>
                     </div>
 
                     <div class="col-12">
                         <label for="sender">Od kogo</label>
-                        <input type="text" name="sender" class="form-control" value="@if(Auth::check()){{ Auth::user()->name }} @else{{ old('sender') }}@endif" required>
+                        <input type="text" name="sender" class="form-control" value="@if(Auth::check()){{ Auth::user()->name }}@else{{ old('sender') }}@endif" required>
                     </div>
 
                     <div class="col-12">
                         <label for="email">E-mail</label>
-                        <input type="text" name="email" class="form-control" value="@if(Auth::check()){{ Auth::user()->email }} @else{{ old('email') }}@endif" required>
+                        <input type="text" name="email" class="form-control" value="@if(Auth::check()){{ Auth::user()->email }}@else{{ old('email') }}@endif" required>
                     </div>
 
                     <div class="col-12">

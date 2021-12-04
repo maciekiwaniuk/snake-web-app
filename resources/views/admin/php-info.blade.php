@@ -1,5 +1,9 @@
 @extends('layouts.layout')
 
+@section('title')
+    Serwer
+@endsection
+
 @section('content')
 
     <div class="col-12 col-sm-10

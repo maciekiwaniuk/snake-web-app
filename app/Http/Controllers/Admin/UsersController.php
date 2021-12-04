@@ -81,7 +81,7 @@ class UsersController extends Controller
             ->where('ip', '=', $ip)
             ->first();
 
-        if (Auth::user()->last_login_ip != $banned_ip->ip) {
+        if (isset($banned_ip) && Auth::user()->last_login_ip != $banned_ip->ip) {
             $this->createAppLog(
                 'ip_user_ban',
                 'Administrator '.Auth::user()->name.' zbanował IP: '.$ip.' użytkownika '.$user->name.'.'

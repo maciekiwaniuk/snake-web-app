@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AppLogsController;
 use App\Http\Controllers\Admin\ServerLogsController;
 use App\Http\Controllers\Admin\ArtisanToolsController;
 use App\Http\Controllers\Admin\PHPInfoController;
+use App\Http\Controllers\Admin\MessagesController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\GameHostingsController;
 use App\Http\Controllers\ProfileController;
@@ -90,6 +91,13 @@ Route::prefix('admin')->middleware('admin')->group(function() {
                 Route::get('/odwiedzajacy-wszyscy', [VisitorsUniqueController::class, 'getAllVisitors'])->name('get-all-visitors');
                 Route::get('/odwiedzajacy-zbanowani', [VisitorsUniqueController::class, 'getBannedVisitors'])->name('get-banned-visitors');
                 Route::get('/odwiedzajacy-niezbanowani', [VisitorsUniqueController::class, 'getNotBannedVisitors'])->name('get-notbanned-visitors');
+            });
+        });
+
+        Route::prefix('wiadomosci')->group(function() {
+            Route::name('messages.')->group(function() {
+                Route::get('/', [MessagesController::class, 'index'])->name('index');
+                Route::get('/wyswietl-wiadomosci', [MessagesController::class, 'getMessages'])->name('get-messages');
             });
         });
 

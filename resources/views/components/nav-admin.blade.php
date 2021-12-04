@@ -36,6 +36,10 @@
                                 <i class="bi bi-broadcast-pin me-1"></i>Odwiedzający
                             </a>
 
+                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.messages.index') }}">
+                                <i class="bi bi-envelope me-1"></i>Wiadomości
+                            </a>
+
                             <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.app-logs.index') }}">
                                 <i class="bi bi-text-left me-1"></i>Logi aplikacji
                             </a>

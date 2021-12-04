@@ -19,6 +19,8 @@ class MessageSubject implements Rule
             'contact',
             'error-website',
             'error-game',
+            'idea-website',
+            'idea-game',
             'other'
         ];
 

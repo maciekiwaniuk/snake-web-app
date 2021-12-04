@@ -100,7 +100,8 @@
                     {
                         title: 'Nazwa użytkownika',
                         data: 'user.name',
-                        class: 'align-middle'
+                        class: 'align-middle',
+                        orderable: false
                     },
                     {
                         title: 'Typ',
@@ -158,17 +159,20 @@
                                 return "Coś nie pasuje";
                             }
                         },
-                        class: 'align-middle'
+                        class: 'align-middle',
+                        orderable: false
                     },
                     {
                         title: 'Zawartość loga',
                         data: 'content',
-                        class: 'align-middle'
+                        class: 'align-middle',
+                        orderable: false
                     },
                     {
                         title: 'IP',
                         data: 'ip',
-                        class: 'align-middle'
+                        class: 'align-middle',
+                        orderable: false
                     },
                     {
                         title: 'Data',
