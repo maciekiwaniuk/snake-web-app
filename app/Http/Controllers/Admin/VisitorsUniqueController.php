@@ -81,7 +81,8 @@ class VisitorsUniqueController extends Controller
             $ip->save();
         }
 
-        return back();
+        return back()
+            ->with('success', 'IP: '.$ip->ip.' zostało pomyślnie zbanowane.');
     }
 
     /**
@@ -101,6 +102,7 @@ class VisitorsUniqueController extends Controller
             'Administrator '.Auth::user()->name.' odbanował IP: '.$ip->ip.'.'
         );
 
-        return back();
+        return back()
+            ->with('success', 'IP: '.$ip->ip.' zostało pomyślnie odbanowane.');
     }
 }

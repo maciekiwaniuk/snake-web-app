@@ -17,7 +17,8 @@
                         bg-gradient-to-left border-radius-25">
 
                     @if ($errors->any())
-                        <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
+                        <div class="col-12 col-sm-10 mx-auto
+                                    text-center mb-3 p-2 pb-3
                                     border border-2 border-danger
                                     border-radius-15"
                              style="background-color: rgb(240, 183, 183);">

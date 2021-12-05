@@ -117,7 +117,7 @@
 
     <script>
 
-        function changeModalMessage(message_id, date, subject, sender, email, content, sent_as_user, user_name) {
+        function changeModalMessageContent(message_id, date, subject, sender, email, content, sent_as_user, user_name) {
             $('#message-date').val(date.slice(0, 10));
 
             if (subject == 'contact') {
@@ -145,9 +145,9 @@
                 $('#message-user_name-div').hide();
             }
 
-            URL = "{{ route('admin.messages.destroy', '__ID__') }}";
-            URL = URL.replace('__ID__', message_id);
-            $('#message-delete-form').attr('action', URL);
+            urlDeleteMessageToReplace = "{{ route('admin.messages.destroy', '__ID__') }}";
+            urlDeleteMessage = urlDeleteMessageToReplace.replace('__ID__', message_id);
+            $('#message-delete-form').attr('action', urlDeleteMessage);
         }
 
         $(document).ready(function() {
@@ -249,11 +249,11 @@
                         title: 'Akcje',
                         data: '',
                         render: function (data, type, row, meta) {
-                            URL = "{{ route('admin.messages.destroy', '__ID__') }}";
-                            URL = URL.replace('__ID__', row.id);
+                            urlDeleteMessageToReplace = "{{ route('admin.messages.destroy', '__ID__') }}";
+                            urlDeleteMessage = urlDeleteMessageToReplace.replace('__ID__', row.id);
 
                             return html = `
-                                        <button onclick="changeModalMessage(
+                                        <button onclick="changeModalMessageContent(
                                                 '`+row.id+`',
                                                 '`+row.created_at+`',
                                                 '`+row.subject+`',
@@ -267,7 +267,7 @@
                                             <i class="bi bi-envelope-open"></i>
                                         </button>
 
-                                        <form method="POST" action="`+URL+`">
+                                        <form method="POST" action="`+urlDeleteMessage+`">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm mt-1">

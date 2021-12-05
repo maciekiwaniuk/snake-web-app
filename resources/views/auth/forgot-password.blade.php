@@ -17,7 +17,8 @@
                         bg-gradient-to-left border-radius-25">
 
                     @if ($errors->any())
-                        <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
+                        <div class="col-12 col-sm-10 mx-auto
+                                    text-center mb-3 p-2 pb-3
                                     border border-2 border-danger
                                     border-radius-15"
                              style="background-color: rgb(240, 183, 183);">
@@ -43,7 +44,7 @@
                         <input type="text" name="email" class="form-control" value="{{ old('email') }}" required>
                     </div>
 
-                    <div class="offset-1 col-10 text-center">
+                    <div class="mx-auto col-10 text-center">
                         <button type="submit" class="btn btn-sm fs-5
                                                      border border-2 border-success
                                                      border-radius-15 bg-orangeyellow"

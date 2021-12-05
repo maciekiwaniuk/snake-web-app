@@ -54,10 +54,23 @@
                     </label>
                 </div>
 
+                @if (session('success'))
+                    <div class="col-12 col-sm-10 mx-auto
+                                text-center mb-3 p-2 pb-3
+                                mt-2 fs-6
+                                border border-2 border-success
+                                border-radius-15 bg-complete">
+                                <div class="valid-feedback d-block">
+                                    <strong>• {{ session('success') }}</strong>
+                                </div>
+                    </div>
+                @endif
+
                 <div class="col-12
                             mx-auto text-center fs-6">
 
                             <div class="mt-3
+                                        table-responsive
                                         table-responsive-sm
                                         table-responsive-md">
                                 <table id="VisitorsTable" class="table table-dark table-hover">
@@ -72,9 +85,51 @@
 
     </div>
 
+    <!-- Ban confirmation modal -->
+    <div class="modal fade" id="banStatusConfirmationModal" tabindex="-1" aria-labelledby="banStatusConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body text-center">
+                    <div id="confirmation-message"></div>
+                </div>
+
+                <div class="modal-footer d-flex justify-content-around">
+                    <form method="POST" id="ban-status-ip-form">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" id="ban-status-ip-button">Potwierdź</button>
+                    </form>
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
 
+        function changeBanStatusConfirmationModalContent(ip_id, ip, ip_banned) {
+            if (ip_banned == 1) {
+                $('#confirmation-message').text('Potwierdź odbanowanie IP: '+ip);
+                $('#ban-status-ip-button').attr('class', 'btn btn-success');
+
+                urlUnbanIpToReplace = "{{ route('admin.unban-ip', '__ID__') }}";
+                urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', ip_id);
+                $('#ban-status-ip-form').attr('action', urlUnbanIp);
+
+            } else if (ip_banned == 0) {
+                $('#confirmation-message').text('Potwierdź zbanowanie IP: '+ip);
+                $('#ban-status-ip-button').attr('class', 'btn btn-danger');
+
+                urlBanIpToReplace = "{{ route('admin.ban-ip', '__ID__') }}";
+                urlBanIp = urlBanIpToReplace.replace('__ID__', ip_id);
+                $('#ban-status-ip-form').attr('action', urlBanIp);
+            }
+        }
 
         $(document).ready(function() {
             var visitorsTable = $('#VisitorsTable').DataTable({
@@ -140,25 +195,27 @@
                         render: function (data, type, row, meta) {
                             // ip IS BANNED
                             if (row.ip_banned) {
-                                urlUnbanIpToReplace = "{{ route('admin.unban-ip', '__ID__') }}";
-                                urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', row.id)
                                 return `
-                                            <form action="`+urlUnbanIp+`" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <button class="btn btn-success">Odbanuj</button>
-                                            </form>
+                                            <button onclick="changeBanStatusConfirmationModalContent(
+                                                    '`+row.id+`',
+                                                    '`+row.ip+`',
+                                                    '`+row.ip_banned+`'
+                                                )"
+                                                    type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#banStatusConfirmationModal">
+                                                Odbanuj
+                                            </button>
                                         `;
                             } else {
                                 // ip ISN'T BANNED
-                                urlBanIpToReplace = "{{ route('admin.ban-ip', '__ID__') }}";
-                                urlBanIp = urlBanIpToReplace.replace('__ID__', row.id)
                                 return `
-                                            <form action="`+urlBanIp+`" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <button class="btn btn-danger">Zbanuj</button>
-                                            </form>
+                                            <button onclick="changeBanStatusConfirmationModalContent(
+                                                    '`+row.id+`',
+                                                    '`+row.ip+`',
+                                                    '`+row.ip_banned+`'
+                                                )"
+                                                    type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#banStatusConfirmationModal">
+                                                Zbanuj
+                                            </button>
                                         `;
                             }
                         },

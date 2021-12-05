@@ -90,7 +90,8 @@
                                 @endif
 
                                 @if (session('password_success'))
-                                    <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
+                                    <div class="col-12 col-sm-10 mx-auto
+                                                text-center mb-3 p-2 pb-3
                                                 border border-2 border-success
                                                 border-radius-15 bg-complete">
                                                 <div class="valid-feedback d-block">
@@ -159,7 +160,8 @@
 
 
                                 @if (session('email_success'))
-                                    <div class="col-10 offset-1 text-center mb-3 p-2 pb-3
+                                    <div class="col-12 col-sm-10 mx-auto
+                                                text-center mb-3 p-2 pb-3
                                                 border border-2 border-success
                                                 border-radius-15 bg-complete">
                                                 <div class="valid-feedback d-block">
@@ -218,7 +220,7 @@
                                 </button>
 
                                 <button type="button" id="logoutFromGame" class="btn btn-primary border border-2 border-dark ms-2">
-                                    Wyloguj z gry
+                                    Wyloguj z gry na wszystkich urządzeniach
                                 </button>
 
                                 <!-- Usuń konto modal -->
