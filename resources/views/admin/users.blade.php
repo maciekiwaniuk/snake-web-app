@@ -22,6 +22,14 @@
             padding-bottom: 1vh;
             padding-top: 0.5vh;
         }
+
+        .front-modal {
+            z-index: 9999;
+        }
+
+        #user-name,  .user-name-text{
+            font-weight: 700;
+        }
     </style>
 
     <div class="col-12 col-sm-10
@@ -54,6 +62,32 @@
                     </label>
                 </div>
 
+                @if ($errors->any())
+                    <div class="col-12 col-sm-10 mx-auto
+                                text-center mb-3 p-2 pb-3
+                                mt-2 fs-6
+                                border border-2 border-danger
+                                border-radius-15 bg-error">
+                        @foreach ($errors->all() as $error)
+                            <div class="invalid-feedback d-block">
+                                <strong>• {{ $error }}</strong>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div class="col-12 col-sm-10 mx-auto
+                                text-center mb-3 p-2 pb-3
+                                mt-2 fs-6
+                                border border-2 border-success
+                                border-radius-15 bg-complete">
+                                <div class="valid-feedback d-block">
+                                    <strong>• {{ session('success') }}</strong>
+                                </div>
+                    </div>
+                @endif
+
                 <div class="col-12
                             mx-auto text-center fs-6">
 
@@ -73,8 +107,251 @@
 
     </div>
 
-    <script>
+    <!-- User action confirmation modal -->
+    <div class="modal fade front-modal" id="userActionConfirmationModal" tabindex="-1" aria-labelledby="userActionConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
+                <div class="modal-body text-center">
+                    <div id="confirmation-content">
+
+                        <div id="ip-ban-status-content">
+                            <div class="d-inline" id="ip-ban-status-text"></div>
+                            <div class="d-inline user-name-text"></div>
+                        </div>
+
+                        <div id="account-ban-status-content">
+                            <div class="d-inline" id="account-ban-status-text"></div>
+                            <div class="d-inline user-name-text"></div>
+                        </div>
+
+                        <div id="account-ip-ban-status-content">
+                            <div class="d-inline" id="account-ip-ban-status-text"></div>
+                            <div class="d-inline user-name-text"></div>
+                        </div>
+
+                        <div id="account-delete-content">
+                            <div class="d-inline" id="account-delete-text"></div>
+                            <div class="d-inline user-name-text"></div>
+                        </div>
+
+                        <div id="token-reset-content">
+                            <div class="d-inline" id="token-reset-text"></div>
+                            <div class="d-inline user-name-text"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer d-flex justify-content-around">
+                    <form method="POST" id="ip-ban-status-confirmation-form">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-warning">Potwierdź</button>
+                    </form>
+
+                    <form method="POST" id="account-ban-status-confirmation-form">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-danger">Potwierdź</button>
+                    </form>
+
+                    <form method="POST" id="account-ip-ban-status-confirmation-form">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-warning">Potwierdź</button>
+                    </form>
+
+                    <form method="POST" id="account-delete-confirmation-form">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Potwierdź</button>
+                    </form>
+
+                    <form method="POST" id="token-reset-confirmation-form">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-primary">Potwierdź</button>
+                    </form>
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User action modal -->
+    <div class="modal fade" id="userActionModal" tabindex="-1" aria-labelledby="userActionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div id="user-action-info" class="text-center fs-4 mb-2">
+                        Użytkownik <div class="d-inline" id="user-name"></div>
+                    </div>
+
+                    <div id="user-action-content" class="text-center">
+                        <button type="button" onclick="openStatusBanIpModal();" id="ip-ban-status-btn" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
+                        </button> <br>
+
+                        <button type="button" onclick="openStatusBanAccountModal();" id="account-ban-status-btn" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
+                        </button> <br>
+
+                        <button type="button" onclick="openStatusBanAccountAndIpModal();" id="account-ip-ban-status-btn" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
+                        </button> <br>
+
+                        <button type="button" onclick="openAccountDeleteModal();" class="btn btn-danger mt-1" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
+                            Usuń konto
+                        </button> <br>
+
+                        <button type="button" onclick="openTokenResetModal();" class="btn btn-primary mt-1" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
+                            Zresetuj token
+                        </button>
+                    </div>
+                </div>
+
+                <div class="modal-footer d-flex justify-content-around">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function hideModalContents() {
+            $('#account-ban-status-content').hide();
+            $('#ip-ban-status-content').hide();
+            $('#account-ip-ban-status-content').hide();
+            $('#account-delete-content').hide();
+            $('#token-reset-content').hide();
+        }
+
+        function hideModalForms() {
+            $('#ip-ban-status-confirmation-form').hide();
+            $('#account-ban-status-confirmation-form').hide();
+            $('#account-ip-ban-status-confirmation-form').hide();
+            $('#account-delete-confirmation-form').hide();
+            $('#token-reset-confirmation-form').hide();
+        }
+
+        function openStatusBanIpModal() {
+            hideModalForms();
+            hideModalContents();
+            $('#ip-ban-status-content').show();
+            $('#ip-ban-status-confirmation-form').show();
+        }
+
+        function openStatusBanAccountModal() {
+            hideModalForms();
+            hideModalContents();
+            $('#account-ban-status-content').show();
+            $('#account-ban-status-confirmation-form').show();
+        }
+
+        function openStatusBanAccountAndIpModal() {
+            hideModalForms();
+            hideModalContents();
+            $('#account-ip-ban-status-content').show();
+            $('#account-ip-ban-status-confirmation-form').show();
+        }
+
+        function openAccountDeleteModal() {
+            hideModalForms();
+            hideModalContents();
+            $('#account-delete-content').show();
+            $('#account-delete-confirmation-form').show();
+        }
+
+        function openTokenResetModal() {
+            hideModalForms();
+            hideModalContents();
+            $('#token-reset-content').show();
+            $('#token-reset-confirmation-form').show();
+        }
+
+        function changeModalsContent(user_id, name, permission, user_banned, ip_id, ip, ip_banned) {
+            $('#user-name').text(name);
+            $('.user-name-text').text(name);
+
+            // IP ban status
+            if (ip_banned == 1) {
+                $('#ip-ban-status-text').text('Potwierdź odbanowanie IP użytkownika');
+                $('#ip-ban-status-btn').text('Odbanuj IP');
+                $('#ip-ban-status-btn').attr('class', 'btn btn-success');
+
+                urlUnbanIpToReplace = "{{ route('admin.unban-last-ip', '__ID__') }}";
+                urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', user_id);
+                $('#ip-ban-status-confirmation-form').attr('action', urlUnbanIp);
+            } else {
+                $('#ip-ban-status-text').text('Potwierdź zbanowanie IP użytkownika');
+                $('#ip-ban-status-btn').text('Zbanuj IP');
+                $('#ip-ban-status-btn').attr('class', 'btn btn-warning');
+
+                urlBanIpToReplace = "{{ route('admin.ban-last-ip', '__ID__') }}";
+                urlBanIp = urlBanIpToReplace.replace('__ID__', user_id);
+                $('#ip-ban-status-confirmation-form').attr('action', urlBanIp);
+            }
+
+            // Account ban status
+            if (user_banned == 1) {
+                $('#account-ban-status-text').text('Potwierdź odbanowanie konta użytkownika');
+                $('#account-ban-status-btn').text('Odbanuj konto');
+                $('#account-ban-status-btn').attr('class', 'btn btn-success mt-1')
+
+                urlUnbanAccountToReplace = "{{ route('admin.unban-account', '__ID__') }}";
+                urlUnbanAccount = urlUnbanAccountToReplace.replace('__ID__', user_id);
+                $('#account-ban-status-confirmation-form').attr('action', urlUnbanAccount);
+            } else {
+                $('#account-ban-status-text').text('Potwierdź zbanowanie konta użytkownika');
+                $('#account-ban-status-btn').text('Zbanuj konto');
+                $('#account-ban-status-btn').attr('class', 'btn btn-danger mt-1')
+
+                urlBanAccountToReplace = "{{ route('admin.ban-account', '__ID__') }}";
+                urlBanAccount = urlBanAccountToReplace.replace('__ID__', user_id);
+                $('#account-ban-status-confirmation-form').attr('action', urlBanAccount);
+            }
+
+            // Account and IP ban status
+            if (user_banned == 0 || ip_banned == 0) {
+                $('#account-ip-ban-status-text').text('Potwierdź zbanowanie konta oraz IP użytkownika');
+                $('#account-ip-ban-status-btn').text('Zbanuj konto oraz IP');
+                $('#account-ip-ban-status-btn').attr('class', 'btn btn-warning mt-1');
+
+                urlBanIpAndAccountToReplace = "{{ route('admin.ban-ip-account', '__ID__') }}";
+                urlBanIpAndAccount = urlBanIpAndAccountToReplace.replace('__ID__', user_id);
+                $('#account-ip-ban-status-confirmation-form').attr('action', urlBanIpAndAccount);
+            } else {
+                $('#account-ip-ban-status-text').text('Potwierdź odbanowanie konta oraz IP użytkownika');
+                $('#account-ip-ban-status-btn').text('Odbanuj konto oraz IP');
+                $('#account-ip-ban-status-btn').attr('class', 'btn btn-success mt-1');
+
+                urlUnbanIpAndAccountToReplace = "{{ route('admin.unban-ip-account', '__ID__') }}";
+                urlUnbanIpAndAccount = urlUnbanIpAndAccountToReplace.replace('__ID__', user_id);
+                $('#account-ip-ban-status-confirmation-form').attr('action', urlUnbanIpAndAccount);
+            }
+
+            // Delete account
+            urlDeleteAccountToReplace = "{{ route('admin.delete-account', '__ID__') }}";
+            urlDeleteAccount = urlDeleteAccountToReplace.replace('__ID__', user_id);
+            $('#account-delete-confirmation-form').attr('action', urlDeleteAccount);
+
+            // Reset token
+            urlResetTokenToReplace = "{{ route('admin.reset-api-token', '__ID__') }}";
+            urlResetToken = urlResetTokenToReplace.replace('__ID__', user_id);
+            $('#token-reset-confirmation-form').attr('action', urlResetToken);
+
+            $('#account-delete-text').text('Potwierdź usunięcie konta użytkownika');
+            $('#token-reset-text').text('Potwierdź zresetowanie tokenu użytkownika');
+
+        }
 
         $(document).ready(function() {
             var usersTable = $('#UsersTable').DataTable({
@@ -163,114 +440,31 @@
                         data: '',
                         orderable: false,
                         render: function (data, type, row, meta) {
-                            text = ``;
-
-                            // USER
-                            if (row.permission == 0) {
-                                // if user's account IS BANNED
-                                if (row.user_banned) {
-                                urlUnbanAccountToReplace = "{{ route('admin.unban-account', '__ID__') }}";
-                                urlUnbanAccount = urlUnbanAccountToReplace.replace('__ID__', row.id);
-
-                                text += `
-                                            <form action="`+urlUnbanAccount+`" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-success mb-1">Odbanuj konto</button>
-                                            </form>
-                                        `;
-                                } else {
-                                    // if user's account ISN'T BANNED
-                                    urlBanAccountToReplace = "{{ route('admin.ban-account', '__ID__') }}";
-                                    urlBanAccount = urlBanAccountToReplace.replace('__ID__', row.id);
-
-                                    text += `
-                                                <form action="`+urlBanAccount+`" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button type="submit" class="btn btn-danger mb-1">Zbanuj konto</button>
-                                                </form>
-                                            `;
-                                }
-                                // if user's last ip IS BANNED
-                                if (row.visitor_unique != null && row.visitor_unique.ip_banned) {
-                                    urlUnbanIpToReplace = "{{ route('admin.unban-last-ip', '__ID__') }}";
-                                    urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', row.id);
-
-                                    text += `
-                                                <form action="`+urlUnbanIp+`" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button type="submit" class="btn btn-success mb-1">Odbanuj IP</button>
-                                                </form>
-                                            `;
-                                } else {
-                                    // if user's last ip ISN'T BANNED
-                                    urlBanIpToReplace = "{{ route('admin.ban-last-ip', '__ID__') }}";
-                                    urlBanIp = urlBanIpToReplace.replace('__ID__', row.id);
-
-                                    text += `
-                                                <form action="`+urlBanIp+`" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button type="submit" class="btn btn-warning mb-1">Zbanuj IP</button>
-                                                </form>
-                                            `;
-                                }
-
-                                // if user's last ip and account IS BANNED
-                                if (row.visitor_unique != null && row.visitor_unique.ip_banned && row.user_banned) {
-                                    urlUnbanIpAndAccountToReplace = "{{ route('admin.unban-ip-account', '__ID__') }}";
-                                    urlUnbanIpAndAccount = urlUnbanIpAndAccountToReplace.replace('__ID__', row.id);
-
-                                    text += `
-                                                <form action="`+urlUnbanIpAndAccount+`" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button type="submit" class="btn btn-success mb-1">Odbanuj IP oraz Konto</button>
-                                                </form>
-                                            `;
-                                } else {
-                                    // if user's last ip OR account ISN'T BANNED
-                                    urlBanIpAndAccountToReplace = "{{ route('admin.ban-ip-account', '__ID__') }}";
-                                    urlBanIpAndAccount = urlBanIpAndAccountToReplace.replace('__ID__', row.id);
-
-                                    text += `
-                                                <form action="`+urlBanIpAndAccount+`" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button type="submit" class="btn btn-danger mb-1">Zbanuj IP oraz Konto</button>
-                                                </form>
-                                            `;
-                                }
-
-                                urlDeleteAccountToReplace = "{{ route('admin.delete-account', '__ID__') }}";
-                                urlDeleteAccount = urlDeleteAccountToReplace.replace('__ID__', row.id);
-
-                                text += `
-                                            <form action="`+urlDeleteAccount+`" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-warning mb-1">Usuń konto</button>
-                                            </form>
-                                        `;
-                            } else if (row.permission == 2) {
-                                // ADMIN
-                                text += ''
+                            if (row.permission == 2) {
+                                return '<i class="bi bi-shield-lock text-danger"></i>';
                             }
 
-                            urlResetTokenToReplace = "{{ route('admin.reset-api-token', '__ID__') }}";
-                            urlResetToken = urlResetTokenToReplace.replace('__ID__', row.id);
-                            text += `
-                                        <form action="`+urlResetToken+`" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-primary mb-1">Zresetuj token</button>
-                                        </form>
+                            if (row.visitor_unique != null) {
+                                return `
+                                        <button onclick="changeModalsContent(
+                                                '`+row.id+`',
+                                                '`+row.name+`',
+                                                '`+row.permission+`',
+                                                '`+row.user_banned+`',
+                                                '`+row.visitor_unique.id+`',
+                                                '`+row.visitor_unique.ip+`',
+                                                '`+row.visitor_unique.ip_banned+`'
+                                            );"
+                                                type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#userActionModal">
+                                            <i class="bi bi-gear"></i>
+                                        </button>
                                     `;
+                            } else {
+                                // visitor unique relation might be null for a few persons only when database is filled using db:seed
+                                return '<i class="bi bi-question-circle"></i>';
+                            }
 
-                            return text;
-                        },
+                        }
                     },
                 ]
             });

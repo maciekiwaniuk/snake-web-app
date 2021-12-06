@@ -162,4 +162,16 @@ class Controller extends BaseController
 
         $log->save();
     }
+
+    /**
+     * Return user's name by id
+     */
+    public function getNameByUserId($user_id)
+    {
+        $user = User::query()
+            ->where('id', '=', $user_id)
+            ->first();
+
+        return $user->name;
+    }
 }

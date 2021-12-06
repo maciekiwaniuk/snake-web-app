@@ -41,7 +41,7 @@
 
                 <div class="accordion" id="optionsAccordion">
 
-                    <!-- Avatar -->
+                    <!-- Awatar -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingAvatar">
                             <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAvatar" aria-expanded="false" aria-controls="collapseAvatar">
@@ -65,7 +65,7 @@
 
 
 
-                    <!-- Password -->
+                    <!-- Hasło -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingPassword">
                             <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePassword" aria-expanded="false" aria-controls="collapsePassword">
@@ -204,7 +204,7 @@
 
 
 
-                    <!-- Other -->
+                    <!-- Inne -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingActions">
                             <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActions" aria-expanded="false" aria-controls="collapseActions">
@@ -214,7 +214,7 @@
                         <div id="collapseActions" class="accordion-collapse @if(isset($selected) && $selected=="inne") collapse show @else collapse @endif" aria-labelledby="headingActions" data-bs-parent="#optionsAccordion">
                             <div class="bg-accordion-body accordion-body">
 
-                                <!-- Delete account button -->
+                                <!-- Usuń konto przycisk -->
                                 <button type="button" id="deleteAccountButton" class="btn btn-danger border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
                                     Usuń konto
                                 </button>
@@ -223,7 +223,7 @@
                                     Wyloguj z gry na wszystkich urządzeniach
                                 </button>
 
-                                <!-- Delete account modal -->
+                                <!-- Usuń konto modal -->
                                 <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content border border-3 border-danger">

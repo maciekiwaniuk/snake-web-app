@@ -89,9 +89,15 @@ class UsersController extends Controller
 
             $banned_ip->ip_banned = 1;
             $banned_ip->save();
+
+            return back()
+                ->with('success', 'IP '.$banned_ip->ip.' użytkownika '.$user->name.' zostało pomyślnie zbanowane.');
         }
 
-        return back();
+        return back()
+            ->withErrors([
+                'error' => 'Coś poszło nie tak przy banowaniu IP '.$ip.' użytkownika '.$user->name.'.'
+            ]);
     }
 
     /**
@@ -116,7 +122,8 @@ class UsersController extends Controller
             'Administrator '.Auth::user()->name.' odbanował IP: '.$ip.' użytkownika '.$user->name.'.'
         );
 
-        return back();
+        return back()
+            ->with('success', 'IP '.$banned_ip->ip.' użytkownika '.$user->name.' zostało pomyślnie odbanowane.');
     }
 
     /**
@@ -127,15 +134,24 @@ class UsersController extends Controller
         $user = User::query()
             ->where('id', '=', $id)
             ->first();
-        $user->user_banned = 1;
-        $user->save();
 
-        $this->createAppLog(
-            'account_ban',
-            'Administrator '.Auth::user()->name.' zbanował użytkownika '.$user->name.'.'
-        );
+        if (!$user->isAdmin()) {
+            $user->user_banned = 1;
+            $user->save();
 
-        return back();
+            $this->createAppLog(
+                'account_ban',
+                'Administrator '.Auth::user()->name.' zbanował konto użytkownika '.$user->name.'.'
+            );
+
+            return back()
+                ->with('success', 'Konto użytkownika '.$user->name.' zostało pomyślnie zbanowane.');
+        }
+
+        return back()
+            ->withErrors([
+                'error' => 'Coś poszło nie tak przy banowaniu konta użytkownika '.$user->name.'.'
+            ]);
     }
 
     /**
@@ -151,10 +167,11 @@ class UsersController extends Controller
 
         $this->createAppLog(
             'account_unban',
-            'Administrator '.Auth::user()->name.' odbanował użytkownika '.$user->name.'.'
+            'Administrator '.Auth::user()->name.' odbanował konto użytkownika '.$user->name.'.'
         );
 
-        return back();
+        return back()
+            ->with('success', 'Konto użytkownika '.$user->name.' zostało pomyślnie odbanowane.');
     }
 
     /**
@@ -170,7 +187,7 @@ class UsersController extends Controller
 
         $this->createAppLog(
             'account_ban',
-            'Administrator '.Auth::user()->name.' zbanował użytkownika '.$user->name.'.'
+            'Administrator '.Auth::user()->name.' zbanował konto użytkownika '.$user->name.'.'
         );
 
         $ip = $user->last_login_ip;
@@ -187,9 +204,13 @@ class UsersController extends Controller
 
             $banned_ip->ip_banned = 1;
             $banned_ip->save();
+
+            return back()
+                ->with('success', 'Konto użytkownika '.$user->name.' oraz IP zostało pomyślnie zbanowane.');
         }
 
-        return back();
+        return back()
+            ->with('success', 'Konto użytkownika '.$user->name.' zostało pomyślnie zbanowane.');
     }
 
     /**
@@ -220,7 +241,8 @@ class UsersController extends Controller
             'Administrator '.Auth::user()->name.' odbanował IP: '.$ip.' użytkownika '.$user->name.'.'
         );
 
-        return back();
+        return back()
+            ->with('success', 'Konto użytkownika '.$user->name.' oraz IP zostało pomyślnie odbanowane.');
     }
 
     /**
@@ -228,9 +250,12 @@ class UsersController extends Controller
      */
     public function deleteUserAccount($id)
     {
+        $user_name = $this->getNameByUserId($id);
+
         $this->deleteUserAccountByID($id);
 
-        return back();
+        return back()
+            ->with('success', 'Konto użytkownika '.$user_name.' zostało usunięte pomyślnie.');
     }
 
     /**
@@ -249,6 +274,7 @@ class UsersController extends Controller
             'Administrator '.Auth::user()->name.' zresetował api_token użytkownika '.$user->name.'.'
         );
 
-        return back();
+        return back()
+            ->with('success', 'API token użytkownika '.$user->name.' zostało zresetowany pomyślnie.');
     }
 }

@@ -86,7 +86,7 @@
                         <textarea name="content" class="form-control" rows="5" required>{{ old('content') }}</textarea>
                     </div>
 
-                    @if(env('CAPTCHA_VALIDATION'))
+                    @if(env('CAPTCHA_VALIDATION_ENABLED'))
                         <div class="col-12 text-center">
                             <div class="g-recaptcha" data-sitekey="{{ env('CAPTCHA_PUBLIC_KEY') }}"></div>
                         </div>

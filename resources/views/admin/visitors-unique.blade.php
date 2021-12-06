@@ -54,6 +54,20 @@
                     </label>
                 </div>
 
+                @if ($errors->any())
+                    <div class="col-12 col-sm-10 mx-auto
+                                text-center mb-3 p-2 pb-3
+                                mt-2 fs-6
+                                border border-2 border-danger
+                                border-radius-15 bg-error">
+                        @foreach ($errors->all() as $error)
+                            <div class="invalid-feedback d-block">
+                                <strong>• {{ $error }}</strong>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
                 @if (session('success'))
                     <div class="col-12 col-sm-10 mx-auto
                                 text-center mb-3 p-2 pb-3
@@ -200,7 +214,7 @@
                                                     '`+row.id+`',
                                                     '`+row.ip+`',
                                                     '`+row.ip_banned+`'
-                                                )"
+                                                );"
                                                     type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#banStatusConfirmationModal">
                                                 Odbanuj
                                             </button>
@@ -212,7 +226,7 @@
                                                     '`+row.id+`',
                                                     '`+row.ip+`',
                                                     '`+row.ip_banned+`'
-                                                )"
+                                                );"
                                                     type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#banStatusConfirmationModal">
                                                 Zbanuj
                                             </button>

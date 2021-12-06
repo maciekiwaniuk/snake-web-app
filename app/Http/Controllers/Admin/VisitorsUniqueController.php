@@ -79,10 +79,15 @@ class VisitorsUniqueController extends Controller
 
             $ip->ip_banned = 1;
             $ip->save();
+
+            return back()
+                ->with('success', 'IP: '.$ip->ip.' zostało pomyślnie zbanowane.');
         }
 
         return back()
-            ->with('success', 'IP: '.$ip->ip.' zostało pomyślnie zbanowane.');
+            ->withErrors([
+                'error' => 'Coś poszło nie tak podczas próby zbanowania IP: '.$ip->ip.'.'
+            ]);
     }
 
     /**
