@@ -20,6 +20,18 @@ class UsersController extends Controller
     }
 
     /**
+     * Show users admin index page with searched user
+     */
+    public function show($user_id)
+    {
+        $name = $this->getNameByUserId($user_id);
+
+        return view('admin.users', [
+            'searched_user_name' => $name
+        ]);
+    }
+
+    /**
      * Return all users
      */
     public function getAllUsers()

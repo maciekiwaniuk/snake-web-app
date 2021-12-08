@@ -62,7 +62,7 @@ Route::prefix('ranking')->group(function() {
 
 /********************************************************* Admin routing *********************************************************/
 
-Route::prefix('admin')->middleware('admin')->group(function() {
+Route::prefix('administrator')->middleware('admin')->group(function() {
     Route::name('admin.')->group(function() {
         Route::put('/banowanie-ostatniego-ip/{id}', [UsersController::class, 'banLastUserIp'])->name('ban-last-ip');
         Route::put('/banowanie-konta/{id}', [UsersController::class, 'banAccount'])->name('ban-account');
@@ -78,10 +78,11 @@ Route::prefix('admin')->middleware('admin')->group(function() {
 
         Route::prefix('uzytkownicy')->group(function() {
             Route::name('users.')->group(function() {
-                Route::get('/', [UsersController::class, 'index'])->name('index');
                 Route::get('/uzytkownicy-wszyscy', [UsersController::class, 'getAllUsers'])->name('get-all-users');
                 Route::get('/uzytkownicy-zbanowani', [UsersController::class, 'getBannedUsers'])->name('get-banned-users');
                 Route::get('/uzytkownicy-niezbanowani', [UsersController::class, 'getNotBannedUsers'])->name('get-notbanned-users');
+                Route::get('/', [UsersController::class, 'index'])->name('index');
+                Route::get('/{id}', [UsersController::class, 'show'])->name('show');
             });
         });
 

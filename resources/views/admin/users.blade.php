@@ -366,6 +366,13 @@
                     datatype: "json",
                     contentType: "application/json",
                 },
+
+                @if (isset($searched_user_name))
+                    search: {
+                        search: '{{ $searched_user_name }}'
+                    },
+                @endif
+
                 columns: [
                     {
                         title: 'Numer',

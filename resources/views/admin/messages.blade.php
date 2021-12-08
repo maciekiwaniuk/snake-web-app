@@ -118,7 +118,7 @@
     <script>
 
         function changeModalMessageContent(message_id, date, subject, sender, email, content, sent_as_user, user_name) {
-            $('#message-date').val(date.slice(0, 10));
+            $('#message-date').val(date.slice(0, 10) + ' ' + date.slice(11, 19));
 
             if (subject == 'contact') {
                 $('#message-subject').text('Kontakt');
@@ -216,7 +216,7 @@
                             if (row.sent_as_user) {
                                 return '<i class="bi bi-check-lg text-success"></i>';
                             } else {
-                                return '<i class="bi bi-exclamation-circle text-danger"></i>';
+                                return '<i class="bi bi bi-x-circle text-danger"></i>';
                             }
                         },
                         class: 'align-middle',
@@ -239,9 +239,9 @@
                         title: 'Data',
                         data: '',
                         render: function (data, type, row, meta) {
-                            let hours = row.created_at.slice(0, 10);
-                            let minutes = row.created_at.slice(11, 19);
-                            return hours + " " + minutes;
+                            let days = row.created_at.slice(0, 9);
+                            let hours = row.created_at.slice(11, 19);
+                            return days + " " + hours;
                         },
                         class: 'align-middle'
                     },

@@ -248,61 +248,13 @@
                             class: 'align-middle',
                             orderable: false,
                             data: function (row, type, val, meta) {
-                                text = ``;
-                                if (row.permission != 2) {
-                                    urlDeleteUserToReplace = "{{ route('admin.delete-account', '__ID__') }}";
-                                    urlDeleteUser = urlDeleteUserToReplace.replace('__ID__', row.id);
-
-                                    urlBanIpToReplace = "{{ route('admin.ban-last-ip', '__ID__') }}";
-                                    urlBanIp = urlBanIpToReplace.replace('__ID__', row.uid);
-
-                                    urlBanAccountToReplace = "{{ route('admin.ban-account', '__ID__') }}";
-                                    urlBanAccount = urlBanAccountToReplace.replace('__ID__', row.id);
-
-                                    urlBanIpAndAccountToReplace = "{{ route('admin.ban-ip-account', '__ID__') }}";
-                                    urlBanIpAndAccount = urlBanIpAndAccountToReplace.replace('__ID__', row.id);
-
-                                    text += `
-
-                                            <form method="POST" action="`+urlBanIp+`">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-md btn-warning">Zbanuj IP</button>
-                                            </form>
-
-                                            <form method="POST" action="`+urlBanAccount+`" class="mt-1">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-md btn-danger">Zbanuj konto</button>
-                                            </form>
-
-                                            <form method="POST" action="`+urlBanIpAndAccount+`" class="mt-1">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-md btn-warning">Zbanuj konto oraz IP</button>
-                                            </form>
-
-                                            <form method="POST" action="`+urlDeleteUser+`" class="mt-1">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-md btn-danger">Usuń konto</button>
-                                            </form>
+                                urlRedirectToReplace = "{{ route('admin.users.show', '__ID__') }}";
+                                urlRedirect = urlRedirectToReplace.replace('__ID__', row.id);
+                                return `
+                                            <a href="`+urlRedirect+`" class="btn btn-danger">
+                                                <i class="bi bi-gear"></i>
+                                            </a>
                                         `;
-                                }
-
-
-                                urlResetTokenToReplace = "{{ route('admin.reset-api-token', '__ID__') }}";
-                                urlResetToken = urlResetTokenToReplace.replace('__ID__', row.id);
-                                text += `
-                                            <form action="`+urlResetToken+`" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-primary mb-1 mt-1">Zresetuj token</button>
-                                            </form>
-                                        `;
-                                return text;
-
-
                             },
                         },
                     @endif
