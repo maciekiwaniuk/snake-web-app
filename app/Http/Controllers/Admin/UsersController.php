@@ -83,9 +83,7 @@ class UsersController extends Controller
      */
     public function banLastUserIP($id)
     {
-        $user = User::query()
-            ->where('id', '=', $id)
-            ->first();
+        $user = $this->getUserInstanceById($id);
 
         $ip = $user->last_login_ip;
 
@@ -117,9 +115,7 @@ class UsersController extends Controller
      */
     public function unbanLastUserIP($id)
     {
-        $user = User::query()
-            ->where('id', '=', $id)
-            ->first();
+        $user = $this->getUserInstanceById($id);
 
         $ip = $user->last_login_ip;
 
@@ -143,9 +139,7 @@ class UsersController extends Controller
      */
     public function banAccount($id)
     {
-        $user = User::query()
-            ->where('id', '=', $id)
-            ->first();
+        $user = $this->getUserInstanceById($id);
 
         if (!$user->isAdmin()) {
             $user->user_banned = 1;
@@ -171,9 +165,7 @@ class UsersController extends Controller
      */
     public function unbanAccount($id)
     {
-        $user = User::query()
-            ->where('id', '=', $id)
-            ->first();
+        $user = $this->getUserInstanceById($id);
         $user->user_banned = 0;
         $user->save();
 
@@ -191,9 +183,7 @@ class UsersController extends Controller
      */
     public function banAccountAndIP($id)
     {
-        $user = User::query()
-            ->where('id', '=', $id)
-            ->first();
+        $user = $this->getUserInstanceById($id);
         $user->user_banned = 1;
         $user->save();
 
@@ -230,9 +220,7 @@ class UsersController extends Controller
      */
     public function unbanAccountAndIP($id)
     {
-        $user = User::query()
-            ->where('id', '=', $id)
-            ->first();
+        $user = $this->getUserInstanceById($id);
         $user->user_banned = 0;
         $user->save();
 
@@ -275,9 +263,7 @@ class UsersController extends Controller
      */
     public function resetApiToken($id)
     {
-        $user = User::query()
-            ->where('id', '=', $id)
-            ->first();
+        $user = $this->getUserInstanceById($id);
         $user->api_token = Str::random(60);
         $user->save();
 
@@ -289,4 +275,22 @@ class UsersController extends Controller
         return back()
             ->with('success', 'API token użytkownika '.$user->name.' zostało zresetowany pomyślnie.');
     }
+
+    /**
+     * Delete user's avatar
+     */
+    public function deleteAvatar($id)
+    {
+        $name = $this->getNameByUserId($id);
+        $this->deleteUserAvatarById($id);
+
+        $this->createAppLog(
+            'avatar_delete',
+            'Administrator '.Auth::user()->name.' usunął awatar użytkownika '.$name.'.'
+        );
+
+        return back()
+            ->with('success', 'Awatar użytkownika '.$name.' został pomyślnie usunięty.');
+    }
+
 }

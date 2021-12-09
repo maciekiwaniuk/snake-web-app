@@ -33,7 +33,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Mechanism of changing user's avatar - AJAX
+     * Change user's avatar
      */
     public function avatarChange(Request $request)
     {
@@ -67,7 +67,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Mechanism of user's deleting avatar - AJAX
+     * Delete user's avatar
      */
     public function avatarDelete()
     {
@@ -90,7 +90,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Mechanism of changing user's password
+     * Change user's password
      */
     public function passwordChange(ChangePasswordRequest $request)
     {
@@ -109,7 +109,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Mechanism of changing user's email
+     * Change user's email
      */
     public function emailChange(ChangeEmailRequest $request)
     {
@@ -129,8 +129,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Mechanism and validation confirmation
-     * of deleting user's account
+     * Validate form confirmation while deleting user's account
      */
     public function accountDelete(Request $request)
     {
@@ -161,7 +160,7 @@ class OptionsController extends Controller
     }
 
     /**
-     * Changing user's token - logout from game
+     * Change user's token - logout from game
      */
     public function logoutFromGame()
     {

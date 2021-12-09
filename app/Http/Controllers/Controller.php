@@ -45,10 +45,8 @@ class Controller extends BaseController
     }
 
     /**
-     * Function that:
-     * - adds user's avatar
-     * - deletes previous user's avatar
-     * - saves link to user's avatar in database
+     * Add user's avatar, delete previous user's avatar
+     * and save link to user's avatar in database
      */
     protected function changeUserAvatar($image)
     {
@@ -72,8 +70,8 @@ class Controller extends BaseController
     }
 
     /**
-     * Delete user's avatar and replacing
-     * it with default.png
+     * Delete current logged user's avatar and replace
+     * it with default
      */
     protected function deleteUserAvatar()
     {
@@ -82,6 +80,23 @@ class Controller extends BaseController
             Storage::delete($previous_avatar);
 
             $user = Auth::user();
+            $user->avatar = '/assets/images/avatar.png';
+            $user->save();
+        }
+    }
+
+    /**
+     * Find user by id and then delete his avatar and
+     * replace it with default
+     */
+    protected function deleteUserAvatarById($user_id)
+    {
+        $user = $this->getUserInstanceById($user_id);
+
+        if ($user->avatar != '/assets/images/avatar.png') {
+            $previous_avatar = $user->avatar;
+            Storage::delete($previous_avatar);
+
             $user->avatar = '/assets/images/avatar.png';
             $user->save();
         }
@@ -166,12 +181,22 @@ class Controller extends BaseController
     /**
      * Return user's name by id
      */
-    public function getNameByUserId($user_id)
+    public function getNameByUserId($id)
     {
         $user = User::query()
-            ->where('id', '=', $user_id)
+            ->where('id', '=', $id)
             ->first();
-
         return $user->name;
+    }
+
+    /**
+     * Return user instance by id
+     */
+    public function getUserInstanceById($id)
+    {
+        $user = User::query()
+            ->where('id', '=', $id)
+            ->first();
+        return $user;
     }
 }

@@ -184,7 +184,7 @@
                         title: 'Pierwsza wizyta',
                         data: 'created_at',
                         render: function (data, type, row, meta) {
-                            let days = row.created_at.slice(0, 9);
+                            let days = row.created_at.slice(0, 10);
                             let hours = row.created_at.slice(11, 19);
                             return days + " " + hours;
                         },

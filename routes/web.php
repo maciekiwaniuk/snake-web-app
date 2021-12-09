@@ -72,6 +72,7 @@ Route::prefix('administrator')->middleware('admin')->group(function() {
         Route::put('/odbanowanie-konta/{id}', [UsersController::class, 'unbanAccount'])->name('unban-account');
         Route::put('/odbanowanie-konta-oraz-ip/{id}', [UsersController::class, 'unbanAccountAndIP'])->name('unban-ip-account');
         Route::put('/resetowanie-api-tokenu/{id}', [UsersController::class, 'resetApiToken'])->name('reset-api-token');
+        Route::delete('/usuniecie-awatara/{id}', [UsersController::class, 'deleteAvatar'])->name('delete-avatar');
 
         Route::put('/zbanuj-konkretne-ip/{id}', [VisitorsUniqueController::class, 'banIp'])->name('ban-ip');
         Route::put('/odbanuj-konkretne-ip/{id}', [VisitorsUniqueController::class, 'unbanIp'])->name('unban-ip');

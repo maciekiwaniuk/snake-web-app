@@ -27,7 +27,7 @@
             z-index: 9999;
         }
 
-        #user-name,  .user-name-text{
+        #user-name, .user-name-text{
             font-weight: 700;
         }
     </style>
@@ -143,6 +143,11 @@
                             <div class="d-inline user-name-text"></div>
                         </div>
 
+                        <div id="avatar-delete-content">
+                            <div class="d-inline" id="avatar-delete-text"></div>
+                            <div class="d-inline user-name-text"></div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -175,6 +180,12 @@
                         @csrf
                         @method('PUT')
                         <button type="submit" class="btn btn-primary">Potwierdź</button>
+                    </form>
+
+                    <form method="POST" id="avatar-delete-confirmation-form">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-success">Potwierdź</button>
                     </form>
 
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
@@ -212,6 +223,10 @@
 
                         <button type="button" onclick="openTokenResetModal();" class="btn btn-primary mt-1" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
                             Zresetuj token
+                        </button> <br>
+
+                        <button type="button" onclick="openAvatarDeleteModal();" class="btn btn-success mt-1" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
+                            Usuń awatar
                         </button>
                     </div>
                 </div>
@@ -275,6 +290,13 @@
             hideModalContents();
             $('#token-reset-content').show();
             $('#token-reset-confirmation-form').show();
+        }
+
+        function openAvatarDeleteModal() {
+            hideModalForms();
+            hideModalContents();
+            $('#avatar-delete-content').show();
+            $('avatar-delete-confirmation-form').show();
         }
 
         function changeModalsContent(user_id, name, permission, user_banned, ip_id, ip, ip_banned) {
@@ -342,14 +364,20 @@
             urlDeleteAccountToReplace = "{{ route('admin.delete-account', '__ID__') }}";
             urlDeleteAccount = urlDeleteAccountToReplace.replace('__ID__', user_id);
             $('#account-delete-confirmation-form').attr('action', urlDeleteAccount);
+            $('#account-delete-text').text('Potwierdź usunięcie konta użytkownika');
 
             // Reset token
             urlResetTokenToReplace = "{{ route('admin.reset-api-token', '__ID__') }}";
             urlResetToken = urlResetTokenToReplace.replace('__ID__', user_id);
             $('#token-reset-confirmation-form').attr('action', urlResetToken);
-
-            $('#account-delete-text').text('Potwierdź usunięcie konta użytkownika');
             $('#token-reset-text').text('Potwierdź zresetowanie tokenu użytkownika');
+
+            // Delete avatar
+            urlDeleteAvatarToReplace = "{{ route('admin.delete-avatar', '__ID__') }}";
+            urlDeleteAvatar = urlDeleteAvatarToReplace.replace('__ID__', user_id);
+            $('#avatar-delete-confirmation-form').attr('action', urlDeleteAvatar);
+            $('#avatar-delete-text').text('Potwierdź usunięcie awatara dla użytkownika');
+
 
         }
 
