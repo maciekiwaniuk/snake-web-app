@@ -247,6 +247,7 @@
             $('#account-ip-ban-status-content').hide();
             $('#account-delete-content').hide();
             $('#token-reset-content').hide();
+            $('#avatar-delete-content').hide();
         }
 
         function hideModalForms() {
@@ -255,6 +256,7 @@
             $('#account-ip-ban-status-confirmation-form').hide();
             $('#account-delete-confirmation-form').hide();
             $('#token-reset-confirmation-form').hide();
+            $('#avatar-delete-confirmation-form').hide();
         }
 
         function openStatusBanIpModal() {
@@ -296,7 +298,7 @@
             hideModalForms();
             hideModalContents();
             $('#avatar-delete-content').show();
-            $('avatar-delete-confirmation-form').show();
+            $('#avatar-delete-confirmation-form').show();
         }
 
         function changeModalsContent(user_id, name, permission, user_banned, ip_id, ip, ip_banned) {

@@ -28,14 +28,11 @@
                                             rgb(137, 189, 6) 100%);
 }
 
-body{
+body {
     background-color: rgb(198, 234, 108) !important;
     background-image: url('/assets/images/background.jpg') !important;
 }
 
-label{
+label {
     font-weight: 700;
 }
-
-
-

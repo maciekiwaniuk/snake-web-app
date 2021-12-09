@@ -51,6 +51,9 @@
     <!-- Custom layout CSS -->
     <link href="{{ asset('css/custom/layout.css') }}" type="text/css" rel="stylesheet">
 
+    <!-- Send message component CSS -->
+    <link href="{{ asset('css/components/send-message.css') }}" type="text/css" rel="stylesheet">
+
     <!-- Bootstrap 5 CSS -->
     <link href="{{ asset('assets/plugins/Bootstrap/bootstrap.css') }}" type="text/css" rel="stylesheet">
 
@@ -115,6 +118,10 @@
         <!-- END CONTENT -->
 
     </div>
+
+    <!-- SEND MESSAGE ICON -->
+    @include('components.send-message')
+    <!-- END SEND MESSAGE ICON -->
 
     <!-- FOOTER -->
     @include('components.footer')
