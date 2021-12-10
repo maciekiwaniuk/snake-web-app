@@ -75,6 +75,11 @@
     <!-- cookie bar JS -->
     <script src="{{ asset('assets/plugins/cookieBar/jquery.cookieBar.js') }}"></script>
 
+    @if (env('CAPTCHA_VALIDATION_ENABLED'))
+        <!-- reCAPTCHA v2 JS -->
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    @endif
+
     @stack('assets')
 
     @stack('css')
@@ -95,6 +100,59 @@
                 style: 'bottom'
             });
         });
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        $(document).ready(function() {
+            $('#send-message-button').on('click', function() {
+                var subject = $('#subject').val();
+                var sender = $('#sender').val();
+                var email = $('#email').val();
+                var content = $('#content').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("message.store-AJAX") }}',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        subject: subject,
+                        sender: sender,
+                        email: email,
+                        content: content
+                    },
+                    success: function(response){
+                        if ( response.result.error ) {
+                            toastr.error(response.result.message);
+                        } else {
+                            toastr.success(response.result.message);
+                            $('#close-message-form-button').click();
+                            $('#content').val('');
+                            $('#subject').val('contact');
+
+                            @if (env('CAPTCHA_VALIDATION_ENABLED'))
+                                grecaptcha.reset();
+                            @endif
+                        }
+                    }
+                });
+            })
+        })
+
     </script>
 
     <div class="container-md mb-5" style="min-height: 100vh">

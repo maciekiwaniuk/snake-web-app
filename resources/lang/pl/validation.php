@@ -34,5 +34,8 @@ return [
         'old_password_correctness' => 'Aktualne hasło',
         'name' => 'Podana nazwa',
         'email' => 'Podany email',
+        'subject' => 'Temat',
+        'sender' => 'Nadawca',
+        'content' => 'Zawartość wiadomości'
     ],
 ];

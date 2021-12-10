@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\MessageRequest;
 use App\Models\Message;
+use App\Rules\MessageSubject;
+use App\Rules\reCAPTCHAv2;
 
 class MessageController extends Controller
 {
@@ -54,8 +58,29 @@ class MessageController extends Controller
     /**
      * Add user's message to database
      */
-    public function storeAJAX(MessageRequest $request)
+    public function storeAJAX(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'subject' => ['required', 'string', 'max:100', new MessageSubject],
+            'sender' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:100'],
+            'content' => ['required', 'string', 'max:500'],
+            'g-recaptcha-response' => [new reCAPTCHAv2]
+        ],
+        [
+            'email.email' => 'E-mail jest niepoprawny.'
+        ]);
+
+        if ($validator->fails()) {
+            $result = [
+                'error' => true,
+                'message' => $validator->errors()->first(),
+            ];
+            return response()->json([
+                'result' => $result
+            ]);
+        }
+
         $message = new Message();
         $message->subject = $request->subject;
         $message->sender = $request->sender;

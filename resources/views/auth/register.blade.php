@@ -4,18 +4,8 @@
     Rejestracja
 @endsection
 
-@push('js.header')
-    <!-- reCAPTCHA v2 JS -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-@endpush
-
 @section('content')
 
-<style>
-    .g-recaptcha {
-        display: inline-block;
-    }
-</style>
 
     <div class="row mt-2 mt-sm-3 mt-md-5">
 

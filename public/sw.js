@@ -8,7 +8,7 @@ var __webpack_exports__ = {};
 // cache then we should change version of cache name
 // in case to delete old cache - only for static caches
 // version of application from .env
-var app_version = "2.1"; // static caches
+var app_version = "1.0"; // static caches
 
 var imagesCache = 'images-cache-v' + app_version;
 var cssCache = 'css-cache-v' + app_version;
