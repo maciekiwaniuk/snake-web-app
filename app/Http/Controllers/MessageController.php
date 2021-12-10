@@ -29,7 +29,7 @@ class MessageController extends Controller
     }
 
     /**
-     * Mechanism of adding user's message to database
+     * Add user's message to database
      */
     public function store(MessageRequest $request)
     {
@@ -49,5 +49,34 @@ class MessageController extends Controller
 
         return redirect()->route('message.index')
             ->with('success', 'Wiadomość została pomyślnie wysłana.');
+    }
+
+    /**
+     * Add user's message to database
+     */
+    public function storeAJAX(MessageRequest $request)
+    {
+        $message = new Message();
+        $message->subject = $request->subject;
+        $message->sender = $request->sender;
+        $message->email = $request->email;
+        $message->content = $request->content;
+
+        if (Auth::check()) {
+            $message->sent_as_user = true;
+            $message->user_name = Auth::user()->name;
+        } else {
+            $message->sent_as_user = false;
+        }
+        $message->save();
+
+        $result = [
+            'success' => true,
+            'message' => 'Wiadomość została pomyślnie wysłana.'
+        ];
+
+        return response()->json([
+            'result' => $result
+        ]);
     }
 }

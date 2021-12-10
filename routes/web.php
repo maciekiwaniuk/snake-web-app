@@ -45,6 +45,7 @@ Route::prefix('wiadomosc')->group(function() {
         Route::get('/', [MessageController::class, 'index'])->name('index');
         Route::get('/{selected}', [MessageController::class, 'show'])->name('show');
         Route::post('/', [MessageController::class, 'store'])->name('index');
+        Route::post('/wyslij-wiadomosc', [MessageController::class,'storeAJAX'])->name('store-AJAX');
     });
 });
 
