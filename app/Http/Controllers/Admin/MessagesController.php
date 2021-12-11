@@ -22,6 +22,7 @@ class MessagesController extends Controller
     {
         $messages = Message::query()
             ->where('deleted', '=', 0)
+            ->orderBy('created_at', 'DESC')
             ->get();
 
         return response()->json([

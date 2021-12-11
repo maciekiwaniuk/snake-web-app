@@ -75,6 +75,9 @@
     <!-- cookie bar JS -->
     <script src="{{ asset('assets/plugins/cookieBar/jquery.cookieBar.js') }}"></script>
 
+    <!-- js-cookie JS -->
+    <script src="{{ asset('assets/plugins/js-cookie/js.cookie.min.js') }}"></script>
+
     @if (env('CAPTCHA_VALIDATION_ENABLED'))
         <!-- reCAPTCHA v2 JS -->
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -120,6 +123,13 @@
         }
 
         $(document).ready(function() {
+            var messageDivCookie = Cookies.get('message-div-state');
+            if (messageDivCookie == null) {
+                $('#main-message-div').attr('class', 'message-div d-none d-xxl-block');
+            } else {
+                $('#after-message-div-close').attr('class', 'closed-message-div d-none d-xxl-block');
+            }
+
             $('#send-message-button').on('click', function() {
                 var subject = $('#subject').val();
                 var sender = $('#sender').val();
@@ -137,6 +147,9 @@
                     },
                     success: function(response){
                         if ( response.result.error ) {
+                            @if (env('CAPTCHA_VALIDATION_ENABLED'))
+                                grecaptcha.reset();
+                            @endif
                             toastr.error(response.result.message);
                         } else {
                             toastr.success(response.result.message);
@@ -151,6 +164,13 @@
                     }
                 });
             })
+
+            $('#close-message-form-button').on('click', function() {
+                $('.message-div').attr('style', 'display: none !important;');
+                $('#after-message-div-close').attr('class', 'closed-message-div d-none d-xxl-block');
+                Cookies.set('message-div-state', true);
+            });
+
         })
 
     </script>

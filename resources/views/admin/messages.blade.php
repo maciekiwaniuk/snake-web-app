@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="sender">Od kogo</label>
+                            <label for="sender">Nazwa nadawcy</label>
                             <input type="text" id="message-sender" name="sender" class="form-control" disabled required>
                         </div>
 
@@ -198,7 +198,7 @@
                         orderable: false
                     },
                     {
-                        title: 'Od kogo',
+                        title: 'Nazwa nadawcy',
                         data: 'sender',
                         class: 'align-middle',
                         orderable: false

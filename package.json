@@ -19,5 +19,8 @@
         "postcss": "^8.2.1",
         "postcss-import": "^12.0.1",
         "tailwindcss": "^2.2.19"
+    },
+    "dependencies": {
+        "js-cookie": "^3.0.1"
     }
 }

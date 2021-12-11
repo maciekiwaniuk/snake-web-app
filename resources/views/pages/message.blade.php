@@ -72,12 +72,12 @@
                     </div>
 
                     <div class="col-12">
-                        <label for="sender">Od kogo</label>
+                        <label for="sender">Twoja nazwa</label>
                         <input type="text" name="sender" class="form-control" value="@if(Auth::check()){{ Auth::user()->name }}@else{{ old('sender') }}@endif" required>
                     </div>
 
                     <div class="col-12">
-                        <label for="email">E-mail</label>
+                        <label for="email">Twój e-mail</label>
                         <input type="text" name="email" class="form-control" value="@if(Auth::check()){{ Auth::user()->email }}@else{{ old('email') }}@endif" required>
                     </div>
 

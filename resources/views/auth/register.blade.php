@@ -4,8 +4,8 @@
     Rejestracja
 @endsection
 
-@section('content')
 
+@section('content')
 
     <div class="row mt-2 mt-sm-3 mt-md-5">
 
