@@ -127,6 +127,7 @@
             var cookiesState = Cookies.get('cookies-state');
             if (messageDivCookie == null) {
                 $('#main-message-div').attr('class', 'message-div d-none d-xxl-block');
+
                 if (cookiesState == null) {
                     $('#main-message-div').attr('style', 'margin-bottom: 1.7rem !important;');
                 }
@@ -134,9 +135,27 @@
                 $('#after-message-div-close').attr('class', 'closed-message-div d-none d-xl-block');
 
                 if (cookiesState == null) {
-                    $('#after-message-div-close').attr('style', 'margin-bottom: 2.7rem !important;');
+                    $('#after-message-div-close').attr('style', 'margin-bottom: 2.3rem !important;');
                 }
             }
+
+            $('#close-send-message-icon').on('click', function() {
+                $('.message-div').attr('style', 'display: none !important;');
+                $('#after-message-div-close').attr('class', 'closed-message-div d-none d-xl-block');
+                Cookies.set('message-div-state', true, { expires: 365 });
+
+                if (cookiesState == null) {
+                    $('#after-message-div-close').attr('style', 'margin-bottom: 2rem !important;');
+                }
+            });
+
+            $('.cookie-bar__btn').on('click', function() {
+                if (messageDivCookie == null) {
+                    $('#main-message-div').attr('style', '');
+                    $('#after-message-div-close').attr('style', 'margin-bottom: 0.1rem !important;');
+                }
+                $('#main-message-div').attr('style', 'display: none !important;');
+            });
 
             $('#send-message-button').on('click', function() {
                 var subject = $('#subject').val();
@@ -154,7 +173,7 @@
                         content: content
                     },
                     success: function(response){
-                        if ( response.result.error ) {
+                        if (response.result.error) {
                             @if (env('CAPTCHA_VALIDATION_ENABLED'))
                                 grecaptcha.reset();
                             @endif
@@ -172,17 +191,6 @@
                     }
                 });
             })
-
-            $('#close-message-form-button').on('click', function() {
-                $('.message-div').attr('style', 'display: none !important;');
-                $('#after-message-div-close').attr('class', 'closed-message-div d-none d-xl-block');
-                Cookies.set('message-div-state', true);
-            });
-
-            $('.cookie-bar__btn').on('click', function() {
-                $('#main-message-div').attr('style', '');
-                $('#after-message-div-close').attr('style', '');
-            });
 
         });
 

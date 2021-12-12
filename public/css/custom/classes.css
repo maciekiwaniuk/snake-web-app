@@ -169,3 +169,9 @@
     height: 80%;
     width: 80%;
 }
+
+/******* checkbox custom size *******/
+.checkbox-big {
+    width: 15px !important;
+    height: 15px !important;
+}

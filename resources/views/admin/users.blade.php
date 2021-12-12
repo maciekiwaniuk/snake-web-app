@@ -148,8 +148,29 @@
                             <div class="d-inline user-name-text"></div>
                         </div>
 
+                        <div id="user-data-modify-content">
+                            <div class="d-inline" id="user-data-modify-text"></div>
+                            <div class="d-inline user-name-text"></div>
+
+                            <div class="text-start mt-3">
+                                <label>Nowa nazwa</label> <br>
+                                <input type="text" id="user-name-input" disabled class="form-control w-75 d-inline">
+                                <input type="checkbox" id="name-enable-checkbox" class="d-inline ms-5 checkbox-big">
+
+                                <label class="mt-2">Nowy e-mail</label> <br>
+                                <input type="text" id="user-email-input" disabled class="form-control w-75 d-inline">
+                                <input type="checkbox" id="email-enable-checkbox" class="d-inline ms-5 checkbox-big">
+
+                                <label class="mt-2">Nowe hasło</label> <br>
+                                <input type="text" id="user-password-input" disabled class="form-control w-75 d-inline">
+                                <input type="checkbox" id="password-enable-checkbox" class="d-inline ms-5 checkbox-big">
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
+
 
                 <div class="modal-footer d-flex justify-content-around">
                     <form method="POST" id="ip-ban-status-confirmation-form">
@@ -186,6 +207,16 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-success">Potwierdź</button>
+                    </form>
+
+                    <form method="POST" id="user-data-modify-confirmation-form">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="name" id="user-name-hidden">
+                        <input type="hidden" name="email" id="user-email-hidden">
+                        <input type="hidden" name="password" id="user-password-hidden">
+
+                        <button id="modify-data-submit" class="btn btn-primary">Potwierdź</button>
                     </form>
 
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
@@ -227,6 +258,10 @@
 
                         <button type="button" onclick="openAvatarDeleteModal();" class="btn btn-success mt-1" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
                             Usuń awatar
+                        </button> <br>
+
+                        <button type="button" onclick="openModifyUserData();" class="btn btn-primary mt-1" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
+                            Zmodyfikuj dane
                         </button>
                     </div>
                 </div>
@@ -248,6 +283,7 @@
             $('#account-delete-content').hide();
             $('#token-reset-content').hide();
             $('#avatar-delete-content').hide();
+            $('#user-data-modify-content').hide();
         }
 
         function hideModalForms() {
@@ -257,6 +293,7 @@
             $('#account-delete-confirmation-form').hide();
             $('#token-reset-confirmation-form').hide();
             $('#avatar-delete-confirmation-form').hide();
+            $('#user-data-modify-confirmation-form').hide();
         }
 
         function openStatusBanIpModal() {
@@ -301,7 +338,14 @@
             $('#avatar-delete-confirmation-form').show();
         }
 
-        function changeModalsContent(user_id, name, permission, user_banned, ip_id, ip, ip_banned) {
+        function openModifyUserData() {
+            hideModalForms();
+            hideModalContents();
+            $('#user-data-modify-content').show();
+            $('#user-data-modify-confirmation-form').show();
+        }
+
+        function changeModalsContent(user_id, name, email, permission, user_banned, ip_id, ip, ip_banned) {
             $('#user-name').text(name);
             $('.user-name-text').text(name);
 
@@ -380,7 +424,11 @@
             $('#avatar-delete-confirmation-form').attr('action', urlDeleteAvatar);
             $('#avatar-delete-text').text('Potwierdź usunięcie awatara dla użytkownika');
 
-
+            // Modify user data
+            urlModifyUserDataToReplace = "{{ route('admin.modify-data', '__ID__') }}";
+            urlModifyUserData = urlModifyUserDataToReplace.replace('__ID__', user_id);
+            $('#user-data-modify-confirmation-form').attr('action', urlModifyUserData);
+            $('#user-data-modify-text').text('Modyfikacja danych dla użytkownika');
         }
 
         $(document).ready(function() {
@@ -486,6 +534,7 @@
                                         <button onclick="changeModalsContent(
                                                 '`+row.id+`',
                                                 '`+row.name+`',
+                                                '`+row.email+`',
                                                 '`+row.permission+`',
                                                 '`+row.user_banned+`',
                                                 '`+row.visitor_unique.id+`',
@@ -514,6 +563,48 @@
             });
             $('#notbannedUsers').on('click', function() {
                 usersTable.ajax.url("{{ route('admin.users.get-notbanned-users') }}").load();
+            });
+
+            $('#name-enable-checkbox').on('click', function() {
+                if ($('#user-name-input').prop('disabled')) {
+                    $('#user-name-input').prop('disabled', false);
+                } else {
+                    $('#user-name-input').prop('disabled', true);
+                }
+            });
+
+            $('#email-enable-checkbox').on('click', function() {
+                if ($('#user-email-input').prop('disabled')) {
+                    $('#user-email-input').prop('disabled', false);
+                } else {
+                    $('#user-email-input').prop('disabled', true);
+                }
+            });
+
+            $('#password-enable-checkbox').on('click', function() {
+                if ($('#user-password-input').prop('disabled')) {
+                    $('#user-password-input').prop('disabled', false);
+                } else {
+                    $('#user-password-input').prop('disabled', true);
+                }
+            });
+
+            $('#modify-data-submit').on('click', function() {
+                if ($('#name-enable-checkbox').prop('checked')) {
+                    $('#user-name-hidden').val($('#user-name-input').val());
+                }
+                if ($('#email-enable-checkbox').prop('checked')) {
+                    $('#user-email-hidden').val($('#user-email-input').val());
+                }
+                if ($('#password-enable-checkbox').prop('checked')) {
+                    $('#user-password-hidden').val($('#user-password-input').val());
+                }
+
+
+                if ($('#name-enable-checkbox').prop('checked') || $('#email-enable-checkbox').prop('checked') || $('#password-enable-checkbox').prop('checked')) {
+                    $('#user-data-modify-confirmation-form').submit()
+                }
+
             });
         });
 

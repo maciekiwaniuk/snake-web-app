@@ -8,7 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Request as RequestFacade;
 use App\Models\User;
 use App\Models\UserDeleted;
 use App\Models\AppLog;
@@ -158,7 +158,7 @@ class Controller extends BaseController
         $log->type = $type;
         $log->content = $content;
         $log->user_id = Auth::user()->id;
-        $log->ip = Request::ip();
+        $log->ip = RequestFacade::ip();
 
         $log->save();
     }
@@ -181,7 +181,7 @@ class Controller extends BaseController
     /**
      * Return user's name by id
      */
-    public function getNameByUserId($id)
+    protected function getNameByUserId($id)
     {
         $user = User::query()
             ->where('id', '=', $id)
@@ -192,7 +192,7 @@ class Controller extends BaseController
     /**
      * Return user instance by id
      */
-    public function getUserInstanceById($id)
+    protected function getUserInstanceById($id)
     {
         $user = User::query()
             ->where('id', '=', $id)

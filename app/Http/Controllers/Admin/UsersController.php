@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Http\Requests\Admin\ModifyUserDataRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\VisitorUnique;
-
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -291,6 +293,51 @@ class UsersController extends Controller
 
         return back()
             ->with('success', 'Awatar użytkownika '.$name.' został pomyślnie usunięty.');
+    }
+
+    /**
+     * Modify user's account data
+     */
+    public function modifyData(ModifyUserDataRequest $request, $id)
+    {
+        $user = $this->getUserInstanceById($id);
+
+        logger($request->all());
+
+        $modifiedData = [];
+        if (isset($request->name)) {
+            $user->name = $request->name;
+            $modifiedData[] = 'nazwa';
+        }
+
+        if (isset($request->email)) {
+            $user->email = $request->email;
+            $modifiedData[] = 'e-mail';
+        }
+
+        if (isset($request->password)) {
+            $user->password = Hash::make($request->password);
+            $modifiedData[] = 'hasło';
+        }
+
+        $user->save();
+
+        if (count($modifiedData) > 0) {
+            $text = implode(', ', $modifiedData);
+
+            $this->createAppLog(
+                'user_data_modify',
+                'Administrator '.Auth::user()->name.' zmodyfikował '.$text.' użytkownika '.$user->name.'.'
+            );
+
+            return back()
+                ->with('success', 'Dane ('.$text.') użytkownika '.$user->name.' zostały pomyślnie zmodyfikowane.');
+        }
+
+        return back()
+            ->withErrors([
+                'error' => 'Coś poszło nie tak przy modyfikacji danych dla użytkownika '.$user->name.'.'
+            ]);
     }
 
 }

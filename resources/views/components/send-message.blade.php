@@ -4,7 +4,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-light">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" id="close-message-form-button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body bg-light">
@@ -54,7 +54,7 @@
 
     <!-- Send message fixed left down corner div -->
     <div id="main-message-div" class="d-none">
-        <div id="close-message-form-button">
+        <div id="close-send-message-icon">
             <i class="message-close bi bi-x-lg"></i>
         </div>
 

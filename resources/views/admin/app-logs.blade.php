@@ -154,6 +154,8 @@
                                 return "Zbanowanie IP";
                             } else if (action == 'ip_unban') {
                                 return "Odbanowanie IP";
+                            } else if (action == 'user_data_modify') {
+                                return "Modyfikacja danych";
                             }
                             else {
                                 return "Coś nie pasuje";
