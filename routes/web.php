@@ -30,6 +30,8 @@ use App\Mail\WelcomeMail;
 Route::get('/', [PagesController::class, 'index'])->middleware('unique.visitor')->name('home');
 Route::get('/strona-offline', [PagesController::class, 'offlineFallback'])->name('offline-fallback');
 
+Route::get('/gra', [PagesController::class, 'miniGamePage'])->name('mini-game');
+
 Route::get('/pobierz-gre', [GameHostingsController::class, 'index'])->name('download');
 Route::get('/profil/{name}', [ProfileController::class, 'show'])->name('profile');
 

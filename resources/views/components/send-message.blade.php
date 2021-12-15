@@ -45,8 +45,8 @@
                 </div>
 
                 <div class="modal-footer d-flex justify-content-around bg-light">
-                    <button id="send-message-button" class="btn btn-success">Wyślij</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                    <button id="send-message-button" class="btn btn-success border border-2 border-dark">Wyślij</button>
+                    <button type="button" class="btn btn-secondary border border-2 border-dark" data-bs-dismiss="modal">Zamknij</button>
                 </div>
             </div>
         </div>

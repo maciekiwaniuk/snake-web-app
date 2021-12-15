@@ -19,4 +19,12 @@ class PagesController extends Controller
     {
         return view('pages.offline-fallback');
     }
+
+    /**
+     * Show mini-game page
+     */
+    public function miniGamePage()
+    {
+        return view('pages.mini-game');
+    }
 }

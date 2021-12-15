@@ -12,7 +12,6 @@
     grid-template-rows: repeat(21, 1fr);
     grid-template-columns: repeat(21, 1fr);
 }
-
 .snake{
     background-color: hsl(200, 100%, 50%);
     border: .25vmin solid black;
@@ -20,4 +19,4 @@
 .food {
     background-color: hsl(50, 100%, 50%);
     border: .25vmin solid black;
-  }
+}

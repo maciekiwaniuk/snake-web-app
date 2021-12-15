@@ -302,8 +302,6 @@ class UsersController extends Controller
     {
         $user = $this->getUserInstanceById($id);
 
-        logger($request->all());
-
         $modifiedData = [];
         if (isset($request->name)) {
             $user->name = $request->name;
@@ -327,7 +325,7 @@ class UsersController extends Controller
 
             $this->createAppLog(
                 'user_data_modify',
-                'Administrator '.Auth::user()->name.' zmodyfikował '.$text.' użytkownika '.$user->name.'.'
+                'Administrator '.Auth::user()->name.' zmodyfikował dane ('.$text.') użytkownika '.$user->name.'.'
             );
 
             return back()

@@ -1,4 +1,11 @@
 <style>
+    .envelope-icon {
+        color: black !important;
+    }
+    .envelope-icon:hover {
+        color: rgb(82, 82, 82) !important;
+    }
+
     .linkedin {
         color: #0e76a8 !important;
     }
@@ -21,7 +28,7 @@
     <div class="container text-center">
         <div class="text-muted col-12">
 
-            <a class="link-none" href="mailto:iwaniukmaciej.kontakt@gmail.com">
+            <a class="link-none envelope-icon" href="mailto:iwaniukmaciej.kontakt@gmail.com">
                 <i class="bi bi-envelope me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="iwaniukmaciej.kontakt@gmail.com"></i>
             </a>
 

@@ -26,7 +26,7 @@ class reCAPTCHAv2 implements Rule
                 return false;
             }
         }
-        return true;
+        return false;
     }
 
     /**

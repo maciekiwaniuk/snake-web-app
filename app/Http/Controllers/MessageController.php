@@ -65,10 +65,13 @@ class MessageController extends Controller
             'sender' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:100'],
             'content' => ['required', 'string', 'max:500'],
-            'g-recaptcha-response' => [new reCAPTCHAv2]
+            'g_recaptcha_response' => [new reCAPTCHAv2]
         ],
         [
-            'email.email' => 'E-mail jest niepoprawny.'
+            'email.email' => 'E-mail jest niepoprawny.',
+            'sender.required' => 'Twoja nazwa jest wymagana.',
+            'email.required' => 'Twój e-mail jest wymagany.',
+            'content.required' => 'Treść wiadomości jest wymagana.'
         ]);
 
         if ($validator->fails()) {

@@ -153,8 +153,9 @@
                 if (messageDivCookie == null) {
                     $('#main-message-div').attr('style', '');
                     $('#after-message-div-close').attr('style', 'margin-bottom: 0.1rem !important;');
+                } else {
+                    $('#main-message-div').attr('style', 'display: none !important;');
                 }
-                $('#main-message-div').attr('style', 'display: none !important;');
             });
 
             $('#send-message-button').on('click', function() {
@@ -162,6 +163,7 @@
                 var sender = $('#sender').val();
                 var email = $('#email').val();
                 var content = $('#content').val();
+                var g_recaptcha_response = grecaptcha.getResponse();
                 $.ajax({
                     type: 'POST',
                     url: '{{ route("message.store-AJAX") }}',
@@ -170,7 +172,8 @@
                         subject: subject,
                         sender: sender,
                         email: email,
-                        content: content
+                        content: content,
+                        g_recaptcha_response: grecaptcha.getResponse()
                     },
                     success: function(response){
                         if (response.result.error) {

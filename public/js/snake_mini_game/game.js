@@ -21,7 +21,6 @@ function update() {
 }
 
 function draw() {
-    console.log()
     drawSnake(gameBoard)
 }
 
