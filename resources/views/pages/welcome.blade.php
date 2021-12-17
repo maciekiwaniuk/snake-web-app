@@ -76,7 +76,7 @@
 
 
     <!-- MINI GAME SNAKE -->
-    <div class="d-block d-sm-none">
+    <div class="d-block">
         <div class="row">
             <div class="mx-auto text-center
                         mt-2 mt-sm-4

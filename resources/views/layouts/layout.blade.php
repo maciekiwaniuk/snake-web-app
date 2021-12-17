@@ -95,7 +95,7 @@
     <script>
         // check if serviceWorker is avaliable in the browser
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register("{{ asset('sw.js') }}");
+            // navigator.serviceWorker.register("{{ asset('sw.js') }}");
         }
 
         $(function() {
@@ -163,7 +163,9 @@
                 var sender = $('#sender').val();
                 var email = $('#email').val();
                 var content = $('#content').val();
-                var g_recaptcha_response = grecaptcha.getResponse();
+                @if (env('CAPTCHA_VALIDATION_ENABLED'))
+                    var g_recaptcha_response = grecaptcha.getResponse();
+                @endif
                 $.ajax({
                     type: 'POST',
                     url: '{{ route("message.store-AJAX") }}',
@@ -172,8 +174,11 @@
                         subject: subject,
                         sender: sender,
                         email: email,
-                        content: content,
-                        g_recaptcha_response: grecaptcha.getResponse()
+                        @if (env('CAPTCHA_VALIDATION_ENABLED'))
+                            g_recaptcha_response: grecaptcha.getResponse(),
+                        @endif
+                        content: content
+
                     },
                     success: function(response){
                         if (response.result.error) {
