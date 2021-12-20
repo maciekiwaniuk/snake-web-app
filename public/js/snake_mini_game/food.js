@@ -1,12 +1,15 @@
-import { ateBySnake, expandSnake } from './snake.js';
-import { getRandomGridPosition } from './grid.js';
+import { positionIsInSnakeBody,
+         expandSnake } from './snake.js';
 
-let foodBody = getRandomFoodPosition();
+import { getRandomGridPosition } from './grid.js';
 
 const SNAKE_BODY_EXPANSION_RATE = 1;
 
+let foodBody = getRandomFoodPosition();
+
+
 export function update() {
-    if (ateBySnake(foodBody)) {
+    if (positionIsInSnakeBody(foodBody)) {
         expandSnake(SNAKE_BODY_EXPANSION_RATE);
         foodBody = getRandomFoodPosition();
     }
@@ -22,7 +25,7 @@ export function draw(gameBoard) {
 
 function getRandomFoodPosition() {
     let newFoodPosition;
-    while (newFoodPosition == null || ateBySnake(newFoodPosition)) {
+    while (newFoodPosition == null || positionIsInSnakeBody(newFoodPosition)) {
         newFoodPosition = getRandomGridPosition();
     }
     return newFoodPosition;

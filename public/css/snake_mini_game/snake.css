@@ -1,22 +1,35 @@
-.snake-game-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-}
-#game-board{
-    background: #CCC;
-    width: 90vmin;
-    height: 90vmin;
-    display: grid;
-    grid-template-rows: repeat(21, 1fr);
-    grid-template-columns: repeat(21, 1fr);
-}
-.snake{
-    background-color: hsl(200, 100%, 50%);
+
+.snake-segment{
+    background-color: hsl(200, 92%, 66%);
     border: .25vmin solid black;
 }
-.food {
-    background-color: hsl(50, 100%, 50%);
-    border: .25vmin solid black;
+
+.snake-border-to-left {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+.snake-border-to-right {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+.snake-border-to-top {
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+}
+.snake-border-to-bottom {
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.snake-border-top-left {
+    border-top-left-radius: 50%;
+}
+.snake-border-top-right {
+    border-top-right-radius: 50%;
+}
+.snake-border-bottom-left {
+    border-bottom-left-radius: 50%;
+}
+.snake-border-bottom-right {
+    border-bottom-right-radius: 50%;
 }

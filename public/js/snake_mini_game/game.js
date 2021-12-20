@@ -1,36 +1,51 @@
-import { update as updateSnake, draw as drawSnake, SNAKE_SPEED, getSnakeHeadPosition, snakeHitsHisBody } from './snake.js';
-import { update as updateFood, draw as drawFood } from './food.js';
-import { outsideGrid } from './grid.js';
+import { SNAKE_SPEED,
+         update as updateSnake,
+         draw as drawSnake,
+         getSnakeHeadPosition,
+         snakeHitBody } from './snake.js';
+
+import { update as updateFood,
+         draw as drawFood } from './food.js';
+
+import { outsideGrid as snakeHitWall } from './grid.js';
+
+const gameBoard = document.getElementById('game-board');
 
 let lastRenderTime = 0;
 let gameOver = false;
-const gameBoard = document.getElementById('game-board');
+let gameStarted = false;
 
-// prevent to move website while clicking arrows, wsad or space
 let keysSnakeGameMoves = [
     'ArrowUp', 'ArrowDown',
     'ArrowLeft', 'ArrowRight',
+    'KeyW', 'KeyS',
+    'KeyA', 'KeyD',
     'Space'
-]
+];
+// prevent to move website while clicking arrow or space
 window.addEventListener('keydown', event => {
     if(keysSnakeGameMoves.includes(event.code)) {
+        gameStarted = true;
         event.preventDefault();
     }
 }, false);
 
+// main loop function
 function main(currentTime) {
-
     window.requestAnimationFrame(main);
+
     const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
     if (secondsSinceLastRender < 1 / SNAKE_SPEED) return;
 
     lastRenderTime = currentTime;
 
-    update();
+    if (gameStarted) {
+        update();
+    }
     draw();
 }
 
-// animation loop -> looping main function
+// start animation loop function
 window.requestAnimationFrame(main);
 
 function update() {
@@ -46,7 +61,7 @@ function draw() {
 }
 
 function checkSnakeFail() {
-    gameOver = outsideGrid(getSnakeHeadPosition) || snakeHitsHisBody();
+    gameOver = snakeHitWall(getSnakeHeadPosition()) || snakeHitBody();
 }
 
 

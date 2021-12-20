@@ -10,7 +10,9 @@
     <link href="{{ asset('css/pages/welcome.css') }}" type="text/css" rel="stylesheet">
 
     <!-- Snake CSS -->
+    <link href="{{ asset('css/snake_mini_game/snake-mini-game.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ asset('css/snake_mini_game/snake.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('css/snake_mini_game/food.css') }}" type="text/css" rel="stylesheet">
 @endpush
 
 
