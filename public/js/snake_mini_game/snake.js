@@ -1,4 +1,7 @@
 import { getInputDirection } from './input.js';
+import { updateScore,
+         updateScoreRecord,
+         updateTime } from './score.js';
 
 export const SNAKE_SPEED = 5;
 
@@ -14,6 +17,7 @@ let snakeTailDirection = { x: 0, y: 0 };
 let snakeBodyLength;
 let snakeHeadDiv;
 let snakeTailDiv;
+let score = 0;
 
 export function update() {
     for (let i = 0; i < newSegments; newSegments--) {
@@ -21,12 +25,14 @@ export function update() {
     }
 
     const inputDirection = getInputDirection();
+
     for (let i = snakeBody.length - 2; i >= 0; i--) {
         snakeBody[i + 1] = { ...snakeBody[i] };
     }
     snakeBody[0].x += inputDirection.x;
     snakeBody[0].y += inputDirection.y;
 
+    score = snakeBody.length - 3;
 }
 
 export function draw(gameBoard) {
@@ -60,6 +66,10 @@ export function draw(gameBoard) {
     snakeTailDirection = getSnakeTailDirection(snakeBody);
     snakeTailDiv = document.getElementById('snake-tail');
     snakeTailDiv = getSnakeTailWithCorrectClassAppearance(snakeTailDiv, snakeTailDirection);
+
+    // draw score bar
+    updateScoreRecord(score);
+    updateScore(score);
 }
 
 export function expandSnake(amount) {

@@ -13,6 +13,7 @@
     <link href="{{ asset('css/snake_mini_game/snake-mini-game.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ asset('css/snake_mini_game/snake.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ asset('css/snake_mini_game/food.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('css/snake_mini_game/score.css') }}" type="text/css" rel="stylesheet">
 @endpush
 
 
@@ -87,14 +88,32 @@
                         border border-2 border-success border-radius
                         bg-gradient-to-right
                         border-radius-15"
-                        style="width:92vmin !important;">
+                        style="width:84vmin !important;">
                         Snake mini-gra</div>
         </div>
 
+        <div class="snake-game-score">
+            <div id="game-score" class="border border-2 border-success
+                                        d-flex justify-content-around">
+                <div id="score-record-div">
+                    Rekordowy wynik: <span id="score-record"></span>
+                </div>
+
+                <div id="score-div">
+                    Aktualny wynik: <span id="score"></span>
+                </div>
+
+                <div id="time-div">
+                    Czas: <span id="time">00:00</span>
+                </div>
+            </div>
+        </div>
 
         <div class="snake-game-content">
-            <div id="game-board" class="border border-2 border-success"></div>
+            <div class="snake-game-background"></div>
+            <div id="game-board" class="border border-top-0 border-2 border-success"></div>
         </div>
+
     </div>
     <!-- END MINI GAME SNAEK -->
 

@@ -30,6 +30,23 @@ window.addEventListener('keydown', event => {
 });
 
 export function getInputDirection() {
+    if (lastInputDirection.x == 0 && lastInputDirection.y == 0 &&
+        inputDirection.x == 1 && inputDirection.y == 0) {
+        return {
+            x: 0,
+            y: 0
+        };
+    }
+
     lastInputDirection = inputDirection;
+
+    // console.log('lastInputDirection.x ==> '+lastInputDirection.x);
+    // console.log('lastInputDirection.y ==> '+lastInputDirection.y);
+    // console.log('inputDirection.x ==> '+inputDirection.x);
+    // console.log('inputDirection.y ==> '+inputDirection.y);
+    // console.log('====');
+
+
+    console.log(inputDirection);
     return inputDirection;
 }
