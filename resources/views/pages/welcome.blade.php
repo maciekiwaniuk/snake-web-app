@@ -110,7 +110,10 @@
         </div>
 
         <div class="snake-game-content">
-            <div class="snake-game-background"></div>
+
+            <div class="snake-game-background">
+                <img class="w-100" src="{{ asset('assets/images/snake_mini_game/board_background_1.png') }}">
+            </div>
             <div id="game-board" class="border border-top-0 border-2 border-success"></div>
         </div>
 
