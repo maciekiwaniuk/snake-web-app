@@ -1,7 +1,10 @@
 
 .snake-segment{
-    background-color: hsl(200, 92%, 66%);
     border: .25vmin solid black;
+}
+
+.snake-blue-background {
+    background-color: hsl(200, 92%, 66%);
 }
 
 .snake-border-to-left {

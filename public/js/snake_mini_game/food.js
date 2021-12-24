@@ -3,6 +3,8 @@ import { positionIsInSnakeBody,
 
 import { getRandomGridPosition } from './grid.js';
 
+import { getFoodBodyWithSelectedFoodAppearance } from './options.js';
+
 const SNAKE_BODY_EXPANSION_RATE = 1;
 
 let foodBody = getRandomFoodPosition();
@@ -16,7 +18,8 @@ export function update() {
 }
 
 export function draw(gameBoard) {
-    const foodElement = document.createElement('div');
+    let foodElement = document.createElement('div');
+    foodElement = getFoodBodyWithSelectedFoodAppearance(foodElement);
     foodElement.style.gridRowStart = foodBody.x;
     foodElement.style.gridColumnStart = foodBody.y;
     foodElement.classList.add('food');

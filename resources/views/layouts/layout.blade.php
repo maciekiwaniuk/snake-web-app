@@ -144,12 +144,14 @@
                 $('#after-message-div-close').attr('class', 'closed-message-div d-none d-xl-block');
                 Cookies.set('message-div-state', true, { expires: 365 });
 
+                cookiesState = Cookies.get('cookies-state');
                 if (cookiesState == null) {
                     $('#after-message-div-close').attr('style', 'margin-bottom: 2rem !important;');
                 }
             });
 
             $('.cookie-bar__btn').on('click', function() {
+                messageDivCookie = Cookies.get('message-div-state');
                 if (messageDivCookie == null) {
                     $('#main-message-div').attr('style', '');
                     $('#after-message-div-close').attr('style', 'margin-bottom: 0.1rem !important;');
@@ -163,9 +165,6 @@
                 var sender = $('#sender').val();
                 var email = $('#email').val();
                 var content = $('#content').val();
-                @if (env('CAPTCHA_VALIDATION_ENABLED'))
-                    var g_recaptcha_response = grecaptcha.getResponse();
-                @endif
                 $.ajax({
                     type: 'POST',
                     url: '{{ route("message.store-AJAX") }}',

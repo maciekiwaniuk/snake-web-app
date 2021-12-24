@@ -4,7 +4,6 @@
     Strona główna
 @endsection
 
-
 @push('css')
     <!-- Welcome page CSS -->
     <link href="{{ asset('css/pages/welcome.css') }}" type="text/css" rel="stylesheet">
@@ -15,8 +14,8 @@
     <link href="{{ asset('css/snake_mini_game/food.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ asset('css/snake_mini_game/score.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ asset('css/snake_mini_game/options.css') }}" type="text/css" rel="stylesheet">
+    <Link href="{{ asset('css/snake_mini_game/buttons.css') }}" type="text/css" rel="stylesheet">
 @endpush
-
 
 @push('js.header')
     <!-- Snake JS -->

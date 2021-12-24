@@ -68,7 +68,7 @@
 
     <!-- Envelope icon div when user close above div -->
     <div id="after-message-div-close" class="d-none">
-        <div class="closed-message-div-icon">
-            <i class="bi bi-envelope" data-bs-toggle="modal" data-bs-target="#messageFormModal"></i>
+        <div class="closed-message-div-icon"  data-bs-toggle="modal" data-bs-target="#messageFormModal">
+            <i class="bi bi-envelope"></i>
         </div>
     </div>

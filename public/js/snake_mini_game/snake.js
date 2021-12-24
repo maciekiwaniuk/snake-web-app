@@ -1,8 +1,9 @@
 import { getInputDirection } from './input.js';
+
 import { updateScore,
          updateScoreRecord } from './score.js';
 
-export const SNAKE_SPEED = 5;
+import { getSnakeSegmentWithSelectedSnakeAppearance } from './options.js';
 
 let snakeBody = [
     { x: 10, y: 11 },
@@ -26,12 +27,15 @@ export function update() {
     const inputDirection = getInputDirection();
 
     for (let i = snakeBody.length - 2; i >= 0; i--) {
-        snakeBody[i + 1] = { ...snakeBody[i] };
+        let nextSegment = {
+            x: snakeBody[i].x,
+            y: snakeBody[i].y
+        }
+        snakeBody[i + 1] = nextSegment;
     }
     snakeBody[0].x += inputDirection.x;
     snakeBody[0].y += inputDirection.y;
 
-    score = snakeBody.length - 3;
 }
 
 export function draw(gameBoard) {
@@ -40,6 +44,7 @@ export function draw(gameBoard) {
     // foreach on snake body segment
     snakeBody.forEach((segment, index) => {
         let snakeElement = document.createElement('div');
+        snakeElement = getSnakeSegmentWithSelectedSnakeAppearance(snakeElement);
         snakeElement.style.gridRowStart = segment.x;
         snakeElement.style.gridColumnStart = segment.y;
         snakeElement.classList.add('snake-segment');
@@ -66,7 +71,8 @@ export function draw(gameBoard) {
     snakeTailDiv = document.getElementById('snake-tail');
     snakeTailDiv = getSnakeTailWithCorrectClassAppearance(snakeTailDiv, snakeTailDirection);
 
-    // draw score bar
+    // draw score bar and handle data from cookie mechanism
+    score = snakeBody.length - 3;
     updateScoreRecord(score);
     updateScore(score);
 }
@@ -93,6 +99,14 @@ export function snakeHitBody() {
 
 export function getSnakeHeadPosition() {
     return snakeBody[0];
+}
+
+export function resetSnakePosition() {
+    snakeBody = [
+        { x: 10, y: 11 },
+        { x: 11, y: 11 },
+        { x: 12, y: 11 }
+    ];
 }
 
 function equalPositions(pos1, pos2) {
@@ -232,14 +246,7 @@ function getSnakeTailWithCorrectClassAppearance(snakeTailDiv, snakeTailDirection
     return snakeTailDiv;
 }
 
-function getDefaultSnakePosition(snakeBody) {
-    snakeBody = [
-        { x: 10, y: 11 },
-        { x: 11, y: 11 },
-        { x: 12, y: 11 }
-    ];
-    return snakeBody;
-}
+
 
 
 
