@@ -1,11 +1,10 @@
 import { getInputDirection } from './input.js';
 import { updateScore,
-         updateScoreRecord,
-         updateTime } from './score.js';
+         updateScoreRecord } from './score.js';
 
 export const SNAKE_SPEED = 5;
 
-const snakeBody = [
+let snakeBody = [
     { x: 10, y: 11 },
     { x: 11, y: 11 },
     { x: 12, y: 11 }
@@ -76,19 +75,24 @@ export function expandSnake(amount) {
     newSegments += amount;
 }
 
-export function positionIsInSnakeBody(position, { ignoreHead = false } = {}) {
+export function positionIsInSnakeBody(position) {
     return snakeBody.some((segment, index) => {
-        if (ignoreHead && index == 0) return false;
         return equalPositions(segment, position);
     });
 }
 
-export function getSnakeHeadPosition() {
-    return snakeBody[0];
+export function snakeHitBody() {
+    let hit = false;
+    snakeBody.forEach(function(segment, index) {
+        if (index != 0 && equalPositions(snakeBody[0], segment)) {
+            hit = true;
+        }
+    });
+    return hit;
 }
 
-export function snakeHitBody() {
-    return positionIsInSnakeBody(snakeBody[0], { ignoreHead: true });
+export function getSnakeHeadPosition() {
+    return snakeBody[0];
 }
 
 function equalPositions(pos1, pos2) {
@@ -128,6 +132,7 @@ function getCurrentNextSegmentRelation(snakeBody, segmentIndex) {
 }
 
 function getSnakeElementWithCorrectClassAppearance(snakeElement, currentNextSegmentRelation, currentPreviousSegmentRelation) {
+
     // TOP LEFT
     if (currentNextSegmentRelation.x == -1 && currentNextSegmentRelation.y == 0 &&
         currentPreviousSegmentRelation.x == 0 && currentPreviousSegmentRelation.y == -1) {
@@ -167,21 +172,50 @@ function getSnakeElementWithCorrectClassAppearance(snakeElement, currentNextSegm
         currentPreviousSegmentRelation.x == 0 && currentPreviousSegmentRelation.y == 1) {
         snakeElement.classList.add('snake-border-bottom-right');
     }
-
     return snakeElement;
 }
 
 function getSnakeHeadWithCorrectClassAppearance(snakeHeadDiv, snakeHeadDirection) {
+    snakeHeadDiv.classList.add('position-relative');
+
+    // creating snake's eyes
+    let leftSnakeEye = document.createElement('div');
+    let rightSnakeEye = document.createElement('div');
+
+    leftSnakeEye.classList.add('position-absolute');
+    rightSnakeEye.classList.add('position-absolute');
+
+    leftSnakeEye.classList.add('snake-eye');
+    rightSnakeEye.classList.add('snake-eye');
+
     if (snakeHeadDirection.x == 1 && snakeHeadDirection.y == 0) {
         snakeHeadDiv.classList.add('snake-border-to-top');
+        leftSnakeEye.style.top = '0.7vmin';
+        leftSnakeEye.style.left = '0.7vmin';
+        rightSnakeEye.style.top = '0.7vmin';
+        rightSnakeEye.style.right = '0.7vmin';
     } else if (snakeHeadDirection.x == -1 && snakeHeadDirection.y == 0) {
         snakeHeadDiv.classList.add('snake-border-to-bottom');
+        leftSnakeEye.style.bottom = '0.7vmin';
+        leftSnakeEye.style.left = '0.7vmin';
+        rightSnakeEye.style.bottom = '0.7vmin';
+        rightSnakeEye.style.right = '0.7vmin';
     } else if (snakeHeadDirection.x == 0 && snakeHeadDirection.y == 1) {
         snakeHeadDiv.classList.add('snake-border-to-left');
+        leftSnakeEye.style.bottom = '0.7vmin';
+        leftSnakeEye.style.left = '0.7vmin';
+        rightSnakeEye.style.top = '0.7vmin';
+        rightSnakeEye.style.left = '0.7vmin';
     } else if (snakeHeadDirection.x == 0 && snakeHeadDirection.y == -1) {
         snakeHeadDiv.classList.add('snake-border-to-right');
+        leftSnakeEye.style.bottom = '0.7vmin';
+        leftSnakeEye.style.right = '0.7vmin';
+        rightSnakeEye.style.top = '0.7vmin';
+        rightSnakeEye.style.right = '0.7vmin';
     }
 
+    snakeHeadDiv.appendChild(leftSnakeEye);
+    snakeHeadDiv.appendChild(rightSnakeEye);
     return snakeHeadDiv;
 }
 
@@ -195,10 +229,17 @@ function getSnakeTailWithCorrectClassAppearance(snakeTailDiv, snakeTailDirection
     } else if (snakeTailDirection.x == 0 && snakeTailDirection.y == -1) {
         snakeTailDiv.classList.add('snake-border-to-left');
     }
-
     return snakeTailDiv;
 }
 
+function getDefaultSnakePosition(snakeBody) {
+    snakeBody = [
+        { x: 10, y: 11 },
+        { x: 11, y: 11 },
+        { x: 12, y: 11 }
+    ];
+    return snakeBody;
+}
 
 
 

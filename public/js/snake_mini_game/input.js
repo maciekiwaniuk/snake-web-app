@@ -47,6 +47,6 @@ export function getInputDirection() {
     // console.log('====');
 
 
-    console.log(inputDirection);
+    // console.log(inputDirection);
     return inputDirection;
 }

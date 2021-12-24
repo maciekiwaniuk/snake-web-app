@@ -9,26 +9,50 @@ import { update as updateFood,
 
 import { outsideGrid as snakeHitWall } from './grid.js';
 
+import { toogleOptionsMenu } from './options.js';
+
+console.log(snakeHitBody());
+
 const gameBoard = document.getElementById('game-board');
+const optionsButton = document.getElementById('options-div');
 
 let lastRenderTime = 0;
 let gameOver = false;
 let gameStarted = false;
+let snakeMoved = false;
 
-let keysSnakeGameMoves = [
+
+let keysThatMayMoveScrollbar = [
+    'ArrowUp', 'ArrowDown',
+    'ArrowLeft', 'ArrowRight',
+    'Space'
+];
+
+let keysThatMoveSnake = [
     'ArrowUp', 'ArrowDown',
     'ArrowLeft', 'ArrowRight',
     'KeyW', 'KeyS',
-    'KeyA', 'KeyD',
-    'Space'
+    'KeyA', 'KeyD'
 ];
-// prevent to move website while clicking arrow or space
+
 window.addEventListener('keydown', event => {
-    if(keysSnakeGameMoves.includes(event.code)) {
-        gameStarted = true;
+    // prevent to move website while clicking arrow or space
+    if(keysThatMayMoveScrollbar.includes(event.code)) {
         event.preventDefault();
     }
+
+    // start game
+    if (keysThatMoveSnake.includes(event.code)) {
+        gameStarted = true;
+    }
 }, false);
+
+
+
+// toogle options menu
+optionsButton.addEventListener('click', function() {
+    toogleOptionsMenu();
+});
 
 // main loop function
 function main(currentTime) {
@@ -43,6 +67,10 @@ function main(currentTime) {
         update();
     }
     draw();
+
+    if (gameOver) {
+        console.log('game over = true');
+    }
 }
 
 // start animation loop function
@@ -61,6 +89,7 @@ function draw() {
 }
 
 function checkSnakeFail() {
+    console.log(snakeHitBody());
     gameOver = snakeHitWall(getSnakeHeadPosition()) || snakeHitBody();
 }
 

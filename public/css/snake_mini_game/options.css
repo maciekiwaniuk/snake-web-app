@@ -1,0 +1,13 @@
+.snake-game-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+#options-content {
+    width: 80vmin;
+    height: 0vmin;
+    display: none;
+    background-color: #CCC;
+    transition: height ease-in-out 0.5s;
+}

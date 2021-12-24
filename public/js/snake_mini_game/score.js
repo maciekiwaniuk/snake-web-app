@@ -1,6 +1,6 @@
 let scoreDiv = document.getElementById('score');
 let scoreRecordDiv = document.getElementById('score-record');
-let timeDiv = document.getElementById('time');
+
 
 export function updateScore(score) {
     scoreDiv.textContent = score;
@@ -22,13 +22,12 @@ export function updateScoreRecord(score) {
     scoreRecordDiv.textContent = data.scoreRecord;
 }
 
-export function updateTime(time) {
-    timeDiv.textContent = time;
-}
-
 function createDefaultCookieData() {
     let data = {
-        scoreRecord: 0
+        scoreRecord: 0,
+        selectedBoard: 'purple',
+        selectedSnake: 'blue',
+        selectedFood: 'yellow'
     };
     Cookies.set('snake-mini-game', JSON.stringify(data), { expires: 365 });
 }

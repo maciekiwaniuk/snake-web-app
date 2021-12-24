@@ -17,7 +17,7 @@
 
 # Installation
 
-To successfully install and test application you need to have installed [composer](https://getcomposer.org/download/), [npm](https://docs.npmjs.com/cli/v7/commands/npm-install), [Git](https://git-scm.com/), database environment (for example [XAMPP](https://www.apachefriends.org/pl/index.html) - localhost).
+To successfully install and test application you need to have installed [composer](https://getcomposer.org/download/), [npm](https://docs.npmjs.com/cli/v7/commands/npm-install), [Git](https://git-scm.com/) and database environment (for example [XAMPP](https://www.apachefriends.org/pl/index.html) - localhost).
 
 Open folder where you want to have project files, open console and then clone the repository
 
