@@ -27,6 +27,16 @@ const blueSnakeAppearanceRadio = document.getElementById('blueSnakeAppearanceRad
 const whiteSnakeAppearanceRadio = document.getElementById('whiteSnakeAppearanceRadio');
 const orangeSnakeAppearanceRadio = document.getElementById('orangeSnakeAppearanceRadio');
 
+// food appearance
+const yellowFoodAppearanceButton = document.getElementById('yellowFoodAppearanceButton');
+const redFoodAppearanceButton = document.getElementById('redFoodAppearanceButton');
+const greenFoodAppearanceButton = document.getElementById('greenFoodAppearanceButton');
+
+const yellowFoodAppearanceRadio = document.getElementById('yellowFoodAppearanceRadio');
+const redFoodAppearanceRadio = document.getElementById('redFoodAppearanceRadio');
+const greenFoodAppearanceRadio = document.getElementById('greenFoodAppearanceRadio');
+
+
 setButtonsToCheckedWhichAreSelected();
 
 // toogle options menu
@@ -34,6 +44,7 @@ optionsButton.addEventListener('click', function() {
     toogleOptionsMenu();
 });
 
+// snake speed buttons
 slowSnakeSpeedButton.addEventListener('click', function() {
     changeSnakeSpeed('slow');
     slowSnakeSpeedRadio.checked = true;
@@ -47,6 +58,7 @@ fastSnakeSpeedButton.addEventListener('click', function() {
     fastSnakeSpeedRadio.checked = true;
 });
 
+// board appearance buttons
 purpleBoardAppearanceButton.addEventListener('click', function() {
     changeBoardAppearance('purple');
     purpleBoardAppearanceRadio.checked = true;
@@ -60,6 +72,7 @@ brownBoardAppearanceButton.addEventListener('click', function() {
     brownBoardAppearanceRadio.checked = true;
 });
 
+// snake appearance buttons
 blueSnakeAppearanceButton.addEventListener('click', function() {
     changeSnakeAppearance('blue');
     blueSnakeAppearanceRadio.checked = true;
@@ -72,6 +85,21 @@ orangeSnakeAppearanceButton.addEventListener('click', function() {
     changeSnakeAppearance('orange');
     orangeSnakeAppearanceRadio.checked = true;
 });
+
+// food appearance buttons
+yellowFoodAppearanceButton.addEventListener('click', function() {
+    changeFoodAppearance('yellow');
+    yellowFoodAppearanceRadio.checked = true;
+});
+redFoodAppearanceButton.addEventListener('click', function() {
+    changeFoodAppearance('red');
+    redFoodAppearanceRadio.checked = true;
+});
+greenFoodAppearanceButton.addEventListener('click', function() {
+    changeFoodAppearance('green');
+    greenFoodAppearanceRadio.checked = true;
+});
+
 
 export function createCookieWithDataIfNotExists() {
     if (Cookies.get('snake-mini-game') == null) {
@@ -87,15 +115,13 @@ export function getSnakeSpeed() {
     switch (data.selectedSnakeSpeed) {
         case 'slow': {
             return 6;
-        } break;
-
+        }
         case 'medium': {
             return 9;
-        } break;
-
+        }
         case 'fast': {
             return 12;
-        } break;
+        }
     }
 }
 
@@ -183,14 +209,14 @@ function toogleOptionsMenu() {
 
         setTimeout(function() {
             allOptionsDivs.style.display = 'inline';
-        }, 250);
+        }, 280);
 
     } else if (optionsContent.style.height == '50vmin') {
         optionsContent.style.height = '0vmin';
 
         setTimeout(function() {
             allOptionsDivs.style.display = 'none';
-        }, 250);
+        }, 280);
     }
 
 }
@@ -226,6 +252,14 @@ function setButtonsToCheckedWhichAreSelected() {
     } else if (data.selectedSnake == 'orange') {
         orangeSnakeAppearanceRadio.checked = true;
     }
+
+    if (data.selectedFood == 'yellow') {
+        yellowFoodAppearanceRadio.checked = true;
+    } else if (data.selectedFood == 'red') {
+        redFoodAppearanceRadio.checked = true;
+    } else if (data.selectedFood == 'green') {
+        greenFoodAppearanceRadio.checked = true;
+    }
 }
 
 function changeSnakeSpeed(newSnakeSpeed) {
@@ -249,5 +283,13 @@ function changeSnakeAppearance(newSnakeAppearance) {
 
     let data = JSON.parse(Cookies.get('snake-mini-game'));
     data.selectedSnake = newSnakeAppearance;
+    saveCookieData(data);
+}
+
+function changeFoodAppearance(newFoodAppearance) {
+    createCookieWithDataIfNotExists();
+
+    let data = JSON.parse(Cookies.get('snake-mini-game'));
+    data.selectedFood = newFoodAppearance;
     saveCookieData(data);
 }
