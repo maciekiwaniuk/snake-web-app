@@ -1,5 +1,12 @@
+const moveUpButton = document.getElementById('move-up-button');
+const moveDownButton = document.getElementById('move-down-button');
+const moveLeftButton = document.getElementById('move-left-button');
+const moveRightButton = document.getElementById('move-right-button');
+
 let inputDirection = { x: 0, y: 0 };
 let lastInputDirection = { x: 0, y: 0 };
+
+
 
 window.addEventListener('keydown', event => {
     switch (event.code) {
@@ -27,6 +34,28 @@ window.addEventListener('keydown', event => {
             inputDirection = { x: 0, y: 1 };
         } break;
     }
+});
+
+// simulate move snake keys while clicking move buttons
+moveUpButton.addEventListener('click', function() {
+    window.dispatchEvent(new KeyboardEvent('keydown', {
+        code: 'ArrowUp'
+    }));
+});
+moveLeftButton.addEventListener('click', function() {
+    window.dispatchEvent(new KeyboardEvent('keydown', {
+        code: 'ArrowLeft'
+    }));
+});
+moveRightButton.addEventListener('click', function() {
+    window.dispatchEvent(new KeyboardEvent('keydown', {
+        code: 'ArrowRight'
+    }));
+});
+moveDownButton.addEventListener('click', function() {
+    window.dispatchEvent(new KeyboardEvent('keydown', {
+        code: 'ArrowDown'
+    }));
 });
 
 export function resetInputDirection() {

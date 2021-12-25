@@ -9,18 +9,12 @@ import { update as updateFood,
 
 import { outsideGrid as snakeHitWall } from './grid.js';
 
-import { toogleOptionsMenu,
-         getSnakeSpeed,
+import { getSnakeSpeed,
          updateSelectedBoardAppearance } from './options.js';
 
 import { resetInputDirection } from './input.js';
 
 const gameBoard = document.getElementById('game-board');
-const optionsButton = document.getElementById('options-div');
-const moveUpButton = document.getElementById('move-up-button');
-const moveDownButton = document.getElementById('move-down-button');
-const moveLeftButton = document.getElementById('move-left-button');
-const moveRightButton = document.getElementById('move-right-button');
 
 let SNAKE_SPEED = getSnakeSpeed();
 let lastRenderTime = 0;
@@ -51,32 +45,8 @@ window.addEventListener('keydown', event => {
     }
 }, false);
 
-// simulate move snake keys while clicking move buttons
-moveUpButton.addEventListener('click', function() {
-    window.dispatchEvent(new KeyboardEvent('keydown', {
-        code: 'ArrowUp'
-    }));
-});
-moveLeftButton.addEventListener('click', function() {
-    window.dispatchEvent(new KeyboardEvent('keydown', {
-        code: 'ArrowLeft'
-    }));
-});
-moveRightButton.addEventListener('click', function() {
-    window.dispatchEvent(new KeyboardEvent('keydown', {
-        code: 'ArrowRight'
-    }));
-});
-moveDownButton.addEventListener('click', function() {
-    window.dispatchEvent(new KeyboardEvent('keydown', {
-        code: 'ArrowDown'
-    }));
-});
 
-// toogle options menu
-optionsButton.addEventListener('click', function() {
-    toogleOptionsMenu();
-});
+
 
 // main loop function
 function main(currentTime) {
@@ -108,6 +78,7 @@ function draw() {
     drawSnake(gameBoard);
     drawFood(gameBoard);
     updateSelectedBoardAppearance(gameBoard);
+    SNAKE_SPEED = getSnakeSpeed();
 }
 
 function checkSnakeFail() {

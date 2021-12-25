@@ -1,171 +1,180 @@
 /******* font colors *******/
 
-.color-black{
+.color-black {
     color: black !important;
 }
-.color-white{
+.color-white {
     color: white !important;
 }
-.color-golden{
+.color-grey {
+    color: rgb(102, 102, 102) !important;
+}
+.color-golden {
     color: #ffc107 !important;
 }
-.color-silver{
+.color-silver {
     color: #c0c0c0 !important;
 }
-.color-bronze{
+.color-bronze {
     color: #cd7f32 !important;
+}
+.color-purple {
+    color: rgb(106, 43, 179) !important;
+}
+.color-orange {
+    color: rgb(240, 166, 29) !important;
 }
 
 /******* background colors *******/
 
-.bg-dropdown-btn-user{
+.bg-dropdown-btn-user {
     background-color: rgb(183, 255, 0) !important;
 }
-.bg-dropdown-btn-user:hover{
+.bg-dropdown-btn-user:hover {
     background-color: rgb(18, 255, 18) !important;
 }
 
-.bg-grass{
+.bg-grass {
     background-color: rgb(18, 255, 18) !important;
 }
-.bg-bright{
+.bg-bright {
     background-color: rgb(183, 255, 0) !important;
 }
 
-.bg-orangeyellow{
+.bg-orangeyellow {
     background-image: linear-gradient(to top, rgb(228, 126, 98), rgb(232, 244, 0)) !important;
 }
-.bg-orangeyellow:hover{
+.bg-orangeyellow:hover {
     background-image: linear-gradient(to top, rgb(254, 76, 27), rgb(232, 244, 0)) !important;
 }
 
-.bg-lightblue{
+.bg-lightblue {
     background-image: linear-gradient(to top, rgb(162, 247, 217), rgb(104, 223, 0)) !important;
 }
-.bg-lightblue:hover{
+.bg-lightblue:hover {
     background-image: linear-gradient(to top, rgb(243, 247, 246), rgb(104, 223, 0)) !important;
 }
 
-.bg-gradient-to-left{
+.bg-gradient-to-left {
     background-image: linear-gradient(to left, rgb(183, 255, 0), rgb(18, 255, 18)) !important;
 }
-.bg-gradient-to-right{
+.bg-gradient-to-right {
     background-image: linear-gradient(to right, rgb(183, 255, 0), rgb(18, 255, 18)) !important;
 }
 
-.bg-error{
+.bg-error {
     background-color: rgb(240, 183, 183);
 }
 
-.bg-complete{
+.bg-complete {
     background-color: rgb(188, 240, 183);
 }
 
 /******* links *******/
 
-.link-none{
+.link-none {
     color: rgb(0, 0, 0) !important;
     text-decoration: none !important;
     background-color: none !important;
 }
-.link-none:hover{
+.link-none:hover {
     cursor:pointer !important;
 }
 
-.link{
+.link {
     color: blue !important;
     text-decoration: none !important;
     background-color: none !important;
 }
-.link:hover{
+.link:hover {
     text-decoration: underline !important;
 }
 
-.link-grey{
+.link-grey {
     color: grey;
     text-decoration: none !important;
     background-color: none !important;
 }
-.link-grey:hover{
+.link-grey:hover {
     text-decoration: underline !important;
 }
 
-.link-blue{
+.link-blue {
     color: rgb(21, 115, 255) !important;
     text-decoration: none !important;
     background-color: none !important;
 }
-.link-blue:hover{
+.link-blue:hover {
     color: rgb(54, 116, 250)!important;
 }
 
 
-.link-golden{
+.link-golden {
     color: #ffc107 !important;
     text-decoration: none !important;
     background-color: none !important;
 }
-.link-golden:hover{
+.link-golden:hover {
     color: #d5ad35 !important;
 }
 
-.link-silver{
+.link-silver {
     color: #c0c0c0 !important;
     text-decoration: none !important;
     background-color: none !important;
 }
-.link-silver:hover{
+.link-silver:hover {
     color: rgb(188, 179, 179) !important;
 }
 
-.link-bronze{
+.link-bronze {
     color: #cd7f32 !important;
     text-decoration: none !important;
     background-color: none !important;
 }
-.link-bronze:hover{
+.link-bronze:hover {
     color: #bf6e1e !important;
 }
 
-.link-white{
+.link-white {
     color: white !important;
     text-decoration: none !important;
     background-color: none !important;
 }
-.link-white:hover{
+.link-white:hover {
     color: rgb(211, 210, 210) !important
 }
 
-.link-red{
+.link-red {
     color: rgb(255, 0, 0) !important;
     text-decoration: none !important;
     background-color: none !important;
 }
-.link-red:hover{
+.link-red:hover {
     cursor:pointer !important;
 }
 
 
 /******* border-radius *******/
 
-.border-radius-10{
+.border-radius-10 {
     border-radius: 10px !important;
 }
-.border-radius-15{
+.border-radius-15 {
     border-radius: 15px !important;
 }
-.border-radius-25{
+.border-radius-25 {
     border-radius: 25px !important;
 }
 
 
 /******* width - height *******/
-.wh-65{
+.wh-65 {
     height: 65%;
     width: 65%;
 }
 
-.wh-80{
+.wh-80 {
     height: 80%;
     width: 80%;
 }
@@ -174,4 +183,12 @@
 .checkbox-big {
     width: 15px !important;
     height: 15px !important;
+}
+
+
+/******* center hotizontally *******/
+.center-horizontally {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

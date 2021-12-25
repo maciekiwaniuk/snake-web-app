@@ -6,6 +6,12 @@
 .snake-blue-background {
     background-color: hsl(200, 92%, 66%);
 }
+.snake-white-background {
+    background-color: white;
+}
+.snake-orange-background {
+    background-color: rgb(240, 166, 29);
+}
 
 .snake-border-to-left {
     border-top-left-radius: 50%;

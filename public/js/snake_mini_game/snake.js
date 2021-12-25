@@ -14,9 +14,6 @@ let snakeBody = [
 let newSegments = 0;
 let snakeHeadDirection = { x: 0, y: 0 };
 let snakeTailDirection = { x: 0, y: 0 };
-let snakeBodyLength;
-let snakeHeadDiv;
-let snakeTailDiv;
 let score = 0;
 
 export function update() {
@@ -33,13 +30,17 @@ export function update() {
         }
         snakeBody[i + 1] = nextSegment;
     }
-    snakeBody[0].x += inputDirection.x;
-    snakeBody[0].y += inputDirection.y;
+    if (typeof inputDirection == 'undefined') {
+        return;
+    } else {
+        snakeBody[0].x += inputDirection.x;
+        snakeBody[0].y += inputDirection.y;
+    }
 
 }
 
 export function draw(gameBoard) {
-    snakeBodyLength = snakeBody.length;
+    let snakeBodyLength = snakeBody.length;
 
     // foreach on snake body segment
     snakeBody.forEach((segment, index) => {
@@ -64,11 +65,11 @@ export function draw(gameBoard) {
         gameBoard.appendChild(snakeElement);
     })
     snakeHeadDirection = getSnakeHeadDirection(snakeBody);
-    snakeHeadDiv = document.getElementById('snake-head');
+    let snakeHeadDiv = document.getElementById('snake-head');
     snakeHeadDiv = getSnakeHeadWithCorrectClassAppearance(snakeHeadDiv, snakeHeadDirection);
 
     snakeTailDirection = getSnakeTailDirection(snakeBody);
-    snakeTailDiv = document.getElementById('snake-tail');
+    let snakeTailDiv = document.getElementById('snake-tail');
     snakeTailDiv = getSnakeTailWithCorrectClassAppearance(snakeTailDiv, snakeTailDirection);
 
     // draw score bar and handle data from cookie mechanism

@@ -1,13 +1,77 @@
-export function toogleOptionsMenu() {
-    const optionsDiv = document.getElementById('options-content');
+const optionsButton = document.getElementById('options-div');
 
-    if (optionsDiv.style.height == '0vmin') {
-        optionsDiv.style.height = '50vmin';
-    } else if (optionsDiv.style.height == '50vmin') {
-        optionsDiv.style.height = '0vmin';
-    }
+// speed
+const slowSnakeSpeedButton = document.getElementById('slowSnakeSpeedButton');
+const mediumSnakeSpeedButton = document.getElementById('mediumSnakeSpeedButton');
+const fastSnakeSpeedButton = document.getElementById('fastSnakeSpeedButton');
 
-}
+const slowSnakeSpeedRadio = document.getElementById('slowSnakeSpeedRadio');
+const mediumSnakeSpeedRadio = document.getElementById('mediumSnakeSpeedRadio');
+const fastSnakeSpeedRadio = document.getElementById('fastSnakeSpeedRadio');
+
+// board appearance
+const purpleBoardAppearanceButton = document.getElementById('purpleBoardAppearanceButton');
+const greenBoardAppearanceButton = document.getElementById('greenBoardAppearanceButton');
+const brownBoardAppearanceButton = document.getElementById('brownBoardAppearanceButton');
+
+const purpleBoardAppearanceRadio = document.getElementById('purpleBoardAppearanceRadio');
+const greenBoardAppearanceRadio = document.getElementById('greenBoardAppearanceRadio');
+const brownBoardAppearanceRadio = document.getElementById('brownBoardAppearanceRadio');
+
+// snake appearance
+const blueSnakeAppearanceButton = document.getElementById('blueSnakeAppearanceButton');
+const whiteSnakeAppearanceButton = document.getElementById('whiteSnakeAppearanceButton');
+const orangeSnakeAppearanceButton = document.getElementById('orangeSnakeAppearanceButton');
+
+const blueSnakeAppearanceRadio = document.getElementById('blueSnakeAppearanceRadio');
+const whiteSnakeAppearanceRadio = document.getElementById('whiteSnakeAppearanceRadio');
+const orangeSnakeAppearanceRadio = document.getElementById('orangeSnakeAppearanceRadio');
+
+setButtonsToCheckedWhichAreSelected();
+
+// toogle options menu
+optionsButton.addEventListener('click', function() {
+    toogleOptionsMenu();
+});
+
+slowSnakeSpeedButton.addEventListener('click', function() {
+    changeSnakeSpeed('slow');
+    slowSnakeSpeedRadio.checked = true;
+});
+mediumSnakeSpeedButton.addEventListener('click', function() {
+    changeSnakeSpeed('medium');
+    mediumSnakeSpeedRadio.checked = true;
+});
+fastSnakeSpeedButton.addEventListener('click', function() {
+    changeSnakeSpeed('fast');
+    fastSnakeSpeedRadio.checked = true;
+});
+
+purpleBoardAppearanceButton.addEventListener('click', function() {
+    changeBoardAppearance('purple');
+    purpleBoardAppearanceRadio.checked = true;
+});
+greenBoardAppearanceButton.addEventListener('click', function() {
+    changeBoardAppearance('green');
+    greenBoardAppearanceRadio.checked = true;
+});
+brownBoardAppearanceButton.addEventListener('click', function() {
+    changeBoardAppearance('brown');
+    brownBoardAppearanceRadio.checked = true;
+});
+
+blueSnakeAppearanceButton.addEventListener('click', function() {
+    changeSnakeAppearance('blue');
+    blueSnakeAppearanceRadio.checked = true;
+});
+whiteSnakeAppearanceButton.addEventListener('click', function() {
+    changeSnakeAppearance('white');
+    whiteSnakeAppearanceRadio.checked = true;
+});
+orangeSnakeAppearanceButton.addEventListener('click', function() {
+    changeSnakeAppearance('orange');
+    orangeSnakeAppearanceRadio.checked = true;
+});
 
 export function createCookieWithDataIfNotExists() {
     if (Cookies.get('snake-mini-game') == null) {
@@ -22,18 +86,19 @@ export function getSnakeSpeed() {
 
     switch (data.selectedSnakeSpeed) {
         case 'slow': {
-            return 5;
+            return 6;
         } break;
 
         case 'medium': {
-            return 8;
+            return 9;
         } break;
 
         case 'fast': {
-            return 11;
+            return 12;
         } break;
     }
 }
+
 
 export function updateSelectedBoardAppearance(gameBoard) {
     createCookieWithDataIfNotExists();
@@ -64,7 +129,15 @@ export function getSnakeSegmentWithSelectedSnakeAppearance(snakeElement) {
     switch (data.selectedSnake) {
         case 'blue': {
             snakeElement.classList.add('snake-blue-background');
-        }
+        } break;
+
+        case 'white': {
+            snakeElement.classList.add('snake-white-background');
+        } break;
+
+        case 'orange': {
+            snakeElement.classList.add('snake-orange-background');
+        } break;
     }
     return snakeElement;
 }
@@ -77,7 +150,15 @@ export function getFoodBodyWithSelectedFoodAppearance(foodBody) {
     switch (data.selectedFood) {
         case 'yellow': {
             foodBody.classList.add('food-yellow');
-        }
+        } break;
+
+        case 'red': {
+            foodBody.classList.add('food-red');
+        } break;
+
+        case 'green': {
+            foodBody.classList.add('food-green');
+        } break;
     }
     return foodBody;
 }
@@ -93,3 +174,80 @@ export function createDefaultCookieData() {
     Cookies.set('snake-mini-game', JSON.stringify(data), { expires: 365 });
 }
 
+function toogleOptionsMenu() {
+    const optionsContent = document.getElementById('options-content');
+    const allOptionsDivs = document.getElementById('all-options-divs');
+
+    if (optionsContent.style.height == '0vmin') {
+        optionsContent.style.height = '50vmin';
+
+        setTimeout(function() {
+            allOptionsDivs.style.display = 'inline';
+        }, 250);
+
+    } else if (optionsContent.style.height == '50vmin') {
+        optionsContent.style.height = '0vmin';
+
+        setTimeout(function() {
+            allOptionsDivs.style.display = 'none';
+        }, 250);
+    }
+
+}
+
+function saveCookieData(data) {
+    Cookies.set('snake-mini-game', JSON.stringify(data), { expires: 365 });
+}
+
+function setButtonsToCheckedWhichAreSelected() {
+    createCookieWithDataIfNotExists();
+    let data = JSON.parse(Cookies.get('snake-mini-game'));
+
+    if (data.selectedSnakeSpeed == 'slow') {
+        slowSnakeSpeedRadio.checked = true;
+    } else if (data.selectedSnakeSpeed = 'medium') {
+        mediumSnakeSpeedRadio.checked = true;
+    } else if (data.selectedSnakeSpeed == 'fast') {
+        fastSnakeSpeedRadio.checked = true;
+    }
+
+    if (data.selectedBoard == 'purple') {
+        purpleBoardAppearanceRadio.checked = true;
+    } else if (data.selectedBoard == 'green') {
+        greenBoardAppearanceRadio.checked = true;
+    } else if (data.selectedBoard == 'brown') {
+        brownBoardAppearanceRadio.checked = true;
+    }
+
+    if (data.selectedSnake == 'blue') {
+        blueSnakeAppearanceRadio.checked = true;
+    } else if (data.selectedSnake == 'white') {
+        whiteSnakeAppearanceRadio.checked = true;
+    } else if (data.selectedSnake == 'orange') {
+        orangeSnakeAppearanceRadio.checked = true;
+    }
+}
+
+function changeSnakeSpeed(newSnakeSpeed) {
+    createCookieWithDataIfNotExists();
+
+    let data = JSON.parse(Cookies.get('snake-mini-game'));
+    data.selectedSnakeSpeed = newSnakeSpeed;
+    saveCookieData(data);
+}
+
+function changeBoardAppearance(newBoardAppearance) {
+    createCookieWithDataIfNotExists();
+
+    let data = JSON.parse(Cookies.get('snake-mini-game'));
+    data.selectedBoard = newBoardAppearance;
+    saveCookieData(data);
+}
+
+function changeSnakeAppearance(newSnakeAppearance) {
+    createCookieWithDataIfNotExists();
+
+    let data = JSON.parse(Cookies.get('snake-mini-game'));
+    data.selectedSnake = newSnakeAppearance;
+    saveCookieData(data);
+}
