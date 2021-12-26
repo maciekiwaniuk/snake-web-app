@@ -35,7 +35,10 @@
                     border border-2 border-success border-radius
                     bg-gradient-to-left
                     border-radius-15">
-                    Galeria - zdjęcia z gry</div>
+                    <a href="{{ route('gallery') }}" class="link-none">
+                        Galeria - zdjęcia z gry
+                    </a>
+        </div>
     </div>
 
     @include('components.welcome-gallery')
@@ -52,7 +55,10 @@
                     bg-gradient-to-right
                     border-radius-15"
                     style="width: 84vmin !important;">
-                    Snake mini-gra</div>
+                    <a href="{{ route('mini-game') }}" class="link-none">
+                        Snake mini-gra
+                    </a>
+        </div>
     </div>
 
     @include('components.snake-mini-game')

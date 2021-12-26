@@ -27,4 +27,12 @@ class PagesController extends Controller
     {
         return view('pages.mini-game');
     }
+
+    /**
+     * Show gallery page
+     */
+    public function galleryPage()
+    {
+        return view('pages.gallery');
+    }
 }

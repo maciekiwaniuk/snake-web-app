@@ -53,7 +53,7 @@
                                 <form action="{{ route('admin.artisan-tools.clear-app-cache') }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <button type="submit" class="btn btn-danger">Wykonaj</button>
+                                    <button type="submit" class="btn btn-danger border border-2 border-dark">Wykonaj</button>
                                 </form>
                             </div>
                     </div>
@@ -75,7 +75,7 @@
                                 <form action="{{ route('admin.artisan-tools.clear-route-cache') }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <button type="submit" class="btn btn-danger">Wykonaj</button>
+                                    <button type="submit" class="btn btn-danger border border-2 border-dark">Wykonaj</button>
                                 </form>
                             </div>
                     </div>
@@ -101,7 +101,7 @@
                                 <form action="{{ route('admin.artisan-tools.clear-config-cache') }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <button type="submit" class="btn btn-danger">Wykonaj</button>
+                                    <button type="submit" class="btn btn-danger border border-2 border-dark">Wykonaj</button>
                                 </form>
                             </div>
                     </div>

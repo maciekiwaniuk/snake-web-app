@@ -45,7 +45,7 @@
                             </div>
 
                             <div class="col-12">
-                                <a href="{{ $hosting->hosting_link }}" target="_blank" class="btn btn-success">Pobierz</a>
+                                <a href="{{ $hosting->hosting_link }}" target="_blank" class="btn btn-success border border-2 border-dark">Pobierz</a>
                             </div>
                 </div>
 

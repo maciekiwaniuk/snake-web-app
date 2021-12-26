@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-    Mini gra
+    Galeria
 @endsection
 
 @push('css')
@@ -25,21 +25,6 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="mx-auto text-center
-                    mt-2
-                    mb-1
-                    fs-3 py-2
-                    border border-2 border-success border-radius
-                    bg-gradient-to-right
-                    border-radius-15"
-                    style="width: 84vmin !important;">
-                    <a href="{{ route('mini-game') }}" class="link-none">
-                        Snake mini-gra
-                    </a>
-        </div>
-    </div>
-
-    @include('components.snake-mini-game')
+    @include('components.welcome-gallery')
 
 @endsection

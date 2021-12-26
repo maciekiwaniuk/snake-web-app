@@ -21,9 +21,9 @@
         <div class="collapse navbar-collapse" id="toggleMobileMenu">
             <ul class="navbar-nav text-center ms-auto fs-4">
 
-                <!-- Zakładki administratora -->
+                <!-- Admin tabs -->
                 <div class="dropdown me-3 mb-1">
-                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButtonAdmin" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-danger border border-2 border-light dropdown-toggle" type="button" id="dropdownMenuButtonAdmin" data-bs-toggle="dropdown" aria-expanded="false">
                         Administrator
                     </button>
                     <ul class="dropdown-menu text-center bg-bright " aria-labelledby="dropdownMenuButtonAdmin">
@@ -59,15 +59,21 @@
                     </ul>
                 </div>
 
-                <!-- Zakładki użytkownika -->
+                <!-- User tabs -->
                 <div class="dropdown me-3 mb-1">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButtonUser" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-primary border border-2 border-light dropdown-toggle" type="button" id="dropdownMenuButtonUser" data-bs-toggle="dropdown" aria-expanded="false">
                         Użytkownik
                     </button>
                     <ul class="dropdown-menu text-center bg-bright " aria-labelledby="dropdownMenuButtonUser">
                         <li>
                             <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('help.index') }}">
                                 <i class="bi bi-info-circle me-1"></i>Pomoc
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('mini-game') }}">
+                                <i class="bi bi-controller me-1"></i>Mini gra
                             </a>
                         </li>
 
@@ -85,17 +91,17 @@
                     </ul>
                 </div>
 
-                <!-- Profil d-md-none -->
+                <!-- Profile d-md-none -->
                 <li class="d-md-none">
-                    <a class="nav-link me-3 mb-1" href="{{ route('profile', Auth::user()->name) }}">Profil</a>
+                    <a class="nav-link me-3 mb-1" href="{{ route('profile', Auth::user()->name) }}"><i class="bi bi-person-circle"></i> Profil</a>
                 </li>
 
-                <!-- Ustawienia d-md-none -->
+                <!-- Options d-md-none -->
                 <li class="d-md-none">
-                    <a class="nav-link me-3 mb-1" href="{{ route('options.index') }}">Ustawienia</a>
+                    <a class="nav-link me-3 mb-1" href="{{ route('options.index') }}"><i class="bi bi-gear"></i> Ustawienia</a>
                 </li>
 
-                <!-- Wyloguj d-md-none -->
+                <!-- Logout d-md-none -->
                 <li class="d-md-none">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -105,11 +111,12 @@
                                     me-md-2 me-sm-2 me-3
                                     border border-2 border-success
                                     border-radius-25 bg-lightblue" type="submit">
-                        Wyloguj</button>
+                            Wyloguj
+                        </button>
                     </form>
                 </li>
 
-                <!-- Nazwa użytkownika oraz awatar na większych ekranach -->
+                <!-- Username and avatar on bigger screens -->
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">

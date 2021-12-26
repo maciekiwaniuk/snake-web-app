@@ -209,14 +209,14 @@ function toogleOptionsMenu() {
 
         setTimeout(function() {
             allOptionsDivs.style.display = 'inline';
-        }, 280);
+        }, 250);
 
     } else if (optionsContent.style.height == '50vmin') {
         optionsContent.style.height = '0vmin';
 
         setTimeout(function() {
             allOptionsDivs.style.display = 'none';
-        }, 280);
+        }, 250);
     }
 
 }

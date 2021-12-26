@@ -41,7 +41,7 @@
 
                 <div class="accordion" id="optionsAccordion">
 
-                    <!-- Awatar -->
+                    <!-- Avatar -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingAvatar">
                             <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAvatar" aria-expanded="false" aria-controls="collapseAvatar">
@@ -65,7 +65,7 @@
 
 
 
-                    <!-- Hasło -->
+                    <!-- Password -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingPassword">
                             <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePassword" aria-expanded="false" aria-controls="collapsePassword">
@@ -204,7 +204,7 @@
 
 
 
-                    <!-- Inne -->
+                    <!-- Others -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingActions">
                             <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActions" aria-expanded="false" aria-controls="collapseActions">

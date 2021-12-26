@@ -12,7 +12,8 @@
 - Logged user can set an avatar, change an email, change a password etc. in a user panel.
 - Users can compare each other in a ranking page what means players can compete which is very fun!
 - User with special permission is able to use admin panel which contains all users list, unique visitors and application logs.
-- Admin is able to ban user's account, ban IP etc.
+- Admin is able to ban user's account, ban IP, look at application logs etc.
+- Snake mini-game which is available to play on welcome page is made in clear JavaScript.
 - In application has been implemented PWA system, what means website can run in a offline mode (without an internet connection - caches things while first visit).
 
 # Installation

@@ -1,6 +1,6 @@
     <nav class="p-2 ps-3
                 mb-0 mb-sm-1 mb-md-3
-                navbar navbar-expand-lg navbar-light
+                navbar navbar-expand-xl navbar-light
                 border border-2 border-top-0 border-success
                 bg-gradient-to-right"
          style="border-bottom-left-radius: 15px;
@@ -22,23 +22,27 @@
         <div class="collapse navbar-collapse" id="toggleMobileMenu">
             <ul class="navbar-nav text-center ms-auto fs-4">
                 <li>
-                    <a class="nav-link me-3" href="{{ route('help.index') }}">Pomoc</a>
+                    <a class="nav-link me-3" href="{{ route('help.index') }}"><i class="bi bi-info-circle"></i> Pomoc</a>
                 </li>
 
                 <li>
-                    <a class="nav-link me-3" href="{{ route('download') }}">Pobierz grę</a>
+                    <a class="nav-link me-3" href="{{ route('mini-game') }}"><i class="bi bi-controller"></i> Mini gra</a>
                 </li>
 
                 <li>
-                    <a class="nav-link me-3" href="{{ route('ranking.index') }}">Ranking</a>
+                    <a class="nav-link me-3" href="{{ route('download') }}"><i class="bi bi-play-circle"></i> Pobierz grę</a>
                 </li>
 
                 <li>
-                    <a class="nav-link me-3" href="{{ route('login') }}">Logowanie</a>
+                    <a class="nav-link me-3 mb-1" href="{{ route('ranking.index') }}"><i class="bi bi-trophy"></i> Ranking</a>
                 </li>
 
                 <li>
-                    <a class="nav-link me-3" href="{{ route('register') }}">Rejestracja</a>
+                    <a class="nav-link me-3" href="{{ route('login') }}"><i class="bi bi-door-open"></i> Logowanie</a>
+                </li>
+
+                <li>
+                    <a class="nav-link me-3" href="{{ route('register') }}"><i class="bi bi-plus-circle"></i> Rejestracja</a>
                 </li>
 
             </ul>

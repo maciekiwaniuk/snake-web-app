@@ -41,7 +41,7 @@
                     <form action="{{ route('admin.server-logs.clear-server-logs') }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-primary">Wyczyść logi</button>
+                        <button class="btn btn-primary border border-2 border-dark">Wyczyść logi</button>
                     </form>
                 </div>
 
