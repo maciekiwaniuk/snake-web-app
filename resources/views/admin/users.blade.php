@@ -445,9 +445,9 @@
                     contentType: "application/json",
                 },
 
-                @if (isset($searched_user_name))
+                @if (isset($search_bar_value))
                     search: {
-                        search: '{{ $searched_user_name }}'
+                        search: '{{ $search_bar_value }}'
                     },
                 @endif
 

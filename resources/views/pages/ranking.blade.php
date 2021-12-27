@@ -248,7 +248,7 @@
                             class: 'align-middle',
                             orderable: false,
                             data: function (row, type, val, meta) {
-                                urlRedirectToReplace = "{{ route('admin.users.show', '__ID__') }}";
+                                urlRedirectToReplace = "{{ route('admin.users.show-name', '__ID__') }}";
                                 urlRedirect = urlRedirectToReplace.replace('__ID__', row.id);
                                 return `
                                             <a href="`+urlRedirect+`" class="btn btn-danger">

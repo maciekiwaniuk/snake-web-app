@@ -67,7 +67,7 @@
                             <option value="error-game" class="form-control" @if(isset($selected) && $selected=="blad-gra") selected @endif>Błąd w grze</option>
                             <option value="idea-website" class="form-control" @if(isset($selected) && $selected=="pomysl-strona") selected @endif>Pomysł dotyczący strony</option>
                             <option value="idea-game" class="form-control" @if(isset($selected) && $selected=="pomysl-gra") selected @endif>Pomysł dotyczący gry</option>
-                            <option value="other" class="form-control" @if(isset($selected) && $selected=="inne") selected @endif>Inne</option>
+                            <option value="other" class="form-control" @if(isset($selected) && $selected=="inny") selected @endif>Inny</option>
                         </select>
                     </div>
 

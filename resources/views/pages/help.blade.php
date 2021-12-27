@@ -26,7 +26,7 @@
 
             <div class="accordion" id="helpAccordion" style="font-weight: 500;">
 
-                <!-- Zakładka - Co tu się tak właściwie dzieje? -->
+                <!-- general info -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingGenerally">
                         <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGenerally" aria-expanded="false" aria-controls="collapseGenerally">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
 
-                <!-- Zakładka - ustawienia -->
+                <!-- options -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOptionsTab">
                         <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOptionsTab" aria-expanded="false" aria-controls="collapseOptionsTab">
@@ -61,7 +61,7 @@
                     </div>
                 </div>
 
-                <!-- Zakładka - pobierz grę -->
+                <!-- download -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingActionsDownload">
                         <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActionsDownload" aria-expanded="false" aria-controls="collapseActionsDownload">
@@ -78,10 +78,10 @@
                             problemy zawsze jest możliwość <strong><a class="link-blue" href="{{ route('help.show', 'pobieranie-plikow') }}">pobrania plików</a></strong>, lecz może to potrwać
                             dłużej niż pobieranie instalatora.
 
-                                <!-- Zagnieżdżony accordion ze wskazówkami dotyczącymi instalacji -->
+                                <!-- nestle accordion with install tips -->
                                 <div class="accordion mt-2" id="installationAccordion">
 
-                                    <!-- EXE -->
+                                    <!-- exe -->
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingExe">
                                             <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExe" aria-expanded="false" aria-controls="collapseExe">
@@ -121,7 +121,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Pliki -->
+                                    <!-- files -->
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingFiles">
                                             <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFiles" aria-expanded="false" aria-controls="collapseFiles">
@@ -165,8 +165,7 @@
 
 
 
-
-                <!-- Ukryta zakładka - Programistyczny bełkot -->
+                <!-- hidden tab - programming babble -->
                 <div class="accordion-item d-none" style="font-weight: 500;">
                     <h2 class="accordion-header" id="headingInfo">
                         <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo">

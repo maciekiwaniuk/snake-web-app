@@ -170,7 +170,16 @@
                     },
                     {
                         title: 'IP',
-                        data: 'ip',
+                        data: '',
+                        render: function (data, type, row, meta) {
+                            urlIpSearchToReplace = "{{ route('admin.users.show-ip', '__IP__') }}";
+                            urlIpSearch = urlIpSearchToReplace.replace('__IP__', row.ip);
+                            return `
+                                        <a href="`+urlIpSearch+`" class="link-white">
+                                            `+row.ip+`
+                                        </a>
+                                    `;
+                        },
                         class: 'align-middle',
                         orderable: false,
                     },

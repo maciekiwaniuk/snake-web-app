@@ -18,7 +18,7 @@
                                 <option value="error-game" class="form-control">Błąd w grze</option>
                                 <option value="idea-website" class="form-control">Pomysł dotyczący strony</option>
                                 <option value="idea-game" class="form-control">Pomysł dotyczący gry</option>
-                                <option value="other" class="form-control">Inne</option>
+                                <option value="other" class="form-control">Inny</option>
                             </select>
                         </div>
 

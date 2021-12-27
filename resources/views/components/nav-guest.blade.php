@@ -30,7 +30,7 @@
                 </li>
 
                 <li>
-                    <a class="nav-link me-3" href="{{ route('download') }}"><i class="bi bi-play-circle"></i> Pobierz grę</a>
+                    <a class="nav-link me-3" href="{{ route('download') }}"><i class="bi bi-download"></i> Pobierz grę</a>
                 </li>
 
                 <li>

@@ -22,14 +22,24 @@ class UsersController extends Controller
     }
 
     /**
-     * Show users admin index page with searched user
+     * Show users admin index page with searched user's name
      */
-    public function show($user_id)
+    public function showName($user_id)
     {
         $name = $this->getNameByUserId($user_id);
 
         return view('admin.users', [
-            'searched_user_name' => $name
+            'search_bar_value' => $name
+        ]);
+    }
+
+    /**
+     * Show users admin index page with searched ip
+     */
+    public function showIP($ip)
+    {
+        return view('admin.users', [
+            'search_bar_value' => $ip
         ]);
     }
 
