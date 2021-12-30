@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\VisitorsUniqueController;
 use App\Http\Controllers\Admin\AppLogsController;
 use App\Http\Controllers\Admin\ServerLogsController;
 use App\Http\Controllers\Admin\ArtisanToolsController;
+use App\Http\Controllers\Admin\EmailsController;
 use App\Http\Controllers\Admin\PHPInfoController;
 use App\Http\Controllers\Admin\MessagesController;
 use App\Http\Controllers\PagesController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\RankingsController;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\MessageController;
 use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 /********************************************************* General routing *********************************************************/
 
@@ -68,6 +70,13 @@ Route::prefix('ranking')->group(function() {
 
 Route::prefix('administrator')->middleware('admin')->group(function() {
     Route::name('admin.')->group(function() {
+
+        Route::prefix('email')->group(function() {
+            Route::name('email.')->group(function() {
+                Route::get('/powitalny', [EmailsController::class, 'showWelcomeMail'])->name('welcome');
+            });
+        });
+
         Route::put('/banowanie-ostatniego-ip/{id}', [UsersController::class, 'banLastUserIp'])->name('ban-last-ip');
         Route::put('/banowanie-konta/{id}', [UsersController::class, 'banAccount'])->name('ban-account');
         Route::put('/banowanie-konta-oraz-ip/{id}', [UsersController::class, 'banAccountAndIP'])->name('ban-ip-account');
@@ -190,14 +199,3 @@ Route::middleware('auth')->group(function () {
     Route::post('/email/weryfikacja-powiadomienia', [EmailVerificationNotificationController::class, 'store'])->name('verification.send')
         ->middleware('throttle:6,1');
 });
-
-/********************************************** E-mails **********************************************/
-
-Route::prefix('email')->group(function() {
-    Route::name('email.')->group(function() {
-        Route::get('/welcome', function() {
-            return new WelcomeMail();
-        });
-    });
-});
-

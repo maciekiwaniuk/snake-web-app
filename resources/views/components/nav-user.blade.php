@@ -37,18 +37,18 @@
                     <a class="nav-link me-3 mb-1" href="{{ route('ranking.index') }}"><i class="bi bi-trophy"></i> Ranking</a>
                 </li>
 
-                <!-- Profile d-md-none -->
-                <li class="d-md-none">
+                <!-- Profile d-lg-none -->
+                <li class="d-lg-none">
                     <a class="nav-link me-3 mb-1" href="{{ route('profile', Auth::user()->name) }}"><i class="bi bi-person-circle"></i> Profil</a>
                 </li>
 
-                <!-- Options d-md-none -->
-                <li class="d-md-none">
+                <!-- Options d-lg-none -->
+                <li class="d-lg-none">
                     <a class="nav-link me-3 mb-1" href="{{ route('options.index') }}"><i class="bi bi-gear"></i> Ustawienia</a>
                 </li>
 
-                <!-- Logout d-md-none -->
-                <li class="d-md-none">
+                <!-- Logout d-lg-none -->
+                <li class="d-lg-none">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button class="btn btn-sm

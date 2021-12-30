@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\AppLog;
+use App\Mail\WelcomeMail;
 use App\Models\User;
 use App\Models\UserGameData;
 use App\Providers\RouteServiceProvider;
@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 use App\Rules\OnlyLettersDigits;
 use App\Rules\ValidNickname;
 use App\Rules\reCAPTCHAv2;
@@ -62,6 +63,11 @@ class RegisteredUserController extends Controller
             'last_login_time' => Carbon::now()->toDateTimeString(),
             'last_user_agent' => $request->server('HTTP_USER_AGENT'),
         ]);
+
+        if (env('MAIL_SERVICE_ENABLED')) {
+            Mail::to($user->email)
+                ->queue(new WelcomeMail($user));
+        }
 
         event(new Registered($user));
 

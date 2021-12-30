@@ -35,8 +35,8 @@ class PasswordResetLinkController extends Controller
                 'email' => 'required|email',
             ],
             [
-                'email.required' => 'Pole z E-mail jest wymagane.',
-                'email.email' => 'Pole E-mail musi być poprawnym adresem E-mail.'
+                'email.required' => 'E-mail jest wymagany.',
+                'email.email' => 'E-mail musi być poprawnym adresem E-mail.'
             ]
         );
 

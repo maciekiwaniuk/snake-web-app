@@ -63,8 +63,6 @@ class CreateUsersGameDataTable extends Migration
             $table->boolean('effects')->default(true);
             $table->float('volume')->default(0.1);
 
-            $table->integer('selected_menu_music')->default(1);
-
             $table->timestamps();
         });
     }

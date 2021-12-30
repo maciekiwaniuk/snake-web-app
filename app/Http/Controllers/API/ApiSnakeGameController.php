@@ -20,31 +20,30 @@ class ApiSnakeGameController extends Controller
             ->where('email', '=', $request->email)
             ->first();
 
-
         if (isset($user) && Hash::check($request->password, $user->password)) {
             // logged user is banned
             if ($user->isBanned()) {
-                $result["success"] = false;
-                $result["error_message"] = "Konto zostało zbanowane.";
+                $result['success'] = false;
+                $result['error_message'] = 'Konto zostało zbanowane.';
             } else {
                 // logged
-                $result["success"] = true;
-                $result["api_token"] = $user->api_token;
+                $result['success'] = true;
+                $result['api_token'] = $user->api_token;
             }
         } else {
             // wrong email or password
-            $result["success"] = false;
-            $result["error_message"] = "Podany przez Ciebie email lub hasło było nieprawidłowe.";
+            $result['success'] = false;
+            $result['error_message'] = 'Podany przez Ciebie email lub hasło było nieprawidłowe.';
         }
 
         // // check if user has newest version of game
         if (!isset($request->version) || $request->version != env('GAME_VERSION')) {
-            $result["success"] = false;
-            $result["error_message"] = "Posiadasz nieaktualną wersję gry.";
+            $result['success'] = false;
+            $result['error_message'] = 'Posiadasz nieaktualną wersję gry.';
         }
 
         return response()->json([
-            "result" => $result
+            'result' => $result
         ]);
     }
 
@@ -67,8 +66,8 @@ class ApiSnakeGameController extends Controller
         $ip = $request->getClientIp();
 
         return response()->json([
-            "result" => $user,
-            "ip" => $ip
+            'result' => $user,
+            'ip' => $ip
         ]);
     }
 
@@ -89,7 +88,7 @@ class ApiSnakeGameController extends Controller
         if (!isset($user) || $user->user_banned == 1 || !isset($request->version) ||
             $request->version != env('GAME_VERSION')) {
             return response()->json([
-                'reason_to_close_game' => true,
+                'reason_to_close_game' => true
             ]);
         }
 
@@ -143,8 +142,6 @@ class ApiSnakeGameController extends Controller
         $user_game_data->music = $request->music;
         $user_game_data->effects = $request->effects;
         $user_game_data->volume = $request->volume;
-
-        $user_game_data->selected_menu_music = $request->selected_menu_music;
 
         $user_game_data->save();
     }
