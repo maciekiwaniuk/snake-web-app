@@ -106,10 +106,10 @@
                     <form method="POST" id="message-delete-form">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Usuń</button>
+                        <button type="submit" class="btn btn-danger border border-2 border-dark">Usuń</button>
                     </form>
 
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn btn-secondary border border-2 border-dark" data-bs-dismiss="modal">Zamknij</button>
                 </div>
             </div>
         </div>

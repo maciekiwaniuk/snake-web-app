@@ -32,12 +32,12 @@
         }
     </style>
 
-    <div class="col-12 col-sm-10
+    <div class="col-12
                 mx-auto
                 mx-5
                 mt-2 mt-sm-4
                 mb-3 fs-3
-                px-4 py-3
+                px-3 py-3
                 border border-2 border-success
                 bg-gradient-to-left border-radius-15">
 
@@ -176,37 +176,37 @@
                     <form method="POST" id="ip-ban-status-confirmation-form">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="btn btn-warning">Potwierdź</button>
+                        <button type="submit" class="btn btn-warning border border-2 border-dark">Potwierdź</button>
                     </form>
 
                     <form method="POST" id="account-ban-status-confirmation-form">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="btn btn-danger">Potwierdź</button>
+                        <button type="submit" class="btn btn-danger border border-2 border-dark">Potwierdź</button>
                     </form>
 
                     <form method="POST" id="account-ip-ban-status-confirmation-form">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="btn btn-warning">Potwierdź</button>
+                        <button type="submit" class="btn btn-warning border border-2 border-dark">Potwierdź</button>
                     </form>
 
                     <form method="POST" id="account-delete-confirmation-form">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Potwierdź</button>
+                        <button type="submit" class="btn btn-danger border border-2 border-dark">Potwierdź</button>
                     </form>
 
                     <form method="POST" id="token-reset-confirmation-form">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="btn btn-primary">Potwierdź</button>
+                        <button type="submit" class="btn btn-primary border border-2 border-dark">Potwierdź</button>
                     </form>
 
                     <form method="POST" id="avatar-delete-confirmation-form">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-success">Potwierdź</button>
+                        <button type="submit" class="btn btn-success border border-2 border-dark">Potwierdź</button>
                     </form>
 
                     <form method="POST" id="user-data-modify-confirmation-form">
@@ -216,10 +216,10 @@
                         <input type="hidden" name="email" id="user-email-hidden">
                         <input type="hidden" name="password" id="user-password-hidden">
 
-                        <button id="modify-data-submit" class="btn btn-primary">Potwierdź</button>
+                        <button id="modify-data-submit" class="btn btn-primary border border-2 border-dark">Potwierdź</button>
                     </form>
 
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="button" class="btn btn-secondary border border-2 border-dark" data-bs-dismiss="modal">Anuluj</button>
                 </div>
             </div>
         </div>
@@ -248,26 +248,26 @@
                         <button type="button" onclick="openStatusBanAccountAndIpModal();" id="account-ip-ban-status-btn" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
                         </button> <br>
 
-                        <button type="button" onclick="openAccountDeleteModal();" class="btn btn-danger mt-1" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
+                        <button type="button" onclick="openAccountDeleteModal();" class="btn btn-danger mt-1 border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
                             Usuń konto
                         </button> <br>
 
-                        <button type="button" onclick="openTokenResetModal();" class="btn btn-primary mt-1" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
+                        <button type="button" onclick="openTokenResetModal();" class="btn btn-primary mt-1 border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
                             Zresetuj token
                         </button> <br>
 
-                        <button type="button" onclick="openAvatarDeleteModal();" class="btn btn-success mt-1" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
+                        <button type="button" onclick="openAvatarDeleteModal();" class="btn btn-success mt-1 border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
                             Usuń awatar
                         </button> <br>
 
-                        <button type="button" onclick="openModifyUserData();" class="btn btn-primary mt-1" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
+                        <button type="button" onclick="openModifyUserData();" class="btn btn-primary mt-1 border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#userActionConfirmationModal">
                             Zmodyfikuj dane
                         </button>
                     </div>
                 </div>
 
                 <div class="modal-footer d-flex justify-content-around">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn btn-secondary border border-2 border-dark" data-bs-dismiss="modal">Zamknij</button>
                 </div>
             </div>
         </div>
@@ -353,7 +353,7 @@
             if (ip_banned == 1) {
                 $('#ip-ban-status-text').text('Potwierdź odbanowanie IP użytkownika');
                 $('#ip-ban-status-btn').text('Odbanuj IP');
-                $('#ip-ban-status-btn').attr('class', 'btn btn-success');
+                $('#ip-ban-status-btn').attr('class', 'btn btn-success border border-2 border-dark');
 
                 urlUnbanIpToReplace = "{{ route('admin.unban-last-ip', '__ID__') }}";
                 urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', user_id);
@@ -361,7 +361,7 @@
             } else {
                 $('#ip-ban-status-text').text('Potwierdź zbanowanie IP użytkownika');
                 $('#ip-ban-status-btn').text('Zbanuj IP');
-                $('#ip-ban-status-btn').attr('class', 'btn btn-warning');
+                $('#ip-ban-status-btn').attr('class', 'btn btn-warning border border-2 border-dark');
 
                 urlBanIpToReplace = "{{ route('admin.ban-last-ip', '__ID__') }}";
                 urlBanIp = urlBanIpToReplace.replace('__ID__', user_id);
@@ -372,7 +372,7 @@
             if (user_banned == 1) {
                 $('#account-ban-status-text').text('Potwierdź odbanowanie konta użytkownika');
                 $('#account-ban-status-btn').text('Odbanuj konto');
-                $('#account-ban-status-btn').attr('class', 'btn btn-success mt-1')
+                $('#account-ban-status-btn').attr('class', 'btn btn-success mt-1 border border-2 border-dark')
 
                 urlUnbanAccountToReplace = "{{ route('admin.unban-account', '__ID__') }}";
                 urlUnbanAccount = urlUnbanAccountToReplace.replace('__ID__', user_id);
@@ -380,7 +380,7 @@
             } else {
                 $('#account-ban-status-text').text('Potwierdź zbanowanie konta użytkownika');
                 $('#account-ban-status-btn').text('Zbanuj konto');
-                $('#account-ban-status-btn').attr('class', 'btn btn-danger mt-1')
+                $('#account-ban-status-btn').attr('class', 'btn btn-danger mt-1 border border-2 border-dark')
 
                 urlBanAccountToReplace = "{{ route('admin.ban-account', '__ID__') }}";
                 urlBanAccount = urlBanAccountToReplace.replace('__ID__', user_id);
@@ -391,7 +391,7 @@
             if (user_banned == 0 || ip_banned == 0) {
                 $('#account-ip-ban-status-text').text('Potwierdź zbanowanie konta oraz IP użytkownika');
                 $('#account-ip-ban-status-btn').text('Zbanuj konto oraz IP');
-                $('#account-ip-ban-status-btn').attr('class', 'btn btn-warning mt-1');
+                $('#account-ip-ban-status-btn').attr('class', 'btn btn-warning mt-1 border border-2 border-dark');
 
                 urlBanIpAndAccountToReplace = "{{ route('admin.ban-ip-account', '__ID__') }}";
                 urlBanIpAndAccount = urlBanIpAndAccountToReplace.replace('__ID__', user_id);
@@ -399,7 +399,7 @@
             } else {
                 $('#account-ip-ban-status-text').text('Potwierdź odbanowanie konta oraz IP użytkownika');
                 $('#account-ip-ban-status-btn').text('Odbanuj konto oraz IP');
-                $('#account-ip-ban-status-btn').attr('class', 'btn btn-success mt-1');
+                $('#account-ip-ban-status-btn').attr('class', 'btn btn-success mt-1 border border-2 border-dark');
 
                 urlUnbanIpAndAccountToReplace = "{{ route('admin.unban-ip-account', '__ID__') }}";
                 urlUnbanIpAndAccount = urlUnbanIpAndAccountToReplace.replace('__ID__', user_id);

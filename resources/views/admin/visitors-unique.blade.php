@@ -118,7 +118,7 @@
                         <button type="submit" id="ban-status-ip-button">Potwierdź</button>
                     </form>
 
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn btn-secondary border border-2 border-dark" data-bs-dismiss="modal">Zamknij</button>
                 </div>
             </div>
         </div>
@@ -129,7 +129,7 @@
         function changeBanStatusConfirmationModalContent(ip_id, ip, ip_banned) {
             if (ip_banned == 1) {
                 $('#confirmation-message').text('Potwierdź odbanowanie IP: '+ip);
-                $('#ban-status-ip-button').attr('class', 'btn btn-success');
+                $('#ban-status-ip-button').attr('class', 'btn btn-success border border-2 border-dark');
 
                 urlUnbanIpToReplace = "{{ route('admin.unban-ip', '__ID__') }}";
                 urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', ip_id);
@@ -137,7 +137,7 @@
 
             } else if (ip_banned == 0) {
                 $('#confirmation-message').text('Potwierdź zbanowanie IP: '+ip);
-                $('#ban-status-ip-button').attr('class', 'btn btn-danger');
+                $('#ban-status-ip-button').attr('class', 'btn btn-danger border border-2 border-dark');
 
                 urlBanIpToReplace = "{{ route('admin.ban-ip', '__ID__') }}";
                 urlBanIp = urlBanIpToReplace.replace('__ID__', ip_id);
@@ -224,7 +224,7 @@
                                                     '`+row.ip+`',
                                                     '`+row.ip_banned+`'
                                                 );"
-                                                    type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#banStatusConfirmationModal">
+                                                    type="button" class="btn btn-success border border-2 border-light" data-bs-toggle="modal" data-bs-target="#banStatusConfirmationModal">
                                                 Odbanuj
                                             </button>
                                         `;
@@ -236,7 +236,7 @@
                                                     '`+row.ip+`',
                                                     '`+row.ip_banned+`'
                                                 );"
-                                                    type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#banStatusConfirmationModal">
+                                                    type="button" class="btn btn-danger border border-2 border-light" data-bs-toggle="modal" data-bs-target="#banStatusConfirmationModal">
                                                 Zbanuj
                                             </button>
                                         `;
