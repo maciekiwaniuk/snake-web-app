@@ -36,10 +36,44 @@
                     <div id="collapseGenerally" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="co-sie-dzieje") collapse show @else collapse @endif" aria-labelledby="headingGenerally" data-bs-parent="#helpAccordion">
                         <div class="accordion-body text-start">
 
-                            Jest to strona, umożliwiająca <a class="link-blue" href="{{ route('help.show', 'pobierz-gre') }}">pobranie gry</a> na komputer Snake.
-                            Zakładka <a class="link-blue" href="{{ route('ranking.index') }}" target="_blank">Ranking</a>
-                            umożliwia rywalizację użytkowników poprzez uczestniczenie w rozgrywce w pobranej grze. Po instalacji Snake'a należy zalogować się w panelu logowania
-                            kontem zarejestrowanym na tej stronie.
+                            Strona umożliwiająca rywalizację graczy poprzez uczestniczenie w rozgrywce. Gra jest możliwa do pobrania w zakładce
+                            <a class="link-blue" href="{{ route('download') }}">Pobierz grę</a>.
+                            Więcej o tym jak zainstalować grę w zakładce <a class="link-blue" href="{{ route('help.show', 'zakladka-instalacja-gry') }}">Instalacja gry</a>.
+                            Po utworzeniu konta na stronie użytkownik ma dostęp do ustawień, w których może m.in. zmienić swój awatar, który będzie widoczny w zakładce
+                            <a class="link-blue" href="{{ route('ranking.index') }}">Ranking</a>.
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- install game -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingInstallGameTab">
+                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstallGameTab" aria-expanded="false" aria-controls="collapseInstallGameTab">
+                            <strong>Instalacja gry</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseInstallGameTab" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="zakladka-instalacja-gry") collapse show @else collapse @endif" aria-labelledby="headingInstallGameTab" data-bs-parent="#helpAccordion">
+                        <div class="accordion-body text-start">
+
+                            Instalacja gry
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- game -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingGameTab">
+                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGameTab" aria-expanded="false" aria-controls="collapseGameTab">
+                            <strong>Wszystko o grze</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseGameTab" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="zakladka-o-grze") collapse show @else collapse @endif" aria-labelledby="headingGameTab" data-bs-parent="#helpAccordion">
+                        <div class="accordion-body text-start">
+
+                            o grze
+
                         </div>
                     </div>
                 </div>

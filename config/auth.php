@@ -114,4 +114,9 @@ return [
 
     'password_timeout' => 10800,
 
+    /**
+     * Default password for user's being created by factory
+     */
+    'default_password' => 'test1234',
+
 ];

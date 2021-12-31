@@ -47,7 +47,7 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->unique()->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => Hash::make('test1234'),
+            'password' => Hash::make(config('auth.default_password')),
             'api_token' => Str::random(60),
             'avatar' => "assets/images/avatar.png",
             'permission' => 0,
