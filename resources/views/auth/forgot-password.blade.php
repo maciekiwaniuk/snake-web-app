@@ -16,6 +16,18 @@
                         border border-2 border-success
                         bg-gradient-to-left border-radius-25">
 
+                    @if (session('status'))
+                        <div class="col-12 col-sm-10 mx-auto
+                                    text-center mb-3 p-2 pb-3
+                                    mt-2 fs-6
+                                    border border-2 border-success
+                                    border-radius-15 bg-complete">
+                                    <div class="valid-feedback d-block">
+                                        <strong>• Link resetujący hasło został wysłany na wskazany e-mail.</strong>
+                                    </div>
+                        </div>
+                    @endif
+
                     @if ($errors->any())
                         <div class="col-12 col-sm-10 mx-auto
                                     text-center mb-3 p-2 pb-3

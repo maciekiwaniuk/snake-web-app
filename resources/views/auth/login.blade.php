@@ -16,6 +16,18 @@
                         border border-2 border-success
                         bg-gradient-to-left border-radius-25">
 
+                    @if (session('status'))
+                        <div class="col-12 col-sm-11 mx-auto
+                                    text-center mb-3 p-2 pb-3
+                                    mt-2 fs-6
+                                    border border-2 border-success
+                                    border-radius-15 bg-complete">
+                                    <div class="valid-feedback d-block">
+                                        <strong>• Hasło dla twojego konta zostało pomyślnie ustawione.</strong>
+                                    </div>
+                        </div>
+                    @endif
+
                 <form method="POST" action="{{ route('login') }}" class="row g-3">
                     @csrf
                     <h4 class="text-center mb-0">Panel logowania</h4>
@@ -48,9 +60,13 @@
                                                      border-radius-15 bg-orangeyellow"
                         >Zaloguj</button>
                     </div>
-                    <div class="col-12 text-center my-0">
-                        <a href="{{ route('password.request') }}" class="btn link mt-1 p-0">Hasło się zapodziało?</a>
-                    </div>
+
+                    @if(env('MAIL_SERVICE_ENABLED'))
+                        <div class="col-12 text-center my-0">
+                            <a href="{{ route('password.request') }}" class="btn link mt-1 p-0">Hasło się zapodziało?</a>
+                        </div>
+                    @endif
+
                 </form>
 
 

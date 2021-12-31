@@ -181,8 +181,8 @@ Route::middleware('guest')->group(function () {
     Route::get('/zgubione-haslo', [PasswordResetLinkController::class, 'create'])->name('password.request');
     Route::post('/zgubione-haslo', [PasswordResetLinkController::class, 'store'])->name('password.email');
 
-    Route::get('/resetowanie-hasla/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
-    Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.update');
+    Route::get('/ustawianie-nowego-hasla/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('/ustawianie-nowego-hasla', [NewPasswordController::class, 'store'])->name('password.update');
 });
 
 Route::middleware('auth')->group(function () {

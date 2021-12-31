@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-    Zresetuj hasło
+    Ustawianie nowego hasła
 @endsection
 
 
@@ -32,23 +32,24 @@
 
                 <form method="POST" action="{{ route('password.update') }}" class="row g-3">
                     @csrf
+                    <input type="hidden" name="token" value="{{ $request->token }}">
 
-                    <h4 class="text-center">Resetowanie hasła</h4>
+                    <h4 class="text-center">Ustawianie nowego hasła</h4>
 
                     <div class="col-12">
-                        <label for="email">E-mail</label>
+                        <label for="email">Twój e-mail</label>
                         <input type="text" name="email" class="form-control" value="{{ old('email') }}" required>
                     </div>
 
 
                     <div class="col-12">
-                        <label for="password">Hasło</label>
+                        <label for="password">Nowe hasło</label>
                         <input type="password" name="password" class="form-control" placeholder="" required>
                     </div>
 
 
                     <div class="col-12">
-                        <label for="password_confirmation">Powtórz hasło</label>
+                        <label for="password_confirmation">Powtórz nowe hasło</label>
                         <input type="password" name="password_confirmation" class="form-control"placeholder="" required>
                     </div>
 
@@ -57,7 +58,7 @@
                         <button type="submit" class="btn btn-sm fs-4
                                                      border border-2 border-success
                                                      border-radius-15 bg-orangeyellow"
-                        >Zresetuj</button>
+                        >Potwierdź</button>
                     </div>
                 </form>
 

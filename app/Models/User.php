@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\AppLog;
 use App\Models\VisitorUnique;
 use App\Models\UserGameData;
+use App\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -53,6 +54,17 @@ class User extends Authenticatable
      * @var string
      */
     protected $table = 'users';
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
 
     /**
      * Function that checks if user has admin permissions
