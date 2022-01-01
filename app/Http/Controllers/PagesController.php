@@ -15,7 +15,7 @@ class PagesController extends Controller
     /**
      * Show offline fallback page
      */
-    public function offlineFallback()
+    public function showOfflineFallback()
     {
         return view('pages.offline-fallback');
     }
@@ -23,7 +23,7 @@ class PagesController extends Controller
     /**
      * Show mini-game page
      */
-    public function miniGamePage()
+    public function showMiniGamePage()
     {
         return view('pages.mini-game');
     }
@@ -31,7 +31,7 @@ class PagesController extends Controller
     /**
      * Show gallery page
      */
-    public function galleryPage()
+    public function showGalleryPage()
     {
         return view('pages.gallery');
     }

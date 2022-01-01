@@ -22,6 +22,14 @@ class EmailVerificationNotificationController extends Controller
 
         $request->user()->sendEmailVerificationNotification();
 
-        return back()->with('status', 'verification-link-sent');
+        $result = [
+            'success' => true,
+            'message' => 'Link potwierdzający e-mail został wysłany na skrzynkę pocztową wskazanego e-mail\'a podczas rejestracji.'
+        ];
+
+        return response()->json([
+            'result' => $result
+        ]);
+        // return back()->with('status', 'verification-link-sent');
     }
 }

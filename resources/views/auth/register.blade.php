@@ -51,7 +51,7 @@
 
                     <div class="col-12">
                         <label for="password_confirmation">Powtórz hasło</label>
-                        <input type="password" name="password_confirmation" class="form-control"placeholder="" required>
+                        <input type="password" name="password_confirmation" class="form-control" placeholder="" required>
                     </div>
 
                     @if(env('CAPTCHA_VALIDATION_ENABLED'))

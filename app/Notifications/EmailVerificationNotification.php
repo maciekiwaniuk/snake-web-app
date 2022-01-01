@@ -3,23 +3,19 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
+use App\Notifications\Messages\MailMessage;
 
-class ResetPasswordNotification extends Notification implements ShouldQueue
+class EmailVerificationNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
-     * The password reset token.
-     *
-     * @var string
-     */
-    public $token;
-
-    /**
-     * The callback that should be used to create the reset password URL.
+     * The callback that should be used to create the verify email URL.
      *
      * @var \Closure|null
      */
@@ -31,17 +27,6 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
      * @var \Closure|null
      */
     public static $toMailCallback;
-
-    /**
-     * Create a notification instance.
-     *
-     * @param  string  $token
-     * @return void
-     */
-    public function __construct($token)
-    {
-        $this->token = $token;
-    }
 
     /**
      * Get the notification's channels.
@@ -62,15 +47,17 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        $verificationUrl = $this->verificationUrl($notifiable);
+
         if (static::$toMailCallback) {
-            return call_user_func(static::$toMailCallback, $notifiable, $this->token);
+            return call_user_func(static::$toMailCallback, $notifiable, $verificationUrl);
         }
 
-        return $this->buildMailMessage($this->resetUrl($notifiable));
+        return $this->buildMailMessage($verificationUrl);
     }
 
     /**
-     * Get the reset password notification mail message for the given URL.
+     * Get the verify email notification mail message for the given URL.
      *
      * @param  string  $url
      * @return \Illuminate\Notifications\Messages\MailMessage
@@ -78,32 +65,35 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
     protected function buildMailMessage($url)
     {
         return (new MailMessage)
-            ->subject('Resetowanie hasła')
-            ->line('Otrzymałeś ten e-mail, ponieważ otrzymaliśmy prośbę o zresetowania hasła do twojego konta.')
-            ->action('Zresetuj hasło', $url)
-            ->line('Link resetujący hasło przestanie być ważny za 60 minut.');
+            ->subject('Zweryfikuj adres e-mail')
+            ->line('Naciśnij poniższy przycisk aby zweryfikować adres e-mail')
+            ->action('Zweryfikuj adres e-mail', $url);
     }
 
     /**
-     * Get the reset URL for the given notifiable.
+     * Get the verification URL for the given notifiable.
      *
      * @param  mixed  $notifiable
      * @return string
      */
-    protected function resetUrl($notifiable)
+    protected function verificationUrl($notifiable)
     {
         if (static::$createUrlCallback) {
-            return call_user_func(static::$createUrlCallback, $notifiable, $this->token);
+            return call_user_func(static::$createUrlCallback, $notifiable);
         }
 
-        return url(route('password.reset', [
-            'token' => $this->token,
-            'email' => $notifiable->getEmailForPasswordReset(),
-        ], false));
+        return URL::temporarySignedRoute(
+            'verification.verify',
+            Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
+            [
+                'id' => $notifiable->getKey(),
+                'hash' => sha1($notifiable->getEmailForVerification()),
+            ]
+        );
     }
 
     /**
-     * Set a callback that should be used when creating the reset password button URL.
+     * Set a callback that should be used when creating the email verification URL.
      *
      * @param  \Closure  $callback
      * @return void

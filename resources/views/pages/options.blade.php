@@ -214,16 +214,56 @@
                         <div id="collapseActions" class="accordion-collapse @if(isset($selected) && $selected=="inne") collapse show @else collapse @endif" aria-labelledby="headingActions" data-bs-parent="#optionsAccordion">
                             <div class="bg-accordion-body accordion-body">
 
-                                <!-- Usuń konto przycisk -->
-                                <button type="button" id="deleteAccountButton" class="btn btn-danger border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                                <!-- Account status button -->
+                                <button type="button" class="btn btn-primary border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#accountStatusModal">
+                                    Status konta
+                                  </button>
+
+                                <!-- Account status modal -->
+                                <div class="modal fade" id="accountStatusModal" tabindex="-1" aria-labelledby="accountStatusModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <div class="modal-body bg-accordion-body">
+                                                <div class="text-center mb-3">
+                                                    <h3>Status konta</h3>
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="text-start fs-4">
+                                                    <div>
+                                                        Konto utworzone: {{ Auth::user()->created_at }}
+                                                    </div>
+
+                                                    <div>
+                                                        E-mail zweryfikowany:
+                                                        @if(Auth::user()->email_verified_at != null)
+                                                            <i class="bi bi-check-circle text-success fs-3"></i>
+                                                        @else
+                                                            <i class="bi bi-x-circle text-danger fs-2"></i>
+                                                            <button id="verifyEmailButton" class="btn btn-success border border-2 border-dark ms-1">Zweryfikuj e-mail</button>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="text-center mt-3">
+                                                    <button type="button" class="btn btn-secondary border border-2 border-dark" data-bs-dismiss="modal">Zamknij</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Delete account button -->
+                                <button type="button" id="deleteAccountButton" class="btn btn-danger border border-2 border-dark ms-2" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
                                     Usuń konto
                                 </button>
 
-                                <button type="button" id="logoutFromGame" class="btn btn-primary border border-2 border-dark ms-2">
-                                    Wyloguj z gry na wszystkich urządzeniach
-                                </button>
-
-                                <!-- Usuń konto modal -->
+                                <!-- Delete account modal -->
                                 <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content border border-3 border-danger">
@@ -247,7 +287,7 @@
 
                                                     <div class="col-12 d-flex justify-content-around">
                                                         <button type="button" class="btn btn-success border border-2 border-dark" data-bs-dismiss="modal">Anuluj</button>
-                                                        <button id="confirmDeleteAccountBtn" type="submit" class="btn btn-danger border border-2 border-dark">Usuń konto</button>
+                                                        <button id="confirmDeleteAccountButton" type="submit" class="btn btn-danger border border-2 border-dark">Usuń konto</button>
                                                     </div>
 
                                                 </form>
@@ -258,6 +298,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Logout from game on all devices -->
+                                <button type="button" id="logoutFromGameButton" class="btn btn-primary border border-2 border-dark ms-2 mt-2 mt-md-0">
+                                    Wyloguj z gry na wszystkich urządzeniach
+                                </button>
+
+
 
                             </div>
                         </div>
@@ -363,7 +409,7 @@
             })
 
 
-            $('#confirmDeleteAccountBtn').on('click', function() {
+            $('#confirmDeleteAccountButton').on('click', function() {
                 event.preventDefault();
 
                 var password = $('#delete_account_password').val();
@@ -375,8 +421,8 @@
                         _token: '{{ csrf_token() }}',
                         password: password,
                     },
-                    success: function(response){
-                        if ( response.result.error ) {
+                    success: function (response) {
+                        if (response.result.error) {
                             blockUI();
                             setTimeout(function () {
                                 toastr.error(response.result.message);
@@ -388,15 +434,15 @@
                 });
             });
 
-            $('#logoutFromGame').on('click', function() {
+            $('#logoutFromGameButton').on('click', function() {
                 $.ajax({
                     type: 'POST',
                     url: '{{ route("options.logout-from-game") }}',
                     data: {
                         _token: '{{ csrf_token() }}',
                     },
-                    success: function(response){
-                        if ( response.result.success ) {
+                    success: function (response) {
+                        if (response.result.success) {
                             blockUI();
                             setTimeout(function () {
                                 toastr.success(response.result.message);
@@ -406,6 +452,21 @@
                 });
             });
 
+            $('#verifyEmailButton').on('click', function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("verification.send") }}',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function (response) {
+                        blockUI();
+                        setTimeout(function () {
+                            toastr.success(response.result.message);
+                        }, 400);
+                    }
+                });
+            });
 
         });
     </script>

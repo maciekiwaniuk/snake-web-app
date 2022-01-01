@@ -22,6 +22,14 @@
     <script src="{{ asset('js/snake_mini_game/game.js') }}" defer type="module"></script>
 @endpush
 
+@push('js.body')
+    <script>
+        @if (\Request::getRequestUri() == '/?verified=1')
+           toastr.success('E-mail został zweryfikowany.');
+        @endif
+    </script>
+@endpush
+
 
 @section('content')
 

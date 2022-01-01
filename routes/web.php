@@ -24,19 +24,17 @@ use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\RankingsController;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\MessageController;
-use App\Mail\WelcomeMail;
-use Illuminate\Support\Facades\Mail;
 
 /********************************************************* General routing *********************************************************/
 
 Route::get('/', [PagesController::class, 'index'])->middleware('unique.visitor')->name('home');
-Route::get('/strona-offline', [PagesController::class, 'offlineFallback'])->name('offline-fallback');
+Route::get('/strona-offline', [PagesController::class, 'showOfflineFallback'])->name('offline-fallback');
 
-Route::get('/gra', [PagesController::class, 'miniGamePage'])->name('mini-game');
+Route::get('/gra', [PagesController::class, 'showMiniGamePage'])->name('mini-game');
 Route::get('/pobierz-gre', [GameHostingsController::class, 'index'])->name('download');
 Route::get('/profil/{name}', [ProfileController::class, 'show'])->name('profile');
 
-Route::get('/galeria', [PagesController::class, 'galleryPage'])->name('gallery');
+Route::get('/galeria', [PagesController::class, 'showGalleryPage'])->name('gallery');
 
 Route::prefix('pomoc')->group(function() {
     Route::name('help.')->group(function() {

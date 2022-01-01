@@ -17,16 +17,16 @@ class RegistrationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    // public function test_new_users_can_register()
-    // {
-    //     $response = $this->post(route('register'), [
-    //         'name' => 'TestUser',
-    //         'email' => 'test@example.com',
-    //         'password' => config('auth.default_password'),
-    //         'password_confirmation' => config('auth.default_password'),
-    //     ]);
+    public function test_new_users_can_register()
+    {
+        $response = $this->post(route('register'), [
+            'name' => 'TestUser',
+            'email' => 'test@example.com',
+            'password' => config('auth.default_password'),
+            'password_confirmation' => config('auth.default_password'),
+        ]);
 
-    //     $this->assertAuthenticated();
-    //     $response->assertRedirect(RouteServiceProvider::HOME);
-    // }
+        $this->assertAuthenticated();
+        $response->assertRedirect(route('home'));
+    }
 }
