@@ -48,7 +48,13 @@
                                             <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
                                         </a>
                                         @else
-                                            <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
+                                            @if (Auth::user()->isAdmin())
+                                                <a href="{{ route('admin.users.show-name', $user->id) }}">
+                                                    <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
+                                                </a>
+                                            @else
+                                                <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
+                                            @endif
                                         @endif
                                     @endauth
 
@@ -63,7 +69,13 @@
 
                                     <span class="nick-size  text-center">
                                         <strong>
-                                            {{ $user->name }}
+                                            @if (Auth::user()->isAdmin() && Auth::user()->id != $user->id)
+                                                <a href="{{ route('admin.users.show-name', $user->id) }}" class="link-none">
+                                                    {{ $user->name }}
+                                                </a>
+                                            @else
+                                                {{ $user->name }}
+                                            @endif
                                         </strong>
                                     </span>
                             </div>
