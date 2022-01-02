@@ -227,7 +227,13 @@
                         data: '',
                         render: function (data, type, row, meta) {
                             if (row.user_name != null) {
-                                return row.user_name;
+                                urlNameSearchToReplace = "{{ route('admin.users.show', '__NAME__') }}";
+                                urlNameSearch = urlNameSearchToReplace.replace('__NAME__', row.user_name);
+                                return `
+                                        <a href="`+urlNameSearch+`" class="link-white">
+                                            `+row.user_name+`
+                                        </a>
+                                        `;
                             } else {
                                 return '<i class="bi bi-question-circle"></i>';
                             }

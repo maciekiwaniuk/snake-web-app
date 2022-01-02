@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Admin\ModifyUserDataRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -21,25 +20,22 @@ class UsersController extends Controller
         return view('admin.users');
     }
 
+    public function show($searched_bar_value)
+    {
+        return view('admin.users', [
+            'search_bar_value' => $searched_bar_value
+        ]);
+    }
+
     /**
      * Show users admin index page with searched user's name
      */
-    public function showName($user_id)
+    public function showNameByUserID($user_id)
     {
         $name = $this->getNameByUserId($user_id);
 
         return view('admin.users', [
             'search_bar_value' => $name
-        ]);
-    }
-
-    /**
-     * Show users admin index page with searched ip
-     */
-    public function showIP($ip)
-    {
-        return view('admin.users', [
-            'search_bar_value' => $ip
         ]);
     }
 

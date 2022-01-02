@@ -172,7 +172,7 @@
                         title: 'IP',
                         data: '',
                         render: function (data, type, row, meta) {
-                            urlIpSearchToReplace = "{{ route('admin.users.show-ip', '__IP__') }}";
+                            urlIpSearchToReplace = "{{ route('admin.users.show', '__IP__') }}";
                             urlIpSearch = urlIpSearchToReplace.replace('__IP__', row.ip);
                             return `
                                         <a href="`+urlIpSearch+`" class="link-white">

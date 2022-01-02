@@ -222,7 +222,7 @@
                                 <!-- Account status modal -->
                                 <div class="modal fade" id="accountStatusModal" tabindex="-1" aria-labelledby="accountStatusModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
-                                        <div class="modal-content">
+                                        <div class="modal-content border border-3 border-dark">
 
                                             <div class="modal-body bg-accordion-body">
                                                 <div class="text-center mb-3">
@@ -299,7 +299,7 @@
                                     </div>
                                 </div>
                                 <!-- Logout from game on all devices -->
-                                <button type="button" id="logoutFromGameButton" class="btn btn-primary border border-2 border-dark ms-2 mt-2 mt-md-0">
+                                <button type="button" id="logoutFromGameButton" class="btn btn-primary border border-2 border-dark ms-0 ms-md-2 mt-2 mt-md-0">
                                     Wyloguj z gry na wszystkich urządzeniach
                                 </button>
 

@@ -95,8 +95,8 @@ Route::prefix('administrator')->middleware('admin')->group(function() {
                 Route::get('/uzytkownicy-zbanowani', [UsersController::class, 'getBannedUsers'])->name('get-banned-users');
                 Route::get('/uzytkownicy-niezbanowani', [UsersController::class, 'getNotBannedUsers'])->name('get-notbanned-users');
                 Route::get('/', [UsersController::class, 'index'])->name('index');
-                Route::get('/uzytkownik/{id}', [UsersController::class, 'showName'])->name('show-name');
-                Route::get('/ip/{ip}', [UsersController::class, 'showIP'])->name('show-ip');
+                Route::get('/wyszukaj/{value}', [UsersController::class, 'show'])->name('show');
+                Route::get('/wyszukaj-uzytkownika/{id}', [UsersController::class, 'showNameByUserID'])->name('show-name-by-id');
             });
         });
 

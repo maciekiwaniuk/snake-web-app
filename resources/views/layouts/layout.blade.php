@@ -225,9 +225,9 @@
 
     </div>
 
-    <!-- SEND MESSAGE ICON -->
+    <!-- SEND MESSAGE COMPONENT-->
     @include('components.send-message')
-    <!-- END SEND MESSAGE ICON -->
+    <!-- END SEND MESSAGE COMPONENT -->
 
     <!-- FOOTER -->
     @include('components.footer')

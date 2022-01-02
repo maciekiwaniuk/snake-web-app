@@ -49,7 +49,7 @@
                                         </a>
                                         @else
                                             @if (Auth::user()->isAdmin())
-                                                <a href="{{ route('admin.users.show-name', $user->id) }}">
+                                                <a href="{{ route('admin.users.show-name-by-id', $user->id) }}">
                                                     <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
                                                 </a>
                                             @else
@@ -70,7 +70,7 @@
                                     <span class="nick-size  text-center">
                                         <strong>
                                             @if (Auth::user()->isAdmin() && Auth::user()->id != $user->id)
-                                                <a href="{{ route('admin.users.show-name', $user->id) }}" class="link-none">
+                                                <a href="{{ route('admin.users.show', $user->name) }}" class="link-none">
                                                     {{ $user->name }}
                                                 </a>
                                             @else
