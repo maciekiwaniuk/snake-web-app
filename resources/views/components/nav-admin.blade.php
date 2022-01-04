@@ -24,7 +24,7 @@
                 <!-- Admin tabs -->
                 <div class="dropdown me-3 mb-1">
                     <button class="btn btn-danger border border-2 border-light dropdown-toggle" type="button" id="dropdownMenuButtonAdmin" data-bs-toggle="dropdown" aria-expanded="false">
-                        Administrator
+                        <i class="bi bi-shield-exclamation"></i> Administrator
                     </button>
                     <ul class="dropdown-menu text-center bg-bright " aria-labelledby="dropdownMenuButtonAdmin">
                         <li>
@@ -48,6 +48,10 @@
                                 <i class="bi bi-hdd-rack me-1"></i>Logi serwera
                             </a>
 
+                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.statistics.index') }}">
+                                <i class="bi bi-bar-chart-line"></i> Statystyki
+                            </a>
+
                             <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.artisan-tools.index') }}">
                                 <i class="bi bi-wrench me-1"></i>Narzędzia
                             </a>
@@ -62,7 +66,7 @@
                 <!-- User tabs -->
                 <div class="dropdown me-3 mb-1">
                     <button class="btn btn-primary border border-2 border-light dropdown-toggle" type="button" id="dropdownMenuButtonUser" data-bs-toggle="dropdown" aria-expanded="false">
-                        Użytkownik
+                        <i class="bi bi-shield-check"></i> Użytkownik
                     </button>
                     <ul class="dropdown-menu text-center bg-bright " aria-labelledby="dropdownMenuButtonUser">
                         <li>

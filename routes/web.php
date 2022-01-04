@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ArtisanToolsController;
 use App\Http\Controllers\Admin\EmailsController;
 use App\Http\Controllers\Admin\PHPInfoController;
 use App\Http\Controllers\Admin\MessagesController;
+use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\GameHostingsController;
 use App\Http\Controllers\ProfileController;
@@ -33,8 +34,6 @@ Route::get('/strona-offline', [PagesController::class, 'showOfflineFallback'])->
 Route::get('/gra', [PagesController::class, 'showMiniGamePage'])->name('mini-game');
 Route::get('/pobierz-gre', [GameHostingsController::class, 'index'])->name('download');
 Route::get('/profil/{name}', [ProfileController::class, 'show'])->name('profile');
-
-Route::get('/galeria', [PagesController::class, 'showGalleryPage'])->name('gallery');
 
 Route::prefix('pomoc')->group(function() {
     Route::name('help.')->group(function() {
@@ -127,6 +126,12 @@ Route::prefix('administrator')->middleware('admin')->group(function() {
                 Route::get('/serwer', [ServerLogsController::class, 'index'])->name('index');
                 Route::get('/lista-logow-serwera', [ServerLogsController::class, 'getServerLogs'])->name('get-server-logs');
                 Route::delete('/czyszczenie-logow-serwera', [ServerLogsController::class, 'clearServerLogs'])->name('clear-server-logs');
+            });
+        });
+
+        Route::prefix('statystyki')->group(function() {
+            Route::name('statistics.')->group(function() {
+                Route::get('/', [StatisticsController::class, 'index'])->name('index');
             });
         });
 

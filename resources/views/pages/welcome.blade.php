@@ -43,9 +43,7 @@
                     border border-2 border-success border-radius
                     bg-gradient-to-left
                     border-radius-15">
-                    <a href="{{ route('gallery') }}" class="link-none">
-                        Galeria - zdjęcia z gry
-                    </a>
+                    Galeria - zdjęcia z gry
         </div>
     </div>
 

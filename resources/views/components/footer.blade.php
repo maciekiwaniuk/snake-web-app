@@ -40,7 +40,7 @@
                 <i class="bi bi-github"></i>
             </a>
 
-            <span>Maciej Iwaniuk - 2021 © Wszelkie prawa zastrzeżone</span>
+            <span>Maciej Iwaniuk - {{ now()->year }} © Wszelkie prawa zastrzeżone</span>
 
             <div class="d-none d-md-inline">|</div>
             <div class="d-inline d-md-none"><br></div>

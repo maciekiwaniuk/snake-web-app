@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Auth;
 
 class WelcomeMail extends Mailable implements ShouldQueue
 {
@@ -22,6 +21,7 @@ class WelcomeMail extends Mailable implements ShouldQueue
     public function __construct($user)
     {
         $this->user = $user;
+        $this->subject = 'Dziękujemy za założenie konta!';
     }
 
     /**
