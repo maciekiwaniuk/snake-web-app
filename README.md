@@ -10,7 +10,7 @@
 - [jQuery](https://jquery.com/) is used to write JavaScript things.
 - Every user has his own profile which everyone can visit.
 - Logged user can set an avatar, change an email, change a password etc. in a user panel.
-- Users can compare each other in a ranking page what means players can compete which is very fun!
+- Users can compare each other in a ranking page what means players can compete what gives a lot of fun!
 - Admin is able to use well expanded admin panel which provides a lot of functionalities.
 - Snake mini-game which is available to play on welcome page is made in clear JavaScript.
 - In application has been implemented PWA system, what means website can run in a offline mode (without an internet connection - caches things while first visit).

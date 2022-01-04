@@ -30,7 +30,6 @@
             </div>
 
 
-
             <table class="col-12 text-dark fs-3">
 
                 <tr>
@@ -54,6 +53,24 @@
                 <tr>
                     <td class="d-flex justify-content-between">
                         <div>Unikalne IP</div> <div class="text-end center-horizontally">{{ $ips_amount }}</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="d-flex justify-content-between">
+                        <div>Logi aplikacji</div> <div class="text-end center-horizontally">{{ $application_logs_amount }}</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="d-flex justify-content-between">
+                        <div>Logi serwera</div> <div class="text-end center-horizontally">{{ $server_logs_amount }}</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="d-flex justify-content-between">
+                        <div>Wyświetlenia stron</div> <div class="text-end center-horizontally">{{ $total_visits_amount }}</div>
                     </td>
                 </tr>
 
