@@ -102,6 +102,7 @@ class OptionsController extends Controller
         );
 
         $user->password = Hash::make($request->new_password);
+        $user->api_token = Str::random(60);
         $user->save();
 
         return redirect()->route('options.show', 'haslo')
@@ -180,6 +181,38 @@ class OptionsController extends Controller
 
         return response()->json([
             'result' => $result,
+        ]);
+    }
+
+    /**
+     * Logout from all devices on website
+     */
+    public function logoutFromAccountOnWebsite(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'password' => ['bail', 'required', new LoggedUserPassword]
+        ]);
+
+        if ($validator->fails()) {
+            $result = [
+                'error' => true,
+                'message' => $validator->errors()->first(),
+            ];
+
+            return response()->json([
+                'result' => $result,
+            ]);
+        }
+
+        Auth::logoutOtherDevices($request->password);
+
+        $result = [
+            'success' => true,
+            'message' => 'Pomyślnie wylogowano z konta na stronie ze wszystkich urządzeń.',
+        ];
+
+        return response()->json([
+            'result' => $result
         ]);
     }
 

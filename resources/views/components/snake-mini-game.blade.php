@@ -136,12 +136,12 @@
 <!-- MOVE BUTTONS -->
 <div class="snake-game-buttons">
     <div class="buttons-content mb-5">
+
         <div class="row mx-1">
             <button id="move-up-button" class="col-12 btn btn-success border border-1 border-light">
                 <i class="bi bi-arrow-up-circle"></i>
             </button>
         </div>
-
 
         <div class="row mx-1">
             <button id="move-left-button" class="col-6 btn btn-success border border-1 border-light">

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 
-class VisitsAmountMiddleware
+class TotalVisitsAmountMiddleware
 {
     /**
      * Handle an incoming request.
@@ -19,13 +19,11 @@ class VisitsAmountMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (env('REDIS_CONFIGURED')) {
-            if (Redis::get('total_visits_amount' !== null)) {
+            if (Redis::get('total_visits_amount') === null) {
                 Redis::set('total_visits_amount', 0);
             }
 
-            $total_visits_amount = Redis::get('total_visits_amount');
-
-            Redis::set('total_visits_amount', $total_visits_amount += 1);
+            Redis::set('total_visits_amount', Redis::get('total_visits_amount') + 1);
         }
 
         return $next($request);

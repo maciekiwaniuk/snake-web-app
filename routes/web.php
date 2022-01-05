@@ -28,7 +28,7 @@ use App\Http\Controllers\MessageController;
 
 /********************************************************* General routing *********************************************************/
 
-Route::get('/', [PagesController::class, 'index'])->middleware('unique.visitor')->name('home');
+Route::get('/', [PagesController::class, 'index'])->middleware(['unique.visitor', 'welcome.page.visitor'])->name('home');
 Route::get('/strona-offline', [PagesController::class, 'showOfflineFallback'])->name('offline-fallback');
 
 Route::get('/gra', [PagesController::class, 'showMiniGamePage'])->name('mini-game');
@@ -168,6 +168,7 @@ Route::middleware('auth')->group(function() {
             Route::delete('/usuniecie-awatara', [OptionsController::class, 'avatarDelete'])->name('avatar-delete');
             Route::delete('/usuniecie-konta', [OptionsController::class, 'accountDelete'])->name('account-delete');
             Route::post('/wylogowanie-z-gry', [OptionsController::class, 'logoutFromGame'])->name('logout-from-game');
+            Route::post('/wylogowanie-ze-strony', [OptionsController::class, 'logoutFromAccountOnWebsite'])->name('logout-from-website');
         });
     });
 });

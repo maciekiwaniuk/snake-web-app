@@ -298,12 +298,50 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <br class="d-block d-md-none">
+
                                 <!-- Logout from game on all devices -->
                                 <button type="button" id="logoutFromGameButton" class="btn btn-primary border border-2 border-dark ms-0 ms-md-2 mt-2 mt-md-0">
                                     Wyloguj z gry na wszystkich urządzeniach
                                 </button>
 
+                                <br class="d-block d-xl-none">
 
+                                <!-- Logout from website on all devices -->
+                                <button type="button" id="logoutFromWebsiteButton" class="btn btn-primary border border-2 border-dark ms-0 ms-xl-2 mt-2 mt-xl-0" data-bs-toggle="modal" data-bs-target="#logoutFromWebsiteOnAllDevicesModal">
+                                    Wyloguj ze strony na wszystkich urządzeniach
+                                </button>
+
+                                <!-- Logout from website on all devices modal -->
+                                <div class="modal fade" id="logoutFromWebsiteOnAllDevicesModal" tabindex="-1" aria-labelledby="logoutFromWebsiteOnAllDevicesModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content border border-3 border-dark">
+
+                                            <div class="modal-body bg-accordion-body">
+
+                                                <div class="text-start">
+                                                    Wyloguj się z konta na wszystkich urządzeniach oprócz tego, na którym aktualnie się znajdujesz.
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="col-12 mb-3">
+                                                    <label for="old_password">Aktualne hasło</label>
+                                                    <input type="password" id="logout_website_password" name="old_password" class="form-control">
+                                                </div>
+
+                                                <div class="col-12 d-flex justify-content-around">
+                                                    <button type="button" class="btn btn-success border border-2 border-dark" data-bs-dismiss="modal">Anuluj</button>
+                                                    <button id="confirmLogoutFromWebsiteButton" type="submit" class="btn btn-primary border border-2 border-dark">Potwierdź</button>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
@@ -366,7 +404,7 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        if ( response.result.success ) {
+                        if (response.result.success) {
                             blockUI();
                             setTimeout(function () {
                                 toastr.success(response.result.message);
@@ -395,8 +433,8 @@
                     data: {
                         _token: '{{ csrf_token() }}'
                     },
-                    success: function(response){
-                        if ( response.result.success ) {
+                    success: function (response){
+                        if (response.result.success) {
                             blockUI();
                             setTimeout(function () {
                                 toastr.success(response.result.message);
@@ -446,6 +484,30 @@
                             blockUI();
                             setTimeout(function () {
                                 toastr.success(response.result.message);
+                            }, 400);
+                        }
+                    },
+                });
+            });
+
+            $('#confirmLogoutFromWebsiteButton').on('click', function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("options.logout-from-website") }}',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        password: $('#logout_website_password').val()
+                    },
+                    success: function(response) {
+                        if (response.result.success) {
+                            blockUI();
+                            setTimeout(function () {
+                                toastr.success(response.result.message);
+                            }, 400);
+                        } else {
+                            blockUI();
+                            setTimeout(function () {
+                                toastr.error(response.result.message);
                             }, 400);
                         }
                     },

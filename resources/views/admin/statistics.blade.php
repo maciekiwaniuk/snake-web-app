@@ -70,7 +70,13 @@
 
                 <tr>
                     <td class="d-flex justify-content-between">
-                        <div>Wyświetlenia stron</div> <div class="text-end center-horizontally">{{ $total_visits_amount }}</div>
+                        <div>Wyświetlenia podstron</div> <div class="text-end center-horizontally">{{ $total_visits_amount }}</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="d-flex justify-content-between">
+                        <div>Wyświetlenia strony głównej</div> <div class="text-end center-horizontally">{{ $welcome_page_visits_amount }}</div>
                     </td>
                 </tr>
 

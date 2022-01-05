@@ -193,7 +193,7 @@ export function createDefaultCookieData() {
     let data = {
         scoreRecord: 0,
         selectedSnakeSpeed: 'slow',
-        selectedBoard: 'purple',
+        selectedBoard: 'green',
         selectedSnake: 'blue',
         selectedFood: 'yellow'
     };

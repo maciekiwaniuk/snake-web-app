@@ -44,7 +44,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
             \App\Http\Middleware\BannedAccountMiddleware::class,
-            \App\Http\Middleware\VisitsAmountMiddleware::class,
+            \App\Http\Middleware\TotalVisitsAmountMiddleware::class,
         ],
 
         'api' => [
@@ -73,5 +73,6 @@ class Kernel extends HttpKernel
 
         'admin' => \App\Http\Middleware\IsAdminMiddleware::class,
         'unique.visitor' => \App\Http\Middleware\VisitorsUniqueMiddleware::class,
+        'welcome.page.visitor' => \App\Http\Middleware\WelcomePageVisitsAmountMiddleware::class,
     ];
 }

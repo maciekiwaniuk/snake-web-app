@@ -41,7 +41,8 @@ class StatisticsController extends Controller
             'ips_amount' => $this->getAmountOfUniqueIps(),
             'application_logs_amount' => $this->getAmountOfApplicationLogs(),
             'server_logs_amount' => $this->getAmountOfServerLogs(),
-            'total_visits_amount' => $this->getAmountOfTotalVisits()
+            'total_visits_amount' => $this->getAmountOfTotalVisits(),
+            'welcome_page_visits_amount' => $this->getAmountOfWelcomePageVisits()
         ]);
     }
 
@@ -120,7 +121,18 @@ class StatisticsController extends Controller
         if (env('REDIS_CONFIGURED')) {
             return Redis::get('total_visits_amount');
         }
-        return 'Brak danych (Redis)';
+        return 'Brak danych (Wymagany Redis)';
+    }
+
+    /**
+     * Return amount of welcome page visits
+     */
+    public function getAmountOfWelcomePageVisits()
+    {
+        if (env('REDIS_CONFIGURED')) {
+            return Redis::get('welcome_page_visits_amount');
+        }
+        return 'Brak danych (Wymagany Redis)';
     }
 
 }

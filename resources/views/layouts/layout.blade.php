@@ -92,6 +92,12 @@
 </head>
 <body>
 
+    <style>
+        #cookie-bar {
+            z-index: 99999 !important;
+        }
+    </style>
+
     <script>
         // check if serviceWorker is avaliable in the browser
         if ('serviceWorker' in navigator) {
