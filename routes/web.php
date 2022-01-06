@@ -169,6 +169,8 @@ Route::middleware('auth')->group(function() {
             Route::delete('/usuniecie-konta', [OptionsController::class, 'accountDelete'])->name('account-delete');
             Route::post('/wylogowanie-z-gry', [OptionsController::class, 'logoutFromGame'])->name('logout-from-game');
             Route::post('/wylogowanie-ze-strony', [OptionsController::class, 'logoutFromAccountOnWebsite'])->name('logout-from-website');
+
+            Route::get('/logi-logowania-uzytkownika/{id}', [OptionsController::class, 'getUserLoginApplicationLogs'])->name('get-user-login-logs');
         });
     });
 });

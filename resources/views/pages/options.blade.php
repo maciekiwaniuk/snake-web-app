@@ -14,6 +14,9 @@
 @endpush
 
 @push('css')
+    <!-- DataTables CSS -->
+    <link href="{{ asset('assets/plugins/DataTables/datatables.min.css') }}" rel="stylesheet" text="text/css">
+
     <!-- Dropify CSS -->
     <link href="{{ asset('assets/plugins/dropify/css/dropify.css') }}" type="text/css" rel="stylesheet">
 
@@ -22,6 +25,9 @@
 @endpush
 
 @push('js.header')
+    <!-- DataTables JS -->
+    <script src="{{ asset('assets/plugins/DataTables/datatables.min.js') }}"></script>
+
     <!-- Dropify JS -->
     <script src="{{ asset('assets/plugins/dropify/js/dropify.js') }}"></script>
 
@@ -245,7 +251,48 @@
                                                             <button id="verifyEmailButton" class="btn btn-success border border-2 border-dark ms-1">Zweryfikuj e-mail</button>
                                                         @endif
                                                     </div>
+
+                                                    <div>
+                                                        <!-- Login logs button -->
+                                                        Historia logowań do konta
+                                                        <button class="btn btn-md btn-primary border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#loginLogsModal">
+                                                            Wyświetl
+                                                        </button>
+                                                    </div>
                                                 </div>
+
+                                                <hr>
+
+                                                <div class="text-center mt-3">
+                                                    <button type="button" class="btn btn-secondary border border-2 border-dark" data-bs-dismiss="modal">Zamknij</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Login logs modal -->
+                                <div class="modal fade" id="loginLogsModal" tabindex="-1" aria-labelledby="loginLogsModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <div class="modal-body">
+                                                <div class="text-center mb-3">
+                                                    <h3>Historia logowań</h3>
+                                                </div>
+
+                                                <hr>
+
+                                                            <div class="table-responsive-sm">
+                                                                <table id="userLoginLogsTable" class="table w-100">
+                                                                    <thead>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
 
                                                 <hr>
 
@@ -371,6 +418,57 @@
                     $.unblockUI();
                 }, 400);
             }
+
+            tableUserLoginLogsUrlToReplace = "{{ route('options.get-user-login-logs', '__ID__') }}";
+            tableUserLoginLogsUrl = tableUserLoginLogsUrlToReplace.replace('__ID__', '{{ Auth::user()->id }}');
+
+            var userLoginLogTable = $('#userLoginLogsTable').DataTable({
+                oLanguage: {
+                    sUrl: "{{ asset('assets/plugins/DataTables/pl.json') }}"
+                },
+                order: [[ 0, 'asc' ]],
+                lengthChange: false,
+                searching: false,
+                info: false,
+                serverSide: false,
+                ajax: {
+                    url: tableUserLoginLogsUrl,
+                    type: "GET",
+                    datatype: "json",
+                    cache: true,
+                    contentType: "application/json",
+                },
+                columns: [
+                    {
+                        title: 'Numer',
+                        data: '',
+                        render: function (data, type, row, meta) {
+                            let number = meta.row + meta.settings._iDisplayStart + 1;
+                            return number;
+                        },
+                        class: 'align-middle',
+                    },
+                    {
+                        title: 'IP',
+                        data: '',
+                        orderable: false,
+                        render: function (data, type, row, meta) {
+                            return row.ip;
+                        },
+                        class: 'align-middle'
+                    },
+                    {
+                        title: 'Data',
+                        data: '',
+                        render: function (data, type, row, meta) {
+                            let days = row.created_at.slice(0, 10);
+                            let hours = row.created_at.slice(11, 19);
+                            return days + " " + hours;
+                        },
+                        class: 'align-middle'
+                    }
+                ]
+            });
 
             var dropifyOptions = {
                 'messages': {

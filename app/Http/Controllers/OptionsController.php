@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangeEmailRequest;
+use App\Models\AppLog;
 use App\Rules\LoggedUserPassword;
 
 class OptionsController extends Controller
@@ -213,6 +214,22 @@ class OptionsController extends Controller
 
         return response()->json([
             'result' => $result
+        ]);
+    }
+
+    /**
+     * Return all login application logs specified user
+     */
+    public function getUserLoginApplicationLogs($user_id)
+    {
+        $logs = AppLog::query()
+            ->where('user_id', '=', $user_id)
+            ->where('type', '=', 'site_login')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        return response()->json([
+            'data' => $logs
         ]);
     }
 
