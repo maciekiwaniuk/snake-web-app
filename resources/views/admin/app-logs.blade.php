@@ -128,6 +128,8 @@
                                 return "Zmiana hasła";
                             } else if (action == 'change_email') {
                                 return "Zmiana e-mail";
+                            } else if (action == 'email_verification') {
+                                return "Próba potwierdzenia e-mail";
                             }
 
                             //game actions
@@ -223,6 +225,8 @@
                                 optionName = "Zmiana hasła";
                             } else if (value == 'change_email') {
                                 optionName = "Zmiana e-mail";
+                            } else if (value == 'email_verification') {
+                                optionName = "Próba potwierdzenia e-mail";
                             }
 
                             //game actions

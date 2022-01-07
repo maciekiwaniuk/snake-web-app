@@ -220,10 +220,10 @@ class OptionsController extends Controller
     /**
      * Return all login application logs specified user
      */
-    public function getUserLoginApplicationLogs($user_id)
+    public function getUserLoginApplicationLogs()
     {
         $logs = AppLog::query()
-            ->where('user_id', '=', $user_id)
+            ->where('user_id', '=', Auth::user()->id)
             ->where('type', '=', 'site_login')
             ->orderBy('created_at', 'DESC')
             ->get();

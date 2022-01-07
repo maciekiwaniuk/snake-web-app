@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmailVerificationNotificationController extends Controller
 {
@@ -21,6 +22,11 @@ class EmailVerificationNotificationController extends Controller
         }
 
         $request->user()->sendEmailVerificationNotification();
+
+        $this->createAppLog(
+            'email_verification',
+            'Użytkownik '.Auth::user()->name.' wysłał linka potwierdzającego e-mail na skrzynkę pocztową.'
+        );
 
         $result = [
             'success' => true,

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\AccountTests;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -34,10 +34,12 @@ class EmailVerificationTest extends TestCase
     //     Event::fake();
 
     //     $verificationUrl = URL::temporarySignedRoute(
-    //         route('verification.verify'),
+    //         route('verification.verify', ['id' => $user->id, 'hash' => sha1($user->email)]),
     //         now()->addMinutes(60),
     //         ['id' => $user->id, 'hash' => sha1($user->email)]
     //     );
+
+    //     logger($verificationUrl);
 
     //     $response = $this->actingAs($user)->get($verificationUrl);
 

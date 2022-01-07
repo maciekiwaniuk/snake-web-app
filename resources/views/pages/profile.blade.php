@@ -48,7 +48,7 @@
                                             <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
                                         </a>
                                         @else
-                                            @if (Auth::user()->isAdmin())
+                                            @if (Auth::check() && Auth::user()->isAdmin())
                                                 <a href="{{ route('admin.users.show-name-by-id', $user->id) }}">
                                                     <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
                                                 </a>
@@ -69,7 +69,7 @@
 
                                     <span class="nick-size  text-center">
                                         <strong>
-                                            @if (Auth::user()->isAdmin() && Auth::user()->id != $user->id)
+                                            @if (Auth::check() && Auth::user()->isAdmin() && Auth::user()->id != $user->id)
                                                 <a href="{{ route('admin.users.show', $user->name) }}" class="link-none">
                                                     {{ $user->name }}
                                                 </a>
@@ -94,7 +94,7 @@
 
                                     @else
 
-                                        @if ($user->userGameData->points > 0)
+                                        @if (isset($user->userGameData->points) && $user->userGameData->points > 0)
                                             Punkty: {{ $user->userGameData->points }} <br>
                                             Monety: {{ $user->userGameData->coins }} <br>
                                             @php

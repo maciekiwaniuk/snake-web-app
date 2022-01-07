@@ -170,7 +170,7 @@ Route::middleware('auth')->group(function() {
             Route::post('/wylogowanie-z-gry', [OptionsController::class, 'logoutFromGame'])->name('logout-from-game');
             Route::post('/wylogowanie-ze-strony', [OptionsController::class, 'logoutFromAccountOnWebsite'])->name('logout-from-website');
 
-            Route::get('/logi-logowania-uzytkownika/{id}', [OptionsController::class, 'getUserLoginApplicationLogs'])->name('get-user-login-logs');
+            Route::get('/pokaz/logi-logowania', [OptionsController::class, 'getUserLoginApplicationLogs'])->name('get-user-login-logs');
         });
     });
 });

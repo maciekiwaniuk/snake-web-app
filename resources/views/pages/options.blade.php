@@ -59,7 +59,7 @@
 
                                 <form id="avatarForm" method="POST" action="{{ route('options.avatar-change') }}">
                                     @csrf
-                                    <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="{{ Auth::user()->avatar }}"/>
+                                    <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="{{ env('APP_URL') . '/' . Auth::user()->avatar}}"/>
                                 </form>
 
                                 <button class="d-block d-md-none btn-md fs-4 mx-auto mt-2
@@ -248,7 +248,9 @@
                                                             <i class="bi bi-check-circle text-success fs-3"></i>
                                                         @else
                                                             <i class="bi bi-x-circle text-danger fs-2"></i>
-                                                            <button id="verifyEmailButton" class="btn btn-success border border-2 border-dark ms-1">Zweryfikuj e-mail</button>
+                                                            @if(env('MAIL_SERVICE_ENABLED'))
+                                                                <button id="verifyEmailButton" class="btn btn-success border border-2 border-dark ms-1">Zweryfikuj e-mail</button>
+                                                            @endif
                                                         @endif
                                                     </div>
 
@@ -419,8 +421,7 @@
                 }, 400);
             }
 
-            tableUserLoginLogsUrlToReplace = "{{ route('options.get-user-login-logs', '__ID__') }}";
-            tableUserLoginLogsUrl = tableUserLoginLogsUrlToReplace.replace('__ID__', '{{ Auth::user()->id }}');
+            tableUserLoginLogsUrl = "{{ route('options.get-user-login-logs') }}";
 
             var userLoginLogTable = $('#userLoginLogsTable').DataTable({
                 oLanguage: {
