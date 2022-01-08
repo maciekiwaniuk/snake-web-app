@@ -106,6 +106,8 @@ class StatisticsController extends Controller
             $errorName = 'production.ERROR:';
         } else if (env('APP_ENV') == 'local') {
             $errorName = 'local.ERROR:';
+        } else {
+            $errorName = 'ERROR';
         }
 
         $logArray = explode($errorName, $logString);

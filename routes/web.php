@@ -74,16 +74,16 @@ Route::prefix('administrator')->middleware('admin')->group(function() {
             });
         });
 
-        Route::put('/banowanie-ostatniego-ip/{id}', [UsersController::class, 'banLastUserIp'])->name('ban-last-ip');
         Route::put('/banowanie-konta/{id}', [UsersController::class, 'banAccount'])->name('ban-account');
-        Route::put('/banowanie-konta-oraz-ip/{id}', [UsersController::class, 'banAccountAndIP'])->name('ban-ip-account');
-        Route::delete('/usuwanie-konta/{id}', [UsersController::class, 'deleteUserAccount'])->name('delete-account');
-        Route::put('/odbanowanie-ostatniego-ip/{id}', [UsersController::class, 'unbanLastUserIp'])->name('unban-last-ip');
         Route::put('/odbanowanie-konta/{id}', [UsersController::class, 'unbanAccount'])->name('unban-account');
-        Route::put('/odbanowanie-konta-oraz-ip/{id}', [UsersController::class, 'unbanAccountAndIP'])->name('unban-ip-account');
+        Route::put('/banowanie-ostatniego-ip/{id}', [UsersController::class, 'banLastUserIp'])->name('ban-last-ip');
+        Route::put('/odbanowanie-ostatniego-ip/{id}', [UsersController::class, 'unbanLastUserIp'])->name('unban-last-ip');
+        Route::put('/banowanie-konta-oraz-ostatniego-ip/{id}', [UsersController::class, 'banAccountAndIP'])->name('ban-last-ip-account');
+        Route::put('/odbanowanie-konta-oraz-ostatniego-ip/{id}', [UsersController::class, 'unbanAccountAndIP'])->name('unban-last-ip-account');
         Route::put('/resetowanie-api-tokenu/{id}', [UsersController::class, 'resetApiToken'])->name('reset-api-token');
-        Route::delete('/usuniecie-awatara/{id}', [UsersController::class, 'deleteAvatar'])->name('delete-avatar');
         Route::put('/modyfikacja-danych/{id}', [UsersController::class, 'modifyData'])->name('modify-data');
+        Route::delete('/usuwanie-konta/{id}', [UsersController::class, 'deleteUserAccount'])->name('delete-account');
+        Route::delete('/usuniecie-awatara/{id}', [UsersController::class, 'deleteAvatar'])->name('delete-avatar');
 
         Route::put('/zbanuj-konkretne-ip/{id}', [VisitorsUniqueController::class, 'banIp'])->name('ban-ip');
         Route::put('/odbanuj-konkretne-ip/{id}', [VisitorsUniqueController::class, 'unbanIp'])->name('unban-ip');

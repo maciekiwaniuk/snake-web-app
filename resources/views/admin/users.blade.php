@@ -393,7 +393,7 @@
                 $('#account-ip-ban-status-btn').text('Zbanuj konto oraz IP');
                 $('#account-ip-ban-status-btn').attr('class', 'btn btn-warning mt-1 border border-2 border-dark');
 
-                urlBanIpAndAccountToReplace = "{{ route('admin.ban-ip-account', '__ID__') }}";
+                urlBanIpAndAccountToReplace = "{{ route('admin.ban-last-ip-account', '__ID__') }}";
                 urlBanIpAndAccount = urlBanIpAndAccountToReplace.replace('__ID__', user_id);
                 $('#account-ip-ban-status-confirmation-form').attr('action', urlBanIpAndAccount);
             } else {
@@ -401,7 +401,7 @@
                 $('#account-ip-ban-status-btn').text('Odbanuj konto oraz IP');
                 $('#account-ip-ban-status-btn').attr('class', 'btn btn-success mt-1 border border-2 border-dark');
 
-                urlUnbanIpAndAccountToReplace = "{{ route('admin.unban-ip-account', '__ID__') }}";
+                urlUnbanIpAndAccountToReplace = "{{ route('admin.unban-last-ip-account', '__ID__') }}";
                 urlUnbanIpAndAccount = urlUnbanIpAndAccountToReplace.replace('__ID__', user_id);
                 $('#account-ip-ban-status-confirmation-form').attr('action', urlUnbanIpAndAccount);
             }
