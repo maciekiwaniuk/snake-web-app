@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\EmailsController;
 use App\Http\Controllers\Admin\PHPInfoController;
 use App\Http\Controllers\Admin\MessagesController;
 use App\Http\Controllers\Admin\StatisticsController;
+use App\Http\Controllers\Admin\GameHostingsController as AdminGameHostingsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\GameHostingsController;
 use App\Http\Controllers\ProfileController;
@@ -113,6 +114,12 @@ Route::prefix('administrator')->middleware('admin')->group(function() {
                 Route::get('/', [MessagesController::class, 'index'])->name('index');
                 Route::get('/wyswietl-wiadomosci', [MessagesController::class, 'getMessages'])->name('get-messages');
                 Route::delete('/usun-wiadomosc/{id}', [MessagesController::class, 'destroy'])->name('destroy');
+            });
+        });
+
+        Route::prefix('hostingi-gry')->group(function() {
+            Route::name('game-hostings.')->group(function() {
+                Route::get('/', [AdminGameHostingsController::class, 'index'])->name('index');
             });
         });
 

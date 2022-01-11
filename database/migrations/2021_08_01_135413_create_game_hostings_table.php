@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHostingsTable extends Migration
+class CreateGameHostingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateHostingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hostings', function (Blueprint $table) {
+        Schema::create('game_hostings', function (Blueprint $table) {
             $table->id();
-            $table->string('hosting_name');
-            $table->string('hosting_link');
+            $table->string('name');
+            $table->string('link');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateHostingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hostings');
+        Schema::dropIfExists('game_hostings');
     }
 }

@@ -40,6 +40,10 @@
                                 <i class="bi bi-envelope me-1"></i>Wiadomości
                             </a>
 
+                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.game-hostings.index') }}">
+                                <i class="bi bi-cloud-download me-1"></i>Hostingi gry
+                            </a>
+
                             <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.app-logs.index') }}">
                                 <i class="bi bi-text-left me-1"></i>Logi aplikacji
                             </a>

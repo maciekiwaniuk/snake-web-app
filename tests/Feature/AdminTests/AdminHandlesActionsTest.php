@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
-class AdminHandleActionsTest extends TestCase
+class AdminHandlesActionsTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -121,6 +121,24 @@ class AdminHandleActionsTest extends TestCase
         $this->assertEquals($user_after_change->name, 'new_user_name');
         $this->assertEquals($user_after_change->email, 'new_user_email@example.test');
         $this->assertNotEquals($user_before_change->password, $user_after_change->password);
+    }
+
+    public function test_admin_can_ban_specified_ip()
+    {
+        $admin = User::factory()->create(['permission' => 2]);
+        $ip = VisitorUnique::factory()->create();
+
+        $response = $this->actingAs($admin)->put(route('admin.ban-ip', $ip->id));
+        $response->assertStatus(302)->assertSessionHas('success');
+    }
+
+    public function test_admin_can_unban_specified_ip()
+    {
+        $admin = User::factory()->create(['permission' => 2]);
+        $ip = VisitorUnique::factory()->create(['ip_banned' => 1]);
+
+        $response = $this->actingAs($admin)->put(route('admin.unban-ip', $ip->id));
+        $response->assertStatus(302)->assertSessionHas('success');
     }
 
 }

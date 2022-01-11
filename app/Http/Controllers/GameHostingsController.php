@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Hosting;
+use App\Models\GameHosting;
 
 class GameHostingsController extends Controller
 {
@@ -11,10 +11,10 @@ class GameHostingsController extends Controller
      */
     public function index()
     {
-        $hostings = Hosting::all();
+        $game_hostings = GameHosting::all();
 
         return view('pages.download', [
-            'hostings' => $hostings
+            'game_hostings' => $game_hostings
         ]);
     }
 }

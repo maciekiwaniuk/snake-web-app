@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\VisitorUnique;
 use App\Models\UserGameData;
-use App\Models\Hosting;
+use App\Models\GameHosting;
 
 class DatabaseSeeder extends Seeder
 {
@@ -69,14 +69,14 @@ class DatabaseSeeder extends Seeder
 
         UserGameData::factory(53)->create();
 
-        Hosting::factory()->create([
-            'hosting_name' => "Snake (instalka)",
-            'hosting_link' => "https://snake-gra.pl/pobierz-gre",
+        GameHosting::factory()->create([
+            'name' => "Snake (instalka)",
+            'link' => "https://snake-gra.pl/pobierz-gre",
         ]);
 
-        Hosting::factory()->create([
-            'hosting_name' => "Snake (pliki)",
-            'hosting_link' => "https://snake-gra.pl/pobierz-gre",
+        GameHosting::factory()->create([
+            'name' => "Snake (pliki)",
+            'link' => "https://snake-gra.pl/pobierz-gre",
         ]);
     }
 }

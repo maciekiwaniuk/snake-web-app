@@ -8,7 +8,6 @@
 - Application is responsive, made with the [Bootstrap 5](https://getbootstrap.com/docs/5.1/getting-started/introduction/).
 - To display tables is used the [DataTables](https://datatables.net/) plugin.
 - [jQuery](https://jquery.com/) is used to write JavaScript things.
-- Every user has his own profile which everyone can visit.
 - Logged user can set an avatar, change an email, change a password etc. in a user panel.
 - Users can compare each other in a ranking page what means players can compete what gives a lot of fun!
 - Admin is able to use well expanded admin panel which provides a lot of functionalities.
@@ -86,6 +85,12 @@ You have to also run queue:work command to set up queue system
 Redis is necessary to count for example total visits on website. To enable redis service you need to fill all crucial variables related with prefix REDIS_ in .env and after that set REDIS_CONFIGURED to true.
 
     REDIS_CONFIGURED=true
+
+# Testing
+
+To test if application is running properly, you can use implemented tests
+
+    php artisan test
 
 # Application usage
 

@@ -7,7 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class AdminVisitPagesTest extends TestCase
+class AdminVisitsPagesTest extends TestCase
 {
     use RefreshDatabase;
 

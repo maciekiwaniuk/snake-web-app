@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Hosting;
+use App\Models\GameHosting;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class HostingFactory extends Factory
+class GameHostingFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Hosting::class;
+    protected $model = GameHosting::class;
 
     /**
      * Define the model's default state.

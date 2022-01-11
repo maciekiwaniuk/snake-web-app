@@ -20,7 +20,7 @@
                 border border-2 border-success
                 bg-gradient-to-left border-radius-15">
 
-        @if (count($hostings))
+        @if (count($game_hostings))
             <div class="col-12 text-center">
                 Pobierz grę
             </div>
@@ -29,7 +29,7 @@
 
         <div class="row text-center">
 
-            @forelse ($hostings as $hosting)
+            @forelse ($game_hostings as $game_hosting)
 
                 <div class="col-11 col-md-5
                             mt-3
@@ -41,15 +41,15 @@
                             border-radius-15">
 
                             <div class="col-12 pb-1">
-                                {{ $hosting->hosting_name }}
+                                {{ $game_hosting->name }}
                             </div>
 
                             <div class="col-12">
-                                <a href="{{ $hosting->hosting_link }}" target="_blank" class="btn btn-success border border-2 border-dark">Pobierz</a>
+                                <a href="{{ $game_hosting->link }}" target="_blank" class="btn btn-success border border-2 border-dark">Pobierz</a>
                             </div>
                 </div>
 
-                @if ((count($hostings) % 2 == 1) && ($loop->last))
+                @if ((count($game_hostings) % 2 == 1) && ($loop->last))
 
                     <div class="col-md-5 mt-3 pt-2 pb-3 mx-auto"></div>
 
