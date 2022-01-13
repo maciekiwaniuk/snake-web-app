@@ -265,7 +265,7 @@
                                                 '`+row.subject+`',
                                                 '`+row.sender+`',
                                                 '`+row.email+`',
-                                                '`+row.content+`',
+                                                '`+row.content.split('\n')+`',
                                                 '`+row.sent_as_user+`',
                                                 '`+row.user_name+`'
                                             )"

@@ -18,12 +18,14 @@ class TotalVisitsAmountMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        $key = 'total_visits_amount_'.env('APP_ENV');
+
         if (env('REDIS_CONFIGURED')) {
-            if (Redis::get('total_visits_amount') === null) {
-                Redis::set('total_visits_amount', 0);
+            if (Redis::get($key) === null) {
+                Redis::set($key, 0);
             }
 
-            Redis::set('total_visits_amount', Redis::get('total_visits_amount') + 1);
+            Redis::set($key, Redis::get($key) + 1);
         }
 
         return $next($request);

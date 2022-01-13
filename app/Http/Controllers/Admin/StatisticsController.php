@@ -121,7 +121,7 @@ class StatisticsController extends Controller
     public function getAmountOfTotalVisits()
     {
         if (env('REDIS_CONFIGURED')) {
-            return Redis::get('total_visits_amount');
+            return Redis::get('total_visits_amount_'.env('APP_ENV'));
         }
         return 'Brak danych (Wymagany Redis)';
     }
@@ -132,7 +132,7 @@ class StatisticsController extends Controller
     public function getAmountOfWelcomePageVisits()
     {
         if (env('REDIS_CONFIGURED')) {
-            return Redis::get('welcome_page_visits_amount');
+            return Redis::get('welcome_page_visits_amount_'.env('APP_ENV'));
         }
         return 'Brak danych (Wymagany Redis)';
     }

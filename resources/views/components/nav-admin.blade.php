@@ -44,16 +44,16 @@
                                 <i class="bi bi-cloud-download me-1"></i>Hostingi gry
                             </a>
 
+                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.statistics.index') }}">
+                                <i class="bi bi-bar-chart-line"></i> Statystyki
+                            </a>
+
                             <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.app-logs.index') }}">
                                 <i class="bi bi-text-left me-1"></i>Logi aplikacji
                             </a>
 
                             <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.server-logs.index') }}">
                                 <i class="bi bi-hdd-rack me-1"></i>Logi serwera
-                            </a>
-
-                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.statistics.index') }}">
-                                <i class="bi bi-bar-chart-line"></i> Statystyki
                             </a>
 
                             <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('admin.artisan-tools.index') }}">

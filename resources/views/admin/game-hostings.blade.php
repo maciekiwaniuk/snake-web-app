@@ -4,17 +4,17 @@
     Hostingi gry
 @endsection
 
-<style>
-    table {
-        border-collapse: collapse;
-    }
-
-    tr {
-        border-bottom: 0.1vmin solid black !important;
-    }
-</style>
-
 @section('content')
+
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        tr {
+            border-bottom: 0.1vmin solid black !important;
+        }
+    </style>
 
     <div class="col-12 col-sm-10
                 mx-auto
