@@ -120,6 +120,9 @@ Route::prefix('administrator')->middleware('admin')->group(function() {
         Route::prefix('hostingi-gry')->group(function() {
             Route::name('game-hostings.')->group(function() {
                 Route::get('/', [AdminGameHostingsController::class, 'index'])->name('index');
+                Route::post('/dodaj', [AdminGameHostingsController::class, 'store'])->name('store');
+                Route::delete('/usun/{id}', [AdminGameHostingsController::class, 'destroy'])->name('destroy');
+                Route::put('/zmodyfikuj/{id}', [AdminGameHostingsController::class, 'update'])->name('update');
             });
         });
 

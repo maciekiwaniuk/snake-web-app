@@ -33,7 +33,26 @@ class GameHostingsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate(
+            $request,
+            [
+                'name' => 'required',
+                'link' => 'required',
+            ],
+            [
+                'name.required' => 'Nazwa hostingu jest wymagana.',
+                'link.required' => 'Link do pobrania jest wymagany.'
+            ]
+        );
 
+        $game_hosting = new GameHosting;
+        $game_hosting->name = $request->name;
+        $game_hosting->link = $request->link;
+        $game_hosting->save();
+
+        return back()->with([
+            'success' => 'Hosting gry został dodany pomyślnie.'
+        ]);
     }
 
     /**
@@ -41,18 +60,33 @@ class GameHostingsController extends Controller
      */
     public function destroy($id)
     {
+        $game_hosting = GameHosting::query()
+            ->where('id', '=', $id)
+            ->first();
 
+        $game_hosting->delete();
+
+        return back()->with([
+            'success' => 'Hosting gry został usunięty pomyślnie.'
+        ]);
     }
 
     /**
      * Modify game hosting
      */
-    public function put($id)
+    public function update(Request $request, $id)
     {
+        $game_hosting = GameHosting::query()
+            ->where('id', '=', $id)
+            ->first();
 
+        $game_hosting->name = $request->name;
+        $game_hosting->link = $request->link;
+        $game_hosting->save();
+
+        return back()->with([
+            'success' => 'Hosting gry został zmodyfikowany pomyślnie.'
+        ]);
     }
-
-
-
 
 }
