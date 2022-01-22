@@ -18,7 +18,7 @@ class GuestVisitsPagesTest extends TestCase
         $this->get(route('home'))->assertStatus(200);
         $this->get(route('offline-fallback'))->assertStatus(200);
         $this->get(route('mini-game'))->assertStatus(200);
-        $this->get(route('download'))->assertStatus(200);
+        $this->get(route('game-hostings.index'))->assertStatus(200);
         $this->get(route('profile', $user->name))->assertStatus(200);
         $this->get(route('help.index'))->assertStatus(200);
         $this->get(route('message.index'))->assertStatus(200);

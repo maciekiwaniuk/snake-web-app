@@ -81,6 +81,12 @@
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="d-flex justify-content-between">
+                        <div>Pobrania gry</div> <div class="text-end center-horizontally">{{ $total_game_downloads_amount }}</div>
+                    </td>
+                </tr>
+
             </table>
 
 

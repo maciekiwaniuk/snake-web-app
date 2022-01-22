@@ -42,7 +42,8 @@ class StatisticsController extends Controller
             'application_logs_amount' => $this->getAmountOfApplicationLogs(),
             'server_logs_amount' => $this->getAmountOfServerLogs(),
             'total_visits_amount' => $this->getAmountOfTotalVisits(),
-            'welcome_page_visits_amount' => $this->getAmountOfWelcomePageVisits()
+            'welcome_page_visits_amount' => $this->getAmountOfWelcomePageVisits(),
+            'total_game_downloads_amount' => $this->getAmountOfDownloadedGames()
         ]);
     }
 
@@ -133,6 +134,17 @@ class StatisticsController extends Controller
     {
         if (env('REDIS_CONFIGURED')) {
             return Redis::get('welcome_page_visits_amount_'.env('APP_ENV'));
+        }
+        return 'Brak danych (Wymagany Redis)';
+    }
+
+    /**
+     * Return amount of downloaded games
+     */
+    public function getAmountOfDownloadedGames()
+    {
+        if (env('REDIS_CONFIGURED')) {
+            return Redis::get('total_game_downloads_amount_'.env('APP_ENV'));
         }
         return 'Brak danych (Wymagany Redis)';
     }

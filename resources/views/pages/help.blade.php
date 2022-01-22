@@ -37,7 +37,7 @@
                         <div class="accordion-body text-start">
 
                             Strona umożliwiająca rywalizację graczy poprzez uczestniczenie w rozgrywce. Gra jest możliwa do pobrania w zakładce
-                            <a class="link-blue" href="{{ route('download') }}">Pobierz grę</a>.
+                            <a class="link-blue" href="{{ route('game-hostings.index') }}">Pobierz grę</a>.
                             Więcej o tym jak zainstalować grę w zakładce <a class="link-blue" href="{{ route('help.show', 'zakladka-instalacja-gry') }}">Instalacja gry</a>.
                             Po utworzeniu konta na stronie użytkownik ma dostęp do ustawień, w których może m.in. zmienić swój awatar, który będzie widoczny w zakładce
                             <a class="link-blue" href="{{ route('ranking.index') }}">Ranking</a>.
@@ -105,7 +105,7 @@
                     <div id="collapseActionsDownload" class="bg-accordion-body accordion-collapse @if(isset($selected) && ($selected=="pobierz-gre" || $selected=="pobieranie-plikow" || $selected=="pobieranie-instalatora")) collapse show @else collapse @endif" aria-labelledby="headingActionsDownload" data-bs-parent="#helpAccordion">
                         <div class="accordion-body text-start">
 
-                            Pobranie gry umożliwia zakładka <a class="link-blue" href="{{ route('download') }}" target="_blank"><strong><em>Pobierz grę</em></strong></a>. Znajdziemy w niej przyciski,
+                            Pobranie gry umożliwia zakładka <a class="link-blue" href="{{ route('game-hostings.index') }}" target="_blank"><strong><em>Pobierz grę</em></strong></a>. Znajdziemy w niej przyciski,
                             które przenoszą na dany hosting w celu pobrania plików gry. Możliwe jest pobranie tzw. instalki, czyli pliku exe, który po podwójnym kliknięciu umożliwi nam zainstalowanie
                             gry we wskazanym miejscu na komputerze. W większości przypadków wiąże się to z wykryciem przez Windows Defender jako niedozwolone oprogramowanie, w celu obejścia tego
                             więcej w zakładce <strong><a class="link-blue" href="{{ route('help.show', 'pobieranie-instalatora') }}">Pobieranie instalatora gry</a></strong>. Jeżeli wystąpią poważniejsze
@@ -127,7 +127,7 @@
 
                                                 <strong>Aby zainstalować grę pobierając instalkę należy:</strong>
                                                 <ol>
-                                                    <li>Wejdź w zakładkę <a class="link-blue" href="{{ route('download') }}" target="_blank"><strong><em>Pobierz grę</em></strong></a></li>
+                                                    <li>Wejdź w zakładkę <a class="link-blue" href="{{ route('game-hostings.index') }}" target="_blank"><strong><em>Pobierz grę</em></strong></a></li>
                                                     <li>Kliknij w przycisk <strong><em class="text-success">Pobierz</em></strong> gdzie w nazwie jest napisane <strong><em>(instalka)</em></strong></li>
                                                     <li>Jeżeli na nowo otwartej karcie wyskoczyło potwierdzenie o ciasteczka, kliknij <strong class="text-success"><em>Accept all cookies</em></strong></li>
                                                     <li>Następnie kliknij w <strong class="text-success"><em>Download</em></strong></li>
@@ -167,7 +167,7 @@
 
                                                 <strong>Aby zainstalować grę pobierając pliki należy:</strong>
                                                 <ol>
-                                                    <li>Wejdź w zakładkę <a class="link-blue" href="{{ route('download') }}" target="_blank"><strong><em>Pobierz grę</em></strong></a></li>
+                                                    <li>Wejdź w zakładkę <a class="link-blue" href="{{ route('game-hostings.index') }}" target="_blank"><strong><em>Pobierz grę</em></strong></a></li>
                                                     <li>Kliknij w przycisk <strong><em class="text-success">Pobierz</em></strong> gdzie w nazwie jest napisane <strong><em>(pliki)</em></strong></li>
                                                     <li>Jeżeli na nowo otwartej karcie wyskoczyło potwierdzenie o ciasteczka, kliknij <strong class="text-success"><em>Accept all cookies</em></strong></li>
                                                     <li>Następnie kliknij w <strong class="text-success"><em>Download as zip</em></strong></li>

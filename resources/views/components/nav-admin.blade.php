@@ -86,7 +86,7 @@
                         </li>
 
                         <li>
-                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('download') }}">
+                            <a class="nav-link fw-bold bg-dropdown-btn-user color-black pe-3" href="{{ route('game-hostings.index') }}">
                                 <i class="bi bi-download me-1"></i>Pobierz grę
                             </a>
                         </li>

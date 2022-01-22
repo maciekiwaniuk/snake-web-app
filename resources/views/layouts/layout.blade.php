@@ -3,6 +3,9 @@
 <head>
     <title>@yield('title')</title>
 
+    <!-- CSRF token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Basic -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">

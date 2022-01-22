@@ -45,7 +45,7 @@
                             </div>
 
                             <div class="col-12">
-                                <a href="{{ $game_hosting->link }}" target="_blank" class="btn btn-success border border-2 border-dark">Pobierz</a>
+                                <a href="{{ $game_hosting->link }}" target="_blank" class="btn btn-success border border-2 border-dark download-button">Pobierz</a>
                             </div>
                 </div>
 
@@ -67,5 +67,21 @@
         </div>
 
     </div>
+
+    <script>
+        $(document).ready(function() {
+            var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+            $('.download-button').on('click', function() {
+                $.ajax({
+                    type: 'POST',
+                    url:'{{ route("game-hostings.increase-downloads") }}',
+                    data: {
+                        _token: csrf_token
+                    }
+                });
+            });
+        });
+    </script>
 
 @endsection

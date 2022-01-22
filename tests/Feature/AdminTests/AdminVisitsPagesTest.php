@@ -18,7 +18,7 @@ class AdminVisitsPagesTest extends TestCase
         $this->actingAs($admin)->get(route('home'))->assertStatus(200);
         $this->actingAs($admin)->get(route('offline-fallback'))->assertStatus(200);
         $this->actingAs($admin)->get(route('mini-game'))->assertStatus(200);
-        $this->actingAs($admin)->get(route('download'))->assertStatus(200);
+        $this->actingAs($admin)->get(route('game-hostings.index'))->assertStatus(200);
         $this->actingAs($admin)->get(route('profile', $admin->name))->assertStatus(200);
         $this->actingAs($admin)->get(route('help.index'))->assertStatus(200);
         $this->actingAs($admin)->get(route('message.index'))->assertStatus(200);

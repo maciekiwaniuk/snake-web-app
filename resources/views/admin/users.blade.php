@@ -425,6 +425,8 @@
             $('#avatar-delete-text').text('Potwierdź usunięcie awatara dla użytkownika');
 
             // Modify user data
+            $('#user-name-input').attr('value', name);
+            $('#user-email-input').attr('value', email);
             urlModifyUserDataToReplace = "{{ route('admin.modify-data', '__ID__') }}";
             urlModifyUserData = urlModifyUserDataToReplace.replace('__ID__', user_id);
             $('#user-data-modify-confirmation-form').attr('action', urlModifyUserData);
