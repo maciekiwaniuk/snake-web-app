@@ -36,7 +36,7 @@
                 <i class="bi bi-linkedin"></i>
             </a>
 
-            <a class="link-none me-1 github" href="https://github.com/macieeek" target="_blank">
+            <a class="link-none me-1 github" href="https://github.com/maciekiwaniuk" target="_blank">
                 <i class="bi bi-github"></i>
             </a>
 

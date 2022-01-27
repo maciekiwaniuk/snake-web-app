@@ -83,10 +83,6 @@ class GameHostingsController extends Controller
         $game_hosting->name = $request->name;
         $game_hosting->link = $request->link;
         $game_hosting->save();
-
-        return back()->with([
-            'success' => 'Hosting gry został zmodyfikowany pomyślnie.'
-        ]);
     }
 
 }

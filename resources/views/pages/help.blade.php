@@ -112,24 +112,115 @@
                     <div id="collapseGameTab" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="zakladka-o-grze") collapse show @else collapse @endif" aria-labelledby="headingGameTab" data-bs-parent="#helpAccordion">
                         <div class="accordion-body text-start">
 
-                            Do zalogowania się jak i również poprawnego włączenia gry niezbędne jest połączenie z internetem. <br>
+                            Jest to gra 'w węża', która została zmodyfikowana o wiele dodatków takich różne skórki do węży, wiele owoców do wyboru, rozmaite kolory plansz, czy
+                            nawet ranking graczy, przez co niezbędne jest połączenie z internetem. Gracz odblokowuje różne rodzaje poziomów trudności gry, bije rekordy równocześnie
+                            zdobywając punkty oraz monety, które może wydać przykładowo na skórki do węży, lub na ulepszenia, które pozwolą szybciej się rozwijać.<br> <br>
 
-                            tab Graj <br>
+                            <!-- nestle accordion with tabs -->
+                            <div class="accordion" id="accordionNestleGameTabs" style="font-weight: 500;">
 
-                            tab Poziomy trudności <br>
+                                <!-- Play tab -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingPlayTab">
+                                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlayTab" aria-expanded="true" aria-controls="collapsePlayTab">
+                                            <strong>Graj</strong>
+                                        </button>
+                                    </h2>
+                                    <div id="collapsePlayTab" class="bg-accordion-body accordion-collapse collapse" aria-labelledby="headingPlayTab" data-bs-parent="#accordionNestleGameTabs">
+                                        <div class="accordion-body text-start">
+                                            Graj kontent
+                                        </div>
+                                    </div>
+                                </div>
 
-                            tab Sklep <br>
+                                <!-- Diffilculty levels tab -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingDifficultiesTab">
+                                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDifficultiesTab" aria-expanded="true" aria-controls="collapseDifficultiesTab">
+                                            <strong>Poziomy trudności</strong>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseDifficultiesTab" class="bg-accordion-body accordion-collapse collapse" aria-labelledby="headingDifficultiesTab" data-bs-parent="#accordionNestleGameTabs">
+                                        <div class="accordion-body text-start">
+                                            Poziomy trudności kontent
+                                        </div>
+                                    </div>
+                                </div>
 
-                            tab Ekwipunek <br>
+                                <!-- Shop tab -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingShopTab">
+                                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShopTab" aria-expanded="true" aria-controls="collapseShopTab">
+                                            <strong>Sklep</strong>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseShopTab" class="bg-accordion-body accordion-collapse collapse" aria-labelledby="headingShopTab" data-bs-parent="#accordionNestleGameTabs">
+                                        <div class="accordion-body text-start">
+                                            Sklep kontent
+                                        </div>
+                                    </div>
+                                </div>
 
-                            tab Ulepszenia <br>
+                                <!-- Inventory tab  -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingInventoryTab">
+                                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInventoryTab" aria-expanded="true" aria-controls="collapseInventoryTab">
+                                            <strong>Ekwipunek</strong>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseInventoryTab" class="bg-accordion-body accordion-collapse collapse" aria-labelledby="headingInventoryTab" data-bs-parent="#accordionNestleGameTabs">
+                                        <div class="accordion-body text-start">
+                                            Ekwipunek kontent
+                                        </div>
+                                    </div>
+                                </div>
 
-                            tab Ustawienia <br>
+                                <!-- Upgrades tab  -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingUpgradesTab">
+                                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUpgradesTab" aria-expanded="true" aria-controls="collapseUpgradesTab">
+                                            <strong>Ulepszenia</strong>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseUpgradesTab" class="bg-accordion-body accordion-collapse collapse" aria-labelledby="headingUpgradesTab" data-bs-parent="#accordionNestleGameTabs">
+                                        <div class="accordion-body text-start">
+                                            Ulepszenia kontent
+                                        </div>
+                                    </div>
+                                </div>
 
-                            tab Statystyki <br>
+                                <!-- Settings tab  -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingSettingsTab">
+                                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSettingsTab" aria-expanded="true" aria-controls="collapseSettingsTab">
+                                            <strong>Ustawienia</strong>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseSettingsTab" class="bg-accordion-body accordion-collapse collapse" aria-labelledby="headingSettingsTab" data-bs-parent="#accordionNestleGameTabs">
+                                        <div class="accordion-body text-start">
+                                            Ustawienia kontent
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <!-- Statistics tab  -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingStatisticsTab">
+                                        <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseStatisticsTab" aria-expanded="true" aria-controls="collapseStatisticsTab">
+                                            <strong>Statystyki</strong>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseStatisticsTab" class="bg-accordion-body accordion-collapse collapse" aria-labelledby="headingStatisticsTab" data-bs-parent="#accordionNestleGameTabs">
+                                        <div class="accordion-body text-start">
+                                            Statystyki kontent
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
 

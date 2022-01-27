@@ -26,7 +26,7 @@
 
                 <div class="modal-body">
                     <div class="text-center fs-4 mb-2">
-                        Modyfikacja hostingu
+                        Dodanie hostingu
                     </div>
 
                     <form id="add-hosting-form" method="POST" action="{{ route('admin.game-hostings.store') }}">
@@ -61,6 +61,7 @@
 
                     <form id="add-hosting-form" method="POST" action="{{ route('admin.game-hostings.store') }}">
                         @csrf
+                        <input id="id-hidden-input" type="hidden">
                         <label for="name">Nazwa</label>
                         <input id="name-input" type="text" name="name" class="form-control">
                         <label for="link" class="mt-2">Link</label>
@@ -69,7 +70,7 @@
                 </div>
 
                 <div class="modal-footer d-flex justify-content-around">
-                    <button id="add-hosting-button" type="button" class="btn btn-primary border border-2 border-dark">Potwierdź</button>
+                    <button id="modify-hosting-button" type="button" class="btn btn-primary border border-2 border-dark">Potwierdź</button>
                     <button type="button" class="btn btn-secondary border border-2 border-dark" data-bs-dismiss="modal">Zamknij</button>
                 </div>
             </div>
@@ -145,7 +146,7 @@
                                         <button type="submit" class="btn btn-danger border border-2 border-dark me-2">Usuń</button>
                                     </form>
 
-                                    <button onclick="updateModifyHostingModal('{{ $game_hosting->name }}', '{{ $game_hosting->link }}');" class="btn btn-primary border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#modifyGameHostingModal">Zmodyfikuj</button>
+                                    <button onclick="updateModifyHostingModal('{{ $game_hosting->id }}', '{{ $game_hosting->name }}', '{{ $game_hosting->link }}');" class="btn btn-primary border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#modifyGameHostingModal">Zmodyfikuj</button>
                                 </td>
                             </tr>
 
@@ -163,15 +164,32 @@
 
 
     <script>
-        function updateModifyHostingModal(name, link) {
+        function updateModifyHostingModal(id, name, link) {
+            $('#id-hidden-input').attr('value', id);
             $('#name-input').attr('value', name);
             $('#link-input').attr('value', link);
         }
 
         $(document).ready(function() {
-
             $('#add-hosting-button').on('click', function() {
                 $('#add-hosting-form').submit();
+            });
+
+            $('#modify-hosting-button').on('click', function() {
+                urlUpdateHostingToReplace = '{{ route("admin.game-hostings.update", "__ID__") }}';
+                urlUpdateHosting = urlUpdateHostingToReplace.replace('__ID__', $('#id-hidden-input').val())
+                $.post({
+                    method: 'PUT',
+                    url: urlUpdateHosting,
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        name: $('#name-input').val(),
+                        link: $('#link-input').val()
+                    },
+                    success: function() {
+                        window.location.reload();
+                    }
+                })
             });
 
         });
