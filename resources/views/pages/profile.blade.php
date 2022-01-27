@@ -45,21 +45,21 @@
                                     @auth
                                         @if (Auth::user()->id == $user->id)
                                         <a href="{{ route('options.show', 'awatar') }}">
-                                            <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
+                                            <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar_path) }}">
                                         </a>
                                         @else
                                             @if (Auth::check() && Auth::user()->isAdmin())
                                                 <a href="{{ route('admin.users.show-name-by-id', $user->id) }}">
-                                                    <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
+                                                    <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar_path) }}">
                                                 </a>
                                             @else
-                                                <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
+                                                <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar_path) }}">
                                             @endif
                                         @endif
                                     @endauth
 
                                     @guest
-                                        <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar) }}">
+                                        <img alt="Awatar użytkownika" class="img-thumbnail avatar" src="{{ asset($user->avatar_path) }}">
                                     @endguest
 
                             </div>

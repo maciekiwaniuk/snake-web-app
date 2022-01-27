@@ -136,7 +136,7 @@ class AdminHandlesActionsTest extends TestCase
         $response->assertStatus(302)->assertSessionHas('success');
 
         $user_after_deleted_avatar = User::where('id', '=', $user->id)->first();
-        $this->assertNotEquals($user_after_deleted_avatar->avatar, $user->avatar);
+        $this->assertNotEquals($user_after_deleted_avatar->avatar_path, $user->avatar_path);
     }
 
     public function test_admin_can_change_name_email_password_for_user()

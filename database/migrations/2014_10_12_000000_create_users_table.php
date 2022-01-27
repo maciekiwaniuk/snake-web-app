@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('api_token')->unique()->nullable()->default(null);
             $table->string('password');
-            $table->string('avatar')->default('/assets/images/avatar.png');
+            $table->string('avatar_path')->default('/assets/images/avatar.png');
             $table->integer('permission')->default(0);
             $table->string('last_login_ip')->nullable();
             $table->string('last_login_time')->nullable();

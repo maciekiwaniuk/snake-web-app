@@ -22,7 +22,7 @@ class RankingsController extends Controller
     {
         $data = User::query()
             ->join('users_game_data', 'user_id', '=', 'users.id')
-            ->select('id', 'name', 'avatar', 'users_game_data.points')
+            ->select('id', 'name', 'avatar_path', 'users_game_data.points')
             ->where('user_banned', '=', 0)
             ->where('users_game_data.points', '>', 0)
             ->orderBy('users_game_data.points', 'DESC')
@@ -42,7 +42,7 @@ class RankingsController extends Controller
     {
         $data = User::query()
             ->join('users_game_data', 'user_id', '=', 'users.id')
-            ->select('id', 'name', 'avatar', 'users_game_data.coins')
+            ->select('id', 'name', 'avatar_path', 'users_game_data.coins')
             ->where('user_banned', '=', 0)
             ->where('users_game_data.coins', '>', 0)
             ->orderBy('users_game_data.coins', 'DESC')
@@ -62,7 +62,7 @@ class RankingsController extends Controller
     {
         $data = User::query()
             ->join('users_game_data', 'user_id', '=', 'users.id')
-            ->select('id', 'name', 'avatar', 'users_game_data.easy_record')
+            ->select('id', 'name', 'avatar_path', 'users_game_data.easy_record')
             ->where('user_banned', '=', 0)
             ->where('users_game_data.easy_record', '>', 0)
             ->orderBy('users_game_data.easy_record', 'DESC')
@@ -82,7 +82,7 @@ class RankingsController extends Controller
     {
         $data = User::query()
             ->join('users_game_data', 'user_id', '=', 'users.id')
-            ->select('id', 'name', 'avatar', 'users_game_data.medium_record')
+            ->select('id', 'name', 'avatar_path', 'users_game_data.medium_record')
             ->where('user_banned', '=', 0)
             ->where('users_game_data.medium_record', '>', 0)
             ->orderBy('users_game_data.medium_record', 'DESC')
@@ -102,7 +102,7 @@ class RankingsController extends Controller
     {
         $data = User::query()
             ->join('users_game_data', 'user_id', '=', 'users.id')
-            ->select('id', 'name', 'avatar', 'users_game_data.hard_record')
+            ->select('id', 'name', 'avatar_path', 'users_game_data.hard_record')
             ->where('user_banned', '=', 0)
             ->where('users_game_data.hard_record', '>', 0)
             ->orderBy('users_game_data.hard_record', 'DESC')
@@ -122,7 +122,7 @@ class RankingsController extends Controller
     {
         $data = User::query()
             ->join('users_game_data', 'user_id', '=', 'users.id')
-            ->select('id', 'name', 'avatar', 'users_game_data.speed_record')
+            ->select('id', 'name', 'avatar_path', 'users_game_data.speed_record')
             ->where('user_banned', '=', 0)
             ->where('users_game_data.speed_record', '>', 0)
             ->orderBy('users_game_data.speed_record', 'DESC')

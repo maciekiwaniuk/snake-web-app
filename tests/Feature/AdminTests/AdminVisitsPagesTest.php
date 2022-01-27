@@ -50,6 +50,7 @@ class AdminVisitsPagesTest extends TestCase
         $this->actingAs($admin)->get(route('admin.users.index'))->assertStatus(200);
         $this->actingAs($admin)->get(route('admin.visitors.index'))->assertStatus(200);
         $this->actingAs($admin)->get(route('admin.messages.index'))->assertStatus(200);
+        $this->actingAs($admin)->get(route('admin.game-hostings.index'))->assertStatus(200);
         $this->actingAs($admin)->get(route('admin.app-logs.index'))->assertStatus(200);
         $this->actingAs($admin)->get(route('admin.server-logs.index'))->assertStatus(200);
         $this->actingAs($admin)->get(route('admin.statistics.index'))->assertStatus(200);

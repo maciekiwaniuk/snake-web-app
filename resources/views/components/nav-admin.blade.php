@@ -130,7 +130,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle color-user mt-1 p-0" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <strong class="text-danger">{{ Auth::user()->name }}</strong> <img alt="Awatar użytkownika" style="height:50px; width: 50px; border-radius: 50%;"
-                                class="border border-2 border-dark" id="user_avatar" src="{{ asset(Auth::user()->avatar) }}">
+                                class="border border-2 border-dark" id="user_avatar" src="{{ asset(Auth::user()->avatar_path) }}">
                             </a>
                             <ul class="dropdown-menu bg-bright" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item bg-dropdown-btn-user color-black" href="{{ route('profile', Auth::user()->name) }}"><i class="bi bi-person-circle me-1"></i>Profil</a></li>

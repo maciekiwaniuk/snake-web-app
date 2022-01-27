@@ -190,22 +190,22 @@
                                 return `<a class="link-golden" href="`+URL+`"><strong>`+row.name+`</strong>
                                         <img alt="Awatar użytkownika"
                                              style="width: 25px; height: 25px; border-radius: 50%;"
-                                             class="border border-1 border-secondary" src="`+row.avatar+`"></a>`;
+                                             class="border border-1 border-secondary" src="`+row.avatar_path+`"></a>`;
                             } else if (meta.row == 1) {
                                 return `<a class="link-silver" href="`+URL+`"><strong>`+row.name+`</strong>
                                         <img alt="Awatar użytkownika"
                                              style="width: 25px; height: 25px; border-radius: 50%;"
-                                             class="border border-1 border-secondary" src="`+row.avatar+`"></a>`;
+                                             class="border border-1 border-secondary" src="`+row.avatar_path+`"></a>`;
                             } else if (meta.row == 2) {
                                 return `<a class="link-bronze" href="`+URL+`"><strong>`+row.name+`</strong>
                                         <img alt="Awatar użytkownika"
                                              style="width: 25px; height: 25px; border-radius: 50%;"
-                                             class="border border-1 border-secondary" src="`+row.avatar+`"></a>`;
+                                             class="border border-1 border-secondary" src="`+row.avatar_path+`"></a>`;
                             } else {
                                 return `<a class="link-white" href="`+URL+`">`+row.name+`
                                 <img alt="Awatar użytkownika"
                                      style="width: 25px; height: 25px; border-radius: 50%;"
-                                     class="border border-1 border-secondary" src="`+row.avatar+`"></a>`;
+                                     class="border border-1 border-secondary" src="`+row.avatar_path+`"></a>`;
                             }
                         },
                         class: 'align-middle',

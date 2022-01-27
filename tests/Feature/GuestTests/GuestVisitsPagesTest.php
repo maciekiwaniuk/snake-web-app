@@ -50,6 +50,7 @@ class GuestVisitsPagesTest extends TestCase
         $this->get(route('admin.users.index'))->assertStatus(403);
         $this->get(route('admin.visitors.index'))->assertStatus(403);
         $this->get(route('admin.messages.index'))->assertStatus(403);
+        $this->get(route('admin.game-hostings.index'))->assertStatus(403);
         $this->get(route('admin.app-logs.index'))->assertStatus(403);
         $this->get(route('admin.server-logs.index'))->assertStatus(403);
         $this->get(route('admin.statistics.index'))->assertStatus(403);

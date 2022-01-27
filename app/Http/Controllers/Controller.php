@@ -57,16 +57,16 @@ class Controller extends BaseController
 
         $image->storeAs($folder, $filename, 'public');
 
-        $current_avatar = explode('/', Auth::user()->avatar);
+        $current_avatar = explode('/', Auth::user()->avatar_path);
 
         if ($current_avatar != '/assets/images/avatar.png') {
-            $previous_avatar = Auth::user()->avatar;
+            $previous_avatar = Auth::user()->avatar_path;
             Storage::delete($previous_avatar);
         }
 
         $user = Auth::user();
         $user->update([
-            'avatar' => '/storage/'.$folder.'/'.'avatar.'.$extension
+            'avatar_path' => '/storage/'.$folder.'/'.'avatar.'.$extension
         ]);
     }
 
@@ -76,13 +76,13 @@ class Controller extends BaseController
      */
     protected function deleteUserAvatar()
     {
-        if (Auth::user()->avatar != '/assets/images/avatar.png') {
-            $previous_avatar = Auth::user()->avatar;
+        if (Auth::user()->avatar_path != '/assets/images/avatar.png') {
+            $previous_avatar = Auth::user()->avatar_path;
             Storage::delete($previous_avatar);
 
             $user = Auth::user();
             $user->update([
-                'avatar' => '/assets/images/avatar.png'
+                'avatar_path' => '/assets/images/avatar.png'
             ]);
         }
     }
@@ -95,12 +95,12 @@ class Controller extends BaseController
     {
         $user = $this->getUserInstanceById($user_id);
 
-        if ($user->avatar != '/assets/images/avatar.png') {
-            $previous_avatar = $user->avatar;
+        if ($user->avatar_path != '/assets/images/avatar.png') {
+            $previous_avatar = $user->avatar_path;
             Storage::delete($previous_avatar);
 
             $user->update([
-                'avatar' => '/assets/images/avatar.png'
+                'avatar_path' => '/assets/images/avatar.png'
             ]);
         }
     }

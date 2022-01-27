@@ -59,7 +59,17 @@
 
                                 <form id="avatarForm" method="POST" action="{{ route('options.avatar-change') }}">
                                     @csrf
-                                    <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="{{ env('APP_URL') . Auth::user()->avatar}}"/>
+
+                                    @php
+                                        // prevent double slash in path to avatar
+                                        $avatar_url = env('APP_URL') . '/' . Auth::user()->avatar_path;
+                                        $path = explode(env('app_URL'), $avatar_url)[1];
+                                        if ($path[1] == '/') {
+                                            $avatar_url = env('APP_URL') . Auth::user()->avatar_path;
+                                        }
+                                    @endphp
+
+                                    <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="{{ $avatar_url }}"/>
                                 </form>
 
                                 <button class="d-block d-md-none btn-md fs-4 mx-auto mt-2

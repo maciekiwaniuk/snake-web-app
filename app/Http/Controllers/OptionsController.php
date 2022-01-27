@@ -63,7 +63,7 @@ class OptionsController extends Controller
 
         return response()->json([
             'result' => $result,
-            'avatarPath' => Auth::user()->avatar
+            'avatarPath' => Auth::user()->avatar_path
         ]);
     }
 
@@ -96,15 +96,15 @@ class OptionsController extends Controller
     public function passwordChange(ChangePasswordRequest $request)
     {
         $user = Auth::user();
+        $user->update([
+            'password' => Hash::make($request->new_password),
+            'api_token' => Str::random(60)
+        ]);
 
         $this->createAppLog(
             'change_password',
             'Użytkownik '.$user->name.' zmienił swoje hasło.'
         );
-
-        $user->password = Hash::make($request->new_password);
-        $user->api_token = Str::random(60);
-        $user->save();
 
         return redirect()->route('options.show', 'haslo')
             ->with('password_success', 'Hasło zostało pomyślnie zmienione.');
@@ -123,8 +123,9 @@ class OptionsController extends Controller
              na '.$request->new_email.'.'
         );
 
-        $user->email = $request->new_email;
-        $user->save();
+        $user->update([
+            'email' => $request->new_email
+        ]);
 
         return redirect()->route('options.show', 'email')
             ->with('email_success', 'Email został pomyślnie zmieniony.');
@@ -167,8 +168,9 @@ class OptionsController extends Controller
     public function logoutFromGame()
     {
         $user = Auth::user();
-        $user->api_token = Str::random(60);
-        $user->save();
+        $user->update([
+            'api_token' => Str::random(60)
+        ]);
 
         $result = [
             'success' => true,
