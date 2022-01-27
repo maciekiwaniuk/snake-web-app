@@ -45,10 +45,10 @@ class GameHostingsController extends Controller
             ]
         );
 
-        $game_hosting = new GameHosting;
-        $game_hosting->name = $request->name;
-        $game_hosting->link = $request->link;
-        $game_hosting->save();
+        GameHosting::create([
+            'name' => $request->name,
+            'link' => $request->link
+        ]);
 
         return back()->with([
             'success' => 'Hosting gry został dodany pomyślnie.'
@@ -80,9 +80,10 @@ class GameHostingsController extends Controller
             ->where('id', '=', $id)
             ->first();
 
-        $game_hosting->name = $request->name;
-        $game_hosting->link = $request->link;
-        $game_hosting->save();
+        $game_hosting->update([
+            'name' => $request->name,
+            'link' => $request->link
+        ]);
     }
 
 }

@@ -19,8 +19,8 @@ class CreateUsersDeletedTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->integer('previous_id');
-            $table->string('last_ip');
-            $table->string('last_date');
+            $table->string('last_login_ip');
+            $table->string('last_login_time');
             $table->string('created_at');
         });
     }

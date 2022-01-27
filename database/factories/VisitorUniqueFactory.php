@@ -31,7 +31,7 @@ class VisitorUniqueFactory extends Factory
     public function definition()
     {
         return [
-            'ip_banned' => false,
+            'ip_banned' => 0,
             'user_agent' => $this->getUserAgent(),
             'ip' => \App\Models\User::factory()->create()->last_login_ip,
         ];

@@ -105,8 +105,9 @@ class UsersController extends Controller
                 'Administrator '.Auth::user()->name.' zbanował IP: '.$ip.' użytkownika '.$user->name.'.'
             );
 
-            $banned_ip->ip_banned = 1;
-            $banned_ip->save();
+            $banned_ip->update([
+                'ip_banned' => 1
+            ]);
 
             return back()
                 ->with('success', 'IP '.$banned_ip->ip.' użytkownika '.$user->name.' zostało pomyślnie zbanowane.');
@@ -130,8 +131,9 @@ class UsersController extends Controller
         $banned_ip = VisitorUnique::query()
             ->where('ip', '=', $ip)
             ->first();
-        $banned_ip->ip_banned = 0;
-        $banned_ip->save();
+        $banned_ip->update([
+            'ip_banned' => 0
+        ]);
 
         $this->createAppLog(
             'ip_user_unban',
@@ -150,8 +152,9 @@ class UsersController extends Controller
         $user = $this->getUserInstanceById($id);
 
         if (!$user->isAdmin()) {
-            $user->user_banned = 1;
-            $user->save();
+            $user->update([
+                'user_banned' => 1
+            ]);
 
             $this->createAppLog(
                 'account_ban',
@@ -174,8 +177,9 @@ class UsersController extends Controller
     public function unbanAccount($id)
     {
         $user = $this->getUserInstanceById($id);
-        $user->user_banned = 0;
-        $user->save();
+        $user->update([
+            'user_banned' => 0
+        ]);
 
         $this->createAppLog(
             'account_unban',
@@ -192,8 +196,9 @@ class UsersController extends Controller
     public function banAccountAndIP($id)
     {
         $user = $this->getUserInstanceById($id);
-        $user->user_banned = 1;
-        $user->save();
+        $user->update([
+            'user_banned' => 1
+        ]);
 
         $this->createAppLog(
             'account_ban',
@@ -212,8 +217,9 @@ class UsersController extends Controller
                 'Administrator '.Auth::user()->name.' zbanował IP: '.$ip.' użytkownika '.$user->name.'.'
             );
 
-            $banned_ip->ip_banned = 1;
-            $banned_ip->save();
+            $banned_ip->update([
+                'ip_banned' => 1
+            ]);
 
             return back()
                 ->with('success', 'Konto użytkownika '.$user->name.' oraz IP zostało pomyślnie zbanowane.');
@@ -229,16 +235,18 @@ class UsersController extends Controller
     public function unbanAccountAndIP($id)
     {
         $user = $this->getUserInstanceById($id);
-        $user->user_banned = 0;
-        $user->save();
+        $user->update([
+            'user_banned' => 0
+        ]);
 
         $ip = $user->last_login_ip;
 
         $banned_ip = VisitorUnique::query()
             ->where('ip', '=', $ip)
             ->first();
-        $banned_ip->ip_banned = 0;
-        $banned_ip->save();
+        $banned_ip->update([
+            'ip_banned' => 0
+        ]);
 
         $this->createAppLog(
             'account_unban',
@@ -272,8 +280,9 @@ class UsersController extends Controller
     public function resetApiToken($id)
     {
         $user = $this->getUserInstanceById($id);
-        $user->api_token = Str::random(60);
-        $user->save();
+        $user->update([
+            'api_token' => Str::random(60)
+        ]);
 
         $this->createAppLog(
             'token_reset',
@@ -310,17 +319,23 @@ class UsersController extends Controller
 
         $modifiedData = [];
         if (isset($request->name)) {
-            $user->name = $request->name;
+            $user->fill([
+                'name' => $request->name
+            ]);
             $modifiedData[] = 'nazwa';
         }
 
         if (isset($request->email)) {
-            $user->email = $request->email;
+            $user->fill([
+                'email' => $request->email
+            ]);
             $modifiedData[] = 'e-mail';
         }
 
         if (isset($request->password)) {
-            $user->password = Hash::make($request->password);
+            $user->fill([
+                'password' => Hash::make($request->password)
+            ]);
             $modifiedData[] = 'hasło';
         }
 

@@ -15,4 +15,20 @@ class Message extends Model
      * @var string
      */
     protected $table = 'messages';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'subject',
+        'sender',
+        'email',
+        'content',
+        'sent_as_user',
+        'user_name',
+        'deleted'
+    ];
+
 }

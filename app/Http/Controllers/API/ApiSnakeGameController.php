@@ -96,54 +96,54 @@ class ApiSnakeGameController extends Controller
             ->where('user_id', '=', $user->id)
             ->first();
 
-        $user_game_data->coins = $request->coins;
-        $user_game_data->total_coins_earned = $request->total_coins_earned;
-        $user_game_data->points = $request->points;
-        $user_game_data->play_time_seconds = $request->play_time_seconds;
+        $user_game_data->update([
+            'coins' => $request->coins,
+            'total_coins_earned' => $request->total_coins_earned,
+            'points' => $request->points,
+            'play_time_seconds' => $request->play_time_seconds,
 
-        $user_game_data->games_amount = $request->games_amount;
-        $user_game_data->hit_wall = $request->hit_wall;
-        $user_game_data->hit_snake = $request->hit_snake;
-        $user_game_data->clicks = $request->clicks;
-        $user_game_data->selected_level = $request->selected_level;
+            'games_amount' => $request->games_amount,
+            'hit_wall' => $request->hit_wall,
+            'hit_snake' => $request->hit_snake,
+            'clicks' => $request->clicks,
+            'selected_level' => $request->selected_level,
 
-        $user_game_data->ate_fruits_amount = $request->ate_fruits_amount;
-        $user_game_data->ate_fruits_on_easy = $request->ate_fruits_on_easy;
-        $user_game_data->ate_fruits_on_medium = $request->ate_fruits_on_medium;
-        $user_game_data->ate_fruits_on_hard = $request->ate_fruits_on_hard;
-        $user_game_data->ate_fruits_on_speed = $request->ate_fruits_on_speed;
+            'ate_fruits_amount' => $request->ate_fruits_amount,
+            'ate_fruits_on_easy' => $request->ate_fruits_on_easy,
+            'ate_fruits_on_medium' => $request->ate_fruits_on_medium,
+            'ate_fruits_on_hard' => $request->ate_fruits_on_hard,
+            'ate_fruits_on_speed' => $request->ate_fruits_on_speed,
 
-        $user_game_data->coins_upgrade_lvl = $request->coins_upgrade_lvl;
-        $user_game_data->points_upgrade_lvl = $request->points_upgrade_lvl;
-        $user_game_data->fruits_upgrade_lvl = $request->fruits_upgrade_lvl;
+            'coins_upgrade_lvl' => $request->coins_upgrade_lvl,
+            'points_upgrade_lvl' => $request->points_upgrade_lvl,
+            'fruits_upgrade_lvl' => $request->fruits_upgrade_lvl,
 
-        $user_game_data->selected_fruits_upgrade_lvl = $request->selected_fruits_upgrade_lvl;
+            'selected_fruits_upgrade_lvl' => $request->selected_fruits_upgrade_lvl,
 
-        $user_game_data->selected_head_skin = $request->selected_head_skin;
-        $user_game_data->selected_body_skin = $request->selected_body_skin;
-        $user_game_data->selected_fruit_skin = $request->selected_fruit_skin;
-        $user_game_data->selected_board_skin = $request->selected_board_skin;
+            'selected_head_skin' => $request->selected_head_skin,
+            'selected_body_skin' => $request->selected_body_skin,
+            'selected_fruit_skin' => $request->selected_fruit_skin,
+            'selected_board_skin' => $request->selected_board_skin,
 
-        $user_game_data->unlocked_medium = $request->unlocked_medium;
-        $user_game_data->unlocked_hard = $request->unlocked_hard;
-        $user_game_data->unlocked_speed = $request->unlocked_speed;
+            'unlocked_medium' => $request->unlocked_medium,
+            'unlocked_hard' => $request->unlocked_hard,
+            'unlocked_speed' => $request->unlocked_speed,
 
-        $user_game_data->easy_record = $request->easy_record;
-        $user_game_data->medium_record = $request->medium_record;
-        $user_game_data->hard_record = $request->hard_record;
-        $user_game_data->speed_record = $request->speed_record;
+            'easy_record' => $request->easy_record,
+            'medium_record' => $request->medium_record,
+            'hard_record' => $request->hard_record,
+            'speed_record' => $request->speed_record,
 
-        $user_game_data->head_skins = $request->head_skins;
-        $user_game_data->body_skins = $request->body_skins;
-        $user_game_data->fruit_skins = $request->fruit_skins;
-        $user_game_data->board_skins = $request->board_skins;
+            'head_skins' => $request->head_skins,
+            'body_skins' => $request->body_skins,
+            'fruit_skins' => $request->fruit_skins,
+            'board_skins' => $request->board_skins,
 
-        $user_game_data->fps = $request->fps;
-        $user_game_data->music = $request->music;
-        $user_game_data->effects = $request->effects;
-        $user_game_data->volume = $request->volume;
-
-        $user_game_data->save();
+            'fps' => $request->fps,
+            'music' => $request->music,
+            'effects' => $request->effects,
+            'volume' => $request->volume,
+        ]);
     }
 
     /**

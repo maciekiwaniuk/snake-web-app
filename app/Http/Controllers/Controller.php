@@ -65,8 +65,9 @@ class Controller extends BaseController
         }
 
         $user = Auth::user();
-        $user->avatar = '/storage/'.$folder.'/'.'avatar.'.$extension;
-        $user->save();
+        $user->update([
+            'avatar' => '/storage/'.$folder.'/'.'avatar.'.$extension
+        ]);
     }
 
     /**
@@ -80,8 +81,9 @@ class Controller extends BaseController
             Storage::delete($previous_avatar);
 
             $user = Auth::user();
-            $user->avatar = '/assets/images/avatar.png';
-            $user->save();
+            $user->update([
+                'avatar' => '/assets/images/avatar.png'
+            ]);
         }
     }
 
@@ -97,8 +99,9 @@ class Controller extends BaseController
             $previous_avatar = $user->avatar;
             Storage::delete($previous_avatar);
 
-            $user->avatar = '/assets/images/avatar.png';
-            $user->save();
+            $user->update([
+                'avatar' => '/assets/images/avatar.png'
+            ]);
         }
     }
 
@@ -111,15 +114,15 @@ class Controller extends BaseController
         $user = User::query()
             ->where('id', '=', $user_id)
             ->first();
-        $user_deleted = new UserDeleted;
-
-        $user_deleted->name =        $user->name;
-        $user_deleted->password =    $user->password;
-        $user_deleted->email =       $user->email;
-        $user_deleted->previous_id = $user->id;
-        $user_deleted->last_ip =     $user->last_login_ip;
-        $user_deleted->last_date =   $user->last_login_time;
-        $user_deleted->created_at =  $user->created_at;
+        UserDeleted::create([
+            'name' => $user->name,
+            'password' => $user->password,
+            'email' => $user->email,
+            'previous_id' => $user->id,
+            'last_login_ip' => $user->last_login_ip,
+            'last_login_time' => $user->last_login_time,
+            'created_at' => $user->created_at,
+        ]);
 
         if (Auth::user()->isAdmin()) {
             $this->createAppLog(
@@ -133,7 +136,6 @@ class Controller extends BaseController
             );
         }
 
-        $user_deleted->save();
         $user->delete();
     }
 
@@ -153,14 +155,12 @@ class Controller extends BaseController
      */
     protected function createAppLog($type, $content)
     {
-        $log = new AppLog;
-
-        $log->type = $type;
-        $log->content = $content;
-        $log->user_id = Auth::user()->id;
-        $log->ip = RequestFacade::ip();
-
-        $log->save();
+        AppLog::create([
+            'type' => $type,
+            'content' => $content,
+            'user_id' => Auth::user()->id,
+            'ip' => RequestFacade::ip()
+        ]);
     }
 
     /**
@@ -168,14 +168,12 @@ class Controller extends BaseController
      */
     protected function createGameAppLog($type, $content, $user_id, $ip)
     {
-        $log = new AppLog;
-
-        $log->type = $type;
-        $log->content = $content;
-        $log->user_id = $user_id;
-        $log->ip = $ip;
-
-        $log->save();
+        AppLog::create([
+            'type' => $type,
+            'content' => $content,
+            'user_id' => $user_id,
+            'ip' => $ip
+        ]);
     }
 
     /**

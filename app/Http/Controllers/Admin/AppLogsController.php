@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AppLog;
-use Illuminate\Http\Request;
 
 class AppLogsController extends Controller
 {
@@ -17,7 +16,7 @@ class AppLogsController extends Controller
     }
 
     /**
-     * Returning all application logs
+     * Return all application logs
      */
     public function getAppLogs()
     {

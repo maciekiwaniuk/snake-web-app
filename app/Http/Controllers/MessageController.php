@@ -37,17 +37,22 @@ class MessageController extends Controller
      */
     public function store(MessageRequest $request)
     {
-        $message = new Message();
-        $message->subject = $request->subject;
-        $message->sender = $request->sender;
-        $message->email = $request->email;
-        $message->content = $request->content;
+        $message = Message::make([
+            'subject' => $request->subject,
+            'sender' => $request->sender,
+            'email' => $request->email,
+            'content' => $request->content
+        ]);
 
         if (Auth::check()) {
-            $message->sent_as_user = true;
-            $message->user_name = Auth::user()->name;
+            $message->fill([
+                'sent_as_user' => true,
+                'user_name' => Auth::user()->name
+            ]);
         } else {
-            $message->sent_as_user = false;
+            $message->fill([
+                'sent_as_user' => false,
+            ]);
         }
         $message->save();
 
@@ -84,17 +89,22 @@ class MessageController extends Controller
             ]);
         }
 
-        $message = new Message();
-        $message->subject = $request->subject;
-        $message->sender = $request->sender;
-        $message->email = $request->email;
-        $message->content = $request->content;
+        $message = Message::make([
+            'subject' => $request->subject,
+            'sender' => $request->sender,
+            'email' => $request->email,
+            'content' => $request->content,
+        ]);
 
         if (Auth::check()) {
-            $message->sent_as_user = true;
-            $message->user_name = Auth::user()->name;
+            $message->fill([
+                'sent_as_user' => true,
+                'user_name' => Auth::user()->name
+            ]);
         } else {
-            $message->sent_as_user = false;
+            $message->fill([
+                'sent_as_user' => false
+            ]);
         }
         $message->save();
 

@@ -77,8 +77,9 @@ class VisitorsUniqueController extends Controller
                 'Administrator '.Auth::user()->name.' zbanował IP: '.$ip->ip.'.'
             );
 
-            $ip->ip_banned = 1;
-            $ip->save();
+            $ip->update([
+                'ip_banned' => 1
+            ]);
 
             return back()
                 ->with('success', 'IP: '.$ip->ip.' zostało pomyślnie zbanowane.');
@@ -99,8 +100,9 @@ class VisitorsUniqueController extends Controller
             ->where('id', '=', $id)
             ->first();
 
-        $ip->ip_banned = 0;
-        $ip->save();
+        $ip->update([
+            'ip_banned' => 0
+        ]);
 
         $this->createAppLog(
             'ip_unban',

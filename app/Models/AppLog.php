@@ -18,6 +18,18 @@ class AppLog extends Model
     protected $table = 'app_logs';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'type',
+        'content',
+        'user_id',
+        'ip',
+    ];
+
+    /**
      * Relation for users table
      */
     public function user()

@@ -59,7 +59,7 @@
 
                                 <form id="avatarForm" method="POST" action="{{ route('options.avatar-change') }}">
                                     @csrf
-                                    <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="{{ env('APP_URL') . '/' . Auth::user()->avatar}}"/>
+                                    <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="{{ env('APP_URL') . Auth::user()->avatar}}"/>
                                 </form>
 
                                 <button class="d-block d-md-none btn-md fs-4 mx-auto mt-2
@@ -238,25 +238,29 @@
                                                 <hr>
 
                                                 <div class="text-start fs-4">
+                                                    <!-- Account created at -->
                                                     <div>
                                                         Konto utworzone: {{ Auth::user()->created_at }}
                                                     </div>
 
-                                                    <div>
+                                                    <!-- E-mail verified at -->
+                                                    <div class="mt-2">
                                                         E-mail zweryfikowany:
                                                         @if(Auth::user()->email_verified_at != null)
                                                             <i class="bi bi-check-circle text-success fs-3"></i>
                                                         @else
                                                             <i class="bi bi-x-circle text-danger fs-2"></i>
                                                             @if(env('MAIL_SERVICE_ENABLED'))
+                                                                <br class="d-block d-sm-none">
                                                                 <button id="verifyEmailButton" class="btn btn-success border border-2 border-dark ms-1">Zweryfikuj e-mail</button>
                                                             @endif
                                                         @endif
                                                     </div>
 
-                                                    <div>
+                                                    <div class="mt-2">
                                                         <!-- Login logs button -->
                                                         Historia logowań do konta
+                                                        <br class="d-block d-sm-none">
                                                         <button class="btn btn-md btn-primary border border-2 border-dark" data-bs-toggle="modal" data-bs-target="#loginLogsModal">
                                                             Wyświetl
                                                         </button>

@@ -1,6 +1,6 @@
-# Snake website ![alt text](https://github.com/macieeek/laravel-snake-website/blob/main/public/assets/icons/32x32.png?raw=true) 
+# Snake web application ![](https://github.com/maciekiwaniuk/snake-web-app/blob/main/public/assets/icons/32x32.png?raw=true) 
 
-> ### Project of the website where you can interact via API with Snake game which is available to download on it.
+> ### Project of the web application where you can interact via API with Snake game which is available to download on it.
 > ###
 > ### Online: https://snake-gra.pl/
 
@@ -20,11 +20,11 @@ To successfully install and test application you need to have installed [compose
 
 Open folder where you want to have project files, open console and then clone the repository
 
-    git clone https://github.com/macieeek/laravel-snake-website.git
+    git clone https://github.com/macieeek/snake-web-app.git
 	
 Change folder in console to created folder with project files
 
-	cd laravel-snake-website
+	cd snake-web-app
 
 Install all the dependencies using composer
 

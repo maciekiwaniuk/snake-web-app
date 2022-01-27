@@ -4,9 +4,8 @@ namespace Tests\Feature\AdminTests;
 
 use App\Models\User;
 use App\Models\VisitorUnique;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tests\TestCase;
 
 class AdminHandlesActionsTest extends TestCase
@@ -15,11 +14,20 @@ class AdminHandlesActionsTest extends TestCase
 
     public function test_admin_can_delete_user_account()
     {
+        $this->withoutExceptionHandling();
         $admin = User::factory()->create(['permission' => 2]);
         $user = User::factory()->create();
 
         $response = $this->actingAs($admin)->delete(route('admin.delete-account', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
+
+        try {
+            $user_deleted = User::findOrFail($user->id);
+            $this->assertTrue(false);
+        } catch (ModelNotFoundException $error) {
+            $this->assertTrue(true);
+
+        }
     }
 
     public function test_admin_can_ban_user_account()
@@ -29,6 +37,9 @@ class AdminHandlesActionsTest extends TestCase
 
         $response = $this->actingAs($admin)->put(route('admin.ban-account', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
+
+        $user_after_ban = User::where('id', '=', $user->id)->first();
+        $this->assertEquals($user_after_ban->user_banned, 1);
     }
 
     public function test_admin_can_unban_user_account()
@@ -38,49 +49,70 @@ class AdminHandlesActionsTest extends TestCase
 
         $response = $this->actingAs($admin)->put(route('admin.unban-account', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
+
+        $user_after_unban = User::where('id', '=', $user->id)->first();
+        $this->assertEquals($user_after_unban->user_banned, 0);
     }
 
     public function test_admin_can_ban_user_last_ip()
     {
-        VisitorUnique::factory()->create();
-        $admin = User::factory()->create(['permission' => 2]);
+        $ip = VisitorUnique::factory()->create();
         $user = User::first();
+        $admin = User::factory()->create(['permission' => 2]);
 
         $response = $this->actingAs($admin)->put(route('admin.ban-last-ip', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
+
+        $user_last_ip_after_ban = VisitorUnique::where('id', '=', $ip->id)->first();
+        $this->assertEquals($user_last_ip_after_ban->ip_banned, 1);
     }
 
     public function test_admin_can_unban_user_last_ip()
     {
-        VisitorUnique::factory()->create(['ip_banned' => 1]);
-        $admin = User::factory()->create(['permission' => 2]);
+        $ip = VisitorUnique::factory()->create(['ip_banned' => 1]);
         $user = User::first();
+        $admin = User::factory()->create(['permission' => 2]);
 
         $response = $this->actingAs($admin)->put(route('admin.unban-last-ip', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
+
+        $user_last_ip_after_unban = VisitorUnique::where('id', '=', $ip->id)->first();
+        $this->assertEquals($user_last_ip_after_unban->ip_banned, 0);
     }
 
     public function test_admin_can_ban_user_account_and_ip()
     {
-        VisitorUnique::factory()->create();
-        $admin = User::factory()->create(['permission' => 2]);
+        $ip = VisitorUnique::factory()->create();
         $user = User::first();
+        $admin = User::factory()->create(['permission' => 2]);
 
         $response = $this->actingAs($admin)->put(route('admin.ban-last-ip-account', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
 
+        $ip_after_ban = VisitorUnique::where('id', '=', $ip->id)->first();
+        $user_after_ban = User::where('id', '=', $user->id)->first();
+
+        $this->assertEquals($ip_after_ban->ip_banned, 1);
+        $this->assertEquals($user_after_ban->user_banned, 1);
     }
 
     public function test_admin_can_unban_user_account_and_ip()
     {
-        VisitorUnique::factory()->create(['ip_banned' => 1]);
-        $admin = User::factory()->create(['permission' => 2]);
+        $ip = VisitorUnique::factory()->create(['ip_banned' => 1]);
         $user = User::first();
-        $user->user_banned = 1;
-        $user->save();
+        $user->update([
+            'user_banned' => 1
+        ]);
+        $admin = User::factory()->create(['permission' => 2]);
 
         $response = $this->actingAs($admin)->put(route('admin.unban-last-ip-account', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
+
+        $ip_after_unban = VisitorUnique::where('id', '=', $ip->id)->first();
+        $user_after_unban = User::where('id', '=', $user->id)->first();
+
+        $this->assertEquals($ip_after_unban->ip_banned, 0);
+        $this->assertEquals($user_after_unban->user_banned, 0);
     }
 
     public function test_admin_can_reset_api_token_for_user()
@@ -90,6 +122,9 @@ class AdminHandlesActionsTest extends TestCase
 
         $response = $this->actingAs($admin)->put(route('admin.reset-api-token', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
+
+        $user_after_token_reset = User::where('id', '=', $user->id)->first();
+        $this->assertNotEquals($user_after_token_reset->api_token, $user->api_token);
     }
 
     public function test_admin_can_delete_avatar_for_user()
@@ -99,6 +134,9 @@ class AdminHandlesActionsTest extends TestCase
 
         $response = $this->actingAs($admin)->delete(route('admin.delete-avatar', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
+
+        $user_after_deleted_avatar = User::where('id', '=', $user->id)->first();
+        $this->assertNotEquals($user_after_deleted_avatar->avatar, $user->avatar);
     }
 
     public function test_admin_can_change_name_email_password_for_user()
@@ -130,6 +168,9 @@ class AdminHandlesActionsTest extends TestCase
 
         $response = $this->actingAs($admin)->put(route('admin.ban-ip', $ip->id));
         $response->assertStatus(302)->assertSessionHas('success');
+
+        $ip_after_ban = VisitorUnique::where('id', '=', $ip->id)->first();
+        $this->assertEquals($ip_after_ban->ip_banned, 1);
     }
 
     public function test_admin_can_unban_specified_ip()
@@ -139,6 +180,9 @@ class AdminHandlesActionsTest extends TestCase
 
         $response = $this->actingAs($admin)->put(route('admin.unban-ip', $ip->id));
         $response->assertStatus(302)->assertSessionHas('success');
+
+        $ip_after_unban = VisitorUnique::where('id', '=', $ip->id)->first();
+        $this->assertEquals($ip_after_unban->ip_banned, 0);
     }
 
 }

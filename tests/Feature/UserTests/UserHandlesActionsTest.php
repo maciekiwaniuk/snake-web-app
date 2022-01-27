@@ -3,7 +3,6 @@
 namespace Tests\Feature\UserTests;
 
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
@@ -62,6 +61,7 @@ class UserHandlesActionsTest extends TestCase
 
     public function test_user_can_delete_his_account_in_options_tab()
     {
+        $this->withoutExceptionHandling();
         $user = User::factory()->create();
         $user->password = Hash::make(config('auth.default_password'));
         $user->save();

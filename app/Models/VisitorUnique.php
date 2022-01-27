@@ -17,6 +17,17 @@ class VisitorUnique extends Model
     protected $table = 'visitors_unique';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'ip',
+        'user_agent',
+        'ip_banned',
+    ];
+
+    /**
      * Relation for users table
      */
     public function user()

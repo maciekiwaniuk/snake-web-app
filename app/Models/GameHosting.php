@@ -15,4 +15,15 @@ class GameHosting extends Model
      * @var string
      */
     protected $table = 'game_hostings';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'link'
+    ];
+
 }

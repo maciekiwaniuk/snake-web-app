@@ -39,8 +39,9 @@ class MessagesController extends Controller
             ->where('id', '=', $id)
             ->first();
 
-        $message->deleted = true;
-        $message->save();
+        $message->update([
+            'deleted' => true
+        ]);
 
         return back();
     }
