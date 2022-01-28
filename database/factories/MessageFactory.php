@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\GameHosting;
+use App\Models\Message;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class GameHostingFactory extends Factory
+class MessageFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = GameHosting::class;
+    protected $model = Message::class;
 
     /**
      * Define the model's default state.
@@ -22,8 +22,11 @@ class GameHostingFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'Hosting',
-            'link' => 'https://snake-gra.pl/'
+            'subject' => 'contact',
+            'sender' => 'Nadawca',
+            'email' => 'email@test.com',
+            'content' => 'Przykładowa treść wiadomości.',
+            'sent_as_user' => false
         ];
     }
 }
