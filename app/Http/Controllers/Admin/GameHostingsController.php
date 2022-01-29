@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreGameHostingRequest;
 use App\Models\GameHosting;
 use Illuminate\Http\Request;
 
@@ -31,20 +32,8 @@ class GameHostingsController extends Controller
     /**
      * Add game hosting
      */
-    public function store(Request $request)
+    public function store(StoreGameHostingRequest $request)
     {
-        $this->validate(
-            $request,
-            [
-                'name' => 'required',
-                'link' => 'required',
-            ],
-            [
-                'name.required' => 'Nazwa hostingu jest wymagana.',
-                'link.required' => 'Link do pobrania jest wymagany.'
-            ]
-        );
-
         GameHosting::create([
             'name' => $request->name,
             'link' => $request->link
@@ -63,7 +52,6 @@ class GameHostingsController extends Controller
         $game_hosting = GameHosting::query()
             ->where('id', '=', $id)
             ->first();
-
         $game_hosting->delete();
 
         return back()->with([

@@ -32,9 +32,9 @@
                     <form id="add-hosting-form" method="POST" action="{{ route('admin.game-hostings.store') }}">
                         @csrf
                         <label for="name">Nazwa</label>
-                        <input type="text" name="name" class="form-control">
+                        <input id="add-name-input" type="text" name="name" class="form-control">
                         <label for="link" class="mt-2">Link</label>
-                        <input type="text" name="link"class="form-control">
+                        <input id="add-link-input" type="text" name="link"class="form-control">
                     </form>
                 </div>
 
@@ -63,9 +63,9 @@
                         @csrf
                         <input id="id-hidden-input" type="hidden">
                         <label for="name">Nazwa</label>
-                        <input id="name-input" type="text" name="name" class="form-control">
+                        <input id="modify-name-input" type="text" name="name" class="form-control">
                         <label for="link" class="mt-2">Link</label>
-                        <input id="link-input" type="text" name="link"class="form-control">
+                        <input id="modify-link-input" type="text" name="link"class="form-control">
                     </form>
                 </div>
 
@@ -166,16 +166,26 @@
     <script>
         function updateModifyHostingModal(id, name, link) {
             $('#id-hidden-input').attr('value', id);
-            $('#name-input').attr('value', name);
-            $('#link-input').attr('value', link);
+            $('#modify-name-input').attr('value', name);
+            $('#modify-link-input').attr('value', link);
         }
 
         $(document).ready(function() {
             $('#add-hosting-button').on('click', function() {
+                if ($('#add-name-input').val().length == 0 || $('#add-link-input').val().length == 0) {
+                    toastr.error('Pola z nazwą oraz linkiem muszą być uzupełnione.');
+                    return;
+                }
+
                 $('#add-hosting-form').submit();
             });
 
             $('#modify-hosting-button').on('click', function() {
+                if ($('#modify-name-input').val().length == 0 || $('#modify-link-input').val().length == 0) {
+                    toastr.error('Pola z nazwą oraz linkiem muszą być uzupełnione.');
+                    return;
+                }
+
                 urlUpdateHostingToReplace = '{{ route("admin.game-hostings.update", "__ID__") }}';
                 urlUpdateHosting = urlUpdateHostingToReplace.replace('__ID__', $('#id-hidden-input').val())
                 $.post({
@@ -183,8 +193,8 @@
                     url: urlUpdateHosting,
                     data: {
                         _token: '{{ csrf_token() }}',
-                        name: $('#name-input').val(),
-                        link: $('#link-input').val()
+                        name: $('#modify-name-input').val(),
+                        link: $('#modify-link-input').val()
                     },
                     success: function() {
                         window.location.reload();

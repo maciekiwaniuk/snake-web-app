@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <title>@yield('title')</title>
+    <title>@yield('title') 🐍</title>
 
     <!-- CSRF token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
