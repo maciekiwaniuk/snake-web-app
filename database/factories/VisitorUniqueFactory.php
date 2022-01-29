@@ -20,7 +20,19 @@ class VisitorUniqueFactory extends Factory
      */
     public function getUserAgent()
     {
-        return "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+        return 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0';
+    }
+
+    /**
+     * Generate random ip adress
+     */
+    public function generateRandomIP()
+    {
+        $num1 = rand(0, 255);
+        $num2 = rand(0, 255);
+        $num3 = rand(0, 255);
+        $num4 = rand(0, 255);
+        return $num1.'.'.$num2.'.'.$num3.'.'.$num4;
     }
 
     /**
@@ -31,7 +43,9 @@ class VisitorUniqueFactory extends Factory
     public function definition()
     {
         return [
-            'user_agent' => $this->getUserAgent()
+            'ip_banned' => false,
+            'user_agent' => $this->getUserAgent(),
+            'ip' => $this->generateRandomIP(),
         ];
     }
 }

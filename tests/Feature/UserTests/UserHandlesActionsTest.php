@@ -75,9 +75,6 @@ class UserHandlesActionsTest extends TestCase
             ]
         );
 
-        $result = json_decode(json_encode($response), true)['baseResponse']['original']['result'];
-
-        $this->assertFalse($result['error']);
         try {
             $user_deleted = User::findOrFail($user->id);
             $this->assertTrue(false);

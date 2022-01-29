@@ -56,8 +56,8 @@ class AdminHandlesActionsTest extends TestCase
 
     public function test_admin_can_ban_user_last_ip()
     {
-        $ip = VisitorUnique::factory()->create();
-        $user = User::first();
+        $user = User::factory()->create();
+        $ip = VisitorUnique::factory()->create(['ip' => $user->last_login_ip]);
         $admin = User::factory()->create(['permission' => 2]);
 
         $response = $this->actingAs($admin)->put(route('admin.ban-last-ip', $user->id));
@@ -69,8 +69,8 @@ class AdminHandlesActionsTest extends TestCase
 
     public function test_admin_can_unban_user_last_ip()
     {
-        $ip = VisitorUnique::factory()->create(['ip_banned' => 1]);
-        $user = User::first();
+        $user = User::factory()->create();
+        $ip = VisitorUnique::factory()->create(['ip_banned' => 1, 'ip' => $user->last_login_ip]);
         $admin = User::factory()->create(['permission' => 2]);
 
         $response = $this->actingAs($admin)->put(route('admin.unban-last-ip', $user->id));
@@ -82,8 +82,8 @@ class AdminHandlesActionsTest extends TestCase
 
     public function test_admin_can_ban_user_account_and_ip()
     {
-        $ip = VisitorUnique::factory()->create();
-        $user = User::first();
+        $user = User::factory()->create();
+        $ip = VisitorUnique::factory()->create(['ip' => $user->last_login_ip]);
         $admin = User::factory()->create(['permission' => 2]);
 
         $response = $this->actingAs($admin)->put(route('admin.ban-last-ip-account', $user->id));
@@ -98,11 +98,8 @@ class AdminHandlesActionsTest extends TestCase
 
     public function test_admin_can_unban_user_account_and_ip()
     {
-        $ip = VisitorUnique::factory()->create(['ip_banned' => 1]);
-        $user = User::first();
-        $user->update([
-            'user_banned' => 1
-        ]);
+        $user = User::factory()->create(['user_banned' => 1]);
+        $ip = VisitorUnique::factory()->create(['ip_banned' => 1, 'ip' => $user->last_login_ip]);
         $admin = User::factory()->create(['permission' => 2]);
 
         $response = $this->actingAs($admin)->put(route('admin.unban-last-ip-account', $user->id));
@@ -130,7 +127,7 @@ class AdminHandlesActionsTest extends TestCase
     public function test_admin_can_delete_avatar_for_user()
     {
         $admin = User::factory()->create(['permission' => 2]);
-        $user = User::factory()->create();
+        $user = User::factory()->create(['avatar_path' => '/example_avatar_path/avatar.png']);
 
         $response = $this->actingAs($admin)->delete(route('admin.delete-avatar', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
