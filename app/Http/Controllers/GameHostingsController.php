@@ -24,7 +24,6 @@ class GameHostingsController extends Controller
      */
     public function increaseDownloads()
     {
-        logger('test');
         if (env('REDIS_CONFIGURED')) {
 
             $key = 'total_game_downloads_amount_'.env('APP_ENV');

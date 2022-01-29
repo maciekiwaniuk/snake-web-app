@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Http\Requests\Auth\ChangeAvatarRequest;
+use App\Http\Requests\Auth\DeleteAccountRequest;
+use App\Http\Requests\Auth\LogoutFromOtherDevicesRequest;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangeEmailRequest;
 use App\Models\AppLog;
-use App\Rules\LoggedUserPassword;
 
 class OptionsController extends Controller
 {
@@ -36,30 +38,19 @@ class OptionsController extends Controller
     /**
      * Change user's avatar
      */
-    public function avatarChange(Request $request)
+    public function avatarChange(ChangeAvatarRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'image' => ['image', 'mimes:jpeg,jpg,png', 'max:10000', 'dimensions:max_width=800,max_height=800']
-        ]);
-
-        $result = [
-            'success' => true,
-            'message' => 'Awatar został pomyślnie zmieniony.'
-        ];
-
-        if ($validator->fails()) {
-            $result = [
-                'success' => false,
-                'message' => $validator->errors()->first(),
-            ];
-        } else {
-            $this->changeUserAvatar($request->file('image'));
-        }
+        $this->changeUserAvatar($request->file('image'));
 
         $this->createAppLog(
             'avatar_change',
             'Użytkownik '.Auth::user()->name.' zmienił swój awatar.'
         );
+
+        $result = [
+            'success' => true,
+            'message' => 'Awatar został pomyślnie zmieniony.'
+        ];
 
         return response()->json([
             'result' => $result,
@@ -72,18 +63,18 @@ class OptionsController extends Controller
      */
     public function avatarDelete()
     {
-        $result = [
-            'success' => true,
-            'message' => 'Awatar został pomyślnie usunięty.',
-            'avatarPath' => '/assets/images/avatar.png',
-        ];
-
         $this->deleteUserAvatar();
 
         $this->createAppLog(
             "avatar_delete",
             "Użytkownik ".Auth::user()->name." usunął swój awatar."
         );
+
+        $result = [
+            'success' => true,
+            'message' => 'Awatar został pomyślnie usunięty.',
+            'avatarPath' => '/assets/images/avatar.png',
+        ];
 
         return response()->json([
             'result' => $result
@@ -134,29 +125,14 @@ class OptionsController extends Controller
     /**
      * Validate form confirmation while deleting user's account
      */
-    public function accountDelete(Request $request)
+    public function accountDelete(DeleteAccountRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'password' => ['bail', 'required', new LoggedUserPassword]
-        ]);
-
-        if ($validator->fails()) {
-            $result = [
-                'error' => true,
-                'message' => $validator->errors()->first(),
-            ];
-
-            return response()->json([
-                'result' => $result,
-            ]);
-        }
-
         $this->deleteUserAccountByID(Auth::user()->id);
 
         $result = [
-            'error' => false,
-            'url' => route('home'),
+            'url' => route('home')
         ];
+
         return response()->json([
             'result' => $result,
         ]);
@@ -172,15 +148,15 @@ class OptionsController extends Controller
             'api_token' => Str::random(60)
         ]);
 
-        $result = [
-            'success' => true,
-            'message' => 'Zostałeś pomyślnie wylogowany z gry na wszystkich urządzeniach.',
-        ];
-
         $this->createAppLog(
             "game_total_logout",
             "Użytkownik ".$user->name." wylogował się z gry przez stronę."
         );
+
+        $result = [
+            'success' => true,
+            'message' => 'Zostałeś pomyślnie wylogowany z gry na wszystkich urządzeniach.',
+        ];
 
         return response()->json([
             'result' => $result,
@@ -190,23 +166,8 @@ class OptionsController extends Controller
     /**
      * Logout from all devices on website
      */
-    public function logoutFromAccountOnWebsite(Request $request)
+    public function logoutFromAccountOnWeb(LogoutFromOtherDevicesRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'password' => ['bail', 'required', new LoggedUserPassword]
-        ]);
-
-        if ($validator->fails()) {
-            $result = [
-                'error' => true,
-                'message' => $validator->errors()->first(),
-            ];
-
-            return response()->json([
-                'result' => $result,
-            ]);
-        }
-
         Auth::logoutOtherDevices($request->password);
 
         $result = [

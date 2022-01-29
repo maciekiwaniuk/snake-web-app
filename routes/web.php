@@ -184,7 +184,7 @@ Route::middleware('auth')->group(function() {
             Route::delete('/usuniecie-awatara', [OptionsController::class, 'avatarDelete'])->name('avatar-delete');
             Route::delete('/usuniecie-konta', [OptionsController::class, 'accountDelete'])->name('account-delete');
             Route::post('/wylogowanie-z-gry', [OptionsController::class, 'logoutFromGame'])->name('logout-from-game');
-            Route::post('/wylogowanie-ze-strony', [OptionsController::class, 'logoutFromAccountOnWebsite'])->name('logout-from-website');
+            Route::post('/wylogowanie-ze-strony', [OptionsController::class, 'logoutFromAccountOnWeb'])->name('logout-from-website');
 
             Route::get('/pokaz/logi-logowania', [OptionsController::class, 'getUserLoginApplicationLogs'])->name('get-user-login-logs');
         });
