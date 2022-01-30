@@ -21,7 +21,7 @@ class CreateUsersGameDataTable extends Migration
             $table->integer('total_coins_earned')->default(0);
             $table->integer('play_time_seconds')->default(0);
 
-            $table->string('selected_level')->default("easy");
+            $table->string('selected_level')->default('easy');
             $table->string('selected_head_skin')->default('default');
             $table->string('selected_body_skin')->default("default");
             $table->string('selected_fruit_skin')->default("default");

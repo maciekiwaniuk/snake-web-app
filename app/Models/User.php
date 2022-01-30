@@ -115,7 +115,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Relation for users_game_data to get only points
+     * Relation for users_game_data table
      */
     public function userGameData()
     {
