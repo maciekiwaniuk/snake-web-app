@@ -69,6 +69,9 @@
     <!-- cookie bar CSS -->
     <link href="{{ asset('assets/plugins/cookieBar/jquery.cookieBar.css') }}" type="text/css" rel="stylesheet">
 
+    <!-- app.js -->
+    <script src="{{ mix('js/app.js') }}"></script>
+
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jQuery/jquery-3.6.0.min.js') }}"></script>
 
@@ -102,9 +105,28 @@
     </style>
 
     <script>
+
+        var productionCacheCookie = Cookies.get('production-cache-state');
+        if (productionCacheCookie == null) {
+            // caches.keys().then(function(keyList) {
+            //     keyList.forEach((key) => {
+            //         caches.delete(key);
+            //     });
+            // });
+            window.location.href = window.location.href;
+            Cookies.set('production-cache-state', true, { expires: 3650 });
+        }
+
+        // in case of problems with pwa cache
+        // caches.keys().then(function(keyList) {
+        //     keyList.forEach((key) => {
+        //         caches.delete(key);
+        //     });
+        // });
+
         // check if serviceWorker is avaliable in the browser
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register("{{ asset('sw.js') }}");
+            navigator.serviceWorker.register("{{ mix('sw.js') }}");
         }
 
         $(function() {

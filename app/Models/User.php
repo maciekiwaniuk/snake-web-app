@@ -138,4 +138,19 @@ class User extends Authenticatable
         return $this->hasOne(VisitorUnique::class, 'ip', 'last_login_ip');
     }
 
+    /**
+     * Deleting related with user instance data
+     */
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            $app_logs = AppLog::where('user_id', '=', $user->id)->get();
+
+            foreach ($app_logs as $app_log) {
+                $app_log->delete();
+            }
+        });
+    }
+
 }

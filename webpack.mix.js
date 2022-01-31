@@ -1,3 +1,4 @@
+const { sourceMaps } = require('laravel-mix');
 const mix = require('laravel-mix');
 
 /*
@@ -18,3 +19,5 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
 ]);
 
 mix.js('resources/js/sw.js', 'public/sw.js');
+
+mix.sourceMaps().version();
