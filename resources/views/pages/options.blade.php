@@ -63,7 +63,7 @@
                                     @php
                                         // prevent double slash in path to avatar
                                         $avatar_url = env('APP_URL') . '/' . Auth::user()->avatar_path;
-                                        $path = explode(env('app_URL'), $avatar_url)[1];
+                                        $path = explode(env('APP_URL'), $avatar_url)[1];
                                         if ($path[1] == '/') {
                                             $avatar_url = env('APP_URL') . Auth::user()->avatar_path;
                                         }

@@ -67,7 +67,7 @@
                             <div class="col-12
                                     mx-auto text-center">
 
-                                    <span class="nick-size  text-center">
+                                    <span class="nick-size text-center">
                                         <strong>
                                             @if (Auth::check() && Auth::user()->isAdmin() && Auth::user()->id != $user->id)
                                                 <a href="{{ route('admin.users.show', $user->name) }}" class="link-none">

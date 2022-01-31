@@ -104,7 +104,7 @@
     <script>
         // check if serviceWorker is avaliable in the browser
         if ('serviceWorker' in navigator) {
-            // navigator.serviceWorker.register("{{ asset('sw.js') }}");
+            navigator.serviceWorker.register("{{ asset('sw.js') }}");
         }
 
         $(function() {

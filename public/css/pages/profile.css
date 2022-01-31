@@ -1,34 +1,34 @@
 
 .nick-size{
-    font-size: 5vw;
+    font-size: 27px;
 }
 
 @media (min-width: 576px){
     .nick-size{
-        font-size: 3.5vw;
+        font-size: 30px;
     }
 }
 
 @media (min-width: 768px){
     .nick-size{
-        font-size: 15px;
+        font-size: 31px;
     }
 }
 
 @media (min-width: 992px){
     .nick-size{
-        font-size: 25px;
+        font-size: 32px;
     }
 }
 
 @media (min-width: 1200px){
     .nick-size{
-        font-size: 35px;
+        font-size: 33px;
     }
 }
 
 @media (min-width: 1400px){
     .nick-size{
-        font-size: 45px;
+        font-size: 40px;
     }
 }

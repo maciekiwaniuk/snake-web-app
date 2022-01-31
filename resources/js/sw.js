@@ -50,33 +50,41 @@ const imagesToCache = [
     '/assets/icons/384x384.png',
     '/assets/icons/512x512.png',
     '/assets/icons/apple-touch-icon.png',
-    '/assets/images/slider-images/image1.jpg',
-    '/assets/images/slider-images/image2.jpg',
-    '/assets/images/slider-images/image3.jpg',
-    '/assets/images/slider-images/image4.jpg',
-    '/assets/images/slider-images/image5.jpg',
-    '/assets/images/help_images/download_files/tip_1.jpg',
-    '/assets/images/help_images/download_files/tip_2.jpg',
-    '/assets/images/help_images/download_files/tip_3.jpg'
+    '/assets/images/slider_images/image1.png',
+    '/assets/images/slider_images/image2.png',
+    '/assets/images/slider_images/image3.png',
+    '/assets/images/slider_images/image4.png',
+    '/assets/images/slider_images/image5.png',
+    '/assets/images/slider_images/image6.png',
+    '/assets/images/snake_mini_game/board_background_brown.png',
+    '/assets/images/snake_mini_game/board_background_green.png',
+    '/assets/images/snake_mini_game/board_background_purple.png'
 ];
 
 const cssToCache = [
     '/css/app.css',
-    '/css/custom/layout.css',
+    '/css/components/send-message.css',
     '/css/custom/classes.css',
-    '/css/pages/banned.css',
-    '/css/pages/download.css',
+    '/css/custom/layout.css',
     '/css/pages/help.css',
-    '/css/pages/offline-fallback.css',
     '/css/pages/options.css',
     '/css/pages/profile.css',
-    '/css/pages/ranking.css',
     '/css/pages/welcome.css',
+    '/css/snake_mini_game/buttons.css',
+    '/css/snake_mini_game/food.css',
+    '/css/snake_mini_game/options.css',
+    '/css/snake_mini_game/score.css',
+    '/css/snake_mini_game/snake-mini-game.css',
     '/css/snake_mini_game/snake.css'
 ];
 
 const jsToCache = [
+    '/js/snake_mini_game/food.js',
     '/js/snake_mini_game/game.js',
+    '/js/snake_mini_game/grid.js',
+    '/js/snake_mini_game/input.js',
+    '/js/snake_mini_game/options.js',
+    '/js/snake_mini_game/score.js',
     '/js/snake_mini_game/snake.js',
     '/js/app.js'
 ];
@@ -94,6 +102,9 @@ const pluginsToCache = [
     '/assets/plugins/BootstrapIcons/fonts/bootstrap-icons.woff2',
     '/assets/plugins/BootstrapIcons/fonts/bootstrap-icons.woff2?856008caa5eb66df68595e734e59580d',
     '/assets/plugins/BootstrapIcons/bootstrap-icons.css',
+    '/assets/plugins/cookieBar/jquery.cookieBar.css',
+    '/assets/plugins/cookieBar/jquery.cookieBar.js',
+    '/assets/plugins/cookieBar/jquery.cookieBar.min.js',
     '/assets/plugins/DataTables/DataTables-1.10.25/images/sort_both.png',
     '/assets/plugins/DataTables/DataTables-1.10.25/images/sort_asc.png',
     '/assets/plugins/DataTables/datatables.js',
@@ -112,17 +123,21 @@ const pluginsToCache = [
     '/assets/plugins/dropify/js/dropify.min.js',
     '/assets/plugins/jQuery/jquery-3.6.0.min.js',
     '/assets/plugins/jQueryBlockUI/jquery.blockUI.js',
+    '/assets/plugins/js-cookie/js.cookie.js',
+    '/assets/plugins/js-cookie/js.cookie.min.js',
+    '/assets/plugins/js-cookie/js.cookie.min.mjs',
+    '/assets/plugins/js-cookie/js.cookie.mjs',
     '/assets/plugins/toastr/toastr.css',
     '/assets/plugins/toastr/toastr.min.css',
     '/assets/plugins/toastr/toastr.js.map',
-    '/assets/plugins/toastr/toastr.min.js',
-    '/assets/plugins/cookieBar/jquery.cookieBar.css',
-    '/assets/plugins/cookieBar/jquery.cookieBar.js',
-    '/assets/plugins/cookieBar/jquery.cookieBar.min.js'
+    '/assets/plugins/toastr/toastr.min.js'
+
 ];
 
 const pagesToCache = [
     '/',
+    '/gra',
+    '/wiadomosc',
     '/strona-offline',
     '/pobierz-gre',
     '/pomoc',

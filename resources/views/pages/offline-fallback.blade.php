@@ -4,12 +4,6 @@
     Brak połączenia z internetem
 @endsection
 
-@push('css')
-    <!-- Offline-fallback page CSS -->
-    <link href="{{ asset('css/pages/offline-fallback.css') }}" type="text/css" rel="stylesheet">
-@endpush
-
-
 @section('content')
 
     <div class="row">

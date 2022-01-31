@@ -5,9 +5,6 @@
 @endsection
 
 @push('css')
-    <!-- Ranking page CSS -->
-    <link href="{{ asset('css/pages/ranking.css') }}" rel="stylesheet" type="text/css">
-
     <!-- DataTables CSS -->
     <link href="{{ asset('assets/plugins/DataTables/datatables.min.css') }}" rel="stylesheet" text="text/css">
 @endpush
