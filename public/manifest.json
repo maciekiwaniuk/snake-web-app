@@ -16,6 +16,7 @@
     "theme_color": "#b5e51d",
     "display": "standalone",
     "orientation": "portrait-primary",
+    "purpose": "any maskable",
     "icons": [
         {
             "src": "assets/icons/16x16.png",

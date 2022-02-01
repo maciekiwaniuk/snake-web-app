@@ -69,9 +69,6 @@
     <!-- cookie bar CSS -->
     <link href="{{ asset('assets/plugins/cookieBar/jquery.cookieBar.css') }}" type="text/css" rel="stylesheet">
 
-    <!-- app.js -->
-    <script src="{{ mix('js/app.js') }}"></script>
-
     <!-- jQuery -->
     <script src="{{ asset('assets/plugins/jQuery/jquery-3.6.0.min.js') }}"></script>
 
@@ -106,16 +103,15 @@
 
     <script>
 
-        var productionCacheCookie = Cookies.get('production-cache-state');
-        if (productionCacheCookie == null) {
-            // caches.keys().then(function(keyList) {
-            //     keyList.forEach((key) => {
-            //         caches.delete(key);
-            //     });
-            // });
-            window.location.href = window.location.href;
-            Cookies.set('production-cache-state', true, { expires: 3650 });
-        }
+        // // refresh application after update
+        // var cookieName = 'production-cache-state-v'+"{{ env('MIX_APP_VERSION') }}";
+        // var productionCacheCookie = Cookies.get(cookieName);
+        // if (productionCacheCookie == null) {
+        //     // Shift + F5
+        //     // window.location.reload(true);
+        //     window.location.href = window.location.href;
+        //     Cookies.set(cookieName, true, { expires: 3650 });
+        // }
 
         // in case of problems with pwa cache
         // caches.keys().then(function(keyList) {
@@ -124,10 +120,32 @@
         //     });
         // });
 
-        // check if serviceWorker is avaliable in the browser
+        //register PWA serviceWorker if is avaliable in the browser
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register("{{ mix('sw.js') }}");
         }
+
+        // register PWA serviceWorker if is avaliable in the browser
+        // if ('serviceWorker' in navigator) {
+        //     window.addEventListener('load', function() {
+        //         navigator.serviceWorker.register("{{ mix('sw.js') }}").then(function (reg) {
+        //             // updatefound is fired if sw.js changes
+        //             reg.onupdatefound = function() {
+        //                 var installingWorker = reg.installing;
+        //                 installingWorker.onstatechange = function() {
+        //                     switch (installingWorker.state) {
+        //                         case 'installed': {
+        //                             if (navigator.serviceWorker.controller) {
+        //                                 // new cache has been saved - time to refresh page
+        //                                 window.location.reload(true);
+        //                             }
+        //                         } break;
+        //                     }
+        //                 };
+        //             };
+        //         });
+        //     });
+        // }
 
         $(function() {
             $.cookieBar({

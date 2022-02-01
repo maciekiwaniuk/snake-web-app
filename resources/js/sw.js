@@ -258,7 +258,7 @@ self.addEventListener('fetch', (event) => {
             // there is no internet connection and requested thing isn't cached
             // if requested thing is subpage and it isn't cached - show offline fallback
             if (event.request.destination == 'document') {
-                return caches.match('/strona-offline')
+                return caches.match('/strona-offline');
             }
 
         })

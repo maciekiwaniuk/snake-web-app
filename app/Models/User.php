@@ -139,7 +139,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Deleting related with user instance data
+     * Delete data related with user
      */
     public static function boot() {
         parent::boot();
