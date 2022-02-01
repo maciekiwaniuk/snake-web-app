@@ -112,9 +112,9 @@
                     <div id="collapseGameTab" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="zakladka-o-grze") collapse show @else collapse @endif" aria-labelledby="headingGameTab" data-bs-parent="#helpAccordion">
                         <div class="accordion-body text-start">
 
-                            Jest to gra 'w węża', która została zmodyfikowana o wiele dodatków takich różne skórki do węży, wiele owoców do wyboru, rozmaite kolory plansz, czy
+                            Jest to gra 'w węża', która została zmodyfikowana o wiele dodatków takich jak różne skórki do węży, wiele owoców do wyboru, rozmaite kolory plansz, czy
                             nawet ranking graczy. Gracz odblokowuje różne rodzaje poziomów trudności gry, bije rekordy równocześnie
-                            zdobywając punkty oraz monety, które może wydać przykładowo na skórki do węży, lub na ulepszenia, które pozwolą szybciej się rozwijać. Niezbędne jest połączenie
+                            zdobywając punkty oraz monety, które może wydać na przykład na skórki do węży, lub na ulepszenia, które pozwolą szybciej się rozwijać. Niezbędne jest połączenie
                             z internetem, ponieważ gra na bieżąco aktualizuje dane.<br> <br>
 
                             <!-- nestle accordion with tabs -->
@@ -290,8 +290,8 @@
                                     </h2>
                                     <div id="collapseUpgradesTab" class="bg-accordion-body accordion-collapse collapse" aria-labelledby="headingUpgradesTab" data-bs-parent="#accordionNestleGameTabs">
                                         <div class="accordion-body text-start">
-                                            Ulepszenia kupuje się za zdobyte monety. Ulepszenia pozwolą Ci szybciej zdobywać punkty, monety oraz poprzez większą ilość owoców na planszy granie stanie się
-                                            bardziej dynamiczne. <hr>
+                                            Ulepszenia kupuje się za zdobyte monety. Ulepszenia pozwolą Ci szybciej zdobywać punkty, monety oraz poprzez większą ilość owoców na planszy gra stanie się
+                                            bardziej dynamiczna. <hr>
                                             Ulepszenie: Ilość owoców na planszy <br>
                                             Ilość ulepszeń do kupienia: 2 <br>
                                             Koszt ulepszenia: 500$/5000$ <hr>

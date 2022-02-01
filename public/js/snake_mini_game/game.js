@@ -36,7 +36,9 @@ let keysThatMoveSnake = [
 window.addEventListener('keydown', event => {
     // prevent to move website while clicking arrow or space
     if(keysThatMayMoveScrollbar.includes(event.code)) {
-        event.preventDefault();
+        if (!document.body.classList.contains('modal-open')) {
+            event.preventDefault();
+        }
     }
 
     // start game
