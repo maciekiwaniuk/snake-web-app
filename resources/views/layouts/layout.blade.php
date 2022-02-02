@@ -103,55 +103,27 @@
 
     <script>
 
-        // // refresh application after update
-        // var cookieName = 'production-cache-state-v'+"{{ env('MIX_APP_VERSION') }}";
-        // var productionCacheCookie = Cookies.get(cookieName);
-        // if (productionCacheCookie == null) {
-        //     // Shift + F5
-        //     // window.location.reload(true);
-        //     window.location.href = window.location.href;
-        //     Cookies.set(cookieName, true, { expires: 3650 });
-        // }
-
-        // in case of problems with pwa cache
-        // caches.keys().then(function(keyList) {
-        //     keyList.forEach((key) => {
-        //         caches.delete(key);
-        //     });
-        // });
-
-        //register PWA serviceWorker if is avaliable in the browser
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register("{{ mix('sw.js') }}");
-        }
-
-        // register PWA serviceWorker if is avaliable in the browser
-        // if ('serviceWorker' in navigator) {
-        //     window.addEventListener('load', function() {
-        //         navigator.serviceWorker.register("{{ mix('sw.js') }}").then(function (reg) {
-        //             // updatefound is fired if sw.js changes
-        //             reg.onupdatefound = function() {
-        //                 var installingWorker = reg.installing;
-        //                 installingWorker.onstatechange = function() {
-        //                     switch (installingWorker.state) {
-        //                         case 'installed': {
-        //                             if (navigator.serviceWorker.controller) {
-        //                                 // new cache has been saved - time to delete old cache
-        //                                 caches.keys().then(function(keyList) {
-        //                                     keyList.forEach((key) => {
-        //                                         if (key.includes('{{ env("APP_URL") }}') == false) {
-        //                                             caches.delete(key);
-        //                                         }
-        //                                     });
-        //                                 });
-        //                             }
-        //                         } break;
-        //                     }
-        //                 };
-        //             };
-        //         });
-        //     });
-        // }
+        @if (env('PWA_SERVICE_WORKER_ENABLED'))
+            // register PWA serviceWorker if is avaliable in the browser
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register("{{ mix('sw.js') }}");
+            }
+        @else
+            // in case of that PWA service worker was enabled in past
+            var cookieName = 'delete-PWA-cache-v'+"{{ env('MIX_APP_VERSION') }}";
+            var deletePWACacheCookie = Cookies.get(cookieName);
+            if (deletePWACacheCookie == null) {
+                // in case of problems with pwa cache - delete it
+                caches.keys().then(function(keyList) {
+                    keyList.forEach((key) => {
+                        caches.delete(key);
+                    });
+                });
+                // refresh page
+                window.location.href = window.location.href;
+                Cookies.set(cookieName, true, { expires: 3650 });
+            }
+        @endif
 
         $(function() {
             $.cookieBar({

@@ -86,6 +86,12 @@ Redis is necessary to count for example total visits on website. To enable redis
 
     REDIS_CONFIGURED=true
 
+# Progressive web app service worker
+
+In case of any problems with PWA caching, you can easily disable PWA system via PWA_SERVICE_WORKER_ENABLED=false in .env
+
+    PWA_SERVICE_WORKER_ENABLED=false
+
 # Testing
 
 To test if application is running properly, you can use implemented tests
