@@ -136,8 +136,14 @@
         //                     switch (installingWorker.state) {
         //                         case 'installed': {
         //                             if (navigator.serviceWorker.controller) {
-        //                                 // new cache has been saved - time to refresh page
-        //                                 window.location.reload(true);
+        //                                 // new cache has been saved - time to delete old cache
+        //                                 caches.keys().then(function(keyList) {
+        //                                     keyList.forEach((key) => {
+        //                                         if (key.includes('{{ env("APP_URL") }}') == false) {
+        //                                             caches.delete(key);
+        //                                         }
+        //                                     });
+        //                                 });
         //                             }
         //                         } break;
         //                     }

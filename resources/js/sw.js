@@ -10,7 +10,7 @@ let app_version = process.env.MIX_APP_VERSION;
 // static caches
 const imagesCache = 'images-cache-v' + app_version;
 const cssCache = 'css-cache-v' + app_version;
-const jsCache = 'jss-cache-v' + app_version;
+const jsCache = 'js-cache-v' + app_version;
 const assetsCache = 'assets-cache-v' + app_version;
 const pluginsCache = 'plugins-cache-v' + app_version;
 
