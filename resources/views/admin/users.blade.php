@@ -526,6 +526,7 @@
                         title: 'Akcje',
                         data: '',
                         orderable: false,
+                        class: 'align-middle',
                         render: function (data, type, row, meta) {
                             if (row.permission == 2) {
                                 return '<i class="bi bi-shield-lock text-danger"></i>';

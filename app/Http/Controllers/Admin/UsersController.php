@@ -323,6 +323,7 @@ class UsersController extends Controller
                 'name' => $request->name
             ]);
             $modifiedData[] = 'nazwa';
+            $this->deleteAvatar($user->id);
         }
 
         if (isset($request->email)) {

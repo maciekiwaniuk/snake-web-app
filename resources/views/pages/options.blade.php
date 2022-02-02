@@ -62,11 +62,10 @@
 
                                     @php
                                         // prevent double slash in path to avatar
-                                        $avatar_url = env('APP_URL') . '/' . Auth::user()->avatar_path;
-                                        $path = explode(env('APP_URL'), $avatar_url)[1];
-                                        if ($path[1] == '/') {
-                                            $avatar_url = env('APP_URL') . Auth::user()->avatar_path;
-                                        }
+                                        $avatar_url = env('APP_URL'). '/' . Auth::user()->avatar_path;
+                                        $avatar_url = trim(str_replace(env('APP_URL'), '', $avatar_url));
+                                        $avatar_url = trim(str_replace('//', '/', $avatar_url));
+                                        $avatar_url = env('APP_URL').$avatar_url;
                                     @endphp
 
                                     <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="{{ $avatar_url }}"/>

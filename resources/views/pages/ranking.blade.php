@@ -183,6 +183,7 @@
                         data: function (row, type, val, meta) {
                             urlToReplace = "{{ route('profile', '__NICKNAME__') }}";
                             URL = urlToReplace.replace('__NICKNAME__', row.name);
+                            row.avatar_path = row.avatar_path.replace('//', '/');
                             if (meta.row == 0) {
                                 return `<a class="link-golden" href="`+URL+`"><strong>`+row.name+`</strong>
                                         <img alt="Awatar użytkownika"
