@@ -127,6 +127,11 @@
 <div class="snake-game-content mb-1">
     <div class="snake-game-background">
         <img id="background-image" class="w-100">
+        <div id="boardHalfTransparentBackground" class="half-transparent-board-background center-horizontally">
+            <button id="playButton" class="btn btn-lg fs-3
+                                           border border-2 border-dark
+                                           border-radius-15 bg-orangeyellow">Zagraj</button>
+        </div>
     </div>
 
     <div id="game-board" class="border border-top-0 border-2 border-success"></div>

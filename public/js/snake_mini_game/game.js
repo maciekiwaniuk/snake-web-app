@@ -14,6 +14,8 @@ import { getSnakeSpeed,
 
 import { resetInputDirection } from './input.js';
 
+import { drawRecordAndEmptyScore } from './score.js';
+
 const gameBoard = document.getElementById('game-board');
 
 let SNAKE_SPEED = getSnakeSpeed();
@@ -48,8 +50,6 @@ window.addEventListener('keydown', event => {
 }, false);
 
 
-
-
 // main loop function
 function main(currentTime) {
     window.requestAnimationFrame(main);
@@ -66,8 +66,19 @@ function main(currentTime) {
 
 }
 
-// start animation loop function
-window.requestAnimationFrame(main);
+draw();
+drawRecordAndEmptyScore();
+
+var playButton = document.getElementById('playButton');
+var halfTransparentBoardBackground = document.getElementById('boardHalfTransparentBackground');
+// click on play button - run main loop function
+playButton.addEventListener('click', event => {
+    playButton.classList.add('d-none');
+    halfTransparentBoardBackground.classList.add('d-none');
+
+    // start animation loop function
+    window.requestAnimationFrame(main);
+});
 
 function update() {
     updateSnake();

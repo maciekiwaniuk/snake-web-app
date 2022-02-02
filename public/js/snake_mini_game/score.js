@@ -19,3 +19,8 @@ export function updateScoreRecord(score) {
 
     scoreRecordDiv.textContent = data.scoreRecord;
 }
+
+export function drawRecordAndEmptyScore() {
+    updateScoreRecord();
+    scoreDiv.textContent = 0;
+}
