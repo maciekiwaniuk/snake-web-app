@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\OptionsController;
+use App\Http\Controllers\Auth\ProfileController as AuthProfileController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\VisitorsUniqueController;
 use App\Http\Controllers\Admin\AppLogsController;
@@ -22,7 +24,6 @@ use App\Http\Controllers\Admin\GameHostingsController as AdminGameHostingsContro
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\GameHostingsController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\RankingsController;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\MessageController;
@@ -187,6 +188,12 @@ Route::middleware('auth')->group(function() {
             Route::post('/wylogowanie-ze-strony', [OptionsController::class, 'logoutFromAccountOnWeb'])->name('logout-from-website');
 
             Route::get('/pokaz/logi-logowania', [OptionsController::class, 'getUserLoginApplicationLogs'])->name('get-user-login-logs');
+        });
+    });
+
+    Route::prefix('profil/ustawienia')->group(function() {
+        Route::name('profile.options.')->group(function() {
+            Route::post('/zmiana-widocznosci-profilu', [AuthProfileController::class, 'changeProfileStatusVisibility'])->name('change-profile-status-visibility');
         });
     });
 });

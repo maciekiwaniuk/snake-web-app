@@ -235,7 +235,7 @@ self.addEventListener('fetch', (event) => {
             }
 
             // if requested thing is user's profile page
-            else if (URL.includes('/profil/')) {
+            else if (URL.includes('/profil/') && URL.includes('/profil/ustawienia') == false) {
                 let fetchResponse = fetch(event.request);
                 fetchResponse.then(result => {
                     if (result.status == 200) {
