@@ -134,7 +134,7 @@
         </div>
     </div>
 
-    <div id="game-board" class="border border-top-0 border-2 border-success"></div>
+    <div id="game-board"></div>
 </div>
 <!-- END GAME CONTENT -->
 
