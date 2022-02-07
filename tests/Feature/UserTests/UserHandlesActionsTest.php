@@ -113,4 +113,16 @@ class UserHandlesActionsTest extends TestCase
         $this->assertTrue($result['success']);
     }
 
+    public function test_user_can_change_visibility_of_his_profile()
+    {
+        $user_public = User::factory()->create(['profile_visibility_status' => 'public']);
+        $this->actingAs($user_public)->post(
+            route('profile.options.change-profile-status-visibility'),
+            [
+                'status' => 'private'
+            ]
+        );
+        $this->assertEquals($user_public->profile_visibility_status, 'private');
+    }
+
 }

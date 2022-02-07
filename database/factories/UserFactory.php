@@ -56,6 +56,7 @@ class UserFactory extends Factory
             'last_user_agent' => $this->getUserAgent(),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
+            'profile_visibility_status' => 'public'
         ];
     }
 
