@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
-
 class WelcomePageVisitsAmountMiddleware
 {
     /**
@@ -18,9 +17,9 @@ class WelcomePageVisitsAmountMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $key = 'welcome_page_visits_amount_'.env('APP_ENV');
-
         if (env('REDIS_CONFIGURED')) {
+            $key = 'welcome_page_visits_amount_'.env('APP_ENV');
+
             if (Redis::get($key) === null) {
                 Redis::set($key, 0);
             }

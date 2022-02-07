@@ -3,28 +3,23 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\WelcomeMail;
-use App\Models\User;
-use App\Models\UserGameData;
+use App\Http\Requests\Auth\RegisterAccountRequest;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Mail;
-use App\Rules\OnlyLettersDigits;
-use App\Rules\ValidNickname;
-use App\Rules\reCAPTCHAv2;
-use Carbon\Carbon;
+use App\Services\UsersService;
+use App\Helpers\ApplicationLog;
 
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view.
-     *
-     * @return \Illuminate\View\View
+     * Constructor
+     */
+    public function __construct(UsersService $service)
+    {
+        $this->usersService = $service;
+    }
+
+    /**
+     * Show register page
      */
     public function create()
     {
@@ -32,54 +27,15 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Handle an incoming registration request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Illuminate\Validation\ValidationException
+     * Store new user account
      */
-    public function store(Request $request)
+    public function store(RegisterAccountRequest $request)
     {
-        $this->validate(
-            $request,
-            [
-                'name' => ['required', 'string', 'max:30', 'unique:users', new OnlyLettersDigits, new ValidNickname],
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => ['required', 'confirmed', Rules\Password::defaults()],
-                'g-recaptcha-response' => [new reCAPTCHAv2],
-            ],
-            [
-                'password.confirmed' => 'Hasła nie były takie same.'
-            ]
-        );
+        $user = $this->usersService->handleRegisterAccount($request);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'api_token' => Str::random(60),
-            'last_login_ip' => $request->getClientIp(),
-            'last_login_time' => Carbon::now()->toDateTimeString(),
-            'last_user_agent' => $request->server('HTTP_USER_AGENT'),
-        ]);
-
-        if (env('MAIL_SERVICE_ENABLED')) {
-            Mail::to($user->email)
-                ->queue(new WelcomeMail($user));
-        }
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        $user_game_data = new UserGameData;
-        $user_game_data->user_id = $user->id;
-        $user_game_data->save();
-
-        $this->createAppLog(
-            "site_register",
-            "Użytkownik ".$user->name." utworzył konto."
+        ApplicationLog::createAppLog(
+            'site_register',
+            'Użytkownik '.$user->name.' utworzył konto.'
         );
 
         return redirect(RouteServiceProvider::HOME);

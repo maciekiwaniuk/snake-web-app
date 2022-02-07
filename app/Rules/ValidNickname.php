@@ -33,8 +33,8 @@ class ValidNickname implements Rule
         $value_replaced_digits = str_replace($digits, $letters, $value);
 
         foreach ($words_json as $word) {
-            if (preg_match("/".$word."/i", strtolower($value)) ||
-                preg_match("/".$word."/i", strtolower($value_replaced_digits))) {
+            if (preg_match('/'.$word.'/i', strtolower($value)) ||
+                preg_match('/'.$word.'/i', strtolower($value_replaced_digits))) {
                 return false;
             }
         }

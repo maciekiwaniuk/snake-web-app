@@ -117,7 +117,7 @@ class UserHandlesActionsTest extends TestCase
     {
         $user_public = User::factory()->create(['profile_visibility_status' => 'public']);
         $this->actingAs($user_public)->post(
-            route('profile.options.change-profile-status-visibility'),
+            route('profile.options.change-profile-visibility-status'),
             [
                 'status' => 'private'
             ]

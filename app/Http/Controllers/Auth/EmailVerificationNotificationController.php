@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use App\Helpers\ApplicationLog;
 
 class EmailVerificationNotificationController extends Controller
 {
@@ -23,7 +24,7 @@ class EmailVerificationNotificationController extends Controller
 
         $request->user()->sendEmailVerificationNotification();
 
-        $this->createAppLog(
+        ApplicationLog::createAppLog(
             'email_verification',
             'Użytkownik '.Auth::user()->name.' wysłał linka potwierdzającego e-mail na skrzynkę pocztową.'
         );
@@ -36,6 +37,5 @@ class EmailVerificationNotificationController extends Controller
         return response()->json([
             'result' => $result
         ]);
-        // return back()->with('status', 'verification-link-sent');
     }
 }

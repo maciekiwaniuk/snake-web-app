@@ -206,7 +206,7 @@
             $('#profileStatusPublicRadio').on('click', function() {
                 $.ajax({
                     type: 'POST',
-                    url: '{{ route("profile.options.change-profile-status-visibility") }}',
+                    url: '{{ route("profile.options.change-profile-visibility-status") }}',
                     data: {
                         _token: csrf_token,
                         status: 'public'
@@ -217,7 +217,7 @@
             $('#profileStatusPrivateRadio').on('click', function(event) {
                 $.ajax({
                     type: 'POST',
-                    url: '{{ route("profile.options.change-profile-status-visibility") }}',
+                    url: '{{ route("profile.options.change-profile-visibility-status") }}',
                     data: {
                         _token: csrf_token,
                         status: 'private'

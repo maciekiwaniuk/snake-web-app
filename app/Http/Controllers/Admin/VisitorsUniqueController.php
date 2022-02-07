@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Services\VisitorsUniqueService;
 use App\Models\VisitorUnique;
+use App\Helpers\Helper;
+use App\Helpers\ApplicationLog;
 
 class VisitorsUniqueController extends Controller
 {
+    /**
+     * Constructor
+     */
+    public function __construct(VisitorsUniqueService $service)
+    {
+        $this->ipService = $service;
+    }
+
     /**
      * Show visitors unique ip index page
      */
@@ -63,23 +74,19 @@ class VisitorsUniqueController extends Controller
     /**
      * Ban ip where param is ip's id
      */
-    public function banIp($id)
+    public function banIp($ip_id)
     {
-        $ip = VisitorUnique::query()
-            ->where('id', '=', $id)
-            ->first();
+        $ip = Helper::getVisitorUniqueById($ip_id);
 
         // ban if selected ip is different than
         // current user's ip (admin's ip)
         if (Auth::user()->last_login_ip != $ip->ip) {
-            $this->createAppLog(
+            $this->ipService->handleBanIp($ip);
+
+            ApplicationLog::createAppLog(
                 'ip_ban',
                 'Administrator '.Auth::user()->name.' zbanował IP: '.$ip->ip.'.'
             );
-
-            $ip->update([
-                'ip_banned' => 1
-            ]);
 
             return back()
                 ->with('success', 'IP: '.$ip->ip.' zostało pomyślnie zbanowane.');
@@ -94,17 +101,13 @@ class VisitorsUniqueController extends Controller
     /**
      * Unban ip where param is ip's id
      */
-    public function unbanIp($id)
+    public function unbanIp($ip_id)
     {
-        $ip = VisitorUnique::query()
-            ->where('id', '=', $id)
-            ->first();
+        $ip = Helper::getVisitorUniqueById($ip_id);
 
-        $ip->update([
-            'ip_banned' => 0
-        ]);
+        $this->ipService->handleUnbanIp($ip);
 
-        $this->createAppLog(
+        ApplicationLog::createAppLog(
             'ip_unban',
             'Administrator '.Auth::user()->name.' odbanował IP: '.$ip->ip.'.'
         );

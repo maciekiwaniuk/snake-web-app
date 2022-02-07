@@ -4,9 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Message;
+use App\Services\MessagesService;
 
 class MessagesController extends Controller
 {
+    /**
+     * Constructor
+     */
+    public function __construct(MessagesService $service)
+    {
+        $this->messagesService = $service;
+    }
+
     /**
      * Show messages index page
      */
@@ -33,15 +42,9 @@ class MessagesController extends Controller
     /**
      * Delete message
      */
-    public function destroy($id)
+    public function destroy($message_id)
     {
-        $message = Message::query()
-            ->where('id', '=', $id)
-            ->first();
-
-        $message->update([
-            'deleted' => true
-        ]);
+        $this->messagesService->destroy($message_id);
 
         return back();
     }

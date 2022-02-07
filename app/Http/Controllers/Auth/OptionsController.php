@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ChangeAvatarRequest;
 use App\Http\Requests\Auth\DeleteAccountRequest;
@@ -14,9 +10,19 @@ use App\Http\Requests\Auth\LogoutFromOtherDevicesRequest;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangeEmailRequest;
 use App\Models\AppLog;
+use App\Services\UsersService;
+use App\Helpers\ApplicationLog;
 
 class OptionsController extends Controller
 {
+    /**
+     * Constructor
+     */
+    public function __construct(UsersService $usersService)
+    {
+        $this->usersService = $usersService;
+    }
+
     /**
      * Show options index page
      */
@@ -41,11 +47,12 @@ class OptionsController extends Controller
      */
     public function avatarChange(ChangeAvatarRequest $request)
     {
-        $this->changeUserAvatar($request->file('image'));
+        $user = Auth::user();
+        $this->usersService->handleChangeUserAvatar($request, $user);
 
-        $this->createAppLog(
+        ApplicationLog::createAppLog(
             'avatar_change',
-            'Użytkownik '.Auth::user()->name.' zmienił swój awatar.'
+            'Użytkownik '.$user->name.' zmienił swój awatar.'
         );
 
         $result = [
@@ -55,7 +62,7 @@ class OptionsController extends Controller
 
         return response()->json([
             'result' => $result,
-            'avatarPath' => Auth::user()->avatar_path
+            'avatarPath' => $user->avatar_path
         ]);
     }
 
@@ -64,11 +71,13 @@ class OptionsController extends Controller
      */
     public function avatarDelete()
     {
-        $this->deleteUserAvatar();
+        $user = Auth::user();
 
-        $this->createAppLog(
-            "avatar_delete",
-            "Użytkownik ".Auth::user()->name." usunął swój awatar."
+        $this->usersService->handleDeleteUserAvatar($user);
+
+        ApplicationLog::createAppLog(
+            'avatar_delete',
+            'Użytkownik '.$user->name.' usunął swój awatar.'
         );
 
         $result = [
@@ -88,12 +97,10 @@ class OptionsController extends Controller
     public function passwordChange(ChangePasswordRequest $request)
     {
         $user = Auth::user();
-        $user->update([
-            'password' => Hash::make($request->new_password),
-            'api_token' => Str::random(60)
-        ]);
 
-        $this->createAppLog(
+        $this->usersService->handlePasswordChange($request, $user);
+
+        ApplicationLog::createAppLog(
             'change_password',
             'Użytkownik '.$user->name.' zmienił swoje hasło.'
         );
@@ -109,16 +116,13 @@ class OptionsController extends Controller
     {
         $user = Auth::user();
 
-        $this->createAppLog(
+        $this->usersService->handleEmailChange($request, $user);
+
+        ApplicationLog::createAppLog(
             'change_email',
             'Użytkownik '.$user->name.' zmienił e-mail z '.$user->email.'
              na '.$request->new_email.'.'
         );
-
-        $user->update([
-            'email' => $request->new_email,
-            'email_verified_at' => null
-        ]);
 
         return redirect()->route('options.show', 'email')
             ->with('email_success', 'Email został pomyślnie zmieniony.');
@@ -129,7 +133,14 @@ class OptionsController extends Controller
      */
     public function accountDelete(DeleteAccountRequest $request)
     {
-        $this->deleteUserAccountByID(Auth::user()->id);
+        $user = Auth::user();
+
+        $this->usersService->handleDeleteUserAccount($user);
+
+        ApplicationLog::createAppLog(
+            'account_delete',
+            'Konto użytkownika '.$user->name.' zostało usunięte manualnie.'
+        );
 
         $result = [
             'url' => route('home')
@@ -146,13 +157,12 @@ class OptionsController extends Controller
     public function logoutFromGame()
     {
         $user = Auth::user();
-        $user->update([
-            'api_token' => Str::random(60)
-        ]);
 
-        $this->createAppLog(
-            "game_total_logout",
-            "Użytkownik ".$user->name." wylogował się z gry przez stronę."
+        $this->usersService->handleLogoutFromGame($user);
+
+        ApplicationLog::createAppLog(
+            'game_total_logout',
+            'Użytkownik '.$user->name.' wylogował się z gry przez stronę.'
         );
 
         $result = [

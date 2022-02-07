@@ -2,26 +2,28 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Services\ProfilesService;
 
 class ProfileController extends Controller
 {
     /**
+     * Constructor
+     */
+    public function __construct(ProfilesService $service)
+    {
+        $this->profilesService = $service;
+    }
+
+    /**
      * Change user's profile status visibility
      */
-    public function changeProfileStatusVisibility(Request $request)
+    public function changeProfileVisibilityStatus(Request $request)
     {
         $user = Auth::user();
 
-        if ($request->status == 'public' && $user->profile_visibility_status != 'public') {
-            $user->profile_visibility_status = 'public';
-            $user->save();
-        } else if ($request->status == 'private' && $user->profile_visibility_status != 'private') {
-            $user->profile_visibility_status = 'private';
-            $user->save();
-        }
-
+        $this->profilesService->handleChangeProfileVisibilityStatus($request, $user);
     }
 }

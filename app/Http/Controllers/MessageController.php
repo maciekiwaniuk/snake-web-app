@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\MessageAjaxRequest;
 use App\Http\Requests\MessageRequest;
-use App\Models\Message;
-use App\Rules\MessageSubject;
-use App\Rules\reCAPTCHAv2;
+use App\Services\MessagesService;
 
 class MessageController extends Controller
 {
+    /**
+     * Constructor
+     */
+    public function __construct(MessagesService $service)
+    {
+        $this->messagesService = $service;
+    }
+
     /**
      * Show message index page with selected contact option
      */
@@ -38,24 +42,12 @@ class MessageController extends Controller
      */
     public function store(MessageRequest $request)
     {
-        $message = Message::make([
-            'subject' => $request->subject,
-            'sender' => $request->sender,
-            'email' => $request->email,
-            'content' => $request->content
-        ]);
+        $message = $this->messagesService->store($request);
 
         if (Auth::check()) {
-            $message->fill([
-                'sent_as_user' => true,
-                'user_name' => Auth::user()->name
-            ]);
-        } else {
-            $message->fill([
-                'sent_as_user' => false,
-            ]);
+            $user = Auth::user();
+            $this->messagesService->updateMessageSentAsUser($message, $user);
         }
-        $message->save();
 
         return redirect()->route('message.index')
             ->with('success', 'Wiadomość została pomyślnie wysłana.');
@@ -66,24 +58,12 @@ class MessageController extends Controller
      */
     public function storeAJAX(MessageAjaxRequest $request)
     {
-        $message = Message::make([
-            'subject' => $request->subject,
-            'sender' => $request->sender,
-            'email' => $request->email,
-            'content' => $request->content,
-        ]);
+        $message = $this->messagesService->storeAJAX($request);
 
         if (Auth::check()) {
-            $message->fill([
-                'sent_as_user' => true,
-                'user_name' => Auth::user()->name
-            ]);
-        } else {
-            $message->fill([
-                'sent_as_user' => false
-            ]);
+            $user = Auth::user();
+            $this->messagesService->updateMessageSentAsUser($message, $user);
         }
-        $message->save();
 
         $result = [
             'success' => true,

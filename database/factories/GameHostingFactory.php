@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\GameHosting;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\GameHosting;
 
 class GameHostingFactory extends Factory
 {

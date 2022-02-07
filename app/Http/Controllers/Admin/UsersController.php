@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ModifyUserDataRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use App\Models\User;
-use App\Models\VisitorUnique;
-use Illuminate\Support\Facades\Hash;
+use App\Services\UsersService;
+use App\Helpers\Helper;
+use App\Helpers\ApplicationLog;
 
 class UsersController extends Controller
 {
+    /**
+     * Constructor
+     */
+    public function __construct(UsersService $service)
+    {
+        $this->usersService = $service;
+    }
+
     /**
      * Show users admin index page
      */
@@ -20,6 +28,9 @@ class UsersController extends Controller
         return view('admin.users');
     }
 
+    /**
+     * Show users admin index page with specific value in search bar
+     */
     public function show($searched_bar_value)
     {
         return view('admin.users', [
@@ -32,7 +43,7 @@ class UsersController extends Controller
      */
     public function showNameByUserID($user_id)
     {
-        $name = $this->getNameByUserId($user_id);
+        $name = Helper::getUserInstanceById($user_id)->name;
 
         return view('admin.users', [
             'search_bar_value' => $name
@@ -89,102 +100,96 @@ class UsersController extends Controller
     /**
      * Ban user's last ip
      */
-    public function banLastUserIP($id)
+    public function banLastUserIP($user_id)
     {
-        $user = $this->getUserInstanceById($id);
-
+        $user = Helper::getUserInstanceById($user_id);
         $ip = $user->last_login_ip;
 
-        $banned_ip = VisitorUnique::query()
-            ->where('ip', '=', $ip)
-            ->first();
+        try {
+            $this->usersService->handleBanLastUserIP($user);
 
-        if (isset($banned_ip) && Auth::user()->last_login_ip != $banned_ip->ip) {
-            $this->createAppLog(
+            ApplicationLog::createAppLog(
                 'ip_user_ban',
                 'Administrator '.Auth::user()->name.' zbanował IP: '.$ip.' użytkownika '.$user->name.'.'
             );
-
-            $banned_ip->update([
-                'ip_banned' => 1
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'error' => 'Coś poszło nie tak przy banowaniu IP '.$ip.' użytkownika '.$user->name.'.'
             ]);
-
-            return back()
-                ->with('success', 'IP '.$banned_ip->ip.' użytkownika '.$user->name.' zostało pomyślnie zbanowane.');
         }
 
         return back()
-            ->withErrors([
-                'error' => 'Coś poszło nie tak przy banowaniu IP '.$ip.' użytkownika '.$user->name.'.'
-            ]);
+            ->with('success', 'IP '.$ip.' użytkownika '.$user->name.' zostało pomyślnie zbanowane.');
     }
 
     /**
      * Unban user's last ip
      */
-    public function unbanLastUserIP($id)
+    public function unbanLastUserIP($user_id)
     {
-        $user = $this->getUserInstanceById($id);
-
+        $user = Helper::getUserInstanceById($user_id);
         $ip = $user->last_login_ip;
 
-        $banned_ip = VisitorUnique::query()
-            ->where('ip', '=', $ip)
-            ->first();
-        $banned_ip->update([
-            'ip_banned' => 0
-        ]);
+        try {
+            $this->usersService->handleUnbanLastUserIP($user);
 
-        $this->createAppLog(
-            'ip_user_unban',
-            'Administrator '.Auth::user()->name.' odbanował IP: '.$ip.' użytkownika '.$user->name.'.'
-        );
+            ApplicationLog::createAppLog(
+                'ip_user_unban',
+                'Administrator '.Auth::user()->name.' odbanował IP: '.$ip.' użytkownika '.$user->name.'.'
+            );
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'error' => 'Coś poszło nie tak przy odbanowaniu IP '.$ip.' użytkownika '.$user->name.'.'
+            ]);
+        }
 
         return back()
-            ->with('success', 'IP '.$banned_ip->ip.' użytkownika '.$user->name.' zostało pomyślnie odbanowane.');
+            ->with('success', 'IP '.$ip.' użytkownika '.$user->name.' zostało pomyślnie odbanowane.');
     }
 
     /**
      * Ban user's account
      */
-    public function banAccount($id)
+    public function banAccount($user_id)
     {
-        $user = $this->getUserInstanceById($id);
+        $user = Helper::getUserInstanceById($user_id);
 
-        if (!$user->isAdmin()) {
-            $user->update([
-                'user_banned' => 1
-            ]);
+        try {
+            $this->usersService->handleBanAccount($user);
 
-            $this->createAppLog(
+            ApplicationLog::createAppLog(
                 'account_ban',
                 'Administrator '.Auth::user()->name.' zbanował konto użytkownika '.$user->name.'.'
             );
-
-            return back()
-                ->with('success', 'Konto użytkownika '.$user->name.' zostało pomyślnie zbanowane.');
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'error' => 'Coś poszło nie tak przy banowaniu konta użytkownika '.$user->name.'.'
+            ]);
         }
 
         return back()
-            ->withErrors([
-                'error' => 'Coś poszło nie tak przy banowaniu konta użytkownika '.$user->name.'.'
-            ]);
+            ->with('success', 'Konto użytkownika '.$user->name.' zostało pomyślnie zbanowane.');
     }
 
     /**
      * Unban user's account
      */
-    public function unbanAccount($id)
+    public function unbanAccount($user_id)
     {
-        $user = $this->getUserInstanceById($id);
-        $user->update([
-            'user_banned' => 0
-        ]);
+        $user = Helper::getUserInstanceById($user_id);
 
-        $this->createAppLog(
-            'account_unban',
-            'Administrator '.Auth::user()->name.' odbanował konto użytkownika '.$user->name.'.'
-        );
+        try {
+            $this->usersService->handleUnbanAccount($user);
+
+            ApplicationLog::createAppLog(
+                'account_unban',
+                'Administrator '.Auth::user()->name.' odbanował konto użytkownika '.$user->name.'.'
+            );
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'error' => 'Coś poszło nie tak przy odbanowaniu konta użytkownika '.$user->name.'.'
+            ]);
+        }
 
         return back()
             ->with('success', 'Konto użytkownika '.$user->name.' zostało pomyślnie odbanowane.');
@@ -193,69 +198,75 @@ class UsersController extends Controller
     /**
      * Ban user's last ip and user's account
      */
-    public function banAccountAndIP($id)
+    public function banAccountAndIP($user_id)
     {
-        $user = $this->getUserInstanceById($id);
-        $user->update([
-            'user_banned' => 1
-        ]);
-
-        $this->createAppLog(
-            'account_ban',
-            'Administrator '.Auth::user()->name.' zbanował konto użytkownika '.$user->name.'.'
-        );
-
+        $user = Helper::getUserInstanceById($user_id);
         $ip = $user->last_login_ip;
 
-        $banned_ip = VisitorUnique::query()
-            ->where('ip', '=', $ip)
-            ->first();
+        try {
+            $this->usersService->handleBanAccount($user);
 
-        if (Auth::user()->last_login_ip != $banned_ip->ip) {
-            $this->createAppLog(
+            ApplicationLog::createAppLog(
+                'account_ban',
+                'Administrator '.Auth::user()->name.' zbanował konto użytkownika '.$user->name.'.'
+            );
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'error' => 'Coś poszło nie tak przy banowaniu konta użytkownika '.$user->name.'.'
+            ]);
+        }
+
+        try {
+            $this->usersService->handleBanLastUserIP($user);
+
+            ApplicationLog::createAppLog(
                 'ip_user_ban',
                 'Administrator '.Auth::user()->name.' zbanował IP: '.$ip.' użytkownika '.$user->name.'.'
             );
-
-            $banned_ip->update([
-                'ip_banned' => 1
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'error' => 'Konto zostało zbanowane, natomiast coś poszło nie tak przy banowaniu IP '.$ip.' użytkownika '.$user->name.'.'
             ]);
-
-            return back()
-                ->with('success', 'Konto użytkownika '.$user->name.' oraz IP zostało pomyślnie zbanowane.');
         }
 
         return back()
-            ->with('success', 'Konto użytkownika '.$user->name.' zostało pomyślnie zbanowane.');
+            ->with('success', 'Konto użytkownika '.$user->name.' oraz IP zostało pomyślnie zbanowane.');
+
     }
 
     /**
      * Unban user's last ip and user's account
      */
-    public function unbanAccountAndIP($id)
+    public function unbanAccountAndIP($user_id)
     {
-        $user = $this->getUserInstanceById($id);
-        $user->update([
-            'user_banned' => 0
-        ]);
-
+        $user = Helper::getUserInstanceById($user_id);
         $ip = $user->last_login_ip;
 
-        $banned_ip = VisitorUnique::query()
-            ->where('ip', '=', $ip)
-            ->first();
-        $banned_ip->update([
-            'ip_banned' => 0
-        ]);
+        try {
+            $this->usersService->handleUnbanAccount($user);
 
-        $this->createAppLog(
-            'account_unban',
-            'Administrator '.Auth::user()->name.' odbanował użytkownika '.$user->name.'.'
-        );
-        $this->createAppLog(
-            'ip_user_unban',
-            'Administrator '.Auth::user()->name.' odbanował IP: '.$ip.' użytkownika '.$user->name.'.'
-        );
+            ApplicationLog::createAppLog(
+                'account_unban',
+                'Administrator '.Auth::user()->name.' odbanował konto użytkownika '.$user->name.'.'
+            );
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'error' => 'Coś poszło nie tak przy odbanowaniu konta użytkownika '.$user->name.'.'
+            ]);
+        }
+
+        try {
+            $this->usersService->handleUnbanLastUserIP($user);
+
+            ApplicationLog::createAppLog(
+                'ip_user_unban',
+                'Administrator '.Auth::user()->name.' odbanował IP: '.$ip.' użytkownika '.$user->name.'.'
+            );
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'error' => 'Coś poszło nie tak przy odbanowaniu IP '.$ip.' użytkownika '.$user->name.'.'
+            ]);
+        }
 
         return back()
             ->with('success', 'Konto użytkownika '.$user->name.' oraz IP zostało pomyślnie odbanowane.');
@@ -264,30 +275,53 @@ class UsersController extends Controller
     /**
      * Delete account by user's ID
      */
-    public function deleteUserAccount($id)
+    public function deleteUserAccount($user_id)
     {
-        $user_name = $this->getNameByUserId($id);
+        $user = Helper::getUserInstanceById($user_id);
 
-        $this->deleteUserAccountByID($id);
+        try {
+            $this->usersService->handleDeleteUserAccount($user);
+
+            if (Auth::user()->isAdmin()) {
+                ApplicationLog::createAppLog(
+                    'account_delete',
+                    'Administrator '.Auth::user()->name.' usunął konto użytkownika '.$user->name.'.'
+                );
+            } else {
+                ApplicationLog::createAppLog(
+                    'account_delete',
+                    'Konto użytkownika '.$user->name.' zostało usunięte manualnie.'
+                );
+            }
+        } catch (\Exception) {
+            return back()->withErrors([
+                'error' => 'Coś poszło nie tak przy usuwanie konta dla użytkownika '.$user->name.'.'
+            ]);
+        }
 
         return back()
-            ->with('success', 'Konto użytkownika '.$user_name.' zostało usunięte pomyślnie.');
+            ->with('success', 'Konto użytkownika '.$user->name.' zostało usunięte pomyślnie.');
     }
 
     /**
      * Reset user's API Token
      */
-    public function resetApiToken($id)
+    public function resetApiToken($user_id)
     {
-        $user = $this->getUserInstanceById($id);
-        $user->update([
-            'api_token' => Str::random(60)
-        ]);
+        $user = Helper::getUserInstanceById($user_id);
 
-        $this->createAppLog(
-            'token_reset',
-            'Administrator '.Auth::user()->name.' zresetował api_token użytkownika '.$user->name.'.'
-        );
+        try {
+            $this->usersService->handleResetApiToken($user);
+
+            ApplicationLog::createAppLog(
+                'token_reset',
+                'Administrator '.Auth::user()->name.' zresetował api_token użytkownika '.$user->name.'.'
+            );
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'error' => 'Coś poszło nie tak przy resetowaniu api tokenu dla użytkownika '.$user->name.'.'
+            ]);
+        }
 
         return back()
             ->with('success', 'API token użytkownika '.$user->name.' zostało zresetowany pomyślnie.');
@@ -296,57 +330,34 @@ class UsersController extends Controller
     /**
      * Delete user's avatar
      */
-    public function deleteAvatar($id)
+    public function deleteAvatar($user_id)
     {
-        $name = $this->getNameByUserId($id);
-        $this->deleteUserAvatarById($id);
+        $user = Helper::getUserInstanceById($user_id);
 
-        $this->createAppLog(
+        $this->usersService->handleDeleteUserAvatar($user);
+
+        ApplicationLog::createAppLog(
             'avatar_delete',
-            'Administrator '.Auth::user()->name.' usunął awatar użytkownika '.$name.'.'
+            'Administrator '.Auth::user()->name.' usunął awatar użytkownika '.$user->name.'.'
         );
 
         return back()
-            ->with('success', 'Awatar użytkownika '.$name.' został pomyślnie usunięty.');
+            ->with('success', 'Awatar użytkownika '.$user->name.' został pomyślnie usunięty.');
     }
 
     /**
      * Modify user's account data
      */
-    public function modifyData(ModifyUserDataRequest $request, $id)
+    public function modifyData(ModifyUserDataRequest $request, $user_id)
     {
-        $user = $this->getUserInstanceById($id);
+        $user = Helper::getUserInstanceById($user_id);
 
-        $modifiedData = [];
-        if (isset($request->name)) {
-            $user->fill([
-                'name' => $request->name
-            ]);
-            $modifiedData[] = 'nazwa';
-            $this->deleteAvatar($user->id);
-        }
-
-        if (isset($request->email)) {
-            $user->fill([
-                'email' => $request->email,
-                'email_verified_at' => null
-            ]);
-            $modifiedData[] = 'e-mail';
-        }
-
-        if (isset($request->password)) {
-            $user->fill([
-                'password' => Hash::make($request->password)
-            ]);
-            $modifiedData[] = 'hasło';
-        }
-
-        $user->save();
+        $modifiedData = $this->usersService->handleModifyData($request, $user);
 
         if (count($modifiedData) > 0) {
             $text = implode(', ', $modifiedData);
 
-            $this->createAppLog(
+            ApplicationLog::createAppLog(
                 'user_data_modify',
                 'Administrator '.Auth::user()->name.' zmodyfikował dane ('.$text.') użytkownika '.$user->name.'.'
             );

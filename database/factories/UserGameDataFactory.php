@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\UserGameData;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserGameDataFactory extends Factory
 {

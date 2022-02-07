@@ -17,18 +17,18 @@ class BannedIpMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $ip_is_banned = VisitorUnique::query()
-            ->where('ip', '=', $request->getClientIp())
-            ->where('ip_banned', '=', 1)
-            ->first();
-
-        // if current request ip found as banned ip
-        if ($ip_is_banned !== null) {
+        try {
+            $ip = VisitorUnique::query()
+                    ->where('ip', '=', $request->getClientIp())
+                    ->where('ip_banned', '=', 1)
+                    ->firstOrFail();
 
             return response()
                 ->view('pages.banned', [
                     'ip' => $request->getClientIp()
                 ]);
+        } catch (\Exception) {
+            //
         }
 
         return $next($request);

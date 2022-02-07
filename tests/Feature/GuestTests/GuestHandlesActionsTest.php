@@ -21,7 +21,7 @@ class GuestHandlesPagesTest extends TestCase
         $this->delete(route('options.account-delete'))->assertRedirect(route('login'));
         $this->post(route('options.logout-from-game'))->assertRedirect(route('login'));
         $this->post(route('options.logout-from-website'))->assertRedirect(route('login'));
-        $this->post(route('profile.options.change-profile-status-visibility'))->assertRedirect(route('login'));
+        $this->post(route('profile.options.change-profile-visibility-status'))->assertRedirect(route('login'));
         $this->post(route('logout'))->assertRedirect(route('login'));
     }
 

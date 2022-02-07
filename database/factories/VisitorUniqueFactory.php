@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Model;
-use App\Models\VisitorUnique;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\VisitorUnique;
 
 class VisitorUniqueFactory extends Factory
 {

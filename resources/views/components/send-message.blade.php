@@ -1,3 +1,8 @@
+    <style>
+        #messageFormModal {
+            z-index: 999999999;
+        }
+    </style>
 
     <!-- Message form modal -->
     <div class="modal fade" id="messageFormModal" tabindex="-1" aria-labelledby="messageFormModalLabel" aria-hidden="true">

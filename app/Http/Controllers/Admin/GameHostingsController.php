@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreGameHostingRequest;
 use App\Models\GameHosting;
-use Illuminate\Http\Request;
+use App\Services\GameHostingsService;
 
 class GameHostingsController extends Controller
 {
     /**
-     * Get list of all game hostings
+     * Constructor
      */
-    public function __construct()
+    public function __construct(GameHostingsService $service)
     {
+        $this->gameHostingsService = $service;
+
         $this->game_hostings = GameHosting::query()
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -34,10 +37,7 @@ class GameHostingsController extends Controller
      */
     public function store(StoreGameHostingRequest $request)
     {
-        GameHosting::create([
-            'name' => $request->name,
-            'link' => $request->link
-        ]);
+        $this->gameHostingService->store($request);
 
         return back()->with([
             'success' => 'Hosting gry został dodany pomyślnie.'
@@ -47,12 +47,9 @@ class GameHostingsController extends Controller
     /**
      * Delete game hosting
      */
-    public function destroy($id)
+    public function destroy($hosting_id)
     {
-        $game_hosting = GameHosting::query()
-            ->where('id', '=', $id)
-            ->first();
-        $game_hosting->delete();
+        $this->gameHostingService->destroy($hosting_id);
 
         return back()->with([
             'success' => 'Hosting gry został usunięty pomyślnie.'
@@ -62,16 +59,9 @@ class GameHostingsController extends Controller
     /**
      * Modify game hosting
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $hosting_id)
     {
-        $game_hosting = GameHosting::query()
-            ->where('id', '=', $id)
-            ->first();
-
-        $game_hosting->update([
-            'name' => $request->name,
-            'link' => $request->link
-        ]);
+        $this->gameHostingService->update($request, $hosting_id);
     }
 
 }

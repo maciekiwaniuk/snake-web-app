@@ -4,11 +4,6 @@
     Wyślij wiadomość
 @endsection
 
-@push('css')
-    <!-- Message page CSS -->
-    <link href="{{ asset('css/pages/message.css') }}" type="text/css" rel="stylesheet">
-@endpush
-
 @push('js.header')
     <!-- reCAPTCHA v2 JS -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -53,9 +48,9 @@
                                         <strong>• {{ session('success') }}</strong>
                                     </div>
                         </div>
-                     @endif
+                    @endif
 
-                <form method="POST" action="{{ route('message.index') }}" class="row g-3">
+                <form method="POST" action="{{ route('message.store') }}" class="row g-3">
                     @csrf
                     <h4 class="text-center">Wyślij wiadomość</h4>
 

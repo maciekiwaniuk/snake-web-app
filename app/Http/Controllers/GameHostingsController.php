@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\GameHosting;
-use Illuminate\Support\Facades\Redis;
+use App\Services\GameHostingsService;
 
 class GameHostingsController extends Controller
 {
+    /**
+     * Constructor
+     */
+    public function __construct(GameHostingsService $service)
+    {
+        $this->gameHostingsService = $service;
+    }
+
     /**
      * Show hostings index page
      */
@@ -24,15 +32,6 @@ class GameHostingsController extends Controller
      */
     public function increaseDownloads()
     {
-        if (env('REDIS_CONFIGURED')) {
-
-            $key = 'total_game_downloads_amount_'.env('APP_ENV');
-
-            if (Redis::get($key) === null) {
-                Redis::set($key, 0);
-            }
-
-            Redis::set($key, Redis::get($key) + 1);
-        }
+        $this->gameHostingsService->handleIncreaseDownloads();
     }
 }

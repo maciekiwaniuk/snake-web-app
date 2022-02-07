@@ -137,7 +137,6 @@ const pluginsToCache = [
 const pagesToCache = [
     '/',
     '/gra',
-    '/wiadomosc',
     '/strona-offline',
     '/pobierz-gre',
     '/pomoc',

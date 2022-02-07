@@ -54,8 +54,8 @@ Route::prefix('wiadomosc')->group(function() {
     Route::name('message.')->group(function() {
         Route::get('/', [MessageController::class, 'index'])->name('index');
         Route::get('/{selected}', [MessageController::class, 'show'])->name('show');
-        Route::post('/', [MessageController::class, 'store'])->name('index');
-        Route::post('/wyslij-wiadomosc', [MessageController::class,'storeAJAX'])->name('store-AJAX');
+        Route::post('/wyslij-wiadomosc', [MessageController::class, 'store'])->name('store');
+        Route::post('/wyslij-wiadomosc-ajax', [MessageController::class,'storeAJAX'])->name('store-AJAX');
     });
 });
 
@@ -193,7 +193,7 @@ Route::middleware('auth')->group(function() {
 
     Route::prefix('profil/ustawienia')->group(function() {
         Route::name('profile.options.')->group(function() {
-            Route::post('/zmiana-widocznosci-profilu', [AuthProfileController::class, 'changeProfileStatusVisibility'])->name('change-profile-status-visibility');
+            Route::post('/zmiana-widocznosci-profilu', [AuthProfileController::class, 'changeProfileVisibilityStatus'])->name('change-profile-visibility-status');
         });
     });
 });

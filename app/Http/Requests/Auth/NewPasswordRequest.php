@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules;
 
-class ModifyUserDataRequest extends FormRequest
+class NewPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +25,9 @@ class ModifyUserDataRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['bail', 'nullable', 'unique:users,name', 'max:100'],
-            'email' => ['bail', 'nullable', 'email', 'unique:users,email', 'max:100'],
-            'password' => ['bail', 'nullable', 'max:100']
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
-
 }
