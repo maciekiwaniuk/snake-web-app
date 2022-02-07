@@ -3,7 +3,6 @@
 namespace Tests\Feature\GuestTests;
 
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -42,7 +41,6 @@ class GuestVisitsPagesTest extends TestCase
         $this->get(route('options.get-user-login-logs'))->assertRedirect(route('login'));
         $this->get(route('verification.notice'))->assertRedirect(route('login'));
         $this->get(route('password.confirm'))->assertRedirect(route('login'));
-        $this->post(route('logout'))->assertRedirect(route('login'));
     }
 
     public function test_guest_cannot_visit_pages_secured_by_admin_middleware()
