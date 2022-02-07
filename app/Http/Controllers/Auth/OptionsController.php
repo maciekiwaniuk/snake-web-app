@@ -116,7 +116,8 @@ class OptionsController extends Controller
         );
 
         $user->update([
-            'email' => $request->new_email
+            'email' => $request->new_email,
+            'email_verified_at' => null
         ]);
 
         return redirect()->route('options.show', 'email')

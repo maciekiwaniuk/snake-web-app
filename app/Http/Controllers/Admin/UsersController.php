@@ -328,7 +328,8 @@ class UsersController extends Controller
 
         if (isset($request->email)) {
             $user->fill([
-                'email' => $request->email
+                'email' => $request->email,
+                'email_verified_at' => null
             ]);
             $modifiedData[] = 'e-mail';
         }
