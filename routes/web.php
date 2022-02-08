@@ -208,7 +208,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/logowanie', [AuthenticatedSessionController::class, 'store'])->name('login');
 
     Route::get('/zgubione-haslo', [PasswordResetLinkController::class, 'create'])->name('password.request');
-    Route::post('/zgubione-haslo', [PasswordResetLinkController::class, 'store'])->name('password.email');
+    Route::post('/zgubione-haslo', [PasswordResetLinkController::class, 'store'])->name('password.email')
+        ->middleware('throttle:6,1');
 
     Route::get('/ustawianie-nowego-hasla/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
     Route::post('/ustawianie-nowego-hasla', [NewPasswordController::class, 'store'])->name('password.update');
