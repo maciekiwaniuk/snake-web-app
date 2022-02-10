@@ -125,21 +125,21 @@
                     <table class="w-100 fs-3">
 
                             <tr class="row">
-                                <th class="col-6 col-sm-4 center-horizontally">Nazwa</th>
+                                <th class="col-6 col-sm-4 center-vertically">Nazwa</th>
 
-                                <th class="col-4 d-none d-sm-block center-horizontally">Data dodania</th>
+                                <th class="col-4 d-none d-sm-block center-vertically">Data dodania</th>
 
-                                <th class="col-6 col-sm-4 text-center center-horizontally">Opcje</th>
+                                <th class="col-6 col-sm-4 text-center center-vertically">Opcje</th>
                             </tr>
 
                         @foreach ($game_hostings as $game_hosting)
 
                             <tr class="row">
-                                <td class="col-6 col-sm-4 my-2 center-horizontally">{{ $game_hosting->name }}</td>
+                                <td class="col-6 col-sm-4 my-2 center-vertically">{{ $game_hosting->name }}</td>
 
-                                <td class="col-4 d-none d-sm-block my-2 center-horizontally">{{ $game_hosting->created_at }}</td>
+                                <td class="col-4 d-none d-sm-block my-2 center-vertically">{{ $game_hosting->created_at }}</td>
 
-                                <td class="col-6 col-sm-4 my-2 text-center center-horizontally">
+                                <td class="col-6 col-sm-4 my-2 text-center center-vertically">
                                     <form method="POST" action="{{ route('admin.game-hostings.destroy', $game_hosting->id) }}">
                                         @csrf
                                         @method('DELETE')

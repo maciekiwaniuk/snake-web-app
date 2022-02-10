@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\GuestTests;
 
+use App\Models\Message;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,6 +24,49 @@ class GuestHandlesPagesTest extends TestCase
         $this->post(route('options.logout-from-website'))->assertRedirect(route('login'));
         $this->post(route('profile.options.change-profile-visibility-status'))->assertRedirect(route('login'));
         $this->post(route('logout'))->assertRedirect(route('login'));
+    }
+
+    public function test_guest_can_send_messages()
+    {
+        $this->post(
+            route('message.store'),
+            [
+                'subject' => 'contact',
+                'sender' => 'Joe',
+                'email' => 'test@example.com',
+                'content' => 'Lorem ipsum...',
+                'sent_as_user' => false
+            ]
+        );
+
+        try {
+            $message = Message::firstOrFail();
+            $this->assertTrue(true);
+        } catch (\Exception $e) {
+            $this->assertTrue(false);
+        }
+    }
+
+    public function test_guest_can_send_ajax_messages()
+    {
+
+        $this->post(
+            route('message.store-AJAX'),
+            [
+                'subject' => 'contact',
+                'sender' => 'Joe',
+                'email' => 'test@example.com',
+                'content' => 'Lorem ipsum...',
+                'sent_as_user' => false
+            ]
+        );
+
+        try {
+            $message = Message::firstOrFail();
+            $this->assertTrue(true);
+        } catch (\Exception $e) {
+            $this->assertTrue(false);
+        }
     }
 
 }

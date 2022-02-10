@@ -186,8 +186,8 @@
 }
 
 
-/******* center hotizontally *******/
-.center-horizontally {
+/******* center vertically *******/
+.center-vertically {
     display: flex;
     justify-content: center;
     align-items: center;

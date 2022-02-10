@@ -5,16 +5,16 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Services\ProfilesService;
+use App\Services\ProfileService;
 
 class ProfileController extends Controller
 {
     /**
      * Constructor
      */
-    public function __construct(ProfilesService $service)
+    public function __construct(ProfileService $service)
     {
-        $this->profilesService = $service;
+        $this->profileService = $service;
     }
 
     /**
@@ -24,6 +24,6 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        $this->profilesService->handleChangeProfileVisibilityStatus($request, $user);
+        $this->profileService->handleChangeProfileVisibilityStatus($request, $user);
     }
 }

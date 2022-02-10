@@ -124,7 +124,7 @@
                                                             <div class="row">
                                                                 <div class="col-12 col-sm-5 col-md-12 col-xl-5
                                                                             pb-2 pb-sm-0 pb-md-2 pb-xl-0
-                                                                            center-horizontally">
+                                                                            center-vertically">
                                                                     Informacje z gry
                                                                 </div>
 

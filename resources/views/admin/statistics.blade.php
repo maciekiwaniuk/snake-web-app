@@ -35,55 +35,55 @@
 
                 <tr>
                     <td class="d-flex justify-content-between">
-                        <div>Zarejestrowani użytkownicy</div> <div class="text-end center-horizontally">{{ $users_amount }}</div>
+                        <div>Zarejestrowani użytkownicy</div> <div class="text-end center-vertically">{{ $users_amount }}</div>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="d-flex justify-content-between">
-                        <div>Ostatnia rejestracja</div> <div class="text-end center-horizontally">{{ $last_register }}</div>
+                        <div>Ostatnia rejestracja</div> <div class="text-end center-vertically">{{ $last_register }}</div>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="d-flex justify-content-between">
-                        <div>Ostatnie logowanie</div> <div class="text-end center-horizontally">{{ $last_login_time }}</div>
+                        <div>Ostatnie logowanie</div> <div class="text-end center-vertically">{{ $last_login_time }}</div>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="d-flex justify-content-between">
-                        <div>Unikalne IP</div> <div class="text-end center-horizontally">{{ $ips_amount }}</div>
+                        <div>Unikalne IP</div> <div class="text-end center-vertically">{{ $ips_amount }}</div>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="d-flex justify-content-between">
-                        <div>Logi aplikacji</div> <div class="text-end center-horizontally">{{ $application_logs_amount }}</div>
+                        <div>Logi aplikacji</div> <div class="text-end center-vertically">{{ $application_logs_amount }}</div>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="d-flex justify-content-between">
-                        <div>Logi serwera</div> <div class="text-end center-horizontally">{{ $server_logs_amount }}</div>
+                        <div>Logi serwera</div> <div class="text-end center-vertically">{{ $server_logs_amount }}</div>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="d-flex justify-content-between">
-                        <div>Wyświetlenia podstron</div> <div class="text-end center-horizontally">{{ $total_visits_amount }}</div>
+                        <div>Wyświetlenia podstron</div> <div class="text-end center-vertically">{{ $total_visits_amount }}</div>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="d-flex justify-content-between">
-                        <div>Wyświetlenia strony głównej</div> <div class="text-end center-horizontally">{{ $welcome_page_visits_amount }}</div>
+                        <div>Wyświetlenia strony głównej</div> <div class="text-end center-vertically">{{ $welcome_page_visits_amount }}</div>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="d-flex justify-content-between">
-                        <div>Pobrania gry</div> <div class="text-end center-horizontally">{{ $total_game_downloads_amount }}</div>
+                        <div>Pobrania gry</div> <div class="text-end center-vertically">{{ $total_game_downloads_amount }}</div>
                     </td>
                 </tr>
 

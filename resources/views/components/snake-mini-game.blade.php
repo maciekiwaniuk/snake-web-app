@@ -30,7 +30,7 @@
             <!-- SNAKE SPEED -->
             <div class="option-div">
                 <div class="btn-group col-11 col-sm-10 mx-auto d-flex" role="group" aria-label="snakeSpeedButtonGroup">
-                    <strong class="me-2 title-option-text center-horizontally">Prędkość węża</strong>
+                    <strong class="me-2 title-option-text center-vertically">Prędkość węża</strong>
 
                     <input type="radio" id="slowSnakeSpeedRadio" class="btn-check" name="snakeSpeedRadio" autocomplete="off">
                     <label id="slowSnakeSpeedButton" class="btn btn-outline-dark button-text rounded-start" for="slowSnakeSpeedRadio">
@@ -53,7 +53,7 @@
             <!-- BOARD APPEARANCE -->
             <div class="option-div">
                 <div class="btn-group col-10 mx-auto d-flex" role="group" aria-label="boardAppearanceButtonGroup">
-                    <strong class="me-2 title-option-text center-horizontally">Kolor planszy</strong>
+                    <strong class="me-2 title-option-text center-vertically">Kolor planszy</strong>
 
                     <input type="radio" id="purpleBoardAppearanceRadio" class="btn-check" name="boardAppearanceRadio" autocomplete="off">
                     <label id="purpleBoardAppearanceButton" class="btn btn-outline-dark button-text rounded-start" for="purpleBoardAppearanceRadio">
@@ -76,7 +76,7 @@
             <!-- SNAKE APPEARANCE -->
             <div class="option-div">
                 <div class="btn-group col-10 mx-auto d-flex" role="group" aria-label="snakeAppearanceButtonGroup">
-                    <strong class="me-2 title-option-text center-horizontally">Kolor węża</strong>
+                    <strong class="me-2 title-option-text center-vertically">Kolor węża</strong>
 
                     <input type="radio" id="blueSnakeAppearanceRadio" class="btn-check" name="snakeAppearanceRadio" autocomplete="off">
                     <label id="blueSnakeAppearanceButton" class="btn btn-outline-dark button-text rounded-start" for="blueSnakeAppearanceRadio">
@@ -99,7 +99,7 @@
             <!-- FOOD APPEARANCE -->
             <div class="option-div">
                 <div class="btn-group col-10 mx-auto d-flex" role="group" aria-label="foodAppearanceButtonGroup">
-                    <strong class="me-2 title-option-text center-horizontally">Kolor owoca</strong>
+                    <strong class="me-2 title-option-text center-vertically">Kolor owoca</strong>
 
                     <input type="radio" id="yellowFoodAppearanceRadio" class="btn-check" name="foodAppearanceRadio" autocomplete="off">
                     <label id="yellowFoodAppearanceButton" class="btn btn-outline-dark button-text rounded-start" for="yellowFoodAppearanceRadio">
@@ -127,7 +127,7 @@
 <div class="snake-game-content mb-1">
     <div class="snake-game-background">
         <img id="background-image" class="w-100">
-        <div id="boardHalfTransparentBackground" class="half-transparent-board-background center-horizontally">
+        <div id="boardHalfTransparentBackground" class="half-transparent-board-background center-vertically">
             <button id="playButton" class="btn btn-lg fs-3
                                            border border-2 border-dark
                                            border-radius-15 bg-orangeyellow">Zagraj</button>
