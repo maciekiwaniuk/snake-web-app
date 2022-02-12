@@ -37,7 +37,7 @@ class GameHostingsController extends Controller
      */
     public function store(StoreGameHostingRequest $request)
     {
-        $this->gameHostingService->store($request);
+        $this->gameHostingsService->store($request);
 
         return back()->with([
             'success' => 'Hosting gry został dodany pomyślnie.'
@@ -49,7 +49,7 @@ class GameHostingsController extends Controller
      */
     public function destroy($hosting_id)
     {
-        $this->gameHostingService->destroy($hosting_id);
+        $this->gameHostingsService->destroy($hosting_id);
 
         return back()->with([
             'success' => 'Hosting gry został usunięty pomyślnie.'
@@ -61,7 +61,7 @@ class GameHostingsController extends Controller
      */
     public function update(Request $request, $hosting_id)
     {
-        $this->gameHostingService->update($request, $hosting_id);
+        $this->gameHostingsService->update($request, $hosting_id);
     }
 
 }

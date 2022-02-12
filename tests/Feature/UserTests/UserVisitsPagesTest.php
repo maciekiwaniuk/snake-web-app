@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\UserTests;
 
-use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\User;
 
 class UserVisitsPagesTest extends TestCase
 {

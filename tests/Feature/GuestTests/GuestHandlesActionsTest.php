@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\GuestTests;
 
-use App\Models\Message;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\Message;
 
 class GuestHandlesPagesTest extends TestCase
 {

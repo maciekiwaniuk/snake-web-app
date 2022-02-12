@@ -2,11 +2,12 @@
 
 namespace Tests\Feature\AdminTests;
 
-use App\Models\User;
-use App\Models\VisitorUnique;
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Tests\TestCase;
+use App\Models\GameHosting;
+use App\Models\User;
+use App\Models\VisitorUnique;
 
 class AdminHandlesActionsTest extends TestCase
 {
@@ -15,7 +16,7 @@ class AdminHandlesActionsTest extends TestCase
     public function test_admin_can_delete_user_account()
     {
         $this->withoutExceptionHandling();
-        $admin = User::factory()->create(['permission' => 2]);
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
         $user = User::factory()->create();
 
         $response = $this->actingAs($admin)->delete(route('admin.delete-account', $user->id));
@@ -32,7 +33,7 @@ class AdminHandlesActionsTest extends TestCase
 
     public function test_admin_can_ban_user_account()
     {
-        $admin = User::factory()->create(['permission' => 2]);
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
         $user = User::factory()->create();
 
         $response = $this->actingAs($admin)->put(route('admin.ban-account', $user->id));
@@ -44,7 +45,7 @@ class AdminHandlesActionsTest extends TestCase
 
     public function test_admin_can_unban_user_account()
     {
-        $admin = User::factory()->create(['permission' => 2]);
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
         $user = User::factory()->create(['user_banned' => 1]);
 
         $response = $this->actingAs($admin)->put(route('admin.unban-account', $user->id));
@@ -58,7 +59,7 @@ class AdminHandlesActionsTest extends TestCase
     {
         $user = User::factory()->create();
         $ip = VisitorUnique::factory()->create(['ip' => $user->last_login_ip]);
-        $admin = User::factory()->create(['permission' => 2]);
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
 
         $response = $this->actingAs($admin)->put(route('admin.ban-last-ip', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
@@ -71,7 +72,7 @@ class AdminHandlesActionsTest extends TestCase
     {
         $user = User::factory()->create();
         $ip = VisitorUnique::factory()->create(['ip_banned' => 1, 'ip' => $user->last_login_ip]);
-        $admin = User::factory()->create(['permission' => 2]);
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
 
         $response = $this->actingAs($admin)->put(route('admin.unban-last-ip', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
@@ -84,7 +85,7 @@ class AdminHandlesActionsTest extends TestCase
     {
         $user = User::factory()->create();
         $ip = VisitorUnique::factory()->create(['ip' => $user->last_login_ip]);
-        $admin = User::factory()->create(['permission' => 2]);
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
 
         $response = $this->actingAs($admin)->put(route('admin.ban-last-ip-account', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
@@ -100,7 +101,7 @@ class AdminHandlesActionsTest extends TestCase
     {
         $user = User::factory()->create(['user_banned' => 1]);
         $ip = VisitorUnique::factory()->create(['ip_banned' => 1, 'ip' => $user->last_login_ip]);
-        $admin = User::factory()->create(['permission' => 2]);
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
 
         $response = $this->actingAs($admin)->put(route('admin.unban-last-ip-account', $user->id));
         $response->assertStatus(302)->assertSessionHas('success');
@@ -114,7 +115,7 @@ class AdminHandlesActionsTest extends TestCase
 
     public function test_admin_can_reset_api_token_for_user()
     {
-        $admin = User::factory()->create(['permission' => 2]);
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
         $user = User::factory()->create();
 
         $response = $this->actingAs($admin)->put(route('admin.reset-api-token', $user->id));
@@ -126,7 +127,7 @@ class AdminHandlesActionsTest extends TestCase
 
     public function test_admin_can_delete_avatar_for_user()
     {
-        $admin = User::factory()->create(['permission' => 2]);
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
         $user = User::factory()->create(['avatar_path' => '/example_avatar_path/avatar.png']);
 
         $response = $this->actingAs($admin)->delete(route('admin.delete-avatar', $user->id));
@@ -138,7 +139,7 @@ class AdminHandlesActionsTest extends TestCase
 
     public function test_admin_can_change_name_email_password_for_user()
     {
-        $admin = User::factory()->create(['permission' => 2]);
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
         $user_before_change = User::factory()->create();
 
         $response = $this->actingAs($admin)->put(
@@ -160,7 +161,7 @@ class AdminHandlesActionsTest extends TestCase
 
     public function test_admin_can_ban_specified_ip()
     {
-        $admin = User::factory()->create(['permission' => 2]);
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
         $ip = VisitorUnique::factory()->create();
 
         $response = $this->actingAs($admin)->put(route('admin.ban-ip', $ip->id));
@@ -172,7 +173,7 @@ class AdminHandlesActionsTest extends TestCase
 
     public function test_admin_can_unban_specified_ip()
     {
-        $admin = User::factory()->create(['permission' => 2]);
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
         $ip = VisitorUnique::factory()->create(['ip_banned' => 1]);
 
         $response = $this->actingAs($admin)->put(route('admin.unban-ip', $ip->id));
@@ -180,6 +181,65 @@ class AdminHandlesActionsTest extends TestCase
 
         $ip_after_unban = VisitorUnique::where('id', '=', $ip->id)->first();
         $this->assertEquals($ip_after_unban->ip_banned, 0);
+    }
+
+    public function test_admin_can_add_game_hosting()
+    {
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
+
+        $this->actingAs($admin)->post(
+            route('admin.game-hostings.store'),
+            [
+                'name' => 'Example hosting',
+                'link' => 'https://github.com/maciekiwaniuk/snake-web-app'
+            ]
+        );
+
+        try {
+            $game_hosting = GameHosting::firstOrFail();
+            $this->assertTrue(true);
+        } catch (\Exception) {
+            $this->assertTrue(false);
+        }
+    }
+
+    public function test_admin_can_modify_game_hosting()
+    {
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
+        $game_hosting = GameHosting::factory()->create();
+
+        $example_hosting_name = 'Example hosting';
+        $example_hosting_link = 'https://github.com/maciekiwaniuk/snake-web-app';
+
+        $this->actingAs($admin)->put(
+            route('admin.game-hostings.update', $game_hosting->id),
+            [
+                'name' => $example_hosting_name,
+                'link' => $example_hosting_link
+            ]
+        );
+
+        $modified_game_hosting = GameHosting::first();
+
+        $this->assertEquals($modified_game_hosting->name, $example_hosting_name);
+        $this->assertEquals($modified_game_hosting->link, $example_hosting_link);
+    }
+
+    public function test_admin_can_delete_game_hosting()
+    {
+        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
+        $game_hosting = GameHosting::factory()->create();
+
+        $this->actingAs($admin)->delete(
+            route('admin.game-hostings.destroy', $game_hosting->id)
+        );
+
+        try {
+            $game_hosting = GameHosting::firstOrFail();
+            $this->assertTrue(false);
+        } catch (\Exception) {
+            $this->assertTrue(true);
+        }
     }
 
 }

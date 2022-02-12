@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\UserTests;
 
-use App\Models\Message;
-use App\Models\User;
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Tests\TestCase;
+use App\Models\Message;
+use App\Models\User;
 
 class UserHandlesActionsTest extends TestCase
 {

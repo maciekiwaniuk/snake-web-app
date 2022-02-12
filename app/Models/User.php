@@ -86,7 +86,7 @@ class User extends Authenticatable
      */
     public function isAdmin()
     {
-        if ($this->permission == 2) {
+        if ($this->permission == config('app.permissions.admin')) {
             return true;
         }
         return false;
@@ -97,7 +97,7 @@ class User extends Authenticatable
      */
     public function isUser()
     {
-        if ($this->permission == 0) {
+        if ($this->permission == config('app.permissions.user')) {
             return true;
         }
         return false;
