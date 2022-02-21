@@ -16,6 +16,18 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
+     * Constants that specify number for account permission
+     */
+    const USER_PERMISSION = 0;
+    const ADMIN_PERMISSION = 2;
+
+    /**
+     * Constants that specify number for account ban status
+     */
+    const NOT_BANNED = 0;
+    const BANNED = 1;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -86,7 +98,7 @@ class User extends Authenticatable
      */
     public function isAdmin()
     {
-        if ($this->permission == config('app.permissions.admin')) {
+        if ($this->permission == self::ADMIN_PERMISSION) {
             return true;
         }
         return false;
@@ -97,7 +109,7 @@ class User extends Authenticatable
      */
     public function isUser()
     {
-        if ($this->permission == config('app.permissions.user')) {
+        if ($this->permission == self::USER_PERMISSION) {
             return true;
         }
         return false;
@@ -108,7 +120,7 @@ class User extends Authenticatable
      */
     public function isBanned()
     {
-        if ($this->user_banned == 1) {
+        if ($this->user_banned == self::BANNED) {
             return true;
         }
         return false;

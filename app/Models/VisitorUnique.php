@@ -10,6 +10,12 @@ class VisitorUnique extends Model
     use HasFactory;
 
     /**
+     * Constants that specify number for ip ban status
+     */
+    const NOT_BANNED = 0;
+    const BANNED = 1;
+
+    /**
      * The table associated with the model.
      *
      * @var string

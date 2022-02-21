@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'user1234',
                 'email' => 'user1234@wp.pl',
                 'password' => Hash::make('user1234'),
-                'permission' => 0,
+                'permission' => User::USER_PERMISSION,
             ]);
             UserGameData::factory()->create();
         }
@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'test1234',
                 'email' => 'test1234@wp.pl',
                 'password' => Hash::make('test1234'),
-                'permission' => 0,
+                'permission' => User::USER_PERMISSION,
             ]);
             UserGameData::factory()->create();
         }
@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'admin1234',
                 'email' => 'admin1234@wp.pl',
                 'password' => Hash::make('admin1234'),
-                'permission' => 2,
+                'permission' => User::ADMIN_PERMISSION,
             ]);
             UserGameData::factory()->create();
         }

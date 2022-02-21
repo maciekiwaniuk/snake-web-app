@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -19,7 +20,6 @@ use App\Models\UserDeleted;
 use App\Models\UserGameData;
 use App\Models\User;
 use App\Mail\WelcomeMail;
-use Carbon\Carbon;
 
 class UsersService
 {
@@ -35,7 +35,7 @@ class UsersService
             ->firstOrFail();
 
         $banned_ip->update([
-            'ip_banned' => 1
+            'ip_banned' => VisitorUnique::BANNED
         ]);
     }
 
@@ -51,7 +51,7 @@ class UsersService
             ->firstOrFail();
 
         $banned_ip->update([
-            'ip_banned' => 0
+            'ip_banned' => VisitorUnique::NOT_BANNED
         ]);
     }
 
@@ -62,7 +62,7 @@ class UsersService
     {
         if (!$user->isAdmin()) {
             $user->update([
-                'user_banned' => 1
+                'user_banned' => User::BANNED
             ]);
         }
     }
@@ -73,7 +73,7 @@ class UsersService
     public function handleUnbanAccount(User $user)
     {
         $user->update([
-            'user_banned' => 0
+            'user_banned' => User::NOT_BANNED
         ]);
     }
 

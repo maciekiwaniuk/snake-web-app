@@ -50,7 +50,7 @@ class UserFactory extends Factory
             'password' => Hash::make(config('auth.default_password')),
             'api_token' => Str::random(60),
             'avatar_path' => '/assets/images/avatar.png',
-            'permission' => 0,
+            'permission' => User::USER_PERMISSION,
             'last_login_ip' => $this->generateRandomIP(),
             'last_login_time' => Carbon::now()->subMinutes(rand(1, 2440)),
             'last_user_agent' => $this->getUserAgent(),

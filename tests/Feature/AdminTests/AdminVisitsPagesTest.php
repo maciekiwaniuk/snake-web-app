@@ -12,7 +12,7 @@ class AdminVisitsPagesTest extends TestCase
 
     public function test_admin_can_visit_pages_which_are_not_secured_by_any_middlewares()
     {
-        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
+        $admin = User::factory()->create(['permission' => User::ADMIN_PERMISSION]);
 
         $this->actingAs($admin)->get(route('home'))->assertStatus(200);
         $this->actingAs($admin)->get(route('offline-fallback'))->assertStatus(200);
@@ -33,7 +33,7 @@ class AdminVisitsPagesTest extends TestCase
 
     public function test_admin_can_visit_pages_which_are_secured_by_admin_middleware()
     {
-        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
+        $admin = User::factory()->create(['permission' => User::ADMIN_PERMISSION]);
 
         $this->actingAs($admin)->get(route('options.index'))->assertStatus(200);
         $this->actingAs($admin)->get(route('options.get-user-login-logs'))->assertStatus(200);
@@ -44,7 +44,7 @@ class AdminVisitsPagesTest extends TestCase
 
     public function test_admin_can_visit_pages_secured_by_admin_middleware()
     {
-        $admin = User::factory()->create(['permission' => config('app.permissions.admin')]);
+        $admin = User::factory()->create(['permission' => User::ADMIN_PERMISSION]);
 
         $this->actingAs($admin)->get(route('admin.users.index'))->assertStatus(200);
         $this->actingAs($admin)->get(route('admin.visitors.index'))->assertStatus(200);

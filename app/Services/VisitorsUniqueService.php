@@ -12,7 +12,7 @@ class VisitorsUniqueService
     public function handleBanIp(VisitorUnique $ip)
     {
         $ip->update([
-            'ip_banned' => 1
+            'ip_banned' => VisitorUnique::BANNED
         ]);
     }
 
@@ -22,7 +22,7 @@ class VisitorsUniqueService
     public function handleUnbanIp(VisitorUnique $ip)
     {
         $ip->update([
-            'ip_banned' => 0
+            'ip_banned' => VisitorUnique::NOT_BANNED
         ]);
     }
 
