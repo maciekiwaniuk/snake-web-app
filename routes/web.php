@@ -209,7 +209,7 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/zgubione-haslo', [PasswordResetLinkController::class, 'create'])->name('password.request');
     Route::post('/zgubione-haslo', [PasswordResetLinkController::class, 'store'])->name('password.email')
-        ->middleware('throttle:6,1');
+        ->middleware('throttle:3,1');
 
     Route::get('/ustawianie-nowego-hasla/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
     Route::post('/ustawianie-nowego-hasla', [NewPasswordController::class, 'store'])->name('password.update');
@@ -224,8 +224,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/wylogowanie', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     Route::get('/weryfikacja-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])->name('verification.verify')
-        ->middleware(['signed', 'throttle:6,1']);
+        ->middleware(['signed', 'throttle:3,1']);
 
     Route::post('/email/weryfikacja-powiadomienia', [EmailVerificationNotificationController::class, 'store'])->name('verification.send')
-        ->middleware('throttle:6,1');
+        ->middleware('throttle:3,1');
 });
