@@ -78,7 +78,7 @@ To enable e-mail service and send e-mails properly you need to fill all necessar
 
 You have to also run queue:work command to set up queue system
 
-    php artisan queue:work --queue=high,default
+    php artisan queue:work
 
 # Redis service
 
