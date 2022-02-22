@@ -528,8 +528,7 @@
                         orderable: false,
                         class: 'align-middle',
                         render: function (data, type, row, meta) {
-                            let adminPermission = '{{ config("app.permissions.admin") }}';
-                            if (row.permission == adminPermission) {
+                            if (row.permission == 2) {
                                 return '<i class="bi bi-shield-lock text-danger"></i>';
                             }
 
