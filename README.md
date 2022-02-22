@@ -115,4 +115,10 @@ To log into account with normal permissions use
     email: test1234@wp.pl
 
     password: test1234
+
+# Application appearance
+
+![](https://github.com/maciekiwaniuk/snake-web-app/raw/main/public/assets/readme/gifs/gif_1.gif)
+![](https://github.com/maciekiwaniuk/snake-web-app/raw/main/public/assets/readme/gifs/gif_2.gif)
+![](https://github.com/maciekiwaniuk/snake-web-app/raw/main/public/assets/readme/gifs/gif_3.gif)
     
