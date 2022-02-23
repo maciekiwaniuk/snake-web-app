@@ -253,6 +253,8 @@
                                 optionName = "Zbanowanie IP";
                             } else if (value == 'ip_unban') {
                                 optionName = "Odbanowanie IP";
+                            } else if (value == 'user_data_modify') {
+                                optionName = "Modyfikacja danych";
                             }
                             else {
                                 optionName = value;
