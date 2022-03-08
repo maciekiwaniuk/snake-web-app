@@ -43,7 +43,7 @@ class VisitorUniqueFactory extends Factory
     {
         return [
             'ip_banned' => false,
-            'user_agent' => $this->getUserAgent(),
+            'user_agent' => substr($this->getUserAgent(), 0, 200),
             'ip' => $this->generateRandomIP(),
         ];
     }

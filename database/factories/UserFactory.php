@@ -53,7 +53,7 @@ class UserFactory extends Factory
             'permission' => User::USER_PERMISSION,
             'last_login_ip' => $this->generateRandomIP(),
             'last_login_time' => Carbon::now()->subMinutes(rand(1, 2440)),
-            'last_user_agent' => $this->getUserAgent(),
+            'last_user_agent' => substr($this->getUserAgent(), 0, 200),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
             'profile_visibility_status' => 'public'

@@ -224,7 +224,7 @@ class UsersService
             'api_token' => Str::random(60),
             'last_login_ip' => $request->getClientIp(),
             'last_login_time' => Carbon::now()->toDateTimeString(),
-            'last_user_agent' => $request->server('HTTP_USER_AGENT'),
+            'last_user_agent' => substr($request->server('HTTP_USER_AGENT'), 0, 200),
         ]);
 
         if (env('MAIL_SERVICE_ENABLED')) {
@@ -257,7 +257,7 @@ class UsersService
         $user->update([
             'last_login_ip' => $request->getClientIp(),
             'last_login_time' => Carbon::now()->toDateTimeString(),
-            'last_user_agent' => $request->server('HTTP_USER_AGENT')
+            'last_user_agent' => substr($request->server('HTTP_USER_AGENT'), 0, 200)
         ]);
 
         if ($user->user_banned && $user->isUser()) {

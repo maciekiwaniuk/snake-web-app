@@ -26,7 +26,7 @@ class VisitorsUniqueMiddleware
 
             $visitor = new VisitorUnique;
             $visitor->ip = $request->getClientIp();
-            $visitor->user_agent = $request->server('HTTP_USER_AGENT');
+            $visitor->user_agent = substr($request->server('HTTP_USER_AGENT'), 0, 200);
             $visitor->save();
         }
 
