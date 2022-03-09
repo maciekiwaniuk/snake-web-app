@@ -85,11 +85,8 @@
                                                                 text-center">
                                                         <img alt="Zdjęcie porady #3" class="w-100" src="{{ asset('assets/images/help_images/download_files/tip_3.jpg') }}">
                                                     </div>
-                                                    <li>OD TĄD NIEPEWNE</li>
-                                                    <li>Wejdź do zainstalowanego folderu z grą, kliknij na plik Snake raz lewym, a raz prawym przyciskiem i następnie kliknij <strong><em>Utwórz skrót</em></strong></li>
-                                                    <li>Utworzony skrót przenieś na pulpit (może to być dowolne inne miejsce na urządzeniu) przeciągając go, następnie zmień nazwę skrótu na np. Snake</li>
-                                                    <li>Uruchom grę poprzez dwukrotnie kliknięcie lewym przyciskiem</li>
-                                                    <li>DO TĄD NIEPEWNE</li>
+                                                    <li>Przejdź przez wszystkie kroki instalatora</li>
+                                                    <li>Zaczekaj aż gra się zainstaluje</li>
                                                 </ol>
                                                 <strong class="text-success"><em>voilà! Miłego grania! :)</em></strong>
                                             </div>
