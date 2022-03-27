@@ -350,7 +350,7 @@
             $('.user-name-text').text(name);
 
             // IP ban status
-            if (ip_banned == 1) {
+            if (ip_banned == {{ \App\Models\VisitorUnique::BANNED }}) {
                 $('#ip-ban-status-text').text('Potwierdź odbanowanie IP użytkownika');
                 $('#ip-ban-status-btn').text('Odbanuj IP');
                 $('#ip-ban-status-btn').attr('class', 'btn btn-success border border-2 border-dark');
@@ -369,7 +369,7 @@
             }
 
             // Account ban status
-            if (user_banned == 1) {
+            if (user_banned == {{ \App\Models\User::BANNED }}) {
                 $('#account-ban-status-text').text('Potwierdź odbanowanie konta użytkownika');
                 $('#account-ban-status-btn').text('Odbanuj konto');
                 $('#account-ban-status-btn').attr('class', 'btn btn-success mt-1 border border-2 border-dark')
@@ -388,7 +388,7 @@
             }
 
             // Account and IP ban status
-            if (user_banned == 0 || ip_banned == 0) {
+            if (user_banned == {{ \App\Models\User::NOT_BANNED }} || ip_banned == {{ \App\Models\VisitorUnique::NOT_BANNED }}) {
                 $('#account-ip-ban-status-text').text('Potwierdź zbanowanie konta oraz IP użytkownika');
                 $('#account-ip-ban-status-btn').text('Zbanuj konto oraz IP');
                 $('#account-ip-ban-status-btn').attr('class', 'btn btn-warning mt-1 border border-2 border-dark');
@@ -469,9 +469,9 @@
                         render: function (data, type, row, meta) {
                             urlProfileToReplace = "{{ route('profile', '__NAME__') }}";
                             urlProfile = urlProfileToReplace.replace('__NAME__', row.name);
-                            if (row.permission == 0) {
+                            if (row.permission == {{ \App\Models\User::USER_PERMISSION }}) {
                                 return `<a class="link-white" href="`+urlProfile+`">`+row.name+`</a>`;
-                            } else if (row.permission == 2) {
+                            } else if (row.permission == {{ \App\Models\User::ADMIN_PERMISSION }}) {
                                 return `<strong class="text-danger"><a class="link-red" href="`+urlProfile+`">`+row.name+`</a></strong>`;
                             }
                         },
@@ -493,9 +493,9 @@
                         title: 'Ban konta',
                         data: 'user_banned',
                         render: function (data, type, row, meta) {
-                            if (data == 0) {
+                            if (data == {{ \App\Models\User::NOT_BANNED }}) {
                                 return '<i class="bi bi-check-lg text-success"></i>';
-                            } else if (data == 1) {
+                            } else if (data == {{ \App\Models\User::BANNED }}) {
                                 return '<i class="bi bi-exclamation-circle text-danger"></i>';
                             } else {
                                 return '<i class="bi bi-question-circle"></i>';
@@ -509,7 +509,7 @@
                         data: '',
                         render: function (data, type, row, meta) {
                             if (row.visitor_unique != null) {
-                                if (row.visitor_unique.ip_banned == 0) {
+                                if (row.visitor_unique.ip_banned == {{ \App\Models\VisitorUnique::NOT_BANNED }}) {
                                     return '<i class="bi bi-check-lg text-success"></i>';
                                 } else {
                                     return '<i class="bi bi-exclamation-circle text-danger"></i>';

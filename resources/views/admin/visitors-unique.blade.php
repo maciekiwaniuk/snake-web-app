@@ -24,7 +24,7 @@
         }
     </style>
 
-    <div class="col-12 col-sm-10
+    <div class="col-12 col-sm-12 col-lg-10
                 mx-auto
                 mx-5
                 mt-2 mt-sm-4
@@ -127,7 +127,7 @@
     <script>
 
         function changeBanStatusConfirmationModalContent(ip_id, ip, ip_banned) {
-            if (ip_banned == 1) {
+            if (ip_banned == {{ \App\Models\VisitorUnique::BANNED }}) {
                 $('#confirmation-message').text('Potwierdź odbanowanie IP: '+ip);
                 $('#ban-status-ip-button').attr('class', 'btn btn-success border border-2 border-dark');
 
@@ -135,7 +135,7 @@
                 urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', ip_id);
                 $('#ban-status-ip-form').attr('action', urlUnbanIp);
 
-            } else if (ip_banned == 0) {
+            } else if (ip_banned == {{ \App\Models\VisitorUnique::NOT_BANNED }}) {
                 $('#confirmation-message').text('Potwierdź zbanowanie IP: '+ip);
                 $('#ban-status-ip-button').attr('class', 'btn btn-danger border border-2 border-dark');
 
@@ -203,7 +203,7 @@
                         title: 'Ban',
                         data: '',
                         render: function (data, type, row, meta) {
-                            if (row.ip_banned == 0) {
+                            if (row.ip_banned == {{ \App\Models\VisitorUnique::NOT_BANNED }}) {
                                 return '<i class="bi bi-check-lg text-success"></i>'
                             } else {
                                 return '<i class="bi bi-exclamation-circle text-danger"></i>'

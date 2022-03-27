@@ -40,7 +40,7 @@ class AdminHandlesActionsTest extends TestCase
         $response->assertStatus(302)->assertSessionHas('success');
 
         $user_after_ban = User::where('id', '=', $user->id)->first();
-        $this->assertEquals($user_after_ban->user_banned, 1);
+        $this->assertEquals($user_after_ban->user_banned, User::BANNED);
     }
 
     public function test_admin_can_unban_user_account()
@@ -52,7 +52,7 @@ class AdminHandlesActionsTest extends TestCase
         $response->assertStatus(302)->assertSessionHas('success');
 
         $user_after_unban = User::where('id', '=', $user->id)->first();
-        $this->assertEquals($user_after_unban->user_banned, 0);
+        $this->assertEquals($user_after_unban->user_banned, User::NOT_BANNED);
     }
 
     public function test_admin_can_ban_user_last_ip()
@@ -65,7 +65,7 @@ class AdminHandlesActionsTest extends TestCase
         $response->assertStatus(302)->assertSessionHas('success');
 
         $user_last_ip_after_ban = VisitorUnique::where('id', '=', $ip->id)->first();
-        $this->assertEquals($user_last_ip_after_ban->ip_banned, 1);
+        $this->assertEquals($user_last_ip_after_ban->ip_banned, VisitorUnique::BANNED);
     }
 
     public function test_admin_can_unban_user_last_ip()
@@ -78,7 +78,7 @@ class AdminHandlesActionsTest extends TestCase
         $response->assertStatus(302)->assertSessionHas('success');
 
         $user_last_ip_after_unban = VisitorUnique::where('id', '=', $ip->id)->first();
-        $this->assertEquals($user_last_ip_after_unban->ip_banned, 0);
+        $this->assertEquals($user_last_ip_after_unban->ip_banned, VisitorUnique::NOT_BANNED);
     }
 
     public function test_admin_can_ban_user_account_and_ip()
@@ -93,8 +93,8 @@ class AdminHandlesActionsTest extends TestCase
         $ip_after_ban = VisitorUnique::where('id', '=', $ip->id)->first();
         $user_after_ban = User::where('id', '=', $user->id)->first();
 
-        $this->assertEquals($ip_after_ban->ip_banned, 1);
-        $this->assertEquals($user_after_ban->user_banned, 1);
+        $this->assertEquals($ip_after_ban->ip_banned, VisitorUnique::BANNED);
+        $this->assertEquals($user_after_ban->user_banned, User::BANNED);
     }
 
     public function test_admin_can_unban_user_account_and_ip()
@@ -109,8 +109,8 @@ class AdminHandlesActionsTest extends TestCase
         $ip_after_unban = VisitorUnique::where('id', '=', $ip->id)->first();
         $user_after_unban = User::where('id', '=', $user->id)->first();
 
-        $this->assertEquals($ip_after_unban->ip_banned, 0);
-        $this->assertEquals($user_after_unban->user_banned, 0);
+        $this->assertEquals($ip_after_unban->ip_banned, VisitorUnique::NOT_BANNED);
+        $this->assertEquals($user_after_unban->user_banned, User::NOT_BANNED);
     }
 
     public function test_admin_can_reset_api_token_for_user()
@@ -168,7 +168,7 @@ class AdminHandlesActionsTest extends TestCase
         $response->assertStatus(302)->assertSessionHas('success');
 
         $ip_after_ban = VisitorUnique::where('id', '=', $ip->id)->first();
-        $this->assertEquals($ip_after_ban->ip_banned, 1);
+        $this->assertEquals($ip_after_ban->ip_banned, VisitorUnique::BANNED);
     }
 
     public function test_admin_can_unban_specified_ip()
@@ -180,7 +180,7 @@ class AdminHandlesActionsTest extends TestCase
         $response->assertStatus(302)->assertSessionHas('success');
 
         $ip_after_unban = VisitorUnique::where('id', '=', $ip->id)->first();
-        $this->assertEquals($ip_after_unban->ip_banned, 0);
+        $this->assertEquals($ip_after_unban->ip_banned, VisitorUnique::NOT_BANNED);
     }
 
     public function test_admin_can_add_game_hosting()
