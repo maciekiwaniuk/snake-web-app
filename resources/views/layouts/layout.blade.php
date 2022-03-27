@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <title>@yield('title') 🐍</title>
+    <title>@yield('title')</title>
 
     <!-- CSRF token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -102,6 +102,17 @@
     </style>
 
     <script>
+        // check if device supports emojis
+        function deviceSupportsEmoji () {
+            const ctx = document.createElement('canvas').getContext('2d');
+            ctx.canvas.width = ctx.canvas.height = 1;
+            ctx.fillText('😗', -4, 4);
+            return ctx.getImageData(0, 0, 1, 1).data[3] > 0; // Not a transparent pixel
+        }
+
+        if (deviceSupportsEmoji()) {
+            document.title = `${document.title} 🐍`;
+        }
 
         @if (env('PWA_SERVICE_WORKER_ENABLED'))
             // register PWA serviceWorker if is avaliable in the browser
