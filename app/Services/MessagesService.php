@@ -13,7 +13,7 @@ class MessagesService
     /**
      * Handle destroy message
      */
-    public function destroy($message_id)
+    public function destroy(int $message_id)
     {
         $message = Message::query()
             ->where('id', '=', $message_id)

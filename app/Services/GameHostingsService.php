@@ -24,7 +24,7 @@ class GameHostingsService
     /**
      * Handle destroy game hosting
      */
-    public function destroy($hosting_id)
+    public function destroy(int $hosting_id)
     {
         $game_hosting = GameHosting::query()
             ->where('id', '=', $hosting_id)
@@ -35,7 +35,7 @@ class GameHostingsService
     /**
      * Handle update game hosting
      */
-    public function update(Request $request, $hosting_id)
+    public function update(Request $request, int $hosting_id)
     {
         $game_hosting = GameHosting::query()
             ->where('id', '=', $hosting_id)
