@@ -20,7 +20,7 @@ To successfully install and test application you need to have installed [compose
 
 Open folder where you want to have project files, open console and then clone the repository
 
-    git clone https://github.com/macieeek/snake-web-app.git
+    git clone https://github.com/maciekiwaniuk/snake-web-app
 	
 Change folder in console to created folder with project files
 
