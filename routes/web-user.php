@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/weryfikacja-email', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');
 
     Route::get('/potwierdzenie-hasla', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
-    Route::post('/potwierdzenie-hasla', [ConfirmablePasswordController::class, 'store'])->name('password.confirm');
+    Route::post('/potwierdzenie-hasla', [ConfirmablePasswordController::class, 'store']);
 
     Route::post('/wylogowanie', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 

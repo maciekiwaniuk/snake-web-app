@@ -55,10 +55,10 @@ Route::prefix('ranking')->group(function() {
 
 Route::middleware('guest')->group(function () {
     Route::get('/rejestracja', [RegisteredUserController::class, 'create'])->name('register');
-    Route::post('/rejestracja', [RegisteredUserController::class, 'store'])->name('register');
+    Route::post('/rejestracja', [RegisteredUserController::class, 'store']);
 
     Route::get('/logowanie', [AuthenticatedSessionController::class, 'create'])->name('login');
-    Route::post('/logowanie', [AuthenticatedSessionController::class, 'store'])->name('login');
+    Route::post('/logowanie', [AuthenticatedSessionController::class, 'store']);
 
     Route::get('/zgubione-haslo', [PasswordResetLinkController::class, 'create'])->name('password.request');
     Route::post('/zgubione-haslo', [PasswordResetLinkController::class, 'store'])->name('password.email')
