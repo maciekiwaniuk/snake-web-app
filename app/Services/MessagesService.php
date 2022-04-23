@@ -29,14 +29,15 @@ class MessagesService
      */
     public function store(MessageRequest $request)
     {
-        $message = Message::create([
+        $content = str_replace(['\'', '"'], '', $request->content);
+
+        return Message::create([
             'subject' => $request->subject,
             'sender' => $request->sender,
             'email' => $request->email,
-            'content' => $request->content,
+            'content' => $content,
             'sent_as_user' => false
         ]);
-        return $message;
     }
 
     /**
@@ -44,14 +45,15 @@ class MessagesService
      */
     public function storeAJAX(MessageAjaxRequest $request)
     {
-        $message = Message::create([
+        $content = str_replace(['\'', '"'], '', $request->content);
+
+        return Message::create([
             'subject' => $request->subject,
             'sender' => $request->sender,
             'email' => $request->email,
-            'content' => $request->content,
+            'content' => $content,
             'sent_as_user' => false
         ]);
-        return $message;
     }
 
     /**
