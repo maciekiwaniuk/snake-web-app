@@ -9,7 +9,11 @@ class ServerLogsService
      */
     public function handleLogsCollection()
     {
-        $logFile = file(storage_path().'/logs/laravel.log');
+        try {
+            $logFile = file(storage_path().'/logs/laravel.log');
+        } catch (\Exception $e) {
+            $logFile = [];
+        }
         $logCollection = [];
         $logString = "";
 

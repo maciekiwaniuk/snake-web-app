@@ -75,8 +75,13 @@ class StatisticsService
      */
     public function getAmountOfServerLogs()
     {
-        $logFile = file(storage_path().'/logs/laravel.log');
-        $logString = "";
+        try {
+            $logFile = file(storage_path().'/logs/laravel.log');
+        } catch (\Exception $e) {
+            $logFile = [];
+        }
+
+        $logString = '';
 
         foreach ($logFile as $line) {
             $logString .= $line;
