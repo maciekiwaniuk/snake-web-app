@@ -6,7 +6,6 @@ use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-
 class DifferentNewPassword implements Rule
 {
     /**

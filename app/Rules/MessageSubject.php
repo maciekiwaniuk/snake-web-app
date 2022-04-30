@@ -37,6 +37,6 @@ class MessageSubject implements Rule
      */
     public function message()
     {
-        return 'Temat wiadomość był niedozwolony.';
+        return 'Temat wiadomości był niedozwolony.';
     }
 }

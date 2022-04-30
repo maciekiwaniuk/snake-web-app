@@ -25,9 +25,8 @@ class reCAPTCHAv2 implements Rule
 
         if ($recaptcha_response->success) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**

@@ -64,7 +64,6 @@ class ApiSnakeGameController extends Controller
     public function createExitGameLog(Request $request)
     {
         $this->apiService->handleExitGameLog($request);
-
     }
 
     /**

@@ -6,7 +6,6 @@ use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-
 class LoggedUserPassword implements Rule
 {
     /**

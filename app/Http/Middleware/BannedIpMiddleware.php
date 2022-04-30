@@ -20,7 +20,7 @@ class BannedIpMiddleware
         try {
             $ip = VisitorUnique::query()
                     ->where('ip', '=', $request->getClientIp())
-                    ->where('ip_banned', '=', 1)
+                    ->where('ip_banned', '=', VisitorUnique::BANNED)
                     ->firstOrFail();
 
             return response()
