@@ -172,4 +172,32 @@ class UserHandlesActionsTest extends TestCase
         }
     }
 
+    public function test_user_cant_spam_send_messages()
+    {
+        $user = User::factory()->create();
+
+        for ($i = 0; $i <= 10; $i++) {
+            $this->actingAs($user)->post(
+                route('message.store-AJAX'),
+                [
+                    'subject' => 'contact',
+                    'sender' => 'Joe',
+                    'email' => 'test@example.com',
+                    'content' => 'Lorem ipsum...',
+                    'sent_as_user' => true
+                ]
+            );
+        }
+
+        try {
+            $amount_of_messages = Message::all()->count();
+
+            if ($amount_of_messages > 10) $this->assertTrue(false);
+
+            $this->assertTrue(true);
+        } catch (\Exception $e) {
+            $this->assertTrue(false);
+        }
+    }
+
 }

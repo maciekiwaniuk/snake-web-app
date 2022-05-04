@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\MessageAjaxRequest;
 use App\Http\Requests\MessageRequest;
 use App\Models\Message;
@@ -25,16 +26,28 @@ class MessagesService
     }
 
     /**
-     * Handle store message
+     * Save message
      */
-    public function store(MessageRequest $request)
+    public function save(Request $request)
     {
         $content = str_replace(['\'', '"'], '', $request->content);
+        $sender = $request->sender;
+        $email = $request->email;
+
+        $amount_of_similar_messages = Message::query()
+            ->where('sender', '=', $sender)
+            ->orWhere('email', '=', $email)
+            ->orWhere('content', '=', $content)
+            ->get()
+            ->count();
+
+        // prevent creating spam messages
+        if ($amount_of_similar_messages >= 10) return;
 
         return Message::create([
             'subject' => $request->subject,
-            'sender' => $request->sender,
-            'email' => $request->email,
+            'sender' => $sender,
+            'email' => $email,
             'content' => $content,
             'sent_as_user' => false
         ]);
@@ -43,17 +56,17 @@ class MessagesService
     /**
      * Handle store message
      */
+    public function store(MessageRequest $request)
+    {
+        return $this->save($request);
+    }
+
+    /**
+     * Handle AJAX store message
+     */
     public function storeAJAX(MessageAjaxRequest $request)
     {
-        $content = str_replace(['\'', '"'], '', $request->content);
-
-        return Message::create([
-            'subject' => $request->subject,
-            'sender' => $request->sender,
-            'email' => $request->email,
-            'content' => $content,
-            'sent_as_user' => false
-        ]);
+        return $this->save($request);
     }
 
     /**

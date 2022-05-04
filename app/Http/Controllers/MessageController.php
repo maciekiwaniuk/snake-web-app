@@ -42,9 +42,10 @@ class MessageController extends Controller
      */
     public function store(MessageRequest $request)
     {
+        // method may not create message -> anti spam detection
         $message = $this->messagesService->store($request);
 
-        if (Auth::check()) {
+        if (Auth::check() && isset($message)) {
             $user = Auth::user();
             $this->messagesService->updateMessageSentAsUser($message, $user);
         }
@@ -58,9 +59,10 @@ class MessageController extends Controller
      */
     public function storeAJAX(MessageAjaxRequest $request)
     {
+        // method may not create message -> anti spam detection
         $message = $this->messagesService->storeAJAX($request);
 
-        if (Auth::check()) {
+        if (Auth::check() && isset($message)) {
             $user = Auth::user();
             $this->messagesService->updateMessageSentAsUser($message, $user);
         }

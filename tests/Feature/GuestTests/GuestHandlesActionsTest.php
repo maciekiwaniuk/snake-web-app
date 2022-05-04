@@ -49,7 +49,6 @@ class GuestHandlesPagesTest extends TestCase
 
     public function test_guest_can_send_ajax_messages()
     {
-
         $this->post(
             route('message.store-AJAX'),
             [
@@ -63,6 +62,32 @@ class GuestHandlesPagesTest extends TestCase
 
         try {
             $message = Message::firstOrFail();
+            $this->assertTrue(true);
+        } catch (\Exception $e) {
+            $this->assertTrue(false);
+        }
+    }
+
+    public function test_guest_cant_spam_send_messages()
+    {
+        for ($i = 0; $i <= 10; $i++) {
+            $this->post(
+                route('message.store-AJAX'),
+                [
+                    'subject' => 'contact',
+                    'sender' => 'Joe',
+                    'email' => 'test@example.com',
+                    'content' => 'Lorem ipsum...',
+                    'sent_as_user' => false
+                ]
+            );
+        }
+
+        try {
+            $amount_of_messages = Message::all()->count();
+
+            if ($amount_of_messages > 10) $this->assertTrue(false);
+
             $this->assertTrue(true);
         } catch (\Exception $e) {
             $this->assertTrue(false);
