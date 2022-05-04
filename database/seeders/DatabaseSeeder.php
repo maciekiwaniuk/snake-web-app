@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
         }
 
         User::factory(50)->create()->each(function ($user) {
-            VisitorUnique::factory(50)->create([
+            VisitorUnique::factory()->create([
                 'ip' => $user->last_login_ip
             ]);
             Message::factory()->create([
