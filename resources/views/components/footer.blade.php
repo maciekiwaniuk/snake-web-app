@@ -32,7 +32,7 @@
                 <i class="bi bi-envelope me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="iwaniukmaciej.kontakt@gmail.com"></i>
             </a>
 
-            <a class="link-none me-1 linkedin" href="https://www.linkedin.com/in/maciej-iwaniuk-478505213/" target="_blank">
+            <a class="link-none me-1 linkedin" href="https://www.linkedin.com/in/iwaniuk-maciej/" target="_blank">
                 <i class="bi bi-linkedin"></i>
             </a>
 
