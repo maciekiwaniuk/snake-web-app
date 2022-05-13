@@ -107,7 +107,7 @@ class StatisticsService
     public function getAmountOfTotalVisits()
     {
         if (env('REDIS_CONFIGURED')) {
-            return Redis::get('total_visits_amount_'.env('APP_ENV'));
+            return Redis::get('total_visits_amount_'.env('APP_ENV')) ?? 0;
         }
         return 'Brak danych (Wymagany Redis)';
     }
@@ -118,7 +118,7 @@ class StatisticsService
     public function getAmountOfWelcomePageVisits()
     {
         if (env('REDIS_CONFIGURED')) {
-            return Redis::get('welcome_page_visits_amount_'.env('APP_ENV'));
+            return Redis::get('welcome_page_visits_amount_'.env('APP_ENV')) ?? 0;
         }
         return 'Brak danych (Wymagany Redis)';
     }
@@ -129,7 +129,7 @@ class StatisticsService
     public function getAmountOfDownloadedGames()
     {
         if (env('REDIS_CONFIGURED')) {
-            return Redis::get('total_game_downloads_amount_'.env('APP_ENV'));
+            return Redis::get('total_game_downloads_amount_'.env('APP_ENV')) ?? 0;
         }
         return 'Brak danych (Wymagany Redis)';
     }
