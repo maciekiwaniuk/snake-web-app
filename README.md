@@ -4,6 +4,7 @@
 > ###
 > ### Online: https://snake-gra.pl/
 
+- Application is made with [Laravel Framework](https://laravel.com/).
 - Project uses a login system from the [Breeze starter kit](https://laravel.com/docs/8.x/starter-kits#laravel-breeze) which has been modified.
 - Application is responsive, made with the [Bootstrap 5](https://getbootstrap.com/docs/5.1/getting-started/introduction/).
 - To display tables is used the [DataTables](https://datatables.net/) plugin.
