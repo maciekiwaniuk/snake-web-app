@@ -236,9 +236,9 @@ class UsersService
 
         Auth::login($user);
 
-        $user_game_data = new UserGameData;
-        $user_game_data->user_id = $user->id;
-        $user_game_data->save();
+        UserGameData::create([
+            'user_id' => $user->id
+        ]);
 
         return $user;
     }
