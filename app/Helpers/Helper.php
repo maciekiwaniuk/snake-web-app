@@ -12,10 +12,9 @@ class Helper
      */
     public static function getUserInstanceById($user_id)
     {
-        $user = User::query()
+        return User::query()
             ->where('id', '=', $user_id)
             ->first();
-        return $user;
     }
 
     /**
@@ -37,10 +36,10 @@ class Helper
      */
     public static function getUsernameById($user_id)
     {
-        $user = User::query()
+        return User::query()
             ->where('id', '=', $user_id)
-            ->first();
-        return $user->name;
+            ->first()
+            ->name;
     }
 
     /**
@@ -48,10 +47,9 @@ class Helper
      */
     public static function getVisitorUniqueById($ip_id)
     {
-        $ip = VisitorUnique::query()
+        return VisitorUnique::query()
             ->where('id', '=', $ip_id)
             ->first();
-        return $ip;
     }
 
 

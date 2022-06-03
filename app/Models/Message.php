@@ -10,6 +10,18 @@ class Message extends Model
     use HasFactory;
 
     /**
+     * Constant that specify which message subjects are valid
+     */
+    const VALID_SUBJECTS = [
+        'contact',
+        'error-website',
+        'error-game',
+        'idea-website',
+        'idea-game',
+        'other'
+    ];
+
+    /**
      * The table associated with the model.
      *
      * @var string

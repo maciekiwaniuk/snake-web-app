@@ -24,10 +24,10 @@ class VisitorsUniqueMiddleware
                 ->firstOrFail();
         } catch (\Exception) {
 
-            $visitor = new VisitorUnique;
-            $visitor->ip = $request->getClientIp();
-            $visitor->user_agent = substr($request->server('HTTP_USER_AGENT'), 0, 200);
-            $visitor->save();
+            VisitorUnique::create([
+                'ip' => $request->getClientIp(),
+                'user_agent' => substr($request->server('HTTP_USER_AGENT'), 0, 200)
+            ]);
         }
 
         return $next($request);

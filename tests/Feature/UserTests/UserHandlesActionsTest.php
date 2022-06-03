@@ -149,6 +149,29 @@ class UserHandlesActionsTest extends TestCase
         }
     }
 
+    public function test_user_cant_send_message_with_invalid_subject()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->post(
+            route('message.store'),
+            [
+                'subject' => 'example_invalid_subject',
+                'sender' => 'Joe',
+                'email' => 'test@example.com',
+                'content' => 'Lorem ipsum...',
+                'sent_as_user' => false
+            ]
+        );
+
+        try {
+            $message = Message::firstOrFail();
+            $this->assertTrue(false);
+        } catch (\Exception $e) {
+            $this->assertTrue(true);
+        }
+    }
+
     public function test_user_can_send_ajax_messages()
     {
         $user = User::factory()->create();

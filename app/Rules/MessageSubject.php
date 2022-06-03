@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use App\Models\Message;
 
 class MessageSubject implements Rule
 {
@@ -15,16 +16,7 @@ class MessageSubject implements Rule
      */
     public function passes($attribute, $value)
     {
-        $subjects = [
-            'contact',
-            'error-website',
-            'error-game',
-            'idea-website',
-            'idea-game',
-            'other'
-        ];
-
-        if (in_array($value, $subjects)) {
+        if (in_array($value, Message::VALID_SUBJECTS)) {
             return true;
         }
         return false;
