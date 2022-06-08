@@ -7,6 +7,14 @@ use Illuminate\Contracts\Validation\Rule;
 class ValidNickname implements Rule
 {
     /**
+     * Abusive words which can not be used in user's nickname
+     */
+    const ABUSIVE_WORDS = [
+        'admin',
+        'moderator'
+    ];
+
+    /**
      * Determine if the validation rule passes.
 
      * @param  string  $attribute
@@ -15,13 +23,15 @@ class ValidNickname implements Rule
      */
     public function passes($attribute, $value)
     {
-        // check if directory exists for feature test
-        if (!file_exists('assets/uncensored_words.json')) {
-            return true;
-        }
+        $abusive_words = self::ABUSIVE_WORDS;
 
-        $uncensored_words_string = file_get_contents('assets/uncensored_words.json');
-        $words_json = json_decode($uncensored_words_string, true);
+        // check if directory exists for feature test
+        if (file_exists('assets/uncensored_words.json')) {
+            $uncensored_words_string = file_get_contents('assets/uncensored_words.json');
+            $words_from_file = json_decode($uncensored_words_string, true);
+
+            $abusive_words = array_merge($abusive_words, $words_from_file);
+        }
 
         $digits = [
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
@@ -32,7 +42,8 @@ class ValidNickname implements Rule
 
         $value_replaced_digits = str_replace($digits, $letters, $value);
 
-        foreach ($words_json as $word) {
+        // check if name contains abusive word in it self
+        foreach ($abusive_words as $word) {
             if (preg_match('/'.$word.'/i', strtolower($value)) ||
                 preg_match('/'.$word.'/i', strtolower($value_replaced_digits))) {
                 return false;
