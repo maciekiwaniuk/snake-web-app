@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\User;
 use App\Models\UserGameData;
+use App\Rules\ValidNickname;
 
 class RegistrationTest extends TestCase
 {
@@ -41,14 +42,29 @@ class RegistrationTest extends TestCase
             'password_confirmation' => config('auth.default_password'),
         ]);
 
-        $this->assertAuthenticated();
-
         try {
             $user = User::firstOrFail();
             $user_game_data = UserGameData::findOrFail($user->id);
             $this->assertTrue(true);
         } catch (ModelNotFoundException $error) {
             $this->assertTrue(false);
+        }
+    }
+
+    public function test_user_cant_register_with_abusive_nickname()
+    {
+        $this->post(route('register'), [
+            'name' => array_rand(ValidNickname::ABUSIVE_WORDS),
+            'email' => 'test@example.com',
+            'password' => config('auth.default_password'),
+            'password_confirmation' => config('auth.default_password'),
+        ]);
+
+        try {
+            $user = User::firstOrFail();
+            $this->assertTrue(false);
+        } catch (ModelNotFoundException $error) {
+            $this->assertTrue(true);
         }
     }
 }
