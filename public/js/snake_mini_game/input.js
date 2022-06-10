@@ -1,9 +1,9 @@
-const moveUpButton = document.getElementById('move-up-button');
-const moveDownButton = document.getElementById('move-down-button');
-const moveLeftButton = document.getElementById('move-left-button');
-const moveRightButton = document.getElementById('move-right-button');
+const moveUpButton = document.querySelector('#move-up-button');
+const moveDownButton = document.querySelector('#move-down-button');
+const moveLeftButton = document.querySelector('#move-left-button');
+const moveRightButton = document.querySelector('#move-right-button');
 
-const messageFormModal = document.getElementById('messageFormModal');
+const messageFormModal = document.querySelector('#messageFormModal');
 
 let inputDirection = { x: 0, y: 0 };
 let lastInputDirection = { x: 0, y: 0 };

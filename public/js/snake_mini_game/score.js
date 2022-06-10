@@ -1,7 +1,7 @@
 import { createCookieWithDataIfNotExists } from './options.js';
 
-let scoreDiv = document.getElementById('score');
-let scoreRecordDiv = document.getElementById('score-record');
+let scoreDiv = document.querySelector('#score');
+let scoreRecordDiv = document.querySelector('#score-record');
 
 export function updateScore(score) {
     scoreDiv.textContent = score;

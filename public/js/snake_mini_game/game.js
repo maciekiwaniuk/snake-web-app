@@ -16,7 +16,7 @@ import { resetInputDirection } from './input.js';
 
 import { drawRecordAndEmptyScore } from './score.js';
 
-const gameBoard = document.getElementById('game-board');
+const gameBoard = document.querySelector('#game-board');
 
 let SNAKE_SPEED = getSnakeSpeed();
 let lastRenderTime = 0;
@@ -69,8 +69,8 @@ function main(currentTime) {
 draw();
 drawRecordAndEmptyScore();
 
-var playButton = document.getElementById('playButton');
-var halfTransparentBoardBackground = document.getElementById('boardHalfTransparentBackground');
+var playButton = document.querySelector('#playButton');
+var halfTransparentBoardBackground = document.querySelector('#boardHalfTransparentBackground');
 // click on play button - run main loop function
 playButton.addEventListener('click', event => {
     playButton.classList.add('d-none');

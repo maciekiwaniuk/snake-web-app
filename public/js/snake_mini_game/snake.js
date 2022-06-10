@@ -65,11 +65,11 @@ export function draw(gameBoard) {
         gameBoard.appendChild(snakeElement);
     })
     snakeHeadDirection = getSnakeHeadDirection(snakeBody);
-    let snakeHeadDiv = document.getElementById('snake-head');
+    let snakeHeadDiv = document.querySelector('#snake-head');
     snakeHeadDiv = getSnakeHeadWithCorrectClassAppearance(snakeHeadDiv, snakeHeadDirection);
 
     snakeTailDirection = getSnakeTailDirection(snakeBody);
-    let snakeTailDiv = document.getElementById('snake-tail');
+    let snakeTailDiv = document.querySelector('#snake-tail');
     snakeTailDiv = getSnakeTailWithCorrectClassAppearance(snakeTailDiv, snakeTailDirection);
 
     // draw score bar and handle data from cookie mechanism

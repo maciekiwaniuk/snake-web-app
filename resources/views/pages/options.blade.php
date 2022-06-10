@@ -501,7 +501,7 @@
             dropify.change(function(event){
                 event.preventDefault();
 
-                var file = document.getElementById('avatar').files[0];
+                var file = document.querySelector('#avatar').files[0];
                 var formData = new FormData();
 
                 formData.append('image', file);

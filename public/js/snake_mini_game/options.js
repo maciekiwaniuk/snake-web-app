@@ -1,40 +1,40 @@
-const optionsButton = document.getElementById('options-div');
+const optionsButton = document.querySelector('#options-div');
 
 // speed
-const slowSnakeSpeedButton = document.getElementById('slowSnakeSpeedButton');
-const mediumSnakeSpeedButton = document.getElementById('mediumSnakeSpeedButton');
-const fastSnakeSpeedButton = document.getElementById('fastSnakeSpeedButton');
+const slowSnakeSpeedButton = document.querySelector('#slowSnakeSpeedButton');
+const mediumSnakeSpeedButton = document.querySelector('#mediumSnakeSpeedButton');
+const fastSnakeSpeedButton = document.querySelector('#fastSnakeSpeedButton');
 
-const slowSnakeSpeedRadio = document.getElementById('slowSnakeSpeedRadio');
-const mediumSnakeSpeedRadio = document.getElementById('mediumSnakeSpeedRadio');
-const fastSnakeSpeedRadio = document.getElementById('fastSnakeSpeedRadio');
+const slowSnakeSpeedRadio = document.querySelector('#slowSnakeSpeedRadio');
+const mediumSnakeSpeedRadio = document.querySelector('#mediumSnakeSpeedRadio');
+const fastSnakeSpeedRadio = document.querySelector('#fastSnakeSpeedRadio');
 
 // board appearance
-const purpleBoardAppearanceButton = document.getElementById('purpleBoardAppearanceButton');
-const greenBoardAppearanceButton = document.getElementById('greenBoardAppearanceButton');
-const brownBoardAppearanceButton = document.getElementById('brownBoardAppearanceButton');
+const purpleBoardAppearanceButton = document.querySelector('#purpleBoardAppearanceButton');
+const greenBoardAppearanceButton = document.querySelector('#greenBoardAppearanceButton');
+const brownBoardAppearanceButton = document.querySelector('#brownBoardAppearanceButton');
 
-const purpleBoardAppearanceRadio = document.getElementById('purpleBoardAppearanceRadio');
-const greenBoardAppearanceRadio = document.getElementById('greenBoardAppearanceRadio');
-const brownBoardAppearanceRadio = document.getElementById('brownBoardAppearanceRadio');
+const purpleBoardAppearanceRadio = document.querySelector('#purpleBoardAppearanceRadio');
+const greenBoardAppearanceRadio = document.querySelector('#greenBoardAppearanceRadio');
+const brownBoardAppearanceRadio = document.querySelector('#brownBoardAppearanceRadio');
 
 // snake appearance
-const blueSnakeAppearanceButton = document.getElementById('blueSnakeAppearanceButton');
-const whiteSnakeAppearanceButton = document.getElementById('whiteSnakeAppearanceButton');
-const orangeSnakeAppearanceButton = document.getElementById('orangeSnakeAppearanceButton');
+const blueSnakeAppearanceButton = document.querySelector('#blueSnakeAppearanceButton');
+const whiteSnakeAppearanceButton = document.querySelector('#whiteSnakeAppearanceButton');
+const orangeSnakeAppearanceButton = document.querySelector('#orangeSnakeAppearanceButton');
 
-const blueSnakeAppearanceRadio = document.getElementById('blueSnakeAppearanceRadio');
-const whiteSnakeAppearanceRadio = document.getElementById('whiteSnakeAppearanceRadio');
-const orangeSnakeAppearanceRadio = document.getElementById('orangeSnakeAppearanceRadio');
+const blueSnakeAppearanceRadio = document.querySelector('#blueSnakeAppearanceRadio');
+const whiteSnakeAppearanceRadio = document.querySelector('#whiteSnakeAppearanceRadio');
+const orangeSnakeAppearanceRadio = document.querySelector('#orangeSnakeAppearanceRadio');
 
 // food appearance
-const yellowFoodAppearanceButton = document.getElementById('yellowFoodAppearanceButton');
-const redFoodAppearanceButton = document.getElementById('redFoodAppearanceButton');
-const greenFoodAppearanceButton = document.getElementById('greenFoodAppearanceButton');
+const yellowFoodAppearanceButton = document.querySelector('#yellowFoodAppearanceButton');
+const redFoodAppearanceButton = document.querySelector('#redFoodAppearanceButton');
+const greenFoodAppearanceButton = document.querySelector('#greenFoodAppearanceButton');
 
-const yellowFoodAppearanceRadio = document.getElementById('yellowFoodAppearanceRadio');
-const redFoodAppearanceRadio = document.getElementById('redFoodAppearanceRadio');
-const greenFoodAppearanceRadio = document.getElementById('greenFoodAppearanceRadio');
+const yellowFoodAppearanceRadio = document.querySelector('#yellowFoodAppearanceRadio');
+const redFoodAppearanceRadio = document.querySelector('#redFoodAppearanceRadio');
+const greenFoodAppearanceRadio = document.querySelector('#greenFoodAppearanceRadio');
 
 
 setButtonsToCheckedWhichAreSelected();
@@ -130,7 +130,7 @@ export function updateSelectedBoardAppearance(gameBoard) {
     createCookieWithDataIfNotExists();
 
     let data = JSON.parse(Cookies.get('snake-mini-game'));
-    let backgroundImageTag = document.getElementById('background-image');
+    let backgroundImageTag = document.querySelector('#background-image');
 
     switch (data.selectedBoard) {
         case 'purple': {
@@ -201,8 +201,8 @@ export function createDefaultCookieData() {
 }
 
 function toogleOptionsMenu() {
-    const optionsContent = document.getElementById('options-content');
-    const allOptionsDivs = document.getElementById('all-options-divs');
+    const optionsContent = document.querySelector('#options-content');
+    const allOptionsDivs = document.querySelector('#all-options-divs');
 
     if (optionsContent.style.height == '0vmin') {
         optionsContent.style.height = '50vmin';
