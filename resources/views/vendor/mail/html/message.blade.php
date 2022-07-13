@@ -21,7 +21,7 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            © {{ date('Y') }} | <a href="{{ route('home') }}" style="text-decoration: none;">snake-gra.pl</a> | Wszelkie prawa zastrzeżone
+            © 2021 - {{ date('Y') }} | <a href="{{ route('home') }}" style="text-decoration: none;">snake-gra.pl</a> | Wszelkie prawa zastrzeżone
         @endcomponent
     @endslot
 @endcomponent

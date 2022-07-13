@@ -24,12 +24,12 @@
         }
     </style>
 
-    <div class="col-12 col-sm-10
+    <div class="col-12
                 mx-auto
                 mx-5
                 mt-2 mt-sm-4
                 mb-3 fs-3
-                px-4 py-3
+                px-2 py-3
                 border border-2 border-success
                 bg-gradient-to-left border-radius-15">
 
