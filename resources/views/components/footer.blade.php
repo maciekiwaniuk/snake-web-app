@@ -28,10 +28,6 @@
     <div class="container text-center">
         <div class="text-muted col-12">
 
-            <a class="link-none envelope-icon" href="mailto:iwaniukmaciej.kontakt@gmail.com">
-                <i class="bi bi-envelope me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="iwaniukmaciej.kontakt@gmail.com"></i>
-            </a>
-
             <a class="link-none me-1 linkedin" href="https://www.linkedin.com/in/iwaniuk-maciej/" target="_blank">
                 <i class="bi bi-linkedin"></i>
             </a>
