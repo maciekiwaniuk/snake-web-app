@@ -4,7 +4,7 @@
 > ###
 > ### Online: https://snake-gra.pl/
 
-- Application is made with [Laravel Framework](https://laravel.com/).
+- Application is made in PHP with [Laravel Framework](https://laravel.com/).
 - Project uses a login system from the [Breeze starter kit](https://laravel.com/docs/8.x/starter-kits#laravel-breeze) which has been modified.
 - Application is responsive, made with the [Bootstrap 5](https://getbootstrap.com/docs/5.1/getting-started/introduction/).
 - To display tables is used the [DataTables](https://datatables.net/) plugin.
@@ -13,7 +13,7 @@
 - Users can compare each other in a ranking page what means players can compete what gives a lot of fun!
 - Admin is able to use well expanded admin panel which provides a lot of functionalities.
 - Snake mini-game which is available to play on welcome page is made in clear JavaScript.
-- In application has been implemented PWA system, what means website can run in a offline mode (without an internet connection - caches things while first visit).
+- In application has been implemented PWA system, what means app can run in a offline mode (without an internet connection - caches things while first visit).
 
 # Installation
 
