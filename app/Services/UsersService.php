@@ -227,7 +227,7 @@ class UsersService
             'last_user_agent' => substr($request->server('HTTP_USER_AGENT'), 0, 200),
         ]);
 
-        if (env('MAIL_SERVICE_ENABLED')) {
+        if (config('mail.enabled')) {
             Mail::to($user->email)
                 ->queue(new WelcomeMail($user));
         }

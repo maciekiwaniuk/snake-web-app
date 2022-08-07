@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Redis;
 
 class GameHostingsService
 {
-
     /**
      * Handle store game hosting
      */
@@ -52,8 +51,8 @@ class GameHostingsService
      */
     public function handleIncreaseDownloads()
     {
-        if (env('REDIS_CONFIGURED')) {
-            $key = 'total_game_downloads_amount_'.env('APP_ENV');
+        if (config('features.redis.enabled')) {
+            $key = 'total_game_downloads_amount_' . config('app.env');
 
             if (Redis::get($key) === null) {
                 Redis::set($key, 0);

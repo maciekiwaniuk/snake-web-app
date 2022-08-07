@@ -62,10 +62,10 @@
 
                                     @php
                                         // prevent double slash in path to avatar
-                                        $avatar_url = env('APP_URL'). '/' . Auth::user()->avatar_path;
-                                        $avatar_url = trim(str_replace(env('APP_URL'), '', $avatar_url));
+                                        $avatar_url = config('app.url'). '/' . Auth::user()->avatar_path;
+                                        $avatar_url = trim(str_replace(config('app.url'), '', $avatar_url));
                                         $avatar_url = trim(str_replace('//', '/', $avatar_url));
-                                        $avatar_url = env('APP_URL').$avatar_url;
+                                        $avatar_url = config('app.url').$avatar_url;
                                     @endphp
 
                                     <input type="file" name="avatar" id="avatar" class="dropify" data-default-file="{{ $avatar_url }}"/>
@@ -259,7 +259,7 @@
                                                             <i class="bi bi-check-circle text-success fs-3"></i>
                                                         @else
                                                             <i class="bi bi-x-circle text-danger fs-2"></i>
-                                                            @if(env('MAIL_SERVICE_ENABLED'))
+                                                            @if(config('mail.enabled'))
                                                                 <br class="d-block d-sm-none">
                                                                 <button id="verifyEmailButton" class="btn btn-success border border-2 border-dark ms-1">Zweryfikuj e-mail</button>
                                                             @endif

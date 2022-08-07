@@ -61,7 +61,7 @@
                         >Zaloguj</button>
                     </div>
 
-                    @if(env('MAIL_SERVICE_ENABLED'))
+                    @if (config('mail.enabled'))
                         <div class="col-12 text-center my-0">
                             <a href="{{ route('password.request') }}" class="btn link mt-1 p-0">Hasło się zapodziało?</a>
                         </div>

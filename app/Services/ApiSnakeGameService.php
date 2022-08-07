@@ -10,7 +10,6 @@ use App\Models\User;
 
 class ApiSnakeGameService
 {
-
     /**
      * Handle login
      */
@@ -37,7 +36,7 @@ class ApiSnakeGameService
         }
 
         // // check if user has newest version of game
-        if (!isset($request->version) || $request->version != env('GAME_VERSION')) {
+        if (!isset($request->version) || $request->version != config('game.version')) {
             $result['success'] = false;
             $result['error_message'] = 'Posiadasz nieaktualną wersję gry.';
         }
@@ -50,7 +49,7 @@ class ApiSnakeGameService
      */
     public function handleLoadData(Request $request)
     {
-        if (!isset($request->version) || $request->version != env('GAME_VERSION')) {
+        if (!isset($request->version) || $request->version != config('game.version')) {
             return response()->json([
                 'reason_to_close_game' => true,
             ]);
@@ -70,7 +69,7 @@ class ApiSnakeGameService
     public function handleSaveData(Request $request)
     {
         // checking if request contains secret game key
-        if (!isset($request->secret_game_key) || $request->secret_game_key != env('SECRET_GAME_KEY')) {
+        if (!isset($request->secret_game_key) || $request->secret_game_key != config('game.secret_key')) {
             exit();
         }
 
@@ -79,7 +78,7 @@ class ApiSnakeGameService
             ->first();
 
         if (!isset($user) || $user->user_banned == User::BANNED || !isset($request->version) ||
-            $request->version != env('GAME_VERSION')) {
+            $request->version != config('game.version')) {
             return response()->json([
                 'reason_to_close_game' => true
             ]);
@@ -144,7 +143,7 @@ class ApiSnakeGameService
      */
     public function handleOpenGameLog(Request $request)
     {
-        if (!isset($request->secret_game_key) || $request->secret_game_key != env('SECRET_GAME_KEY')) {
+        if (!isset($request->secret_game_key) || $request->secret_game_key != config('game.secret_key')) {
             exit();
         }
 
@@ -167,7 +166,7 @@ class ApiSnakeGameService
      */
     public function handleExitGameLog(Request $request)
     {
-        if (!isset($request->secret_game_key) || $request->secret_game_key != env('SECRET_GAME_KEY')) {
+        if (!isset($request->secret_game_key) || $request->secret_game_key != config('game.secret_key')) {
             exit();
         }
 
@@ -190,7 +189,7 @@ class ApiSnakeGameService
      */
     public function handleLogoutGameLog(Request $request)
     {
-        if (!isset($request->secret_game_key) || $request->secret_game_key != env('SECRET_GAME_KEY')) {
+        if (!isset($request->secret_game_key) || $request->secret_game_key != config('game.secret_key')) {
             exit();
         }
 

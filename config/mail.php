@@ -2,6 +2,11 @@
 
 return [
 
+    /**
+     * This option defines if sending e-mails in app is enabled
+     */
+    'enabled' => env('MAIL_SERVICE_ENABLED', false),
+
     /*
     |--------------------------------------------------------------------------
     | Default Mailer

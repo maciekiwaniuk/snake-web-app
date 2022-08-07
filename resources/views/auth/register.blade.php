@@ -54,9 +54,9 @@
                         <input type="password" name="password_confirmation" class="form-control" placeholder="" required>
                     </div>
 
-                    @if(env('CAPTCHA_VALIDATION_ENABLED'))
+                    @if(config('captcha.enabled'))
                         <div class="col-12 text-center">
-                            <div class="g-recaptcha" data-sitekey="{{ env('CAPTCHA_PUBLIC_KEY') }}"></div>
+                            <div class="g-recaptcha" data-sitekey="{{ config('features.captcha.public_key') }}"></div>
                         </div>
                     @endif
 

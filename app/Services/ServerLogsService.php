@@ -22,9 +22,9 @@ class ServerLogsService
         }
 
         // check if app is running in production or local
-        if (env('APP_ENV') == 'production') {
+        if (config('app.env') == 'production') {
             $errorName = 'production.ERROR:';
-        } else if (env('APP_ENV') == 'local') {
+        } else if (config('app.env') == 'local') {
             $errorName = 'local.ERROR:';
         } else {
             $errorName = 'ERROR';

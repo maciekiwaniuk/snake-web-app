@@ -20,13 +20,13 @@
 
     <!-- Android support -->
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="{{ env('APP_NAME') }}">
+    <meta name="application-name" content="{{ config('app.name') }}">
     <link rel="icon" sizes="512x512" href="{{ asset('assets/icons/512x512.png') }}">
 
     <!-- iOS support -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="#b5e51d">
-    <meta name="apple-mobile-web-app-title" content="{{ env('APP_NAME') }}">
+    <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
     <link rel="apple-touch-icon" href="{{ asset('assets/icons/apple-touch-icon.png') }}">
 
     <!-- Windows -->
@@ -34,13 +34,13 @@
     <meta name="msapplication-TileImage" content="{{ asset('assets/icons/512x512.png') }}">
 
     <!-- Social media -->
-    <meta property="og:title" content="{{ env('APP_NAME') }}">
-    <meta property="og:url" content="{{ env('APP_URL') }}">
+    <meta property="og:title" content="{{ config('app.name') }}">
+    <meta property="og:url" content="{{ config('app.url') }}">
     <meta property="og:type" content="website">
     <meta property="og:image" content="{{ asset('assets/icons/192x192.png') }}">
     <meta property="og:description" content="Strona internetowa, która umożliwia zagranie w grę jaką jest Snake, gdzie możesz rywalizować z innymi użytkownikami, zdobywać skiny, bić rekordy i wiele innych!">
     <meta property="og:locale" content="pl_PL">
-    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
+    <meta property="og:site_name" content="{{ config('app.name') }}">
 
     <!-- manifest link -->
     <link rel="manifest" href="{{ asset('manifest.json') }}">
@@ -81,7 +81,7 @@
     <!-- js-cookie JS -->
     <script src="{{ asset('assets/plugins/js-cookie/js.cookie.min.js') }}"></script>
 
-    @if (env('CAPTCHA_VALIDATION_ENABLED'))
+    @if (config('captcha.enabled'))
         <!-- reCAPTCHA v2 JS -->
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     @endif
@@ -114,14 +114,14 @@
             document.title = `${document.title} 🐍`;
         }
 
-        @if (env('PWA_SERVICE_WORKER_ENABLED'))
+        @if (config('features.pwa_enabled'))
             // register PWA serviceWorker if is avaliable in the browser
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register("{{ mix('sw.js') }}");
             }
         @else
             // in case of that PWA service worker was enabled in past
-            var cookieName = 'delete-PWA-cache-v'+"{{ env('MIX_APP_VERSION') }}";
+            var cookieName = 'delete-PWA-cache-v' + "{{ config('app.version') }}";
             var deletePWACacheCookie = Cookies.get(cookieName);
             if (deletePWACacheCookie == null) {
                 // in case of problems with pwa cache - delete it
@@ -211,7 +211,7 @@
                         subject: subject,
                         sender: sender,
                         email: email,
-                        @if (env('CAPTCHA_VALIDATION_ENABLED'))
+                        @if (config('captcha.enabled'))
                             g_recaptcha_response: grecaptcha.getResponse(),
                         @endif
                         content: content
@@ -219,7 +219,7 @@
                     },
                     success: function(response){
                         if (response.result.error) {
-                            @if (env('CAPTCHA_VALIDATION_ENABLED'))
+                            @if (config('captcha.enabled'))
                                 grecaptcha.reset();
                             @endif
                             toastr.error(response.result.message);
@@ -229,7 +229,7 @@
                             $('#content').val('');
                             $('#subject').val('contact');
 
-                            @if (env('CAPTCHA_VALIDATION_ENABLED'))
+                            @if (config('captcha.enabled'))
                                 grecaptcha.reset();
                             @endif
                         }
