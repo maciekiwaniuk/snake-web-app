@@ -1,6 +1,6 @@
 # Snake web application ![](https://github.com/maciekiwaniuk/snake-web-app/blob/main/public/assets/icons/32x32.png?raw=true) 
 
-> ### Project of the web application where you can interact via API with Snake game which is available to download on it.
+> ### Project of the web application where you can interact via API with Snake game.
 
 - Application is made in PHP with [Laravel in 8.x version](https://laravel.com/).
 - Project uses a login system from the [Breeze starter kit](https://laravel.com/docs/8.x/starter-kits#laravel-breeze) which has been modified.
