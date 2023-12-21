@@ -9,18 +9,8 @@ class UserDeleted extends Model
 {
     use HasFactory;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'users_deleted';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',
@@ -31,8 +21,5 @@ class UserDeleted extends Model
         'created_at'
     ];
 
-    /**
-     * Disabling timestamps
-     */
     public $timestamps = false;
 }

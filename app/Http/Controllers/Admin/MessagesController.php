@@ -8,25 +8,16 @@ use App\Services\MessagesService;
 
 class MessagesController extends Controller
 {
-    /**
-     * Constructor
-     */
     public function __construct(MessagesService $service)
     {
         $this->messagesService = $service;
     }
 
-    /**
-     * Show messages index page
-     */
     public function index()
     {
         return view('admin.messages');
     }
 
-    /**
-     * Return messages sent via site
-     */
     public function getMessages()
     {
         $messages = Message::query()
@@ -39,9 +30,6 @@ class MessagesController extends Controller
         ]);
     }
 
-    /**
-     * Delete message
-     */
     public function destroy($message_id)
     {
         $this->messagesService->destroy($message_id);

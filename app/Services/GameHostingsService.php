@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Redis;
 
 class GameHostingsService
 {
-    /**
-     * Handle store game hosting
-     */
     public function store(StoreGameHostingRequest $request)
     {
         GameHosting::create([
@@ -20,9 +17,6 @@ class GameHostingsService
         ]);
     }
 
-    /**
-     * Handle destroy game hosting
-     */
     public function destroy(int $hosting_id)
     {
         $game_hosting = GameHosting::query()
@@ -31,9 +25,6 @@ class GameHostingsService
         $game_hosting->delete();
     }
 
-    /**
-     * Handle update game hosting
-     */
     public function update(Request $request, int $hosting_id)
     {
         $game_hosting = GameHosting::query()
@@ -46,9 +37,6 @@ class GameHostingsService
         ]);
     }
 
-    /**
-     * Handle increase amount of downloads for statistics
-     */
     public function handleIncreaseDownloads()
     {
         if (config('features.redis.enabled')) {

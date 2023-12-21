@@ -11,25 +11,16 @@ use App\Helpers\ApplicationLog;
 
 class VisitorsUniqueController extends Controller
 {
-    /**
-     * Constructor
-     */
     public function __construct(VisitorsUniqueService $service)
     {
         $this->ipService = $service;
     }
 
-    /**
-     * Show visitors unique ip index page
-     */
     public function index()
     {
         return view('admin.visitors-unique');
     }
 
-    /**
-     * Return all visitors unique data
-     */
     public function getAllVisitors()
     {
         $data = VisitorUnique::query()
@@ -41,9 +32,6 @@ class VisitorsUniqueController extends Controller
         ]);
     }
 
-    /**
-     * Return banned visitors unique data
-     */
     public function getBannedVisitors()
     {
         $data = VisitorUnique::query()
@@ -56,9 +44,6 @@ class VisitorsUniqueController extends Controller
         ]);
     }
 
-    /**
-     * Return not banned visitors unique data
-     */
     public function getNotBannedVisitors()
     {
         $data = VisitorUnique::query()
@@ -71,9 +56,6 @@ class VisitorsUniqueController extends Controller
         ]);
     }
 
-    /**
-     * Ban ip where param is ip's id
-     */
     public function banIp($ip_id)
     {
         $ip = Helper::getVisitorUniqueById($ip_id);
@@ -98,9 +80,6 @@ class VisitorsUniqueController extends Controller
             ]);
     }
 
-    /**
-     * Unban ip where param is ip's id
-     */
     public function unbanIp($ip_id)
     {
         $ip = Helper::getVisitorUniqueById($ip_id);

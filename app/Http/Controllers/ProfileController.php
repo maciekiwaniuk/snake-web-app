@@ -7,9 +7,6 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
-    /**
-     * Show user's profile page
-     */
     public function show($username)
     {
         try {

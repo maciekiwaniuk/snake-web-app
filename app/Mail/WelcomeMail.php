@@ -13,22 +13,12 @@ class WelcomeMail extends Mailable implements ShouldQueue
 
     protected $user;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
     public function __construct($user)
     {
         $this->user = $user;
         $this->subject = 'Dziękujemy za założenie konta!';
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
         return $this->markdown('emails.welcome', [

@@ -9,17 +9,11 @@ use App\Services\MessagesService;
 
 class MessageController extends Controller
 {
-    /**
-     * Constructor
-     */
     public function __construct(MessagesService $service)
     {
         $this->messagesService = $service;
     }
 
-    /**
-     * Show message index page with selected contact option
-     */
     public function index()
     {
         return view('pages.message', [
@@ -27,9 +21,6 @@ class MessageController extends Controller
         ]);
     }
 
-    /**
-     * Show message index page with selected exact option
-     */
     public function show($selected)
     {
         return view('pages.message', [
@@ -37,9 +28,6 @@ class MessageController extends Controller
         ]);
     }
 
-    /**
-     * Add user's message to database
-     */
     public function store(MessageRequest $request)
     {
         // method may not create message -> anti spam detection
@@ -54,9 +42,6 @@ class MessageController extends Controller
             ->with('success', 'Wiadomość została pomyślnie wysłana.');
     }
 
-    /**
-     * Add user's message to database
-     */
     public function storeAJAX(MessageAjaxRequest $request)
     {
         // method may not create message -> anti spam detection

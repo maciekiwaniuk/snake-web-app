@@ -10,10 +10,6 @@ use App\Models\User;
 
 class MessagesService
 {
-
-    /**
-     * Handle destroy message
-     */
     public function destroy(int $message_id)
     {
         $message = Message::query()
@@ -25,12 +21,9 @@ class MessagesService
         ]);
     }
 
-    /**
-     * Save message
-     */
     public function save(Request $request)
     {
-        $content = str_replace(['\'', '"'], '', $request->content);
+        $content = str_replace(['\'', '"'], '', $request->getContent());
         $sender = $request->sender;
         $email = $request->email;
 
@@ -53,25 +46,16 @@ class MessagesService
         ]);
     }
 
-    /**
-     * Handle store message
-     */
     public function store(MessageRequest $request)
     {
         return $this->save($request);
     }
 
-    /**
-     * Handle AJAX store message
-     */
     public function storeAJAX(MessageAjaxRequest $request)
     {
         return $this->save($request);
     }
 
-    /**
-     * Update message - update message sent as logged user
-     */
     public function updateMessageSentAsUser(Message $message, User $user)
     {
         $message->update([

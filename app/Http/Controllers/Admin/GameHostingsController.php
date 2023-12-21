@@ -10,9 +10,6 @@ use App\Services\GameHostingsService;
 
 class GameHostingsController extends Controller
 {
-    /**
-     * Constructor
-     */
     public function __construct(GameHostingsService $service)
     {
         $this->gameHostingsService = $service;
@@ -22,9 +19,6 @@ class GameHostingsController extends Controller
             ->get();
     }
 
-    /**
-     * Show game hostings index page
-     */
     public function index()
     {
         return view('admin.game-hostings', [
@@ -32,9 +26,6 @@ class GameHostingsController extends Controller
         ]);
     }
 
-    /**
-     * Add game hosting
-     */
     public function store(StoreGameHostingRequest $request)
     {
         $this->gameHostingsService->store($request);
@@ -44,9 +35,6 @@ class GameHostingsController extends Controller
         ]);
     }
 
-    /**
-     * Delete game hosting
-     */
     public function destroy($hosting_id)
     {
         $this->gameHostingsService->destroy($hosting_id);
@@ -56,9 +44,6 @@ class GameHostingsController extends Controller
         ]);
     }
 
-    /**
-     * Modify game hosting
-     */
     public function update(Request $request, $hosting_id)
     {
         $this->gameHostingsService->update($request, $hosting_id);

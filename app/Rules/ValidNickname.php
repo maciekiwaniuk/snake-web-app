@@ -6,21 +6,11 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ValidNickname implements Rule
 {
-    /**
-     * Abusive words which can not be used in user's nickname
-     */
     const ABUSIVE_WORDS = [
         'admin',
         'moderator'
     ];
 
-    /**
-     * Determine if the validation rule passes.
-
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
-     */
     public function passes($attribute, $value)
     {
         $abusive_words = self::ABUSIVE_WORDS;
@@ -53,11 +43,6 @@ class ValidNickname implements Rule
         return true;
     }
 
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
     public function message()
     {
         return ':attribute zawierała nieodpowiednie słownictwo.';

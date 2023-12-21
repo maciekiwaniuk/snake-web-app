@@ -6,18 +6,11 @@ use App\Models\User;
 
 class RankingsController extends Controller
 {
-    /**
-     * Show ranking index page
-     */
     public function index()
     {
         return view('pages.ranking');
     }
 
-    /**
-     * Return data with user's
-     * points ranking
-     */
     public function getPoints()
     {
         $data = User::query()
@@ -34,10 +27,6 @@ class RankingsController extends Controller
         ]);
     }
 
-    /**
-     * Return data with user's
-     * coins ranking
-     */
     public function getCoins()
     {
         $data = User::query()
@@ -54,10 +43,6 @@ class RankingsController extends Controller
         ]);
     }
 
-    /**
-     * Return data with user's
-     * records on easy ranking
-     */
     public function getEasy()
     {
         $data = User::query()
@@ -74,10 +59,6 @@ class RankingsController extends Controller
         ]);
     }
 
-    /**
-     * Return data with user's
-     * records on medium ranking
-     */
     public function getMedium()
     {
         $data = User::query()
@@ -94,10 +75,6 @@ class RankingsController extends Controller
         ]);
     }
 
-    /**
-     * Return data with user's
-     * records on hard ranking
-     */
     public function getHard()
     {
         $data = User::query()
@@ -114,10 +91,6 @@ class RankingsController extends Controller
         ]);
     }
 
-    /**
-     * Return data with user's
-     * records on hard ranking
-     */
     public function getSpeed()
     {
         $data = User::query()

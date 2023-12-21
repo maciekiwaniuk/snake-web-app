@@ -8,17 +8,11 @@ use App\Http\Controllers\Controller;
 
 class ArtisanToolsController extends Controller
 {
-    /**
-     * Show artisan tools index page
-     */
     public function index()
     {
         return view('admin.artisan-tools');
     }
 
-    /**
-     * Clear application cache
-     */
     public function clearApplicationCache()
     {
         Cache::flush();
@@ -27,9 +21,6 @@ class ArtisanToolsController extends Controller
             ->with('message', 'Pomyślnie wyczyszczono cache aplikacji');
     }
 
-    /**
-     * Clear routing cache
-     */
     public function clearRouteCache()
     {
         Artisan::call('route:clear');
@@ -38,9 +29,6 @@ class ArtisanToolsController extends Controller
             ->with('message', 'Pomyślnie wyczyszczono cache routingu aplikacji');
     }
 
-    /**
-     * Clear config cache
-     */
     public function clearConfigCache()
     {
         Artisan::call('config:clear');

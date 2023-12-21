@@ -4,9 +4,6 @@ namespace App\Services;
 
 class ServerLogsService
 {
-    /**
-     * Handle collection of logs from laravel.log file
-     */
     public function handleLogsCollection()
     {
         try {

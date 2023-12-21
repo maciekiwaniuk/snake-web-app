@@ -7,17 +7,11 @@ use App\Services\StatisticsService;
 
 class StatisticsController extends Controller
 {
-    /**
-     * Constructor
-     */
     public function __construct(StatisticsService $service)
     {
         $this->statisticsService = $service;
     }
 
-    /**
-     * Show index page with general statistics
-     */
     public function index()
     {
         return view('admin.statistics', [

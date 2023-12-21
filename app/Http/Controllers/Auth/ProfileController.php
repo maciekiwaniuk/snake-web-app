@@ -9,17 +9,11 @@ use App\Services\ProfileService;
 
 class ProfileController extends Controller
 {
-    /**
-     * Constructor
-     */
     public function __construct(ProfileService $service)
     {
         $this->profileService = $service;
     }
 
-    /**
-     * Change user's profile status visibility
-     */
     public function changeProfileVisibilityStatus(Request $request)
     {
         $user = Auth::user();

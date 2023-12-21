@@ -9,28 +9,13 @@ use App\Rules\DifferentNewEmail;
 
 class ChangeEmailRequest extends FormRequest
 {
-    /**
-     * Name of error Bag
-     *
-     * @return string
-     */
     protected $errorBag = 'email';
 
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
@@ -50,11 +35,6 @@ class ChangeEmailRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get custom messages for validator errors.
-     *
-     * @return array
-     */
     public function messages()
     {
         return [
@@ -65,11 +45,6 @@ class ChangeEmailRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the URL to redirect to on a validation error.
-     *
-     * @return string
-     */
     protected function getRedirectUrl()
     {
         return route('options.show', 'email');

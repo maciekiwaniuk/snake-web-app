@@ -8,9 +8,6 @@ use App\Models\AppLog;
 
 class ApplicationLog
 {
-    /**
-     * Create application log
-     */
     public static function createAppLog($type, $content)
     {
         AppLog::create([
@@ -21,9 +18,6 @@ class ApplicationLog
         ]);
     }
 
-    /**
-     * Create game application log
-     */
     public static function createGameAppLog($type, $content, $user_id, $ip)
     {
         AppLog::create([

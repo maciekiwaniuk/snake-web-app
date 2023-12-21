@@ -27,11 +27,6 @@ class User extends Authenticatable
     const NOT_BANNED = 0;
     const BANNED = 1;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',
@@ -46,56 +41,27 @@ class User extends Authenticatable
         'email_verified_at',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'users';
 
-    /**
-     * Send the password reset notification.
-     *
-     * @param  string  $token
-     * @return void
-     */
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
     }
 
-    /**
-     * Send the email verification notification.
-     *
-     * @return void
-     */
     public function sendEmailVerificationNotification()
     {
         $this->notify(new EmailVerificationNotification());
     }
 
-    /**
-     * Function that checks if user has admin permissions
-     */
     public function isAdmin()
     {
         if ($this->permission == self::ADMIN_PERMISSION) {
@@ -104,9 +70,6 @@ class User extends Authenticatable
         return false;
     }
 
-    /**
-     * Function that checks if user has normal permissions
-     */
     public function isUser()
     {
         if ($this->permission == self::USER_PERMISSION) {
@@ -115,9 +78,6 @@ class User extends Authenticatable
         return false;
     }
 
-    /**
-     * Function that checks if user is banned
-     */
     public function isBanned()
     {
         if ($this->user_banned == self::BANNED) {
@@ -126,9 +86,6 @@ class User extends Authenticatable
         return false;
     }
 
-    /**
-     * Relation for users_game_data table
-     */
     public function userGameData()
     {
         return $this->hasOne(UserGameData::class, 'user_id', 'id');
@@ -150,9 +107,6 @@ class User extends Authenticatable
         return $this->hasOne(VisitorUnique::class, 'ip', 'last_login_ip');
     }
 
-    /**
-     * Delete data related with user
-     */
     public static function boot() {
         parent::boot();
 

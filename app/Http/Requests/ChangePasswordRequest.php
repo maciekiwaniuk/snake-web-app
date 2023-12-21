@@ -9,28 +9,14 @@ use App\Rules\DifferentNewPassword;
 
 class ChangePasswordRequest extends FormRequest
 {
-    /**
-     * Name of error Bag
-     *
-     * @return string
-     */
+
     protected $errorBag = 'password';
 
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
@@ -49,21 +35,11 @@ class ChangePasswordRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the URL to redirect to on a validation error.
-     *
-     * @return string
-     */
     protected function getRedirectUrl()
     {
         return route('options.show', 'haslo');
     }
 
-    /**
-     * Get custom messages for validator errors.
-     *
-     * @return array
-     */
     public function messages()
     {
         return ['new_password.confirmed' => 'Pola z nowym hasłem różniły się do siebie.'];

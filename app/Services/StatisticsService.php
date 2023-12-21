@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Redis;
 
 class StatisticsService
 {
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->users = User::query()
@@ -27,25 +24,16 @@ class StatisticsService
             ->get();
     }
 
-    /**
-     * Return count of all registered users
-     */
     public function getAmountOfUsers()
     {
         return count($this->users);
     }
 
-    /**
-     * Return date of last registered user
-     */
     public function getDateOfLastRegisteredUser()
     {
         return $this->users->first()->created_at;
     }
 
-    /**
-     * Return date last login time of users
-     */
     public function getLastLoginTimeOfUsers()
     {
         return User::query()
@@ -54,25 +42,16 @@ class StatisticsService
             ->last_login_time;
     }
 
-    /**
-     * Return amount of unique ips
-     */
     public function getAmountOfUniqueIps()
     {
         return count($this->visitors_unique);
     }
 
-    /**
-     * Return amount of application logs
-     */
     public function getAmountOfApplicationLogs()
     {
         return count($this->server_logs);
     }
 
-    /**
-     * Return amount of server logs
-     */
     public function getAmountOfServerLogs()
     {
         try {
@@ -101,9 +80,6 @@ class StatisticsService
         return count($logArray) - 1;
     }
 
-    /**
-     * Return amount of total visits on any subpage
-     */
     public function getAmountOfTotalVisits()
     {
         if (config('features.redis.enabled')) {
@@ -112,9 +88,6 @@ class StatisticsService
         return 'Brak danych (Wymagany Redis)';
     }
 
-    /**
-     * Return amount of welcome page visits
-     */
     public function getAmountOfWelcomePageVisits()
     {
         if (config('features.redis.enabled')) {
@@ -123,9 +96,6 @@ class StatisticsService
         return 'Brak danych (Wymagany Redis)';
     }
 
-    /**
-     * Return amount of downloaded games
-     */
     public function getAmountOfDownloadedGames()
     {
         if (config('features.redis.enabled')) {

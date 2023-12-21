@@ -12,25 +12,16 @@ use App\Services\UsersService;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Constructor
-     */
     public function __construct(UsersService $service)
     {
         $this->usersService = $service;
     }
 
-    /**
-     * Show login page
-     */
     public function create()
     {
         return view('auth.login');
     }
 
-    /**
-     * Log into website
-     */
     public function store(LoginRequest $request)
     {
         $user = $this->usersService->handleLoginIntoWebsite($request);
@@ -43,12 +34,6 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
-    /**
-     * Destroy an authenticated session.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function destroy(Request $request)
     {
         ApplicationLog::createAppLog(

@@ -8,13 +8,6 @@ use App\Models\VisitorUnique;
 
 class VisitorsUniqueMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
     public function handle(Request $request, Closure $next)
     {
         // Check if current visitor is unique (first time on website)

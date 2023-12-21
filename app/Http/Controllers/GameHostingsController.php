@@ -7,17 +7,11 @@ use App\Services\GameHostingsService;
 
 class GameHostingsController extends Controller
 {
-    /**
-     * Constructor
-     */
     public function __construct(GameHostingsService $service)
     {
         $this->gameHostingsService = $service;
     }
 
-    /**
-     * Show hostings index page
-     */
     public function index()
     {
         $game_hostings = GameHosting::all();
@@ -27,9 +21,6 @@ class GameHostingsController extends Controller
         ]);
     }
 
-    /**
-     * Increase amount of downloads by one
-     */
     public function increaseDownloads()
     {
         $this->gameHostingsService->handleIncreaseDownloads();

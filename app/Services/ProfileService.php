@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class ProfileService
 {
-    /**
-     * Handle user's profile visibility status
-     */
     public function handleChangeProfileVisibilityStatus(Request $request, User $user)
     {
         if ($request->status == 'public' && $user->profile_visibility_status != 'public') {

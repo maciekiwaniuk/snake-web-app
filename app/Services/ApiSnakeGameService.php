@@ -10,9 +10,6 @@ use App\Models\User;
 
 class ApiSnakeGameService
 {
-    /**
-     * Handle login
-     */
     public function handleLogin(Request $request)
     {
         $user = User::query()
@@ -44,9 +41,6 @@ class ApiSnakeGameService
         return $result;
     }
 
-    /**
-     * Handle load data to game
-     */
     public function handleLoadData(Request $request)
     {
         if (!isset($request->version) || $request->version != config('game.version')) {
@@ -63,9 +57,6 @@ class ApiSnakeGameService
         return $user;
     }
 
-    /**
-     * Handle save data request
-     */
     public function handleSaveData(Request $request)
     {
         // checking if request contains secret game key
@@ -138,9 +129,6 @@ class ApiSnakeGameService
         ]);
     }
 
-    /**
-     * Handle open game log
-     */
     public function handleOpenGameLog(Request $request)
     {
         if (!isset($request->secret_game_key) || $request->secret_game_key != config('game.secret_key')) {
@@ -161,9 +149,6 @@ class ApiSnakeGameService
         }
     }
 
-    /**
-     * Handle exit game log
-     */
     public function handleExitGameLog(Request $request)
     {
         if (!isset($request->secret_game_key) || $request->secret_game_key != config('game.secret_key')) {
@@ -184,9 +169,6 @@ class ApiSnakeGameService
         }
     }
 
-    /**
-     * Handle logout game log
-     */
     public function handleLogoutGameLog(Request $request)
     {
         if (!isset($request->secret_game_key) || $request->secret_game_key != config('game.secret_key')) {

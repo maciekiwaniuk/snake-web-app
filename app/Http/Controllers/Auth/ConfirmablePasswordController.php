@@ -10,22 +10,11 @@ use App\Providers\RouteServiceProvider;
 
 class ConfirmablePasswordController extends Controller
 {
-    /**
-     * Show the confirm password view.
-     *
-     * @return \Illuminate\View\View
-     */
     public function show()
     {
         return view('auth.confirm-password');
     }
 
-    /**
-     * Confirm the user's password.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return mixed
-     */
     public function store(Request $request)
     {
         if (! Auth::guard('web')->validate([

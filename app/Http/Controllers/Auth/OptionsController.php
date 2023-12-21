@@ -15,26 +15,16 @@ use App\Helpers\ApplicationLog;
 
 class OptionsController extends Controller
 {
-    /**
-     * Constructor
-     */
     public function __construct(UsersService $usersService)
     {
         $this->usersService = $usersService;
     }
 
-    /**
-     * Show options index page
-     */
     public function index()
     {
         return view('pages.options');
     }
 
-    /**
-     * Show options index page with
-     * selected one tab
-     */
     public function show($selected)
     {
         return view('pages.options', [
@@ -42,9 +32,6 @@ class OptionsController extends Controller
         ]);
     }
 
-    /**
-     * Change user's avatar
-     */
     public function avatarChange(ChangeAvatarRequest $request)
     {
         $user = Auth::user();
@@ -66,9 +53,6 @@ class OptionsController extends Controller
         ]);
     }
 
-    /**
-     * Delete user's avatar
-     */
     public function avatarDelete()
     {
         $user = Auth::user();
@@ -91,9 +75,6 @@ class OptionsController extends Controller
         ]);
     }
 
-    /**
-     * Change user's password
-     */
     public function passwordChange(ChangePasswordRequest $request)
     {
         $user = Auth::user();
@@ -109,9 +90,6 @@ class OptionsController extends Controller
             ->with('password_success', 'Hasło zostało pomyślnie zmienione.');
     }
 
-    /**
-     * Change user's email
-     */
     public function emailChange(ChangeEmailRequest $request)
     {
         $user = Auth::user();
@@ -128,9 +106,6 @@ class OptionsController extends Controller
             ->with('email_success', 'Email został pomyślnie zmieniony.');
     }
 
-    /**
-     * Validate form confirmation while deleting user's account
-     */
     public function accountDelete(DeleteAccountRequest $request)
     {
         $user = Auth::user();
@@ -151,9 +126,6 @@ class OptionsController extends Controller
         ]);
     }
 
-    /**
-     * Change user's token - logout from game
-     */
     public function logoutFromGame()
     {
         $user = Auth::user();
@@ -175,9 +147,6 @@ class OptionsController extends Controller
         ]);
     }
 
-    /**
-     * Logout from all devices on website
-     */
     public function logoutFromAccountOnWeb(LogoutFromOtherDevicesRequest $request)
     {
         Auth::logoutOtherDevices($request->password);
@@ -192,9 +161,6 @@ class OptionsController extends Controller
         ]);
     }
 
-    /**
-     * Return all login application logs specified user
-     */
     public function getUserLoginApplicationLogs()
     {
         $logs = AppLog::query()
@@ -207,5 +173,4 @@ class OptionsController extends Controller
             'data' => $logs
         ]);
     }
-
 }

@@ -12,25 +12,16 @@ use App\Helpers\ApplicationLog;
 
 class UsersController extends Controller
 {
-    /**
-     * Constructor
-     */
     public function __construct(UsersService $service)
     {
         $this->usersService = $service;
     }
 
-    /**
-     * Show users admin index page
-     */
     public function index()
     {
         return view('admin.users');
     }
 
-    /**
-     * Show users admin index page with specific value in search bar
-     */
     public function show($searched_bar_value)
     {
         return view('admin.users', [
@@ -38,9 +29,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Show users admin index page with searched user's name
-     */
     public function showNameByUserID($user_id)
     {
         $name = Helper::getUserInstanceById($user_id)->name;
@@ -50,9 +38,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Return all users
-     */
     public function getAllUsers()
     {
         $users = User::query()
@@ -65,9 +50,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Return all banned users
-     */
     public function getBannedUsers()
     {
         $users = User::query()
@@ -81,9 +63,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Return all not banned users
-     */
     public function getNotBannedUsers()
     {
         $users = User::query()
@@ -97,9 +76,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Ban user's last ip
-     */
     public function banLastUserIP($user_id)
     {
         $user = Helper::getUserInstanceById($user_id);
@@ -122,9 +98,6 @@ class UsersController extends Controller
             ->with('success', 'IP '.$ip.' użytkownika '.$user->name.' zostało pomyślnie zbanowane.');
     }
 
-    /**
-     * Unban user's last ip
-     */
     public function unbanLastUserIP($user_id)
     {
         $user = Helper::getUserInstanceById($user_id);
@@ -147,9 +120,6 @@ class UsersController extends Controller
             ->with('success', 'IP '.$ip.' użytkownika '.$user->name.' zostało pomyślnie odbanowane.');
     }
 
-    /**
-     * Ban user's account
-     */
     public function banAccount($user_id)
     {
         $user = Helper::getUserInstanceById($user_id);
@@ -171,9 +141,6 @@ class UsersController extends Controller
             ->with('success', 'Konto użytkownika '.$user->name.' zostało pomyślnie zbanowane.');
     }
 
-    /**
-     * Unban user's account
-     */
     public function unbanAccount($user_id)
     {
         $user = Helper::getUserInstanceById($user_id);
@@ -195,9 +162,6 @@ class UsersController extends Controller
             ->with('success', 'Konto użytkownika '.$user->name.' zostało pomyślnie odbanowane.');
     }
 
-    /**
-     * Ban user's last ip and user's account
-     */
     public function banAccountAndIP($user_id)
     {
         $user = Helper::getUserInstanceById($user_id);
@@ -234,9 +198,6 @@ class UsersController extends Controller
 
     }
 
-    /**
-     * Unban user's last ip and user's account
-     */
     public function unbanAccountAndIP($user_id)
     {
         $user = Helper::getUserInstanceById($user_id);
@@ -272,9 +233,6 @@ class UsersController extends Controller
             ->with('success', 'Konto użytkownika '.$user->name.' oraz IP zostało pomyślnie odbanowane.');
     }
 
-    /**
-     * Delete account by user's ID
-     */
     public function deleteUserAccount($user_id)
     {
         $user = Helper::getUserInstanceById($user_id);
@@ -303,9 +261,6 @@ class UsersController extends Controller
             ->with('success', 'Konto użytkownika '.$user->name.' zostało usunięte pomyślnie.');
     }
 
-    /**
-     * Reset user's API Token
-     */
     public function resetApiToken($user_id)
     {
         $user = Helper::getUserInstanceById($user_id);
@@ -327,9 +282,6 @@ class UsersController extends Controller
             ->with('success', 'API token użytkownika '.$user->name.' zostało zresetowany pomyślnie.');
     }
 
-    /**
-     * Delete user's avatar
-     */
     public function deleteAvatar($user_id)
     {
         $user = Helper::getUserInstanceById($user_id);
@@ -345,9 +297,6 @@ class UsersController extends Controller
             ->with('success', 'Awatar użytkownika '.$user->name.' został pomyślnie usunięty.');
     }
 
-    /**
-     * Modify user's account data
-     */
     public function modifyData(ModifyUserDataRequest $request, $user_id)
     {
         $user = Helper::getUserInstanceById($user_id);

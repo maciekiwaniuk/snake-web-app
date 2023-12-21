@@ -15,18 +15,8 @@ class VisitorUnique extends Model
     const NOT_BANNED = 0;
     const BANNED = 1;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'visitors_unique';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'ip',
         'user_agent',

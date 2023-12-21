@@ -8,9 +8,6 @@ use App\Mail\WelcomeMail;
 
 class EmailsController extends Controller
 {
-    /**
-     * Show welcome mail
-     */
     public function showWelcomeMail()
     {
         return new WelcomeMail(Auth::user());

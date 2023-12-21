@@ -10,25 +10,16 @@ use App\Helpers\ApplicationLog;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Constructor
-     */
     public function __construct(UsersService $service)
     {
         $this->usersService = $service;
     }
 
-    /**
-     * Show register page
-     */
     public function create()
     {
         return view('auth.register');
     }
 
-    /**
-     * Store new user account
-     */
     public function store(RegisterAccountRequest $request)
     {
         $user = $this->usersService->handleRegisterAccount($request);
