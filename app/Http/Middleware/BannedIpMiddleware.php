@@ -27,7 +27,7 @@ class BannedIpMiddleware
                 ->view('pages.banned', [
                     'ip' => $request->getClientIp()
                 ]);
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             //
         }
 

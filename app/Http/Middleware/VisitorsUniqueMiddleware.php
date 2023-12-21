@@ -22,7 +22,7 @@ class VisitorsUniqueMiddleware
             $visitor_unique = VisitorUnique::query()
                 ->where('ip', '=', $request->getClientIp())
                 ->firstOrFail();
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
 
             VisitorUnique::create([
                 'ip' => $request->getClientIp(),

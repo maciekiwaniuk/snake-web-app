@@ -293,7 +293,7 @@ class UsersController extends Controller
                     'Konto użytkownika '.$user->name.' zostało usunięte manualnie.'
                 );
             }
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             return back()->withErrors([
                 'error' => 'Coś poszło nie tak przy usuwanie konta dla użytkownika '.$user->name.'.'
             ]);

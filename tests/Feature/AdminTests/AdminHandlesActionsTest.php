@@ -198,7 +198,7 @@ class AdminHandlesActionsTest extends TestCase
         try {
             $game_hosting = GameHosting::firstOrFail();
             $this->assertTrue(true);
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             $this->assertTrue(false);
         }
     }
@@ -237,7 +237,7 @@ class AdminHandlesActionsTest extends TestCase
         try {
             $game_hosting = GameHosting::firstOrFail();
             $this->assertTrue(false);
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             $this->assertTrue(true);
         }
     }
