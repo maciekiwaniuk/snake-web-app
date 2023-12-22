@@ -25,7 +25,6 @@ RUN apt-get update && apt-get install -y \
     && pecl install redis \
     && docker-php-ext-enable redis
 
-
 RUN docker-php-ext-install \
     pdo pdo_mysql zip xsl gd intl opcache exif mbstring
 
