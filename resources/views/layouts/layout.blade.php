@@ -42,6 +42,9 @@
     <meta property="og:locale" content="pl_PL">
     <meta property="og:site_name" content="{{ config('app.name') }}">
 
+    <!-- Content security policy -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
     <!-- manifest link -->
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 
