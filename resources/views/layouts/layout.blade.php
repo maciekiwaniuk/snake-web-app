@@ -58,7 +58,7 @@
     <link href="{{ asset('css/custom/layout.css') }}" type="text/css" rel="stylesheet">
 
     <!-- Send message component CSS -->
-    <link href="{{ asset('css/components/send-message.css') }}" type="text/css" rel="stylesheet">
+{{--    <link href="{{ asset('css/components/send-message.css') }}" type="text/css" rel="stylesheet">--}}
 
     <!-- Bootstrap 5 CSS -->
     <link href="{{ asset('assets/plugins/Bootstrap/bootstrap.css') }}" type="text/css" rel="stylesheet">
@@ -180,16 +180,16 @@
                 }
             }
 
-            $('#close-send-message-icon').on('click', function() {
-                $('.message-div').attr('style', 'display: none !important;');
-                $('#after-message-div-close').attr('class', 'closed-message-div d-none d-xl-block');
-                Cookies.set('message-div-state', true, { expires: 365 });
-
-                cookiesState = Cookies.get('cookies-state');
-                if (cookiesState == null) {
-                    $('#after-message-div-close').attr('style', 'margin-bottom: 2rem !important;');
-                }
-            });
+            // $('#close-send-message-icon').on('click', function() {
+            //     $('.message-div').attr('style', 'display: none !important;');
+            //     $('#after-message-div-close').attr('class', 'closed-message-div d-none d-xl-block');
+            //     Cookies.set('message-div-state', true, { expires: 365 });
+            //
+            //     cookiesState = Cookies.get('cookies-state');
+            //     if (cookiesState == null) {
+            //         $('#after-message-div-close').attr('style', 'margin-bottom: 2rem !important;');
+            //     }
+            // });
 
             $('.cookie-bar__btn').on('click', function() {
                 messageDivCookie = Cookies.get('message-div-state');
@@ -201,44 +201,44 @@
                 }
             });
 
-            $('#send-message-button').on('click', function() {
-                var subject = $('#subject').val();
-                var sender = $('#sender').val();
-                var email = $('#email').val();
-                var content = $('#content').val();
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ route("message.store-AJAX") }}',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        subject: subject,
-                        sender: sender,
-                        email: email,
-                        @if (config('captcha.enabled'))
-                            g_recaptcha_response: grecaptcha.getResponse(),
-                        @endif
-                        content: content
+            {{--$('#send-message-button').on('click', function() {--}}
+            {{--    var subject = $('#subject').val();--}}
+            {{--    var sender = $('#sender').val();--}}
+            {{--    var email = $('#email').val();--}}
+            {{--    var content = $('#content').val();--}}
+            {{--    $.ajax({--}}
+            {{--        type: 'POST',--}}
+            {{--        url: '{{ route("message.store-AJAX") }}',--}}
+            {{--        data: {--}}
+            {{--            _token: '{{ csrf_token() }}',--}}
+            {{--            subject: subject,--}}
+            {{--            sender: sender,--}}
+            {{--            email: email,--}}
+            {{--            @if (config('captcha.enabled'))--}}
+            {{--                g_recaptcha_response: grecaptcha.getResponse(),--}}
+            {{--            @endif--}}
+            {{--            content: content--}}
 
-                    },
-                    success: function(response){
-                        if (response.result.error) {
-                            @if (config('captcha.enabled'))
-                                grecaptcha.reset();
-                            @endif
-                            toastr.error(response.result.message);
-                        } else {
-                            toastr.success(response.result.message);
-                            $('#close-message-form-button').click();
-                            $('#content').val('');
-                            $('#subject').val('contact');
+            {{--        },--}}
+            {{--        success: function(response){--}}
+            {{--            if (response.result.error) {--}}
+            {{--                @if (config('captcha.enabled'))--}}
+            {{--                    grecaptcha.reset();--}}
+            {{--                @endif--}}
+            {{--                toastr.error(response.result.message);--}}
+            {{--            } else {--}}
+            {{--                toastr.success(response.result.message);--}}
+            {{--                $('#close-message-form-button').click();--}}
+            {{--                $('#content').val('');--}}
+            {{--                $('#subject').val('contact');--}}
 
-                            @if (config('captcha.enabled'))
-                                grecaptcha.reset();
-                            @endif
-                        }
-                    }
-                });
-            })
+            {{--                @if (config('captcha.enabled'))--}}
+            {{--                    grecaptcha.reset();--}}
+            {{--                @endif--}}
+            {{--            }--}}
+            {{--        }--}}
+            {{--    });--}}
+            {{--})--}}
 
         });
 
@@ -267,7 +267,7 @@
     </div>
 
     <!-- SEND MESSAGE COMPONENT-->
-    @include('components.send-message')
+{{--    @include('components.send-message')--}}
     <!-- END SEND MESSAGE COMPONENT -->
 
     <!-- FOOTER -->
