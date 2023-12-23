@@ -20,7 +20,6 @@ class GuestVisitsPagesTest extends TestCase
         $this->get(route('game-hostings.index'))->assertStatus(200);
         $this->get(route('profile', $user->name))->assertStatus(200);
         $this->get(route('help.index'))->assertStatus(200);
-        $this->get(route('message.index'))->assertStatus(200);
 
         $this->get(route('ranking.index'))->assertStatus(200);
         $this->get(route('ranking.get-points'))->assertStatus(200);
@@ -41,6 +40,7 @@ class GuestVisitsPagesTest extends TestCase
         $this->get(route('options.get-user-login-logs'))->assertRedirect(route('login'));
         $this->get(route('verification.notice'))->assertRedirect(route('login'));
         $this->get(route('password.confirm'))->assertRedirect(route('login'));
+        $this->get(route('message.index'))->assertRedirect(route('login'));
     }
 
     public function test_guest_cannot_visit_pages_secured_by_admin_middleware()

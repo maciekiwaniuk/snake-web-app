@@ -1,13 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\MessageController;
 use App\Http\Controllers\Auth\OptionsController;
 use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\Auth\VerifyEmailController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function() {
     Route::prefix('ustawienia')->group(function() {
@@ -31,6 +32,15 @@ Route::middleware('auth')->group(function() {
     Route::prefix('profil/ustawienia')->group(function() {
         Route::name('profile.options.')->group(function() {
             Route::post('/zmiana-widocznosci-profilu', [ProfileController::class, 'changeProfileVisibilityStatus'])->name('change-profile-visibility-status');
+        });
+    });
+
+    Route::prefix('wiadomosc')->group(function() {
+        Route::name('message.')->group(function() {
+            Route::get('/', [MessageController::class, 'index'])->name('index');
+            Route::get('/{selected}', [MessageController::class, 'show'])->name('show');
+            Route::post('/wyslij-wiadomosc', [MessageController::class, 'store'])->name('store');
+            Route::post('/wyslij-wiadomosc-ajax', [MessageController::class,'storeAJAX'])->name('store-AJAX');
         });
     });
 

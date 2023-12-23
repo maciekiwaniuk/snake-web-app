@@ -6,7 +6,6 @@ use App\Http\Controllers\GameHostingsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RankingsController;
 use App\Http\Controllers\HelpController;
-use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
@@ -29,15 +28,6 @@ Route::prefix('pomoc')->group(function() {
     Route::name('help.')->group(function() {
         Route::get('/', [HelpController::class, 'index'])->name('index');
         Route::get('/{selected}', [HelpController::class, 'show'])->name('show');
-    });
-});
-
-Route::prefix('wiadomosc')->group(function() {
-    Route::name('message.')->group(function() {
-        Route::get('/', [MessageController::class, 'index'])->name('index');
-        Route::get('/{selected}', [MessageController::class, 'show'])->name('show');
-        Route::post('/wyslij-wiadomosc', [MessageController::class, 'store'])->name('store');
-        Route::post('/wyslij-wiadomosc-ajax', [MessageController::class,'storeAJAX'])->name('store-AJAX');
     });
 });
 

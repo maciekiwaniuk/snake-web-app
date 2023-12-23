@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\MessageAjaxRequest;
 use App\Http\Requests\MessageRequest;
 use App\Services\MessagesService;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
