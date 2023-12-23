@@ -51,13 +51,15 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingAvatar">
                             <button class="accordion-button collapsed bg-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAvatar" aria-expanded="false" aria-controls="collapseAvatar">
-                                <strong>Awatar</strong>
+                                <strong>Awatar - <span class="text-danger">funkcja wyłączona</span></strong>
                             </button>
                         </h2>
-                        <div id="collapseAvatar" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="awatar") collapse show @else collapse @endif" aria-labelledby="headingAvatar" data-bs-parent="#optionsAccordion">
+{{--                        <div id="collapseAvatar" class="bg-accordion-body accordion-collapse @if(isset($selected) && $selected=="awatar") collapse show @else collapse @endif" aria-labelledby="headingAvatar" data-bs-parent="#optionsAccordion">--}}
+                        <div class="bg-accordion-body accordion-collapse collapse">
                             <div class="accordion-body text-center">
 
-                                <form id="avatarForm" method="POST" action="{{ route('options.avatar-change') }}">
+{{--                                <form id="avatarForm" method="POST" action="{{ route('options.avatar-change') }}">--}}
+                                <form id="avatarForm" method="POST">
                                     @csrf
 
                                     @php
@@ -484,79 +486,79 @@
                 ]
             });
 
-            var dropifyOptions = {
-                'messages': {
-                    'default' : '',
-                    'replace' : '',
-                    'remove' :  'Usuń',
-                    'error' :   'Upppsss, coś poszło nie tak.'
-                },
-                'tpl': {
-                    'message': '<div class="dropify-message"><span class="file-icon" /> <p class="fs-4">Wczytaj obrazek, który chcesz ustawić jako awatar.</p></div>',
-                }
-            };
+            {{--var dropifyOptions = {--}}
+            {{--    'messages': {--}}
+            {{--        'default' : '',--}}
+            {{--        'replace' : '',--}}
+            {{--        'remove' :  'Usuń',--}}
+            {{--        'error' :   'Upppsss, coś poszło nie tak.'--}}
+            {{--    },--}}
+            {{--    'tpl': {--}}
+            {{--        'message': '<div class="dropify-message"><span class="file-icon" /> <p class="fs-4">Wczytaj obrazek, który chcesz ustawić jako awatar.</p></div>',--}}
+            {{--    }--}}
+            {{--};--}}
 
-            var dropify = $('.dropify').dropify(dropifyOptions);
+            {{--var dropify = $('.dropify').dropify(dropifyOptions);--}}
 
-            dropify.change(function(event){
-                event.preventDefault();
+            {{--dropify.change(function(event){--}}
+            {{--    event.preventDefault();--}}
 
-                var file = document.querySelector('#avatar').files[0];
-                var formData = new FormData();
+            {{--    var file = document.querySelector('#avatar').files[0];--}}
+            {{--    var formData = new FormData();--}}
 
-                formData.append('image', file);
-                formData.append('_token', '{{ csrf_token() }}');
+            {{--    formData.append('image', file);--}}
+            {{--    formData.append('_token', '{{ csrf_token() }}');--}}
 
-                $.ajax({
-                    type: 'POST',
-                    url:'{{ route("options.avatar-change") }}',
-                    data: formData,
-                    dataType: 'json',
-                    enctype: 'multipart/form-data',
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        if (response.result.success) {
-                            blockUI();
-                            setTimeout(function () {
-                                toastr.success(response.result.message);
-                                // avatar icon refresh
-                                d = new Date();
-                                $('#user_avatar').attr('src', response.avatarPath+'?'+d.getTime());
-                            }, 400);
-                        } else {
-                            blockUI();
-                            setTimeout(function () {
-                                toastr.error(response.result.message);
-                            }, 400);
-                        }
-                    },
-                });
-            });
+            {{--    $.ajax({--}}
+            {{--        type: 'POST',--}}
+            {{--        url:'{{ route("options.avatar-change") }}',--}}
+            {{--        data: formData,--}}
+            {{--        dataType: 'json',--}}
+            {{--        enctype: 'multipart/form-data',--}}
+            {{--        contentType: false,--}}
+            {{--        processData: false,--}}
+            {{--        success: function(response) {--}}
+            {{--            if (response.result.success) {--}}
+            {{--                blockUI();--}}
+            {{--                setTimeout(function () {--}}
+            {{--                    toastr.success(response.result.message);--}}
+            {{--                    // avatar icon refresh--}}
+            {{--                    d = new Date();--}}
+            {{--                    $('#user_avatar').attr('src', response.avatarPath+'?'+d.getTime());--}}
+            {{--                }, 400);--}}
+            {{--            } else {--}}
+            {{--                blockUI();--}}
+            {{--                setTimeout(function () {--}}
+            {{--                    toastr.error(response.result.message);--}}
+            {{--                }, 400);--}}
+            {{--            }--}}
+            {{--        },--}}
+            {{--    });--}}
+            {{--});--}}
 
-            $('#delete_avatar_xs').on('click', function() {
-                $('.dropify-clear').trigger('click');
-            });
+            {{--$('#delete_avatar_xs').on('click', function() {--}}
+            {{--    $('.dropify-clear').trigger('click');--}}
+            {{--});--}}
 
-            $('.dropify-clear').on('click', function() {
-                $.ajax({
-                    type: 'DELETE',
-                    url: '{{ route("options.avatar-delete") }}',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function (response){
-                        if (response.result.success) {
-                            blockUI();
-                            setTimeout(function () {
-                                toastr.success(response.result.message);
-                            }, 400);
-                        }
-                        d = new Date();
-                        $('#user_avatar').attr('src', response.result.avatarPath+'?'+d.getTime());
-                    },
-                });
-            })
+            {{--$('.dropify-clear').on('click', function() {--}}
+            {{--    $.ajax({--}}
+            {{--        type: 'DELETE',--}}
+            {{--        url: '{{ route("options.avatar-delete") }}',--}}
+            {{--        data: {--}}
+            {{--            _token: '{{ csrf_token() }}'--}}
+            {{--        },--}}
+            {{--        success: function (response){--}}
+            {{--            if (response.result.success) {--}}
+            {{--                blockUI();--}}
+            {{--                setTimeout(function () {--}}
+            {{--                    toastr.success(response.result.message);--}}
+            {{--                }, 400);--}}
+            {{--            }--}}
+            {{--            d = new Date();--}}
+            {{--            $('#user_avatar').attr('src', response.result.avatarPath+'?'+d.getTime());--}}
+            {{--        },--}}
+            {{--    });--}}
+            {{--})--}}
 
 
             $('#confirmDeleteAccountButton').on('click', function() {

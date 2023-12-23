@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function() {
             Route::put('/zmiana-hasla', [OptionsController::class, 'passwordChange'])->name('password-change');
             Route::put('/zmiana-emaila', [OptionsController::class, 'emailChange'])->name('email-change');
 
-            Route::post('/zmiana-awatara', [OptionsController::class, 'avatarChange'])->name('avatar-change');
+//            Route::post('/zmiana-awatara', [OptionsController::class, 'avatarChange'])->name('avatar-change');
             Route::delete('/usuniecie-awatara', [OptionsController::class, 'avatarDelete'])->name('avatar-delete');
             Route::delete('/usuniecie-konta', [OptionsController::class, 'accountDelete'])->name('account-delete');
             Route::post('/wylogowanie-z-gry', [OptionsController::class, 'logoutFromGame'])->name('logout-from-game');
