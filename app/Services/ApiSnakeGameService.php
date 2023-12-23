@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\GameRequest;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Helpers\ApplicationLog;
@@ -10,8 +12,50 @@ use App\Models\User;
 
 class ApiSnakeGameService
 {
+    private function validateHash(Request $request): bool
+    {
+        $secretHash = GameRequest::query()
+            ->where('secret_hash', $request->input('secret_hash'))
+            ->first();
+        if ($secretHash !== null) {
+            return false;
+        }
+
+        $now = new DateTime();
+        $validHashes = [];
+        $secondsRange = 15;
+        for (
+            $secondsDifference = -1 * $secondsRange;
+            $secondsDifference <= $secondsRange;
+            $secondsDifference++
+        ) {
+            $datetime = clone $now;
+            $datetime->modify('+' . $secondsDifference . 'seconds');
+            $secretToHash = config('game.secret_key')
+                . '.'
+                . $datetime->format('Y-m-d H:i:s')
+                . '.'
+                . config('game.version');
+            $validHashes[] = hash('sha256', $secretToHash);
+        }
+
+        if (in_array($request->input('secret_hash'), $validHashes)) {
+            GameRequest::create([
+                'secret_hash' => $request->input('secret_hash')
+            ]);
+            return true;
+        }
+        return false;
+    }
+
     public function handleLogin(Request $request)
     {
+        if (!$this->validateHash($request)) {
+            $result['success'] = false;
+            $result['error_message'] = 'Coś tu nie gra :)';
+            return $result;
+        }
+
         $user = User::query()
             ->where('email', '=', $request->email)
             ->first();
@@ -43,7 +87,7 @@ class ApiSnakeGameService
 
     public function handleLoadData(Request $request)
     {
-        if (!isset($request->version) || $request->version != config('game.version')) {
+        if (!$this->validateHash($request)) {
             return response()->json([
                 'reason_to_close_game' => true,
             ]);
@@ -59,6 +103,9 @@ class ApiSnakeGameService
 
     public function handleSaveData(Request $request)
     {
+        if (!$this->validateHash($request)) {
+            exit();
+        }
         // checking if request contains secret game key
         if (!isset($request->secret_game_key) || $request->secret_game_key != config('game.secret_key')) {
             exit();
@@ -131,7 +178,7 @@ class ApiSnakeGameService
 
     public function handleOpenGameLog(Request $request)
     {
-        if (!isset($request->secret_game_key) || $request->secret_game_key != config('game.secret_key')) {
+        if (!$this->validateHash($request)) {
             exit();
         }
 
@@ -151,7 +198,7 @@ class ApiSnakeGameService
 
     public function handleExitGameLog(Request $request)
     {
-        if (!isset($request->secret_game_key) || $request->secret_game_key != config('game.secret_key')) {
+        if (!$this->validateHash($request)) {
             exit();
         }
 
@@ -171,7 +218,7 @@ class ApiSnakeGameService
 
     public function handleLogoutGameLog(Request $request)
     {
-        if (!isset($request->secret_game_key) || $request->secret_game_key != config('game.secret_key')) {
+        if (!$this->validateHash($request)) {
             exit();
         }
 
