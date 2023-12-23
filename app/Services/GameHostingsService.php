@@ -39,15 +39,13 @@ class GameHostingsService
 
     public function handleIncreaseDownloads()
     {
-        if (config('features.redis.enabled')) {
-            $key = 'total_game_downloads_amount_' . config('app.env');
+        $key = 'total_game_downloads_amount_' . config('app.env');
 
-            if (Redis::get($key) === null) {
-                Redis::set($key, 0);
-            }
-
-            Redis::set($key, Redis::get($key) + 1);
+        if (Redis::get($key) === null) {
+            Redis::set($key, 0);
         }
+
+        Redis::set($key, Redis::get($key) + 1);
     }
 
 }

@@ -106,10 +106,6 @@ class ApiSnakeGameService
         if (!$this->validateHash($request)) {
             exit();
         }
-        // checking if request contains secret game key
-        if (!isset($request->secret_game_key) || $request->secret_game_key != config('game.secret_key')) {
-            exit();
-        }
 
         $user = User::query()
             ->where('api_token', '=', $request->api_token)

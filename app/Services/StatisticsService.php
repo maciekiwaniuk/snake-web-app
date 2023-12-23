@@ -82,26 +82,16 @@ class StatisticsService
 
     public function getAmountOfTotalVisits()
     {
-        if (config('features.redis.enabled')) {
-            return Redis::get('total_visits_amount_' . config('app.env')) ?? 0;
-        }
-        return 'Brak danych (Wymagany Redis)';
+        return Redis::get('total_visits_amount_' . config('app.env')) ?? 0;
     }
 
     public function getAmountOfWelcomePageVisits()
     {
-        if (config('features.redis.enabled')) {
-            return Redis::get('welcome_page_visits_amount_' . config('app.env')) ?? 0;
-        }
-        return 'Brak danych (Wymagany Redis)';
+        return Redis::get('welcome_page_visits_amount_' . config('app.env')) ?? 0;
     }
 
     public function getAmountOfDownloadedGames()
     {
-        if (config('features.redis.enabled')) {
-            return Redis::get('total_game_downloads_amount_' . config('app.env')) ?? 0;
-        }
-        return 'Brak danych (Wymagany Redis)';
+        return Redis::get('total_game_downloads_amount_' . config('app.env')) ?? 0;
     }
-
 }

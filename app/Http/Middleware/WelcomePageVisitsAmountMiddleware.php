@@ -10,15 +10,13 @@ class WelcomePageVisitsAmountMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (config('features.redis.enabled')) {
-            $key = 'welcome_page_visits_amount_' . config('app.env');
+        $key = 'welcome_page_visits_amount_' . config('app.env');
 
-            if (Redis::get($key) === null) {
-                Redis::set($key, 0);
-            }
-
-            Redis::set($key, Redis::get($key) + 1);
+        if (Redis::get($key) === null) {
+            Redis::set($key, 0);
         }
+
+        Redis::set($key, Redis::get($key) + 1);
 
         return $next($request);
     }

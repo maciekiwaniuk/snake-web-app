@@ -29,10 +29,9 @@ return [
      */
 
     'redis' => [
-        'enabled' => env('REDIS_CONFIGURED', false),
-        'host' => env('REDIS_HOST', null),
-        'password' => env('REDIS_PASSWORD', null),
-        'port' => env('REDIS_PORT', null)
+        'host' => env('REDIS_HOST', 'redis'),
+        'password' => env('REDIS_PASSWORD'),
+        'port' => env('REDIS_PORT', 6379)
     ],
 
     /**
@@ -46,6 +45,6 @@ return [
      *
      */
 
-    'pwa_enabled' => env('PWA_SERVICE_WORKER_ENABLED', true),
+    'pwa_enabled' => env('PWA_SERVICE_WORKER_ENABLED', false),
 
 ];
