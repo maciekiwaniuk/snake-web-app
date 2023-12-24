@@ -111,8 +111,7 @@ class ApiSnakeGameService
             ->where('api_token', '=', $request->api_token)
             ->first();
 
-        if (!isset($user) || $user->user_banned == User::BANNED || !isset($request->version) ||
-            $request->version != config('game.version')) {
+        if (!isset($user) || $user->user_banned == User::BANNED) {
             return response()->json([
                 'reason_to_close_game' => true
             ]);
