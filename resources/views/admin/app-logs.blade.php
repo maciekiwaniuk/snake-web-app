@@ -44,14 +44,14 @@
                                         table-responsive-xl">
                                 <table id="LogsTable" class="table table-dark table-hover">
                                     <thead>
-                                        <tr>
-                                            <th class=""></th>
-                                            <th class="filterhead"></th>
-                                            <th class="filterhead"></th>
-                                            <th class=""></th>
-                                            <th class=""></th>
-                                            <th class=""></th>
-                                        </tr>
+{{--                                        <tr>--}}
+{{--                                            <th class=""></th>--}}
+{{--                                            <th class="filterhead"></th>--}}
+{{--                                            <th class="filterhead"></th>--}}
+{{--                                            <th class=""></th>--}}
+{{--                                            <th class=""></th>--}}
+{{--                                            <th class=""></th>--}}
+{{--                                        </tr>--}}
                                         <tr>
                                             <th>Numer</th>
                                             <th>Typ</th>
@@ -99,9 +99,15 @@
                     },
                     {
                         title: 'Nazwa użytkownika',
-                        data: 'user.name',
+                        data: '',
+                        orderable: false,
+                        render: function (data, type, row, meta) {
+                            if (row.user != null) {
+                                return row.user.name;
+                            }
+                            return '-';
+                        },
                         class: 'align-middle',
-                        orderable: false
                     },
                     {
                         title: 'Typ',
@@ -189,80 +195,80 @@
                         class: 'align-middle'
                     }
                 ],
-                initComplete: function () {
-                    var api = this.api();
-                    $('.filterhead', api.table().header()).each(function (i) {
-                        var column = api.column(i+1);
-                        var select = $('<select><option value=""></option></select>')
-                            .appendTo($(this).empty())
-                            .on('change', function () {
-                                var val = $.fn.dataTable.util.escapeRegex(
-                                    $(this).val()
-                                );
-
-                                column.search(val ? '^'+val+'$' : '', true, false).draw();
-                            });
-
-                        column.data().unique().sort().each(function (value) {
-                            let optionName = "";
-
-                            // user site actions
-                            if (value == 'account_delete') {
-                                optionName = "Usunięcie konta";
-                            } else if (value == 'avatar_change') {
-                                optionName = "Zmiana awatara";
-                            } else if (value == 'avatar_delete') {
-                                optionName = "Usunięcie awatara";
-                            } else if (value == 'game_total_logout') {
-                                optionName = "Wylogowanie z gry przez stronę";
-                            } else if (value == 'site_login') {
-                                optionName = "Zalogowanie na stronę";
-                            } else if (value == 'site_logout') {
-                                optionName = "Wylogowanie ze strony";
-                            } else if (value == 'site_register') {
-                                optionName = "Zarejestrowanie konta";
-                            } else if (value == 'change_password') {
-                                optionName = "Zmiana hasła";
-                            } else if (value == 'change_email') {
-                                optionName = "Zmiana e-mail";
-                            } else if (value == 'email_verification') {
-                                optionName = "Próba potwierdzenia e-mail";
-                            }
-
-                            //game actions
-                            else if (value == 'game_open') {
-                                optionName = "Wejście do gry";
-                            } else if (value == 'game_leave') {
-                                optionName = "Wyjście z gry";
-                            } else if (value == 'game_logout') {
-                                optionName = "Wylogowanie z gry";
-                            }
-
-                            // admin
-                            else if (value == 'ip_user_ban') {
-                                optionName = "Zbanowanie IP użytkownika";
-                            } else if (value == 'ip_user_unban') {
-                                optionName = "Odbanowanie IP użytkownika";
-                            } else if (value == 'account_ban') {
-                                optionName = "Zbanowanie konta";
-                            } else if (value == 'account_unban') {
-                                optionName = "Odbanowanie konta";
-                            } else if (value == 'token_reset') {
-                                optionName = "Zresetowanie api tokenu"
-                            } else if (value == 'ip_ban') {
-                                optionName = "Zbanowanie IP";
-                            } else if (value == 'ip_unban') {
-                                optionName = "Odbanowanie IP";
-                            } else if (value == 'user_data_modify') {
-                                optionName = "Modyfikacja danych";
-                            }
-                            else {
-                                optionName = value;
-                            }
-                            select.append( '<option value="'+optionName+'">'+optionName+'</option>' );
-                        });
-                    });
-                }
+                // initComplete: function () {
+                //     var api = this.api();
+                //     $('.filterhead', api.table().header()).each(function (i) {
+                //         var column = api.column(i+1);
+                //         var select = $('<select><option value=""></option></select>')
+                //             .appendTo($(this).empty())
+                //             .on('change', function () {
+                //                 var val = $.fn.dataTable.util.escapeRegex(
+                //                     $(this).val()
+                //                 );
+                //
+                //                 column.search(val ? '^'+val+'$' : '', true, false).draw();
+                //             });
+                //
+                //         column.data().unique().sort().each(function (value) {
+                //             let optionName = "";
+                //
+                //             // user site actions
+                //             if (value == 'account_delete') {
+                //                 optionName = "Usunięcie konta";
+                //             } else if (value == 'avatar_change') {
+                //                 optionName = "Zmiana awatara";
+                //             } else if (value == 'avatar_delete') {
+                //                 optionName = "Usunięcie awatara";
+                //             } else if (value == 'game_total_logout') {
+                //                 optionName = "Wylogowanie z gry przez stronę";
+                //             } else if (value == 'site_login') {
+                //                 optionName = "Zalogowanie na stronę";
+                //             } else if (value == 'site_logout') {
+                //                 optionName = "Wylogowanie ze strony";
+                //             } else if (value == 'site_register') {
+                //                 optionName = "Zarejestrowanie konta";
+                //             } else if (value == 'change_password') {
+                //                 optionName = "Zmiana hasła";
+                //             } else if (value == 'change_email') {
+                //                 optionName = "Zmiana e-mail";
+                //             } else if (value == 'email_verification') {
+                //                 optionName = "Próba potwierdzenia e-mail";
+                //             }
+                //
+                //             //game actions
+                //             else if (value == 'game_open') {
+                //                 optionName = "Wejście do gry";
+                //             } else if (value == 'game_leave') {
+                //                 optionName = "Wyjście z gry";
+                //             } else if (value == 'game_logout') {
+                //                 optionName = "Wylogowanie z gry";
+                //             }
+                //
+                //             // admin
+                //             else if (value == 'ip_user_ban') {
+                //                 optionName = "Zbanowanie IP użytkownika";
+                //             } else if (value == 'ip_user_unban') {
+                //                 optionName = "Odbanowanie IP użytkownika";
+                //             } else if (value == 'account_ban') {
+                //                 optionName = "Zbanowanie konta";
+                //             } else if (value == 'account_unban') {
+                //                 optionName = "Odbanowanie konta";
+                //             } else if (value == 'token_reset') {
+                //                 optionName = "Zresetowanie api tokenu"
+                //             } else if (value == 'ip_ban') {
+                //                 optionName = "Zbanowanie IP";
+                //             } else if (value == 'ip_unban') {
+                //                 optionName = "Odbanowanie IP";
+                //             } else if (value == 'user_data_modify') {
+                //                 optionName = "Modyfikacja danych";
+                //             }
+                //             else {
+                //                 optionName = value;
+                //             }
+                //             select.append( '<option value="'+optionName+'">'+optionName+'</option>' );
+                //         });
+                //     });
+                // }
             });
         });
 
