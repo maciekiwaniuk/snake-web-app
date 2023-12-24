@@ -345,27 +345,31 @@
             $('#user-data-modify-confirmation-form').show();
         }
 
-        function changeModalsContent(user_id, name, email, permission, user_banned, ip_id, ip, ip_banned) {
+        function changeModalsContent(user_id, name, email, permission, user_banned, ip_id=null, ip=null, ip_banned=null) {
             $('#user-name').text(name);
             $('.user-name-text').text(name);
 
             // IP ban status
-            if (ip_banned == {{ \App\Models\VisitorUnique::BANNED }}) {
-                $('#ip-ban-status-text').text('Potwierdź odbanowanie IP użytkownika');
-                $('#ip-ban-status-btn').text('Odbanuj IP');
-                $('#ip-ban-status-btn').attr('class', 'btn btn-success border border-2 border-dark');
-
-                urlUnbanIpToReplace = "{{ route('admin.unban-last-ip', '__ID__') }}";
-                urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', user_id);
-                $('#ip-ban-status-confirmation-form').attr('action', urlUnbanIp);
+            if (ip_banned == null) {
+                $('#ip-ban-status-btn').hide();
             } else {
-                $('#ip-ban-status-text').text('Potwierdź zbanowanie IP użytkownika');
-                $('#ip-ban-status-btn').text('Zbanuj IP');
-                $('#ip-ban-status-btn').attr('class', 'btn btn-warning border border-2 border-dark');
+                if (ip_banned == {{ \App\Models\VisitorUnique::BANNED }}) {
+                    $('#ip-ban-status-text').text('Potwierdź odbanowanie IP użytkownika');
+                    $('#ip-ban-status-btn').text('Odbanuj IP');
+                    $('#ip-ban-status-btn').attr('class', 'btn btn-success border border-2 border-dark');
 
-                urlBanIpToReplace = "{{ route('admin.ban-last-ip', '__ID__') }}";
-                urlBanIp = urlBanIpToReplace.replace('__ID__', user_id);
-                $('#ip-ban-status-confirmation-form').attr('action', urlBanIp);
+                    urlUnbanIpToReplace = "{{ route('admin.unban-last-ip', '__ID__') }}";
+                    urlUnbanIp = urlUnbanIpToReplace.replace('__ID__', user_id);
+                    $('#ip-ban-status-confirmation-form').attr('action', urlUnbanIp);
+                } else {
+                    $('#ip-ban-status-text').text('Potwierdź zbanowanie IP użytkownika');
+                    $('#ip-ban-status-btn').text('Zbanuj IP');
+                    $('#ip-ban-status-btn').attr('class', 'btn btn-warning border border-2 border-dark');
+
+                    urlBanIpToReplace = "{{ route('admin.ban-last-ip', '__ID__') }}";
+                    urlBanIp = urlBanIpToReplace.replace('__ID__', user_id);
+                    $('#ip-ban-status-confirmation-form').attr('action', urlBanIp);
+                }
             }
 
             // Account ban status
@@ -549,8 +553,18 @@
                                         </button>
                                     `;
                             } else {
-                                // visitor unique relation might be null for a few persons only when database is filled using db:seed
-                                return '<i class="bi bi-question-circle"></i>';
+                                return `
+                                        <button onclick="changeModalsContent(
+                                                '`+row.id+`',
+                                                '`+row.name+`',
+                                                '`+row.email+`',
+                                                '`+row.permission+`',
+                                                '`+row.user_banned+`'
+                                            );"
+                                                type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#userActionModal">
+                                            <i class="bi bi-gear"></i>
+                                        </button>
+                                    `;
                             }
 
                         }
