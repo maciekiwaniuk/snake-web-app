@@ -1,0 +1,31 @@
+.snake-game-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+#game-board {
+    width: 80vmin;
+    height: 80vmin;
+    display: grid;
+    grid-template-rows: repeat(21, 1fr);
+    grid-template-columns: repeat(21, 1fr);
+    z-index: 999;
+    background-color: transparent;
+}
+.snake-game-background {
+    position: absolute;
+    top: 0;
+    width: 80vmin;
+    height: 80vmin;
+}
+
+.half-transparent-board-background {
+    position: absolute;
+    top: 0;
+    height: 80vmin;
+    width: 80vmin;
+    background-color: rgba(255,255,255,0.85);
+    z-index: 999999;
+}

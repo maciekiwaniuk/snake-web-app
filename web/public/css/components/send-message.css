@@ -1,0 +1,86 @@
+.message-div {
+    position: fixed;
+    bottom: 0;
+    width: 20%;
+    z-index: 100;
+    color: white;
+}
+
+.message-close {
+    margin-left: 15rem;
+    transition: linear font-size 0.1s;
+    font-size: 1.8rem;
+}
+
+.message-close:hover {
+    cursor: pointer;
+    transition: linear font-size 0.1s;
+    font-size: 2.2rem;
+    color: rgb(197, 197, 197);
+}
+
+.message-text {
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
+}
+
+.message-text:hover {
+    cursor: pointer;
+}
+
+.message-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    margin-left: 4.5rem;
+    margin-bottom: 1.4rem;
+    font-size: 3rem;
+    border-radius: 50%;
+    background-color: #FFC30B;
+    border: black solid 0.125rem;
+    color: black;
+
+    transition: font-size 0.1s linear;
+}
+
+.message-icon:hover {
+    font-size: 3.4rem;
+    cursor: pointer;
+
+    transition: font-size 0.1s linear;
+}
+
+
+.closed-message-div {
+    position: fixed;
+    bottom: 0;
+    width: 20%;
+    z-index: 100;
+    color: white;
+}
+
+.closed-message-div-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    margin-left: 1.4rem;
+    margin-bottom: 1.4rem;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    background-color: #FFC30B;
+    border: black solid 0.125rem;
+    color: black;
+
+    transition: font-size 0.1s linear;
+}
+
+.closed-message-div-icon:hover {
+    font-size: 1.7rem;
+    cursor: pointer;
+
+    transition: font-size 0.1s linear;
+}

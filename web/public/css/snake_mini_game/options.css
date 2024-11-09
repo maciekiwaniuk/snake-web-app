@@ -1,0 +1,28 @@
+.snake-game-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+#options-content {
+    width: 80vmin;
+    height: 0vmin;
+    display: none;
+    transition: height ease-in-out 0.5s;
+}
+
+.option-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 25%;
+}
+
+.title-option-text {
+    font-size: 2.5vmin;
+}
+
+.button-text {
+    font-size: 2.1vmin;
+}

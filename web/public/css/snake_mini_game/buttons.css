@@ -1,0 +1,10 @@
+.snake-game-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.buttons-content {
+    width: 80vmin;
+    height: 10vmin;
+}

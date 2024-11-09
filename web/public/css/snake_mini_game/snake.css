@@ -1,0 +1,51 @@
+
+.snake-segment{
+    border: .25vmin solid black;
+}
+
+.snake-blue-background {
+    background-color: hsl(200, 92%, 66%);
+}
+.snake-white-background {
+    background-color: white;
+}
+.snake-orange-background {
+    background-color: rgb(240, 166, 29);
+}
+
+.snake-border-to-left {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+.snake-border-to-right {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+.snake-border-to-top {
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+}
+.snake-border-to-bottom {
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.snake-border-top-left {
+    border-top-left-radius: 50%;
+}
+.snake-border-top-right {
+    border-top-right-radius: 50%;
+}
+.snake-border-bottom-left {
+    border-bottom-left-radius: 50%;
+}
+.snake-border-bottom-right {
+    border-bottom-right-radius: 50%;
+}
+
+.snake-eye {
+    border-radius: 50%;
+    width: 0.5vmin;
+    height: 0.5vmin;
+    background-color: black;
+}
